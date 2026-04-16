@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CurriculaFP — Catálogo de ciclos formativos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+  --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+  --sidebar-w:232px;--topbar-h:52px;
+  --text-main:#1C1008;--text-sub:#6B5A4E;--text-muted:#A08070;
+  --border:#E8E0D8;--border-dark:#D0C4B4;
+  --green:#15803D;--green-bg:#F0FDF4;
+  --amber:#B45309;--amber-bg:#FFFBEB;
+  --blue:#1E40AF;--blue-bg:#EFF6FF;
+  --slate:#64748B;--slate-bg:#F1F5F9;
+  --purple:#6D28D9;--purple-bg:#F5F3FF;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.08);
+  --radius:10px;--radius-lg:13px;
+}
+html{font-size:15px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh}
+svg{display:block}a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--border-dark);border-radius:999px}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+.sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+.sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+.sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+.sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+.sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+.sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+.nav-group{padding:0 0.625rem 0.25rem}
+.nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+.ni{width:15px;height:15px;opacity:0.55;flex-shrink:0;transition:opacity 0.15s}
+.nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+.nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+.nav-item:hover .ni{opacity:0.85}
+.nav-item.active{background:var(--brand);color:#fff}
+.nav-item.active .ni{opacity:1}
+.nav-badge{margin-left:auto;background:rgba(255,255,255,0.15);color:#fff;font-size:0.62rem;font-weight:700;padding:0.08rem 0.42rem;border-radius:999px}
+.nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+.sb-bottom{margin-top:auto;padding:0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+.user-tile{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:7px;background:rgba(255,255,255,0.05);cursor:pointer}
+.user-tile:hover{background:rgba(255,255,255,0.09)}
+.user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-weight:700;font-size:0.69rem;color:#fff;flex-shrink:0}
+.user-name{font-size:0.775rem;font-weight:600;color:#F7F4F0}
+.user-role{font-size:0.63rem;color:rgba(255,255,255,0.3);margin-top:1px}
+
+/* MAIN */
+.app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+
+/* TOPBAR */
+.topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:0.625rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm)}
+.topbar-bc{font-size:0.775rem;color:var(--text-muted);display:flex;align-items:center;gap:0.3rem}
+.topbar-bc a{color:var(--text-muted)}.topbar-bc a:hover{color:var(--brand)}
+.topbar-bc strong{color:var(--text-main);font-weight:600}
+.bc-sep{color:var(--border-dark)}
+.topbar-spacer{flex:1}
+.topbar-actions{display:flex;align-items:center;gap:0.45rem}
+.tb-div{width:1px;height:18px;background:var(--border);margin:0 0.1rem}
+.tb-btn{display:flex;align-items:center;gap:0.35rem;padding:0.32rem 0.8rem;border-radius:6px;font-size:0.75rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.15s;border:1px solid transparent;white-space:nowrap}
+.tb-ghost{background:transparent;color:var(--text-sub);border-color:var(--border)}
+.tb-ghost:hover{background:var(--bg);border-color:var(--border-dark);color:var(--text-main)}
+.tb-primary{background:var(--brand);color:#fff;box-shadow:0 2px 8px rgba(155,28,28,0.2)}
+.tb-primary:hover{background:var(--brand-dark)}
+.tb-icon{width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--text-sub);transition:all 0.15s;position:relative}
+.tb-notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--brand);border:1.5px solid #fff}
+
+/* PAGE */
+.page{padding:1.625rem 1.75rem 3rem;flex:1}
+.page-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.page-hd h1{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;line-height:1.15}
+.page-hd p{margin-top:0.25rem;font-size:0.85rem;color:var(--text-sub)}
+
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;gap:0.22rem;padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600;white-space:nowrap}
+.chip-green{background:var(--green-bg);color:var(--green);border:1px solid #86EFAC}
+.chip-amber{background:var(--amber-bg);color:var(--amber);border:1px solid #FCD34D}
+.chip-slate{background:var(--slate-bg);color:var(--slate);border:1px solid #CBD5E1}
+.chip-blue{background:var(--blue-bg);color:var(--blue);border:1px solid #93C5FD}
+.chip-red{background:var(--brand-light);color:var(--brand);border:1px solid #FECACA}
+.chip-purple{background:var(--purple-bg);color:var(--purple);border:1px solid #C4B5FD}
+
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0.875rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.125rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s}
+.kpi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+.k-red::after{background:var(--brand)}.k-green::after{background:var(--green)}.k-amber::after{background:var(--amber)}.k-blue::after{background:var(--blue)}
+.kpi-icon{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;margin-bottom:0.625rem}
+.kpi-icon svg{width:16px;height:16px}
+.k-red .kpi-icon{background:var(--brand-light);color:var(--brand)}
+.k-green .kpi-icon{background:var(--green-bg);color:var(--green)}
+.k-amber .kpi-icon{background:var(--amber-bg);color:var(--amber)}
+.k-blue .kpi-icon{background:var(--blue-bg);color:var(--blue)}
+.kpi-label{font-size:0.68rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem}
+.kpi-val{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--text-main);line-height:1;margin-bottom:0.2rem}
+.kpi-sub{font-size:0.68rem;color:var(--text-muted)}
+
+/* SC */
+.sc{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:1.25rem}
+.sc-head{padding:0.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap}
+.sc-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--text-main);display:flex;align-items:center;gap:0.45rem}
+.sc-body{padding:1.125rem 1.25rem}
+.link-btn{font-size:0.72rem;font-weight:700;color:var(--brand);cursor:pointer;transition:color 0.15s}
+.link-btn:hover{color:var(--brand-dark);text-decoration:underline}
+
+/* SEARCH */
+.search-bar{display:flex;align-items:center;gap:0.625rem;margin-bottom:1rem;flex-wrap:wrap}
+.search-input-wrap{position:relative;flex:1;min-width:220px;max-width:320px}
+.search-input-wrap svg{position:absolute;left:0.625rem;top:50%;transform:translateY(-50%);color:var(--text-muted);width:14px;height:14px}
+.search-input{width:100%;padding:0.42rem 0.75rem 0.42rem 2rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--text-main);background:var(--bg-white);outline:none;transition:border-color 0.15s}
+.search-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(155,28,28,0.07)}
+.filter-select{padding:0.42rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--text-sub);background:var(--bg-white);outline:none;cursor:pointer}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse}
+.t th{text-align:left;font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);padding:0 0.75rem 0.5rem;border-bottom:1px solid var(--border)}
+.t td{padding:0.6rem 0.75rem;font-size:0.8rem;color:var(--text-sub);border-bottom:1px solid var(--border);vertical-align:middle}
+.t tr:last-child td{border-bottom:none}
+.t tr:hover td{background:var(--bg);cursor:pointer}
+.t td:first-child{font-weight:600;color:var(--text-main)}
+.t-mono{font-family:monospace;font-size:0.73rem;color:var(--text-muted)}
+.t-action{color:var(--brand);font-size:0.73rem;font-weight:700;cursor:pointer}
+.t-action:hover{text-decoration:underline}
+
+/* VIEWS */
+#view-lista{display:block}
+#view-detalle{display:none}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:1.5rem}
+.tab{padding:0.625rem 1.125rem;font-size:0.82rem;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.15s;white-space:nowrap}
+.tab:hover{color:var(--text-main)}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* BACK */
+.back-btn{display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;font-weight:600;color:var(--text-muted);cursor:pointer;margin-bottom:1rem;transition:color 0.15s}
+.back-btn:hover{color:var(--brand)}
+
+/* DETAIL HD */
+.detail-hd{margin-bottom:1.5rem}
+.detail-hd h2{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:0.375rem}
+.detail-hd-meta{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.875rem}
+.detail-hd-actions{display:flex;gap:0.5rem;align-items:center}
+
+/* FICHA */
+.ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ficha-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.ficha-field{display:flex;flex-direction:column;gap:0.2rem}
+.ficha-label{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted)}
+.ficha-value{font-size:0.85rem;font-weight:600;color:var(--text-main)}
+.ficha-value.mono{font-family:monospace;font-size:0.8rem}
+
+/* NORM REF */
+.norm-ref{display:inline-flex;align-items:center;gap:0.3rem;padding:0.18rem 0.55rem;border-radius:999px;font-size:0.67rem;font-weight:600;background:var(--purple-bg);color:var(--purple);border:1px solid #C4B5FD;white-space:nowrap}
+.norm-ref.derogada{background:var(--slate-bg);color:var(--slate);border-color:#CBD5E1;text-decoration:line-through}
+.norm-ref.parcial{background:var(--amber-bg);color:var(--amber);border-color:#FCD34D}
+
+/* ALERT */
+.alert-box{display:flex;align-items:flex-start;gap:0.75rem;padding:0.875rem 1rem;border-radius:var(--radius);margin-bottom:1.25rem;border:1px solid}
+.alert-info{background:var(--blue-bg);border-color:#93C5FD}
+.alert-info .alert-icon{color:var(--blue)}
+.alert-warn{background:var(--amber-bg);border-color:#FCD34D}
+.alert-warn .alert-icon{color:var(--amber)}
+.alert-icon svg{width:16px;height:16px;flex-shrink:0;margin-top:1px}
+.alert-title{font-size:0.8rem;font-weight:700;margin-bottom:0.2rem}
+.alert-info .alert-title{color:var(--blue)}
+.alert-warn .alert-title{color:var(--amber)}
+.alert-text{font-size:0.77rem;color:var(--text-sub);line-height:1.5}
+
+/* GRADO BADGE */
+.grado-badge{display:inline-flex;align-items:center;padding:0.2rem 0.625rem;border-radius:999px;font-size:0.69rem;font-weight:700;white-space:nowrap}
+.gb-basico{background:#FEF3C7;color:#92400E;border:1px solid #FCD34D}
+.gb-medio{background:var(--blue-bg);color:var(--blue);border:1px solid #93C5FD}
+.gb-superior{background:var(--purple-bg);color:var(--purple);border:1px solid #C4B5FD}
+
+/* CP LIST */
+.cp-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.625rem 0.75rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:0.375rem}
+.cp-num{width:24px;height:24px;border-radius:50%;background:var(--brand-light);color:var(--brand);display:grid;place-items:center;font-size:0.67rem;font-weight:700;flex-shrink:0;margin-top:1px}
+.cp-text{font-size:0.8rem;color:var(--text-sub);line-height:1.5}
+
+/* MODULO LIST */
+.mod-troncal-item{display:flex;align-items:center;gap:0.75rem;padding:0.625rem 0.875rem;background:var(--bg-white);border:1px solid var(--border);border-radius:8px;margin-bottom:0.375rem;transition:border-color 0.15s}
+.mod-troncal-item:hover{border-color:var(--border-dark)}
+.mod-curso-badge{width:26px;height:26px;border-radius:6px;display:grid;place-items:center;font-size:0.65rem;font-weight:700;flex-shrink:0}
+.mc-1{background:var(--brand-light);color:var(--brand)}
+.mc-2{background:var(--green-bg);color:var(--green)}
+.mc-fct{background:var(--amber-bg);color:var(--amber)}
+.mod-troncal-name{flex:1;font-size:0.82rem;font-weight:600;color:var(--text-main)}
+.mod-troncal-horas{font-size:0.75rem;font-weight:600;color:var(--text-sub);white-space:nowrap}
+.mod-troncal-tag{font-size:0.7rem;color:var(--text-muted);margin-left:0.5rem}
+
+/* CENTROS IMPLANTADOS */
+.centro-impl-item{display:flex;align-items:center;gap:0.75rem;padding:0.625rem 0.875rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:0.375rem}
+.centro-impl-name{flex:1;font-size:0.82rem;font-weight:600;color:var(--text-main)}
+.centro-impl-meta{font-size:0.72rem;color:var(--text-muted)}
+
+/* NORM LIST */
+.norm-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.625rem 0.875rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:0.375rem}
+.norm-item-main{flex:1}
+.norm-item-ref{font-size:0.82rem;font-weight:700;color:var(--text-main)}
+.norm-item-desc{font-size:0.75rem;color:var(--text-muted);margin-top:2px}
+.norm-item-scope{font-size:0.7rem;font-weight:600;padding:0.15rem 0.45rem;border-radius:999px}
+.ns-estatal{background:var(--blue-bg);color:var(--blue);border:1px solid #93C5FD}
+.ns-andalucia{background:var(--green-bg);color:var(--green);border:1px solid #86EFAC}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg-white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(0,0,0,0.2);width:580px;max-width:calc(100vw - 2rem);max-height:90vh;overflow-y:auto;animation:modalIn 0.2s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(0.96) translateY(8px)}to{opacity:1;transform:none}}
+.modal-head{padding:1.125rem 1.375rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg-white);z-index:1}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700}
+.modal-close{width:28px;height:28px;border-radius:6px;border:none;background:var(--bg);cursor:pointer;display:grid;place-items:center;color:var(--text-sub)}
+.modal-close:hover{background:var(--border)}
+.modal-body{padding:1.375rem;display:flex;flex-direction:column;gap:1rem}
+.modal-section-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.5rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border)}
+.form-group{display:flex;flex-direction:column;gap:0.35rem}
+.form-label{font-size:0.75rem;font-weight:700;color:var(--text-main)}
+.form-label span{color:var(--brand)}
+.form-input{padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.83rem;color:var(--text-main);background:var(--bg-white);transition:border-color 0.15s;outline:none}
+.form-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(155,28,28,0.08)}
+.form-hint{font-size:0.7rem;color:var(--text-muted)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.875rem}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.875rem}
+.form-select{padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.83rem;color:var(--text-main);background:var(--bg-white);outline:none;cursor:pointer;width:100%}
+.form-select:focus{border-color:var(--brand)}
+.form-textarea{padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.83rem;color:var(--text-main);background:var(--bg-white);outline:none;resize:vertical;min-height:80px}
+.form-textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(155,28,28,0.08)}
+.modal-foot{padding:1rem 1.375rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:0.625rem;background:var(--bg);position:sticky;bottom:0}
+.btn{padding:0.45rem 1.1rem;border-radius:7px;font-size:0.8rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.15s;border:1px solid transparent}
+.btn-ghost{background:transparent;color:var(--text-sub);border-color:var(--border)}
+.btn-ghost:hover{background:var(--border)}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.kpi-card{animation:fadeUp 0.3s ease both}
+.kpi-card:nth-child(1){animation-delay:.04s}.kpi-card:nth-child(2){animation-delay:.08s}
+.kpi-card:nth-child(3){animation-delay:.12s}.kpi-card:nth-child(4){animation-delay:.16s}
+.sc{animation:fadeUp 0.3s ease 0.15s both}
+
+.nav-layer-label{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(247,244,240,0.55);padding:0.875rem 0.5rem 0.3rem;border-left:2px solid var(--brand);margin-left:0.625rem;padding-left:0.5rem}
+.nav-demo-tag{font-size:0.55rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:rgba(155,28,28,0.35);color:#FCA5A5;border-radius:3px;padding:0.05rem 0.3rem;margin-left:0.2rem;vertical-align:middle}
+.nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
+.nav-disabled:hover{background:transparent !important;color:rgba(255,255,255,0.5) !important}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a href="index.html" class="sb-logo">
+    <div class="sb-logo-mark">CF</div>
+    <div class="sb-logo-text">CurriculaFP <small>Gestión curricular FP</small></div>
+  </a>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 · Activo</div>
+  <div style="height:0.5rem"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">General</div>
+    <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    <a class="nav-item active" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Catálogo de ciclos</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Administración · Superadmin</div>
+    <a class="nav-item" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+    <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+    <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas · DNI</a>
+    <a class="nav-item" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Años académicos</a>
+    <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Catálogo normativo</a>
+    <a class="nav-item nav-disabled" href="#auditoria" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditoría del sistema</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-layer-label">Capa 1 · Diseño del ciclo · TES <span class="nav-demo-tag">demo</span></div>
+    <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Estructura del ciclo</a>
+    <a class="nav-item nav-disabled" href="programacion.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Programación base</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-layer-label">Capa 2 · Gestión del curso · TES <span class="nav-demo-tag">demo</span></div>
+    <a class="nav-item nav-disabled" href="gestion-curso.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>Grupos y docentes</a>
+    <a class="nav-item nav-disabled" href="calificaciones.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+    <a class="nav-item nav-disabled" href="alumno.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+    <a class="nav-item nav-disabled" href="fct.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>FCT / Dual</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Gestión académica</div>
+    <a class="nav-item nav-disabled" href="#sesiones" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluación</a>
+    <a class="nav-item nav-disabled" href="#boletines" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Boletines de notas</a>
+    <a class="nav-item nav-disabled" href="#convalidaciones" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones<span class="nav-badge">1</span></a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Comunicación</div>
+    <a class="nav-item nav-disabled" href="#avisos" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos<span class="nav-badge">5</span></a>
+    <a class="nav-item nav-disabled" href="#informes" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y analítica</a>
+  </div>
+  <div class="sb-bottom">
+    <div class="user-tile">
+      <div class="user-av">SA</div>
+      <div><div class="user-name">Superadministrador</div><div class="user-role">Acceso total al sistema</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="app-main">
+  <header class="topbar">
+    <div class="topbar-bc" id="breadcrumb">
+      <a href="index.html">Inicio</a><span class="bc-sep">›</span>
+      <strong>Catálogo de ciclos formativos</strong>
+    </div>
+    <div class="topbar-spacer"></div>
+    <div class="topbar-actions">
+      <button class="tb-btn tb-ghost" onclick="openModal('modal-nuevo-ciclo')">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 4v16m8-8H4"/></svg>
+        Nuevo ciclo
+      </button>
+      <div class="tb-div"></div>
+      <button class="tb-icon" style="position:relative;">
+        <div class="tb-notif-dot"></div>
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="page">
+
+    <!-- ══ VISTA LISTA ══ -->
+    <div id="view-lista">
+
+      <div class="page-hd">
+        <div>
+          <h1>Catálogo de ciclos formativos</h1>
+          <p>Plantillas troncales estatales · Gestionadas por Superadmin · Base para la implantación en centros</p>
+        </div>
+        <button class="tb-btn tb-primary" onclick="openModal('modal-nuevo-ciclo')">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 4v16m8-8H4"/></svg>
+          Nuevo ciclo
+        </button>
+      </div>
+
+      <!-- Aviso clave -->
+      <div class="alert-box alert-info" style="margin-bottom:1.25rem">
+        <div class="alert-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div>
+          <div class="alert-title">Catálogo nacional · Plantillas troncales</div>
+          <div class="alert-text">Este catálogo contiene la estructura troncal estatal de cada ciclo formativo. Cuando un administrador de centro implanta un ciclo, el sistema <strong>copia esta plantilla</strong> a su instancia, donde podrá adaptarla libremente a la normativa de su comunidad autónoma y a las particularidades de su centro.</div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi-card k-red">
+          <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0118 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg></div>
+          <div class="kpi-label">Total ciclos</div>
+          <div class="kpi-val">191</div>
+          <div class="kpi-sub">En el catálogo nacional</div>
+        </div>
+        <div class="kpi-card k-blue">
+          <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+          <div class="kpi-label">Grado básico</div>
+          <div class="kpi-val">27</div>
+          <div class="kpi-sub">Ciclos de grado básico</div>
+        </div>
+        <div class="kpi-card k-green">
+          <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+          <div class="kpi-label">Grado medio</div>
+          <div class="kpi-val">79</div>
+          <div class="kpi-sub">Ciclos de grado medio</div>
+        </div>
+        <div class="kpi-card k-amber">
+          <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></div>
+          <div class="kpi-label">Grado superior</div>
+          <div class="kpi-val">85</div>
+          <div class="kpi-sub">Ciclos de grado superior</div>
+        </div>
+      </div>
+
+      <!-- Búsqueda y filtros -->
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input class="search-input" type="text" placeholder="Buscar ciclo por nombre o código…">
+        </div>
+        <select class="filter-select">
+          <option>Todas las familias</option>
+          <option>Sanidad</option><option>Informática</option><option>Administración</option>
+          <option>Electricidad</option><option>Hostelería</option><option>Comercio</option>
+          <option>Imagen Personal</option><option>Mecánica</option>
+        </select>
+        <select class="filter-select">
+          <option>Todos los grados</option>
+          <option>Grado básico</option>
+          <option>Grado medio</option>
+          <option>Grado superior</option>
+        </select>
+        <select class="filter-select">
+          <option>Todos los estados</option>
+          <option>Vigente</option>
+          <option>En extinción</option>
+          <option>Extinguido</option>
+        </select>
+      </div>
+
+      <!-- Tabla ciclos -->
+      <div class="sc">
+        <div class="sc-head">
+          <span class="sc-title">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0118 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+            Ciclos formativos
+          </span>
+          <span style="font-size:0.72rem;color:var(--text-muted)">191 ciclos en el catálogo</span>
+        </div>
+        <div style="padding:0 1.25rem">
+          <table class="t">
+            <thead>
+              <tr><th>Código</th><th>Denominación</th><th>Familia</th><th>Grado</th><th>Horas</th><th>Ref. principal</th><th>Estado</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr onclick="showDetalle()">
+                <td class="t-mono">SAN301</td>
+                <td>Técnico en Emergencias Sanitarias</td>
+                <td style="font-size:0.78rem">Sanidad</td>
+                <td><span class="grado-badge gb-medio">Grado Medio</span></td>
+                <td>2.000 h</td>
+                <td><span class="norm-ref">RD 1397/2007</span></td>
+                <td><span class="chip chip-green">Vigente</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr>
+                <td class="t-mono">SAN101</td>
+                <td>Técnico en Cuidados Auxiliares de Enfermería</td>
+                <td style="font-size:0.78rem">Sanidad</td>
+                <td><span class="grado-badge gb-medio">Grado Medio</span></td>
+                <td>1.400 h</td>
+                <td><span class="norm-ref">RD 546/1995</span></td>
+                <td><span class="chip chip-amber">En extinción</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr>
+                <td class="t-mono">INF201</td>
+                <td>Técnico en Sistemas Microinformáticos y Redes</td>
+                <td style="font-size:0.78rem">Informática</td>
+                <td><span class="grado-badge gb-medio">Grado Medio</span></td>
+                <td>2.000 h</td>
+                <td><span class="norm-ref">RD 1691/2007</span></td>
+                <td><span class="chip chip-green">Vigente</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr>
+                <td class="t-mono">INF301</td>
+                <td>Técnico Superior en Desarrollo de Aplicaciones Multiplataforma</td>
+                <td style="font-size:0.78rem">Informática</td>
+                <td><span class="grado-badge gb-superior">Grado Superior</span></td>
+                <td>2.000 h</td>
+                <td><span class="norm-ref">RD 450/2010</span></td>
+                <td><span class="chip chip-green">Vigente</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr>
+                <td class="t-mono">ADM201</td>
+                <td>Técnico en Gestión Administrativa</td>
+                <td style="font-size:0.78rem">Administración</td>
+                <td><span class="grado-badge gb-medio">Grado Medio</span></td>
+                <td>1.400 h</td>
+                <td><span class="norm-ref">RD 1659/1994</span></td>
+                <td><span class="chip chip-slate">Extinguido</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr>
+                <td class="t-mono">ADM301</td>
+                <td>Técnico Superior en Administración y Finanzas</td>
+                <td style="font-size:0.78rem">Administración</td>
+                <td><span class="grado-badge gb-superior">Grado Superior</span></td>
+                <td>2.000 h</td>
+                <td><span class="norm-ref">RD 1584/2011</span></td>
+                <td><span class="chip chip-green">Vigente</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr>
+                <td class="t-mono">HOT101</td>
+                <td>Técnico Básico en Cocina y Restauración</td>
+                <td style="font-size:0.78rem">Hostelería</td>
+                <td><span class="grado-badge gb-basico">Grado Básico</span></td>
+                <td>2.000 h</td>
+                <td><span class="norm-ref">RD 356/2014</span></td>
+                <td><span class="chip chip-green">Vigente</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /view-lista -->
+
+    <!-- ══ VISTA DETALLE ══ -->
+    <div id="view-detalle">
+
+      <div class="back-btn" onclick="showLista()">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
+        Volver al catálogo
+      </div>
+
+      <div class="detail-hd">
+        <h2>Técnico en Emergencias Sanitarias</h2>
+        <div class="detail-hd-meta">
+          <span class="t-mono" style="font-size:0.82rem;color:var(--text-muted)">SAN301</span>
+          <span class="grado-badge gb-medio">Grado Medio</span>
+          <span class="chip chip-green">Vigente</span>
+          <span style="font-size:0.8rem;color:var(--text-muted)">Familia: Sanidad · 2.000 h</span>
+        </div>
+        <div class="detail-hd-actions">
+          <button class="tb-btn tb-ghost" onclick="openModal('modal-editar-ciclo')">Editar plantilla</button>
+          <button class="tb-btn tb-ghost" onclick="openModal('modal-norm-ref')">+ Referencia normativa</button>
+        </div>
+      </div>
+
+      <!-- Aviso plantilla troncal -->
+      <div class="alert-box alert-warn" style="margin-bottom:1.25rem">
+        <div class="alert-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+        <div>
+          <div class="alert-title">Plantilla troncal · Solo lectura para todos los roles excepto Superadmin</div>
+          <div class="alert-text">Esta es la plantilla troncal estatal. Los cambios aquí afectan a futuras implantaciones. Las implantaciones ya existentes en centros <strong>no se ven afectadas</strong> — cada centro trabaja sobre su copia independiente.</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('td-ficha',this)">Ficha normativa</div>
+        <div class="tab" onclick="switchTab('td-competencias',this)">Competencias profesionales</div>
+        <div class="tab" onclick="switchTab('td-modulos',this)">Módulos profesionales</div>
+        <div class="tab" onclick="switchTab('td-centros',this)">Centros implantados</div>
+      </div>
+
+      <!-- FICHA NORMATIVA -->
+      <div id="td-ficha" class="tab-content active">
+
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Datos del título</span>
+            <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-editar-ciclo')">Editar</button>
+          </div>
+          <div class="sc-body">
+            <div class="ficha-grid" style="margin-bottom:1rem">
+              <div class="ficha-field"><div class="ficha-label">Código oficial</div><div class="ficha-value mono">SAN301</div></div>
+              <div class="ficha-field"><div class="ficha-label">Denominación completa</div><div class="ficha-value">Técnico en Emergencias Sanitarias</div></div>
+              <div class="ficha-field"><div class="ficha-label">Familia profesional</div><div class="ficha-value">Sanidad</div></div>
+              <div class="ficha-field"><div class="ficha-label">Grado</div><div class="ficha-value"><span class="grado-badge gb-medio">Grado Medio (CFGM)</span></div></div>
+              <div class="ficha-field"><div class="ficha-label">Duración total</div><div class="ficha-value">2.000 horas · 2 cursos académicos</div></div>
+              <div class="ficha-field"><div class="ficha-label">Estado en el catálogo</div><div class="ficha-value"><span class="chip chip-green">Vigente</span></div></div>
+            </div>
+            <div class="ficha-field" style="margin-bottom:1rem">
+              <div class="ficha-label">Competencia general del título</div>
+              <div style="margin-top:0.4rem;padding:0.75rem 0.875rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);font-size:0.82rem;color:var(--text-sub);line-height:1.6">
+                Atender al paciente en situación de emergencia sanitaria y de urgencia en el lugar del suceso, en el vehículo de asistencia y durante el traslado al centro sanitario, aplicando técnicas sanitarias según los protocolos establecidos.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Referencias normativas -->
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Referencias normativas</span>
+            <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-norm-ref')">+ Añadir referencia</button>
+          </div>
+          <div class="sc-body">
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.875rem">La normativa de este ciclo puede estar compuesta por varias disposiciones, con distintos ámbitos de aplicación y vigencias. Se registran todas para trazabilidad completa.</div>
+
+            <div class="norm-item">
+              <div class="norm-item-main">
+                <div class="norm-item-ref">RD 1397/2007, de 29 de octubre</div>
+                <div class="norm-item-desc">Establece el título de Técnico en Emergencias Sanitarias y fija sus enseñanzas mínimas · Competencias, módulos, RA y CE troncales</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem">
+                <span class="norm-item-scope ns-estatal">Estatal</span>
+                <span class="chip chip-green" style="font-size:0.65rem">Vigente</span>
+                <span class="t-action" style="font-size:0.7rem">Editar</span>
+              </div>
+            </div>
+
+            <div class="norm-item">
+              <div class="norm-item-main">
+                <div class="norm-item-ref">Orden de 16 de junio de 2011 (Junta de Andalucía)</div>
+                <div class="norm-item-desc">Desarrolla el currículo del ciclo formativo de Grado Medio de Emergencias Sanitarias en Andalucía · Adaptación autonómica con ampliación de horas en algunos módulos</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem">
+                <span class="norm-item-scope ns-andalucia">Andalucía</span>
+                <span class="chip chip-green" style="font-size:0.65rem">Vigente</span>
+                <span class="t-action" style="font-size:0.7rem">Editar</span>
+              </div>
+            </div>
+
+            <div class="norm-item">
+              <div class="norm-item-main">
+                <div class="norm-item-ref">RD 659/2023, de 18 de julio</div>
+                <div class="norm-item-desc">Ordena el Sistema de Formación Profesional · Afecta a la estructura general del ciclo, FCT dual y acreditación parcial acumulable</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem">
+                <span class="norm-item-scope ns-estatal">Estatal</span>
+                <span class="chip chip-green" style="font-size:0.65rem">Vigente</span>
+                <span class="t-action" style="font-size:0.7rem">Editar</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /td-ficha -->
+
+      <!-- COMPETENCIAS PROFESIONALES -->
+      <div id="td-competencias" class="tab-content">
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>Competencias profesionales del título · Troncales estatales</span>
+            <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-nueva-cp')">+ Añadir CP</button>
+          </div>
+          <div class="sc-body">
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem">Competencias definidas en el RD 1397/2007. Son la base del expediente global del alumno y de la acreditación parcial acumulable.</div>
+
+            <div class="cp-item">
+              <div class="cp-num">CP1</div>
+              <div class="cp-text">Atender a múltiples víctimas en situaciones de emergencia aplicando técnicas de triage y clasificación según protocolos establecidos.</div>
+            </div>
+            <div class="cp-item">
+              <div class="cp-num">CP2</div>
+              <div class="cp-text">Aplicar técnicas de soporte vital básico y avanzado según los protocolos de actuación en emergencias sanitarias extrahospitalarias.</div>
+            </div>
+            <div class="cp-item">
+              <div class="cp-num">CP3</div>
+              <div class="cp-text">Realizar la atención sanitaria inicial al paciente en situación de urgencia o emergencia en el lugar del suceso, durante el traslado y en la entrega al centro receptor.</div>
+            </div>
+            <div class="cp-item">
+              <div class="cp-num">CP4</div>
+              <div class="cp-text">Manejar y conducir vehículos de transporte sanitario terrestre y aéreo, asegurando el traslado del paciente en condiciones de seguridad.</div>
+            </div>
+            <div class="cp-item">
+              <div class="cp-num">CP5</div>
+              <div class="cp-text">Colaborar en la coordinación con los servicios de emergencias sanitarias, cuerpos de seguridad y protección civil en situaciones de catástrofe.</div>
+            </div>
+            <div class="cp-item">
+              <div class="cp-num">CP6</div>
+              <div class="cp-text">Aplicar los protocolos de logística sanitaria en emergencias, gestionando el material y los equipos de intervención.</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /td-competencias -->
+
+      <!-- MÓDULOS PROFESIONALES -->
+      <div id="td-modulos" class="tab-content">
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0118 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>Módulos profesionales · Plantilla troncal estatal</span>
+            <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-nuevo-mod')">+ Añadir módulo</button>
+          </div>
+          <div class="sc-body">
+
+            <div class="alert-box alert-info" style="margin-bottom:1rem">
+              <div class="alert-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <div>
+                <div class="alert-title">Plantilla troncal · Las horas y RA son las estatales mínimas</div>
+                <div class="alert-text">Cada CA puede ampliar horas dentro de los márgenes que permite la normativa estatal. Cuando el administrador de centro implanta este ciclo, puede ajustar estos valores a su realidad autonómica.</div>
+              </div>
+            </div>
+
+            <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.625rem">1º Curso</div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-1">1º</div>
+              <div class="mod-troncal-name">Atención sanitaria inicial en situaciones de emergencia</div>
+              <div class="mod-troncal-horas">224 h</div>
+              <span class="mod-troncal-tag">6 RA</span>
+            </div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-1">1º</div>
+              <div class="mod-troncal-name">Soporte vital básico y primeros auxilios</div>
+              <div class="mod-troncal-horas">96 h</div>
+              <span class="mod-troncal-tag">4 RA</span>
+            </div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-1">1º</div>
+              <div class="mod-troncal-name">Logística sanitaria en emergencias</div>
+              <div class="mod-troncal-horas">128 h</div>
+              <span class="mod-troncal-tag">5 RA</span>
+            </div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-1">1º</div>
+              <div class="mod-troncal-name">Dotación sanitaria</div>
+              <div class="mod-troncal-horas">64 h</div>
+              <span class="mod-troncal-tag">3 RA</span>
+            </div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-1">1º</div>
+              <div class="mod-troncal-name">Formación y orientación laboral</div>
+              <div class="mod-troncal-horas">96 h</div>
+              <span class="mod-troncal-tag">6 RA</span>
+            </div>
+
+            <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin:1rem 0 0.625rem">2º Curso</div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-2">2º</div>
+              <div class="mod-troncal-name">Triage y clasificación de víctimas en catástrofes</div>
+              <div class="mod-troncal-horas">160 h</div>
+              <span class="mod-troncal-tag">5 RA</span>
+            </div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-2">2º</div>
+              <div class="mod-troncal-name">Intervención en emergencias colectivas y catástrofes</div>
+              <div class="mod-troncal-horas">96 h</div>
+              <span class="mod-troncal-tag">4 RA</span>
+            </div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-2">2º</div>
+              <div class="mod-troncal-name">Evacuación y traslado de pacientes</div>
+              <div class="mod-troncal-horas">96 h</div>
+              <span class="mod-troncal-tag">4 RA</span>
+            </div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-2">2º</div>
+              <div class="mod-troncal-name">Vehículos de transporte sanitario</div>
+              <div class="mod-troncal-horas">64 h</div>
+              <span class="mod-troncal-tag">3 RA</span>
+            </div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-2">2º</div>
+              <div class="mod-troncal-name">Empresa e iniciativa emprendedora</div>
+              <div class="mod-troncal-horas">64 h</div>
+              <span class="mod-troncal-tag">4 RA</span>
+            </div>
+
+            <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin:1rem 0 0.625rem">Módulo FCT</div>
+            <div class="mod-troncal-item">
+              <div class="mod-curso-badge mc-fct">FCT</div>
+              <div class="mod-troncal-name">Formación en Centros de Trabajo</div>
+              <div class="mod-troncal-horas">410 h</div>
+              <span class="mod-troncal-tag">En empresa</span>
+            </div>
+
+            <div style="margin-top:1rem;padding:0.75rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);font-size:0.77rem;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between">
+              <span><strong style="color:var(--text-main)">Total: 1.590 h</strong> en centro + 410 h FCT = 2.000 h totales</span>
+              <span class="norm-ref">RD 1397/2007</span>
+            </div>
+
+          </div>
+        </div>
+      </div><!-- /td-modulos -->
+
+      <!-- CENTROS IMPLANTADOS -->
+      <div id="td-centros" class="tab-content">
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros que tienen implantado este ciclo</span>
+            <span style="font-size:0.72rem;color:var(--text-muted)">3 centros · Año activo 2024–2025</span>
+          </div>
+          <div class="sc-body">
+            <div class="alert-box alert-info" style="margin-bottom:1rem">
+              <div class="alert-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <div>
+                <div class="alert-title">La implantación en centros es responsabilidad del administrador de cada centro</div>
+                <div class="alert-text">Cada centro gestiona su propia copia del ciclo desde su panel. El superadmin puede consultar qué centros lo tienen implantado, pero la gestión operativa es local.</div>
+              </div>
+            </div>
+
+            <div class="centro-impl-item">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0"></div>
+              <div style="flex:1">
+                <div class="centro-impl-name">CIFP Salud Jerez</div>
+                <div class="centro-impl-meta">Jerez de la Frontera, Cádiz · Andalucía · 2 grupos · 47 alumnos</div>
+              </div>
+              <span class="chip chip-green">Activo 2024–25</span>
+              <a href="ciclo-tes.html" class="t-action" style="margin-left:0.5rem">Ver demo →</a>
+            </div>
+
+            <div class="centro-impl-item">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0"></div>
+              <div style="flex:1">
+                <div class="centro-impl-name">IES Virgen del Mar</div>
+                <div class="centro-impl-meta">Almería, Almería · Andalucía · 1 grupo · 22 alumnos</div>
+              </div>
+              <span class="chip chip-green">Activo 2024–25</span>
+              <a href="centro.html" class="t-action" style="margin-left:0.5rem">Ver centro →</a>
+            </div>
+
+            <div class="centro-impl-item">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0"></div>
+              <div style="flex:1">
+                <div class="centro-impl-name">IFP Zorrotzaurre</div>
+                <div class="centro-impl-meta">Bilbao, Vizcaya · País Vasco · En configuración</div>
+              </div>
+              <span class="chip chip-amber">En configuración</span>
+              <a href="centro.html" class="t-action" style="margin-left:0.5rem">Ver centro →</a>
+            </div>
+
+          </div>
+        </div>
+      </div><!-- /td-centros -->
+
+    </div><!-- /view-detalle -->
+
+  </div><!-- /page -->
+</div><!-- /app-main -->
+
+<!-- MODALES -->
+
+<!-- Nuevo ciclo -->
+<div class="modal-overlay" id="modal-nuevo-ciclo">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo ciclo formativo</span>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-ciclo')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-title">Identificación del título</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Código oficial <span>*</span></label><input class="form-input" type="text" placeholder="Ej: SAN302"></div>
+        <div class="form-group">
+          <label class="form-label">Grado <span>*</span></label>
+          <select class="form-select"><option>Grado básico</option><option selected>Grado medio</option><option>Grado superior</option></select>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Denominación completa <span>*</span></label><input class="form-input" type="text" placeholder="Técnico en / Técnico Superior en…"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Familia profesional <span>*</span></label>
+          <select class="form-select"><option>Sanidad</option><option>Informática</option><option>Administración</option><option>Electricidad</option><option>Hostelería</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">Duración total (horas) <span>*</span></label><input class="form-input" type="number" placeholder="2000"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Competencia general del título</label>
+        <textarea class="form-textarea" placeholder="Texto de la competencia general según el RD del título…"></textarea>
+      </div>
+      <div class="modal-section-title">Referencia normativa principal</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Norma <span>*</span></label><input class="form-input" type="text" placeholder="Ej: RD 1397/2007, de 29 de octubre"></div>
+        <div class="form-group">
+          <label class="form-label">Ámbito</label>
+          <select class="form-select"><option>Estatal</option><option>Autonómico</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nuevo-ciclo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-ciclo')">Crear ciclo</button>
+    </div>
+  </div>
+</div>
+
+<!-- Editar ciclo -->
+<div class="modal-overlay" id="modal-editar-ciclo">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Editar plantilla · TES</span>
+      <button class="modal-close" onclick="closeModal('modal-editar-ciclo')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Código</label><input class="form-input" value="SAN301"></div>
+        <div class="form-group"><label class="form-label">Grado</label><select class="form-select"><option selected>Grado medio</option></select></div>
+      </div>
+      <div class="form-group"><label class="form-label">Denominación completa</label><input class="form-input" value="Técnico en Emergencias Sanitarias"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Familia</label><select class="form-select"><option selected>Sanidad</option></select></div>
+        <div class="form-group"><label class="form-label">Duración total (horas)</label><input class="form-input" type="number" value="2000"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Competencia general</label>
+        <textarea class="form-textarea">Atender al paciente en situación de emergencia sanitaria y de urgencia en el lugar del suceso, en el vehículo de asistencia y durante el traslado al centro sanitario, aplicando técnicas sanitarias según los protocolos establecidos.</textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Estado</label>
+        <select class="form-select"><option selected>Vigente</option><option>En extinción</option><option>Extinguido</option></select>
+        <span class="form-hint">Marcar como extinguido no elimina las implantaciones existentes en centros</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-editar-ciclo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-editar-ciclo')">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nueva referencia normativa -->
+<div class="modal-overlay" id="modal-norm-ref">
+  <div class="modal" style="width:500px">
+    <div class="modal-head">
+      <span class="modal-title">Añadir referencia normativa</span>
+      <button class="modal-close" onclick="closeModal('modal-norm-ref')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Identificación de la norma <span>*</span></label><input class="form-input" type="text" placeholder="Ej: RD 659/2023, de 18 de julio"><span class="form-hint">Incluye número, año y fecha de publicación</span></div>
+      <div class="form-group"><label class="form-label">Descripción del alcance</label><textarea class="form-textarea" placeholder="Qué aspectos del ciclo regula esta norma, qué modifica respecto a normas anteriores…"></textarea></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Ámbito de aplicación <span>*</span></label>
+          <select class="form-select"><option>Estatal</option><option>Andalucía</option><option>Cataluña</option><option>Madrid</option><option>País Vasco</option><option>C. Valenciana</option><option>Galicia</option><option>Aragón</option><option>Otro</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Estado de vigencia</label>
+          <select class="form-select"><option>Vigente</option><option>Derogada parcialmente</option><option>Derogada totalmente</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Fecha de publicación (BOE/BOJA...)</label><input class="form-input" type="date"></div>
+        <div class="form-group"><label class="form-label">Fecha de entrada en vigor</label><input class="form-input" type="date"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-norm-ref')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-norm-ref')">Añadir referencia</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nueva CP -->
+<div class="modal-overlay" id="modal-nueva-cp">
+  <div class="modal" style="width:500px">
+    <div class="modal-head">
+      <span class="modal-title">Nueva competencia profesional</span>
+      <button class="modal-close" onclick="closeModal('modal-nueva-cp')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Código <span>*</span></label><input class="form-input" type="text" placeholder="Ej: CP7"></div>
+      <div class="form-group"><label class="form-label">Descripción de la competencia <span>*</span></label><textarea class="form-textarea" placeholder="Enunciado completo de la competencia profesional según el RD del título…"></textarea></div>
+      <div class="form-group"><label class="form-label">Referencia normativa</label><input class="form-input" type="text" placeholder="Ej: RD 1397/2007 · Anexo I"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nueva-cp')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-cp')">Añadir competencia</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nuevo módulo troncal -->
+<div class="modal-overlay" id="modal-nuevo-mod">
+  <div class="modal" style="width:500px">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo módulo profesional · Plantilla troncal</span>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-mod')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Denominación del módulo <span>*</span></label><input class="form-input" type="text" placeholder="Nombre oficial según el RD del título"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Curso <span>*</span></label>
+          <select class="form-select"><option>1º curso</option><option>2º curso</option><option>FCT</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">Horas (estatal mínimo) <span>*</span></label><input class="form-input" type="number" placeholder="224"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Referencia normativa</label><input class="form-input" type="text" placeholder="Ej: RD 1397/2007 · Anexo módulos"></div>
+      <div style="padding:0.625rem 0.875rem;background:var(--amber-bg);border:1px solid #FCD34D;border-radius:8px;font-size:0.77rem;color:var(--amber)">
+        Los Resultados de Aprendizaje y Criterios de Evaluación de este módulo se añadirán desde la pantalla de estructura del ciclo implantado en el centro.
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nuevo-mod')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-mod')">Añadir módulo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showDetalle(){
+  document.getElementById('view-lista').style.display='none';
+  document.getElementById('view-detalle').style.display='block';
+  document.getElementById('breadcrumb').innerHTML='<a href="index.html">Inicio</a><span class="bc-sep">›</span><a href="#" onclick="showLista();return false;" style="color:var(--text-muted)">Catálogo de ciclos</a><span class="bc-sep">›</span><strong>Técnico en Emergencias Sanitarias · SAN301</strong>';
+}
+function showLista(){
+  document.getElementById('view-lista').style.display='block';
+  document.getElementById('view-detalle').style.display='none';
+  document.getElementById('breadcrumb').innerHTML='<a href="index.html">Inicio</a><span class="bc-sep">›</span><strong>Catálogo de ciclos formativos</strong>';
+}
+function switchTab(tabId,el){
+  el.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  let cur=el.closest('.tabs').nextElementSibling;
+  while(cur){if(cur.classList&&cur.classList.contains('tab-content'))cur.classList.remove('active');cur=cur.nextElementSibling;}
+  document.getElementById(tabId).classList.add('active');
+}
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')})
+});
+</script>
+</body>
+</html>

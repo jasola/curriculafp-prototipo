@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CurriculaFP — Años académicos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+  --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+  --sidebar-w:232px;--topbar-h:52px;
+  --text-main:#1C1008;--text-sub:#6B5A4E;--text-muted:#A08070;
+  --border:#E8E0D8;--border-dark:#D0C4B4;
+  --green:#15803D;--green-bg:#F0FDF4;
+  --amber:#B45309;--amber-bg:#FFFBEB;
+  --blue:#1E40AF;--blue-bg:#EFF6FF;
+  --slate:#64748B;--slate-bg:#F1F5F9;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.08);
+  --radius:10px;--radius-lg:13px;
+}
+html{font-size:15px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh}
+svg{display:block}a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--border-dark);border-radius:999px}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+.sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+.sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+.sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+.sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+.sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+.sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+.nav-group{padding:0 0.625rem 0.25rem}
+.nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+.ni{width:15px;height:15px;opacity:0.55;flex-shrink:0;transition:opacity 0.15s}
+.nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+.nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+.nav-item:hover .ni{opacity:0.85}
+.nav-item.active{background:var(--brand);color:#fff}
+.nav-item.active .ni{opacity:1}
+.nav-badge{margin-left:auto;background:rgba(255,255,255,0.15);color:#fff;font-size:0.62rem;font-weight:700;padding:0.08rem 0.42rem;border-radius:999px}
+.nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+.sb-bottom{margin-top:auto;padding:0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+.user-tile{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:7px;background:rgba(255,255,255,0.05);cursor:pointer}
+.user-tile:hover{background:rgba(255,255,255,0.09)}
+.user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-weight:700;font-size:0.69rem;color:#fff;flex-shrink:0}
+.user-name{font-size:0.775rem;font-weight:600;color:#F7F4F0}
+.user-role{font-size:0.63rem;color:rgba(255,255,255,0.3);margin-top:1px}
+
+/* MAIN */
+.app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+
+/* TOPBAR */
+.topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:0.625rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm)}
+.topbar-bc{font-size:0.775rem;color:var(--text-muted);display:flex;align-items:center;gap:0.3rem}
+.topbar-bc a{color:var(--text-muted)}.topbar-bc a:hover{color:var(--brand)}
+.topbar-bc strong{color:var(--text-main);font-weight:600}
+.bc-sep{color:var(--border-dark)}
+.topbar-spacer{flex:1}
+.topbar-actions{display:flex;align-items:center;gap:0.45rem}
+.tb-div{width:1px;height:18px;background:var(--border);margin:0 0.1rem}
+.tb-btn{display:flex;align-items:center;gap:0.35rem;padding:0.32rem 0.8rem;border-radius:6px;font-size:0.75rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.15s;border:1px solid transparent;white-space:nowrap}
+.tb-ghost{background:transparent;color:var(--text-sub);border-color:var(--border)}
+.tb-ghost:hover{background:var(--bg);border-color:var(--border-dark);color:var(--text-main)}
+.tb-primary{background:var(--brand);color:#fff;box-shadow:0 2px 8px rgba(155,28,28,0.2)}
+.tb-primary:hover{background:var(--brand-dark)}
+.tb-icon{width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--text-sub);transition:all 0.15s;position:relative}
+.tb-icon:hover{background:var(--bg);color:var(--text-main)}
+.tb-notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--brand);border:1.5px solid #fff}
+
+/* PAGE */
+.page{padding:1.625rem 1.75rem 3rem;flex:1}
+.page-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.page-hd h1{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;line-height:1.15}
+.page-hd p{margin-top:0.25rem;font-size:0.85rem;color:var(--text-sub)}
+
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;gap:0.22rem;padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600;white-space:nowrap}
+.chip-green{background:var(--green-bg);color:var(--green);border:1px solid #86EFAC}
+.chip-amber{background:var(--amber-bg);color:var(--amber);border:1px solid #FCD34D}
+.chip-slate{background:var(--slate-bg);color:var(--slate);border:1px solid #CBD5E1}
+.chip-blue{background:var(--blue-bg);color:var(--blue);border:1px solid #93C5FD}
+
+/* KPI ROW */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0.875rem;margin-bottom:1.25rem}
+.kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.125rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s}
+.kpi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+.k-red::after{background:var(--brand)}.k-green::after{background:var(--green)}.k-amber::after{background:var(--amber)}.k-blue::after{background:var(--blue)}
+.kpi-icon{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;margin-bottom:0.625rem}
+.kpi-icon svg{width:16px;height:16px}
+.k-red .kpi-icon{background:var(--brand-light);color:var(--brand)}
+.k-green .kpi-icon{background:var(--green-bg);color:var(--green)}
+.k-amber .kpi-icon{background:var(--amber-bg);color:var(--amber)}
+.k-blue .kpi-icon{background:var(--blue-bg);color:var(--blue)}
+.kpi-label{font-size:0.68rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem}
+.kpi-val{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--text-main);line-height:1;margin-bottom:0.2rem}
+.kpi-sub{font-size:0.68rem;color:var(--text-muted)}
+
+/* SECTION CARD */
+.sc{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:1.25rem}
+.sc-head{padding:0.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:0.5rem}
+.sc-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--text-main);display:flex;align-items:center;gap:0.45rem}
+.sc-body{padding:1.125rem 1.25rem}
+.link-btn{font-size:0.72rem;font-weight:700;color:var(--brand);cursor:pointer;transition:color 0.15s}
+.link-btn:hover{color:var(--brand-dark);text-decoration:underline}
+
+/* BANNERS */
+.active-banner{display:flex;align-items:center;gap:0.875rem;padding:0.75rem 1.25rem;background:var(--green-bg);border:1px solid #86EFAC;border-radius:var(--radius-lg);margin-bottom:1.25rem}
+.active-banner-dot{width:9px;height:9px;border-radius:50%;background:var(--green);animation:blink 2s ease-in-out infinite;flex-shrink:0}
+.active-banner-text{font-size:0.85rem;color:var(--green);font-weight:600}
+.active-banner-text span{font-weight:400;color:var(--text-sub)}
+.active-banner .sp{flex:1}
+.active-banner-action{font-size:0.75rem;font-weight:700;color:var(--brand);cursor:pointer;white-space:nowrap}
+.rule-box{display:flex;gap:0.875rem;padding:0.875rem 1.125rem;background:var(--amber-bg);border:1px solid #FCD34D;border-radius:var(--radius);margin-bottom:1.25rem;align-items:flex-start}
+.rule-icon{width:32px;height:32px;border-radius:8px;background:rgba(180,83,9,0.12);display:grid;place-items:center;flex-shrink:0;color:var(--amber)}
+.rule-icon svg{width:16px;height:16px}
+.rule-title{font-size:0.8rem;font-weight:700;color:var(--amber);margin-bottom:0.2rem}
+.rule-text{font-size:0.78rem;color:var(--text-sub);line-height:1.5}
+
+/* ANIO CARDS */
+.anios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.125rem;margin-bottom:1.25rem}
+.anio-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;transition:box-shadow 0.2s,transform 0.2s}
+.anio-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.anio-card.is-active{border-color:#86EFAC;box-shadow:0 0 0 2px rgba(21,128,61,0.1),var(--shadow-sm)}
+.anio-card.is-future{border-color:#93C5FD}
+.anio-card.is-closed{opacity:0.72}
+.anio-card-top{padding:1.125rem 1.25rem 0.875rem;display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem}
+.anio-label{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.3rem}
+.anio-year{font-family:'Playfair Display',serif;font-size:1.625rem;font-weight:700;color:var(--text-main);line-height:1}
+.anio-icon{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;flex-shrink:0}
+.anio-icon svg{width:20px;height:20px}
+.ai-green{background:var(--green-bg);color:var(--green)}
+.ai-blue{background:var(--blue-bg);color:var(--blue)}
+.ai-slate{background:var(--slate-bg);color:var(--slate)}
+.anio-card-mid{padding:0 1.25rem 1rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem}
+.anio-stat{text-align:center;padding:0.5rem 0.25rem;background:var(--bg);border-radius:7px}
+.anio-stat-val{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--text-main)}
+.anio-stat-lbl{font-size:0.65rem;color:var(--text-muted);margin-top:2px}
+.anio-card-foot{padding:0.75rem 1.25rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:0.5rem;background:rgba(0,0,0,0.015)}
+.anio-dates{font-size:0.72rem;color:var(--text-muted)}
+.anio-dates strong{color:var(--text-sub);font-weight:600}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:1rem;padding:0.875rem 0;border-bottom:1px solid var(--border)}
+.tl-item:last-child{border-bottom:none}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:20px;flex-shrink:0;padding-top:3px}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tl-line{width:2px;background:var(--border);flex:1;margin-top:4px}
+.tl-item:last-child .tl-line{display:none}
+.tl-content{flex:1;min-width:0}
+.tl-title{font-size:0.83rem;font-weight:600;color:var(--text-main);margin-bottom:0.2rem}
+.tl-desc{font-size:0.77rem;color:var(--text-sub);line-height:1.5}
+.tl-note{font-size:0.7rem;color:var(--text-muted);margin-top:0.25rem;font-style:italic}
+.tl-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.35rem;flex-shrink:0}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse}
+.t th{text-align:left;font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);padding:0 0.75rem 0.5rem;border-bottom:1px solid var(--border)}
+.t td{padding:0.6rem 0.75rem;font-size:0.8rem;color:var(--text-sub);border-bottom:1px solid var(--border);vertical-align:middle}
+.t tr:last-child td{border-bottom:none}
+.t tr:hover td{background:var(--bg)}
+.t td:first-child{font-weight:600;color:var(--text-main)}
+.t-mono{font-family:monospace;font-size:0.73rem;color:var(--text-muted)}
+.t-action{color:var(--brand);font-size:0.73rem;font-weight:700;cursor:pointer}
+.t-action:hover{text-decoration:underline}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg-white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(0,0,0,0.2);width:480px;max-width:calc(100vw - 2rem);overflow:hidden;animation:modalIn 0.2s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(0.96) translateY(8px)}to{opacity:1;transform:none}}
+.modal-head{padding:1.125rem 1.375rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700}
+.modal-close{width:28px;height:28px;border-radius:6px;border:none;background:var(--bg);cursor:pointer;display:grid;place-items:center;color:var(--text-sub)}
+.modal-close:hover{background:var(--border)}
+.modal-body{padding:1.375rem;display:flex;flex-direction:column;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.35rem}
+.form-label{font-size:0.75rem;font-weight:700;color:var(--text-main)}
+.form-label span{color:var(--brand)}
+.form-input{padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.83rem;color:var(--text-main);background:var(--bg-white);transition:border-color 0.15s;outline:none}
+.form-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(155,28,28,0.08)}
+.form-hint{font-size:0.7rem;color:var(--text-muted)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.875rem}
+.form-select{padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.83rem;color:var(--text-main);background:var(--bg-white);outline:none;cursor:pointer}
+.form-select:focus{border-color:var(--brand)}
+.modal-foot{padding:1rem 1.375rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:0.625rem;background:var(--bg)}
+.btn{padding:0.45rem 1.1rem;border-radius:7px;font-size:0.8rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.15s;border:1px solid transparent}
+.btn-ghost{background:transparent;color:var(--text-sub);border-color:var(--border)}
+.btn-ghost:hover{background:var(--border)}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.anio-card{animation:fadeUp 0.3s ease both}
+.anio-card:nth-child(1){animation-delay:.04s}.anio-card:nth-child(2){animation-delay:.08s}.anio-card:nth-child(3){animation-delay:.12s}
+.sc,.kpi-card{animation:fadeUp 0.3s ease 0.15s both}
+
+.nav-layer-label{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(247,244,240,0.55);padding:0.875rem 0.5rem 0.3rem;border-left:2px solid var(--brand);margin-left:0.625rem;padding-left:0.5rem}
+.nav-demo-tag{font-size:0.55rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:rgba(155,28,28,0.35);color:#FCA5A5;border-radius:3px;padding:0.05rem 0.3rem;margin-left:0.2rem;vertical-align:middle}
+.nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
+.nav-disabled:hover{background:transparent !important;color:rgba(255,255,255,0.5) !important}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a href="index.html" class="sb-logo">
+    <div class="sb-logo-mark">CF</div>
+    <div class="sb-logo-text">CurriculaFP <small>Gestión curricular FP</small></div>
+  </a>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 · Activo</div>
+  <div style="height:0.5rem"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">General</div>
+    <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    <a class="nav-item" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Catálogo de ciclos</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Administración · Superadmin</div>
+    <a class="nav-item" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+    <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+    <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas · DNI</a>
+    <a class="nav-item active" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Años académicos</a>
+    <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Catálogo normativo</a>
+    <a class="nav-item nav-disabled" href="#auditoria" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditoría del sistema</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-layer-label">Capa 1 · Diseño del ciclo · TES <span class="nav-demo-tag">demo</span></div>
+    <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Estructura del ciclo</a>
+    <a class="nav-item nav-disabled" href="programacion.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Programación base</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-layer-label">Capa 2 · Gestión del curso · TES <span class="nav-demo-tag">demo</span></div>
+    <a class="nav-item nav-disabled" href="gestion-curso.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>Grupos y docentes</a>
+    <a class="nav-item nav-disabled" href="calificaciones.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+    <a class="nav-item nav-disabled" href="alumno.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+    <a class="nav-item nav-disabled" href="fct.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>FCT / Dual</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Gestión académica</div>
+    <a class="nav-item nav-disabled" href="#sesiones" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluación</a>
+    <a class="nav-item nav-disabled" href="#boletines" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Boletines de notas</a>
+    <a class="nav-item nav-disabled" href="#convalidaciones" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones<span class="nav-badge">1</span></a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Comunicación</div>
+    <a class="nav-item nav-disabled" href="#avisos" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos<span class="nav-badge">5</span></a>
+    <a class="nav-item nav-disabled" href="#informes" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y analítica</a>
+  </div>
+  <div class="sb-bottom">
+    <div class="user-tile">
+      <div class="user-av">SA</div>
+      <div><div class="user-name">Superadministrador</div><div class="user-role">Acceso total al sistema</div></div>
+    </div>
+  </div>
+</aside>
+
+<div class="app-main">
+  <header class="topbar">
+    <div class="topbar-bc">
+      <a href="index.html">Inicio</a><span class="bc-sep">›</span>
+      <span>Administración</span><span class="bc-sep">›</span>
+      <strong>Años académicos</strong>
+    </div>
+    <div class="topbar-spacer"></div>
+    <div class="topbar-actions">
+      <button class="tb-btn tb-ghost" onclick="openModal()">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 4v16m8-8H4"/></svg>
+        Nuevo año académico
+      </button>
+      <div class="tb-div"></div>
+      <button class="tb-icon" style="position:relative;">
+        <div class="tb-notif-dot"></div>
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="page">
+    <div class="page-hd">
+      <div>
+        <h1>Años académicos</h1>
+        <p>Entidad B0 · Transversal a toda la plataforma · Aplica simultáneamente a todos los centros del sistema</p>
+      </div>
+      <button class="tb-btn tb-primary" onclick="openModal()">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 4v16m8-8H4"/></svg>
+        Nuevo año académico
+      </button>
+    </div>
+
+    <!-- KPIs globales -->
+    <div class="kpi-row">
+      <div class="kpi-card k-green">
+        <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+        <div class="kpi-label">Año activo</div>
+        <div class="kpi-val">2024–25</div>
+        <div class="kpi-sub">1 sep 2024 → 30 jun 2025</div>
+      </div>
+      <div class="kpi-card k-blue">
+        <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg></div>
+        <div class="kpi-label">Centros activos</div>
+        <div class="kpi-val">12</div>
+        <div class="kpi-sub">En todo el sistema</div>
+      </div>
+      <div class="kpi-card k-amber">
+        <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div>
+        <div class="kpi-label">Alumnos matriculados</div>
+        <div class="kpi-val">1.847</div>
+        <div class="kpi-sub">En todos los centros</div>
+      </div>
+      <div class="kpi-card k-red">
+        <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0118 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg></div>
+        <div class="kpi-label">Ciclos formativos</div>
+        <div class="kpi-val">38</div>
+        <div class="kpi-sub">En todos los centros</div>
+      </div>
+    </div>
+
+    <!-- Banner año activo -->
+    <div class="active-banner">
+      <div class="active-banner-dot"></div>
+      <div class="active-banner-text">
+        Año académico activo en todo el sistema: <strong>2024–2025</strong>
+        <span> · 12 centros · 1.847 alumnos · 38 ciclos formativos</span>
+      </div>
+      <div class="sp"></div>
+      <span class="active-banner-action" onclick="openModal()">Cambiar año activo →</span>
+    </div>
+
+    <!-- Regla de negocio -->
+    <div class="rule-box">
+      <div class="rule-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+      <div>
+        <div class="rule-title">Restricción de negocio · Solo un año activo en todo el sistema</div>
+        <div class="rule-text">Solo puede existir un año académico en estado <strong>Activo</strong>, y aplica simultáneamente a <strong>todos los centros</strong> de la plataforma. Al activar un año nuevo, el actual pasa automáticamente a <strong>Cerrado</strong>. Los años en estado <strong>Futuro</strong> permiten a los centros planificar grupos, módulos y docentes antes del inicio del curso.</div>
+      </div>
+    </div>
+
+    <!-- Cards de años -->
+    <div class="anios-grid">
+      <div class="anio-card is-future">
+        <div class="anio-card-top">
+          <div>
+            <div class="anio-label">Año académico</div>
+            <div class="anio-year">2025–26</div>
+            <div style="margin-top:0.5rem"><span class="chip chip-blue">Futuro</span></div>
+          </div>
+          <div class="anio-icon ai-blue"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+        </div>
+        <div class="anio-card-mid">
+          <div class="anio-stat"><div class="anio-stat-val">—</div><div class="anio-stat-lbl">Centros</div></div>
+          <div class="anio-stat"><div class="anio-stat-val">—</div><div class="anio-stat-lbl">Alumnos</div></div>
+          <div class="anio-stat"><div class="anio-stat-val">—</div><div class="anio-stat-lbl">Ciclos</div></div>
+        </div>
+        <div class="anio-card-foot">
+          <div class="anio-dates"><strong>1 sep 2025</strong> → 30 jun 2026</div>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="link-btn">Editar</span>
+            <span style="color:var(--border-dark)">·</span>
+            <span class="link-btn" style="color:var(--green)">Activar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anio-card is-active">
+        <div class="anio-card-top">
+          <div>
+            <div class="anio-label">Año académico</div>
+            <div class="anio-year">2024–25</div>
+            <div style="margin-top:0.5rem"><span class="chip chip-green"><svg width="7" height="7" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>Activo</span></div>
+          </div>
+          <div class="anio-icon ai-green"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+        </div>
+        <div class="anio-card-mid">
+          <div class="anio-stat"><div class="anio-stat-val">12</div><div class="anio-stat-lbl">Centros</div></div>
+          <div class="anio-stat"><div class="anio-stat-val">1.847</div><div class="anio-stat-lbl">Alumnos</div></div>
+          <div class="anio-stat"><div class="anio-stat-val">38</div><div class="anio-stat-lbl">Ciclos</div></div>
+        </div>
+        <div class="anio-card-foot">
+          <div class="anio-dates"><strong>1 sep 2024</strong> → 30 jun 2025</div>
+          <span class="link-btn">Ver detalle</span>
+        </div>
+      </div>
+
+      <div class="anio-card is-closed">
+        <div class="anio-card-top">
+          <div>
+            <div class="anio-label">Año académico</div>
+            <div class="anio-year">2023–24</div>
+            <div style="margin-top:0.5rem"><span class="chip chip-slate">Cerrado</span></div>
+          </div>
+          <div class="anio-icon ai-slate"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+        </div>
+        <div class="anio-card-mid">
+          <div class="anio-stat"><div class="anio-stat-val">11</div><div class="anio-stat-lbl">Centros</div></div>
+          <div class="anio-stat"><div class="anio-stat-val">1.703</div><div class="anio-stat-lbl">Alumnos</div></div>
+          <div class="anio-stat"><div class="anio-stat-val">35</div><div class="anio-stat-lbl">Ciclos</div></div>
+        </div>
+        <div class="anio-card-foot">
+          <div class="anio-dates"><strong>1 sep 2023</strong> → 30 jun 2024</div>
+          <span class="link-btn">Consultar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Historial + ciclo de estados -->
+    <div class="g2">
+      <div class="sc">
+        <div class="sc-head">
+          <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Historial completo</span>
+          <span style="font-size:0.72rem;color:var(--text-muted)">3 registros</span>
+        </div>
+        <div style="padding:0 1.25rem;">
+          <table class="t">
+            <thead><tr><th>Año</th><th>Inicio</th><th>Fin</th><th>Centros</th><th>Alumnos</th><th>Estado</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>2025–2026</td><td class="t-mono">01/09/2025</td><td class="t-mono">30/06/2026</td><td>—</td><td>—</td><td><span class="chip chip-blue">Futuro</span></td><td><span class="t-action">Editar</span></td></tr>
+              <tr><td>2024–2025</td><td class="t-mono">01/09/2024</td><td class="t-mono">30/06/2025</td><td>12</td><td>1.847</td><td><span class="chip chip-green">Activo</span></td><td><span class="t-action">Ver</span></td></tr>
+              <tr><td>2023–2024</td><td class="t-mono">01/09/2023</td><td class="t-mono">30/06/2024</td><td>11</td><td>1.703</td><td><span class="chip chip-slate">Cerrado</span></td><td><span class="t-action">Consultar</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="sc-head">
+          <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Ciclo de estados</span>
+        </div>
+        <div class="sc-body">
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-left"><div class="tl-dot" style="background:var(--blue)"></div><div class="tl-line"></div></div>
+              <div class="tl-content">
+                <div class="tl-title">Futuro</div>
+                <div class="tl-desc">El año está creado. Los centros pueden planificar: configurar grupos, asignar docentes y preparar módulos antes del inicio del curso.</div>
+              </div>
+              <div class="tl-right"><span class="chip chip-blue">Futuro</span></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-left"><div class="tl-dot" style="background:var(--green)"></div><div class="tl-line"></div></div>
+              <div class="tl-content">
+                <div class="tl-title">Activo</div>
+                <div class="tl-desc">Único año operativo del sistema. Toda la actividad académica queda vinculada a este año en todos los centros simultáneamente.</div>
+                <div class="tl-note">Al activar → el año anterior pasa a Cerrado automáticamente en todos los centros</div>
+              </div>
+              <div class="tl-right"><span class="chip chip-green">Activo</span></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-left"><div class="tl-dot" style="background:var(--slate)"></div><div class="tl-line"></div></div>
+              <div class="tl-content">
+                <div class="tl-title">Cerrado</div>
+                <div class="tl-desc">Solo lectura. Se pueden consultar calificaciones, expedientes y boletines de todos los centros, pero no modificar ningún dato.</div>
+                <div class="tl-note">Datos conservados para trazabilidad histórica universal por DNI</div>
+              </div>
+              <div class="tl-right"><span class="chip chip-slate">Cerrado</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo año académico</span>
+      <button class="modal-close" onclick="closeModal()"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Denominación <span>*</span></label>
+        <input class="form-input" type="text" placeholder="Ej: 2025–2026" value="2025–2026">
+        <span class="form-hint">Nombre visible en toda la plataforma para todos los centros</span>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Fecha de inicio <span>*</span></label>
+          <input class="form-input" type="date" value="2025-09-01">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fecha de fin <span>*</span></label>
+          <input class="form-input" type="date" value="2026-06-30">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Estado inicial</label>
+        <select class="form-select">
+          <option value="futuro" selected>Futuro — planificación anticipada en todos los centros</option>
+          <option value="activo">Activo — activar inmediatamente (cierra el 2024–2025 en todos los centros)</option>
+        </select>
+      </div>
+      <div class="rule-box" style="margin-bottom:0">
+        <div class="rule-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div>
+          <div class="rule-title">Restricción global</div>
+          <div class="rule-text">El año activo aplica simultáneamente a <strong>todos los centros</strong>. Esta es una restricción de negocio central de CurriculaFP.</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal()">Crear año académico</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()})
+</script>
+</body>
+</html>

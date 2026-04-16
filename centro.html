@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CurriculaFP — Centros educativos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+  --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+  --sidebar-w:232px;--topbar-h:52px;
+  --text-main:#1C1008;--text-sub:#6B5A4E;--text-muted:#A08070;
+  --border:#E8E0D8;--border-dark:#D0C4B4;
+  --green:#15803D;--green-bg:#F0FDF4;
+  --amber:#B45309;--amber-bg:#FFFBEB;
+  --blue:#1E40AF;--blue-bg:#EFF6FF;
+  --slate:#64748B;--slate-bg:#F1F5F9;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.08);
+  --radius:10px;--radius-lg:13px;
+}
+html{font-size:15px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh}
+svg{display:block}a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--border-dark);border-radius:999px}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+.sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+.sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+.sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+.sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+.sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+.sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+.nav-group{padding:0 0.625rem 0.25rem}
+.nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+.ni{width:15px;height:15px;opacity:0.55;flex-shrink:0;transition:opacity 0.15s}
+.nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+.nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+.nav-item:hover .ni{opacity:0.85}
+.nav-item.active{background:var(--brand);color:#fff}
+.nav-item.active .ni{opacity:1}
+.nav-badge{margin-left:auto;background:rgba(255,255,255,0.15);color:#fff;font-size:0.62rem;font-weight:700;padding:0.08rem 0.42rem;border-radius:999px}
+.nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+.sb-bottom{margin-top:auto;padding:0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+.user-tile{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:7px;background:rgba(255,255,255,0.05);cursor:pointer}
+.user-tile:hover{background:rgba(255,255,255,0.09)}
+.user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-weight:700;font-size:0.69rem;color:#fff;flex-shrink:0}
+.user-name{font-size:0.775rem;font-weight:600;color:#F7F4F0}
+.user-role{font-size:0.63rem;color:rgba(255,255,255,0.3);margin-top:1px}
+
+/* MAIN */
+.app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+
+/* TOPBAR */
+.topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:0.625rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm)}
+.topbar-bc{font-size:0.775rem;color:var(--text-muted);display:flex;align-items:center;gap:0.3rem}
+.topbar-bc a{color:var(--text-muted)}.topbar-bc a:hover{color:var(--brand)}
+.topbar-bc strong{color:var(--text-main);font-weight:600}
+.bc-sep{color:var(--border-dark)}
+.topbar-spacer{flex:1}
+.topbar-actions{display:flex;align-items:center;gap:0.45rem}
+.tb-div{width:1px;height:18px;background:var(--border);margin:0 0.1rem}
+.tb-btn{display:flex;align-items:center;gap:0.35rem;padding:0.32rem 0.8rem;border-radius:6px;font-size:0.75rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.15s;border:1px solid transparent;white-space:nowrap}
+.tb-ghost{background:transparent;color:var(--text-sub);border-color:var(--border)}
+.tb-ghost:hover{background:var(--bg);border-color:var(--border-dark);color:var(--text-main)}
+.tb-primary{background:var(--brand);color:#fff;box-shadow:0 2px 8px rgba(155,28,28,0.2)}
+.tb-primary:hover{background:var(--brand-dark)}
+.tb-icon{width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--text-sub);transition:all 0.15s;position:relative}
+.tb-icon:hover{background:var(--bg);color:var(--text-main)}
+.tb-notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--brand);border:1.5px solid #fff}
+
+/* PAGE */
+.page{padding:1.625rem 1.75rem 3rem;flex:1}
+.page-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.page-hd h1{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;line-height:1.15}
+.page-hd p{margin-top:0.25rem;font-size:0.85rem;color:var(--text-sub)}
+
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;gap:0.22rem;padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600;white-space:nowrap}
+.chip-green{background:var(--green-bg);color:var(--green);border:1px solid #86EFAC}
+.chip-amber{background:var(--amber-bg);color:var(--amber);border:1px solid #FCD34D}
+.chip-slate{background:var(--slate-bg);color:var(--slate);border:1px solid #CBD5E1}
+.chip-blue{background:var(--blue-bg);color:var(--blue);border:1px solid #93C5FD}
+.chip-red{background:var(--brand-light);color:var(--brand);border:1px solid #FECACA}
+
+/* KPI ROW */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0.875rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.125rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s}
+.kpi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+.k-red::after{background:var(--brand)}.k-green::after{background:var(--green)}.k-amber::after{background:var(--amber)}.k-blue::after{background:var(--blue)}
+.kpi-icon{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;margin-bottom:0.625rem}
+.kpi-icon svg{width:16px;height:16px}
+.k-red .kpi-icon{background:var(--brand-light);color:var(--brand)}
+.k-green .kpi-icon{background:var(--green-bg);color:var(--green)}
+.k-amber .kpi-icon{background:var(--amber-bg);color:var(--amber)}
+.k-blue .kpi-icon{background:var(--blue-bg);color:var(--blue)}
+.kpi-label{font-size:0.68rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem}
+.kpi-val{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--text-main);line-height:1;margin-bottom:0.2rem}
+.kpi-sub{font-size:0.68rem;color:var(--text-muted)}
+
+/* SECTION CARD */
+.sc{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:1.25rem}
+.sc-head{padding:0.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:0.5rem}
+.sc-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--text-main);display:flex;align-items:center;gap:0.45rem}
+.sc-body{padding:1.125rem 1.25rem}
+.link-btn{font-size:0.72rem;font-weight:700;color:var(--brand);cursor:pointer;transition:color 0.15s}
+.link-btn:hover{color:var(--brand-dark);text-decoration:underline}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse}
+.t th{text-align:left;font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);padding:0 0.75rem 0.5rem;border-bottom:1px solid var(--border)}
+.t td{padding:0.6rem 0.75rem;font-size:0.8rem;color:var(--text-sub);border-bottom:1px solid var(--border);vertical-align:middle}
+.t tr:last-child td{border-bottom:none}
+.t tr:hover td{background:var(--bg);cursor:pointer}
+.t td:first-child{font-weight:600;color:var(--text-main)}
+.t-mono{font-family:monospace;font-size:0.73rem;color:var(--text-muted)}
+.t-action{color:var(--brand);font-size:0.73rem;font-weight:700;cursor:pointer}
+.t-action:hover{text-decoration:underline}
+
+/* SEARCH BAR */
+.search-bar{display:flex;align-items:center;gap:0.625rem;margin-bottom:1.125rem}
+.search-input-wrap{position:relative;flex:1;max-width:320px}
+.search-input-wrap svg{position:absolute;left:0.625rem;top:50%;transform:translateY(-50%);color:var(--text-muted);width:14px;height:14px}
+.search-input{width:100%;padding:0.42rem 0.75rem 0.42rem 2rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--text-main);background:var(--bg-white);outline:none;transition:border-color 0.15s}
+.search-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(155,28,28,0.07)}
+.filter-select{padding:0.42rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.8rem;color:var(--text-sub);background:var(--bg-white);outline:none;cursor:pointer}
+
+/* VIEWS: lista / detalle */
+#view-lista{display:block}
+#view-detalle{display:none}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:1.5rem}
+.tab{padding:0.625rem 1.125rem;font-size:0.82rem;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.15s;white-space:nowrap}
+.tab:hover{color:var(--text-main)}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand)}
+
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* DETAIL HEADER */
+.detail-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.detail-hd h2{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700}
+.detail-hd p{font-size:0.83rem;color:var(--text-sub);margin-top:0.2rem}
+.back-btn{display:flex;align-items:center;gap:0.35rem;font-size:0.78rem;font-weight:600;color:var(--text-muted);cursor:pointer;margin-bottom:1rem;transition:color 0.15s}
+.back-btn:hover{color:var(--brand)}
+
+/* FICHA GRID */
+.ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
+.ficha-field{display:flex;flex-direction:column;gap:0.2rem}
+.ficha-label{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted)}
+.ficha-value{font-size:0.85rem;font-weight:600;color:var(--text-main)}
+.ficha-value.mono{font-family:monospace;font-size:0.82rem}
+
+/* EQUIPO DIRECTIVO */
+.equipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.875rem;margin-bottom:1.25rem}
+.equipo-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:0.875rem 1rem}
+.equipo-rol{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.375rem}
+.equipo-nombre{font-size:0.85rem;font-weight:600;color:var(--text-main);margin-bottom:0.2rem}
+.equipo-dni{font-family:monospace;font-size:0.75rem;color:var(--text-muted)}
+
+/* CALENDAR */
+.cal-controls{display:flex;align-items:center;gap:0.875rem;margin-bottom:1rem}
+.cal-nav{display:flex;align-items:center;gap:0.5rem}
+.cal-nav-btn{width:28px;height:28px;border:1px solid var(--border);border-radius:6px;background:var(--bg-white);cursor:pointer;display:grid;place-items:center;color:var(--text-sub);transition:all 0.15s}
+.cal-nav-btn:hover{background:var(--bg);color:var(--text-main)}
+.cal-month-label{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;min-width:140px;text-align:center}
+.cal-legend{display:flex;align-items:center;gap:1rem;margin-left:auto}
+.cal-legend-item{display:flex;align-items:center;gap:0.35rem;font-size:0.72rem;color:var(--text-sub)}
+.cal-legend-dot{width:10px;height:10px;border-radius:2px}
+
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day-header{text-align:center;font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);padding:0.4rem 0}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:500;border-radius:6px;cursor:default;position:relative;transition:all 0.12s}
+.cal-day.empty{background:transparent}
+.cal-day.lectivo{background:rgba(155,28,28,0.1);color:var(--brand);font-weight:600}
+.cal-day.lectivo:hover{background:rgba(155,28,28,0.18)}
+.cal-day.festivo{background:var(--bg);color:var(--text-muted)}
+.cal-day.finde{background:transparent;color:var(--border-dark)}
+.cal-day.today{box-shadow:0 0 0 2px var(--brand)}
+.cal-day.vacaciones{background:var(--amber-bg);color:var(--amber)}
+
+.cal-year-view{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.cal-month-mini{background:var(--bg);border-radius:var(--radius);padding:0.875rem}
+.cal-month-mini-title{font-size:0.78rem;font-weight:700;color:var(--text-main);margin-bottom:0.625rem;text-align:center}
+.cal-mini-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-mini-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.6rem;border-radius:3px}
+.cal-mini-day.lectivo{background:rgba(155,28,28,0.15);color:var(--brand)}
+.cal-mini-day.festivo{background:transparent;color:var(--text-muted)}
+.cal-mini-day.finde{color:var(--border-dark)}
+.cal-mini-day.vacaciones{background:var(--amber-bg);color:var(--amber)}
+.cal-mini-day.empty{background:transparent}
+
+/* ESPACIOS */
+.espacio-tipo-badge{display:inline-flex;align-items:center;padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600;background:var(--blue-bg);color:var(--blue);border:1px solid #93C5FD}
+
+/* CICLOS TABLE */
+.ciclo-row-name{font-weight:600;color:var(--text-main);font-size:0.82rem}
+.ciclo-row-sub{font-size:0.72rem;color:var(--text-muted)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg-white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(0,0,0,0.2);width:560px;max-width:calc(100vw - 2rem);max-height:90vh;overflow-y:auto;animation:modalIn 0.2s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(0.96) translateY(8px)}to{opacity:1;transform:none}}
+.modal-head{padding:1.125rem 1.375rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg-white);z-index:1}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700}
+.modal-close{width:28px;height:28px;border-radius:6px;border:none;background:var(--bg);cursor:pointer;display:grid;place-items:center;color:var(--text-sub)}
+.modal-close:hover{background:var(--border)}
+.modal-body{padding:1.375rem;display:flex;flex-direction:column;gap:1rem}
+.modal-section-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.5rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border)}
+.form-group{display:flex;flex-direction:column;gap:0.35rem}
+.form-label{font-size:0.75rem;font-weight:700;color:var(--text-main)}
+.form-label span{color:var(--brand)}
+.form-input{padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.83rem;color:var(--text-main);background:var(--bg-white);transition:border-color 0.15s;outline:none}
+.form-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(155,28,28,0.08)}
+.form-hint{font-size:0.7rem;color:var(--text-muted)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.875rem}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.875rem}
+.form-select{padding:0.55rem 0.75rem;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.83rem;color:var(--text-main);background:var(--bg-white);outline:none;cursor:pointer;width:100%}
+.form-select:focus{border-color:var(--brand)}
+.modal-foot{padding:1rem 1.375rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:0.625rem;background:var(--bg);position:sticky;bottom:0}
+.btn{padding:0.45rem 1.1rem;border-radius:7px;font-size:0.8rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.15s;border:1px solid transparent}
+.btn-ghost{background:transparent;color:var(--text-sub);border-color:var(--border)}
+.btn-ghost:hover{background:var(--border)}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.kpi-card{animation:fadeUp 0.3s ease both}
+.kpi-card:nth-child(1){animation-delay:.04s}.kpi-card:nth-child(2){animation-delay:.08s}
+.kpi-card:nth-child(3){animation-delay:.12s}.kpi-card:nth-child(4){animation-delay:.16s}
+.sc{animation:fadeUp 0.3s ease 0.15s both}
+
+.nav-layer-label{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(247,244,240,0.55);padding:0.875rem 0.5rem 0.3rem;border-left:2px solid var(--brand);margin-left:0.625rem;padding-left:0.5rem}
+.nav-demo-tag{font-size:0.55rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:rgba(155,28,28,0.35);color:#FCA5A5;border-radius:3px;padding:0.05rem 0.3rem;margin-left:0.2rem;vertical-align:middle}
+.nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
+.nav-disabled:hover{background:transparent !important;color:rgba(255,255,255,0.5) !important}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a href="index.html" class="sb-logo">
+    <div class="sb-logo-mark">CF</div>
+    <div class="sb-logo-text">CurriculaFP <small>Gestión curricular FP</small></div>
+  </a>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 · Activo</div>
+  <div style="height:0.5rem"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">General</div>
+    <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    <a class="nav-item" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Catálogo de ciclos</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Administración · Superadmin</div>
+    <a class="nav-item active" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+    <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+    <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas · DNI</a>
+    <a class="nav-item" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Años académicos</a>
+    <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Catálogo normativo</a>
+    <a class="nav-item nav-disabled" href="#auditoria" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditoría del sistema</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-layer-label">Capa 1 · Diseño del ciclo · TES <span class="nav-demo-tag">demo</span></div>
+    <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Estructura del ciclo</a>
+    <a class="nav-item nav-disabled" href="programacion.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Programación base</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-layer-label">Capa 2 · Gestión del curso · TES <span class="nav-demo-tag">demo</span></div>
+    <a class="nav-item nav-disabled" href="gestion-curso.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>Grupos y docentes</a>
+    <a class="nav-item nav-disabled" href="calificaciones.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+    <a class="nav-item nav-disabled" href="alumno.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+    <a class="nav-item nav-disabled" href="fct.html" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>FCT / Dual</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Gestión académica</div>
+    <a class="nav-item nav-disabled" href="#sesiones" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluación</a>
+    <a class="nav-item nav-disabled" href="#boletines" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Boletines de notas</a>
+    <a class="nav-item nav-disabled" href="#convalidaciones" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones<span class="nav-badge">1</span></a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-group">
+    <div class="nav-group-label">Comunicación</div>
+    <a class="nav-item nav-disabled" href="#avisos" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos<span class="nav-badge">5</span></a>
+    <a class="nav-item nav-disabled" href="#informes" title="En desarrollo"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y analítica</a>
+  </div>
+  <div class="sb-bottom">
+    <div class="user-tile">
+      <div class="user-av">SA</div>
+      <div><div class="user-name">Superadministrador</div><div class="user-role">Acceso total al sistema</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="app-main">
+  <header class="topbar">
+    <div class="topbar-bc" id="breadcrumb">
+      <a href="index.html">Inicio</a><span class="bc-sep">›</span>
+      <span>Administración</span><span class="bc-sep">›</span>
+      <strong>Centros educativos</strong>
+    </div>
+    <div class="topbar-spacer"></div>
+    <div class="topbar-actions">
+      <button class="tb-btn tb-ghost" onclick="openModal('modal-centro')">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 4v16m8-8H4"/></svg>
+        Nuevo centro
+      </button>
+      <div class="tb-div"></div>
+      <button class="tb-icon" style="position:relative;">
+        <div class="tb-notif-dot"></div>
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="page">
+
+    <!-- ══ VISTA LISTA ══ -->
+    <div id="view-lista">
+      <div class="page-hd">
+        <div>
+          <h1>Centros educativos</h1>
+          <p>Entidad B1 · Todos los centros registrados en CurriculaFP</p>
+        </div>
+        <button class="tb-btn tb-primary" onclick="openModal('modal-centro')">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 4v16m8-8H4"/></svg>
+          Nuevo centro
+        </button>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi-card k-red">
+          <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg></div>
+          <div class="kpi-label">Total centros</div>
+          <div class="kpi-val">12</div>
+          <div class="kpi-sub">En todo el sistema</div>
+        </div>
+        <div class="kpi-card k-blue">
+          <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <div class="kpi-label">Comunidades autónomas</div>
+          <div class="kpi-val">7</div>
+          <div class="kpi-sub">Con centros activos</div>
+        </div>
+        <div class="kpi-card k-green">
+          <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div>
+          <div class="kpi-label">Alumnos totales</div>
+          <div class="kpi-val">1.847</div>
+          <div class="kpi-sub">Año académico activo</div>
+        </div>
+        <div class="kpi-card k-amber">
+          <div class="kpi-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0118 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg></div>
+          <div class="kpi-label">Ciclos formativos</div>
+          <div class="kpi-val">38</div>
+          <div class="kpi-sub">En activo este curso</div>
+        </div>
+      </div>
+
+      <!-- Búsqueda y filtros -->
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input class="search-input" type="text" placeholder="Buscar centro por nombre o código…">
+        </div>
+        <select class="filter-select">
+          <option>Todas las CCAA</option>
+          <option>Andalucía</option>
+          <option>Cataluña</option>
+          <option>Madrid</option>
+          <option>País Vasco</option>
+          <option>Valencia</option>
+          <option>Galicia</option>
+          <option>Aragón</option>
+        </select>
+        <select class="filter-select">
+          <option>Todos los tipos</option>
+          <option>IES</option>
+          <option>CIFP</option>
+          <option>IFP</option>
+          <option>Centro concertado FP</option>
+          <option>Centro privado FP</option>
+          <option>CIPFP</option>
+          <option>CIP</option>
+          <option>CPIFP</option>
+        </select>
+        <select class="filter-select">
+          <option>Todos los estados</option>
+          <option>Activo</option>
+          <option>Inactivo</option>
+        </select>
+      </div>
+
+      <!-- Tabla centros -->
+      <div class="sc">
+        <div class="sc-head">
+          <span class="sc-title">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>
+            Listado de centros
+          </span>
+          <span style="font-size:0.72rem;color:var(--text-muted)">12 centros registrados</span>
+        </div>
+        <div style="padding:0 1.25rem">
+          <table class="t">
+            <thead>
+              <tr>
+                <th>Centro</th>
+                <th>Código</th>
+                <th>Tipo</th>
+                <th>Localidad · CA</th>
+                <th>Ciclos</th>
+                <th>Alumnos</th>
+                <th>Estado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr onclick="showDetalle()">
+                <td><div class="ciclo-row-name">CIFP Salud Jerez</div><div class="ciclo-row-sub">Familia: Sanidad</div></td>
+                <td class="t-mono">11023456</td>
+                <td><span class="espacio-tipo-badge">CIFP</span></td>
+                <td>Jerez de la Frontera · Andalucía</td>
+                <td>3</td><td>127</td>
+                <td><span class="chip chip-green">Activo</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr onclick="showDetalle()">
+                <td><div class="ciclo-row-name">IES Mar de Aragón</div><div class="ciclo-row-sub">Familia: Electricidad · Informática</div></td>
+                <td class="t-mono">50034211</td>
+                <td><span class="espacio-tipo-badge">IES</span></td>
+                <td>Zaragoza · Aragón</td>
+                <td>4</td><td>198</td>
+                <td><span class="chip chip-green">Activo</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr onclick="showDetalle()">
+                <td><div class="ciclo-row-name">CIPFP Misericordia</div><div class="ciclo-row-sub">Familia: Administración · Comercio</div></td>
+                <td class="t-mono">46009823</td>
+                <td><span class="espacio-tipo-badge">CIPFP</span></td>
+                <td>Valencia · C. Valenciana</td>
+                <td>5</td><td>231</td>
+                <td><span class="chip chip-green">Activo</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr onclick="showDetalle()">
+                <td><div class="ciclo-row-name">IFP Zorrotzaurre</div><div class="ciclo-row-sub">Familia: Industria 4.0 · Automoción</div></td>
+                <td class="t-mono">48012344</td>
+                <td><span class="espacio-tipo-badge">IFP</span></td>
+                <td>Bilbao · País Vasco</td>
+                <td>6</td><td>287</td>
+                <td><span class="chip chip-green">Activo</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr onclick="showDetalle()">
+                <td><div class="ciclo-row-name">IES Lázaro Cárdenas</div><div class="ciclo-row-sub">Familia: Hostelería · Turismo</div></td>
+                <td class="t-mono">28056781</td>
+                <td><span class="espacio-tipo-badge">IES</span></td>
+                <td>Madrid · Madrid</td>
+                <td>3</td><td>145</td>
+                <td><span class="chip chip-green">Activo</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr onclick="showDetalle()">
+                <td><div class="ciclo-row-name">CPIFP Los Enlaces</div><div class="ciclo-row-sub">Familia: Imagen · Diseño</div></td>
+                <td class="t-mono">50089123</td>
+                <td><span class="espacio-tipo-badge">CPIFP</span></td>
+                <td>Zaragoza · Aragón</td>
+                <td>4</td><td>176</td>
+                <td><span class="chip chip-green">Activo</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr onclick="showDetalle()">
+                <td><div class="ciclo-row-name">Centro FP Ilerna</div><div class="ciclo-row-sub">Familia: Sanidad · Servicios sociales</div></td>
+                <td class="t-mono">25034567</td>
+                <td><span class="espacio-tipo-badge" style="background:var(--amber-bg);color:var(--amber);border-color:#FCD34D">Concertado</span></td>
+                <td>Lleida · Cataluña</td>
+                <td>5</td><td>312</td>
+                <td><span class="chip chip-green">Activo</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+              <tr onclick="showDetalle()">
+                <td><div class="ciclo-row-name">IES As Mariñas</div><div class="ciclo-row-sub">Familia: Marítimo-pesquera</div></td>
+                <td class="t-mono">15023890</td>
+                <td><span class="espacio-tipo-badge">IES</span></td>
+                <td>Betanzos · Galicia</td>
+                <td>2</td><td>89</td>
+                <td><span class="chip chip-amber">Sin configurar</span></td>
+                <td><span class="t-action">Ver →</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- /view-lista -->
+
+    <!-- ══ VISTA DETALLE ══ -->
+    <div id="view-detalle">
+
+      <div class="back-btn" onclick="showLista()">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
+        Volver a centros educativos
+      </div>
+
+      <div class="detail-hd">
+        <div>
+          <h2>CIFP Salud Jerez</h2>
+          <p>Centro Integrado de Formación Profesional · Código: <span style="font-family:monospace">11023456</span> · Jerez de la Frontera, Cádiz · Andalucía</p>
+        </div>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <span class="chip chip-green"><svg width="7" height="7" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>Activo</span>
+          <button class="tb-btn tb-ghost">Editar centro</button>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('tab-datos',this)">Datos generales</div>
+        <div class="tab" onclick="switchTab('tab-calendario',this)">Calendario escolar</div>
+        <div class="tab" onclick="switchTab('tab-espacios',this)">Espacios</div>
+        <div class="tab" onclick="switchTab('tab-ciclos',this)">Ciclos implantados</div>
+      </div>
+
+      <!-- TAB: DATOS GENERALES -->
+      <div id="tab-datos" class="tab-content active">
+
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Ficha del centro</span>
+            <button class="tb-btn tb-ghost" style="font-size:0.75rem">Editar</button>
+          </div>
+          <div class="sc-body">
+            <div class="ficha-grid">
+              <div class="ficha-field"><div class="ficha-label">Nombre oficial</div><div class="ficha-value">Centro Integrado de Formación Profesional Salud Jerez</div></div>
+              <div class="ficha-field"><div class="ficha-label">Código de consejería</div><div class="ficha-value mono">11023456</div></div>
+              <div class="ficha-field"><div class="ficha-label">Tipo de centro</div><div class="ficha-value">CIFP — Centro Integrado de Formación Profesional</div></div>
+              <div class="ficha-field"><div class="ficha-label">Familia profesional principal</div><div class="ficha-value">Sanidad</div></div>
+              <div class="ficha-field"><div class="ficha-label">Dirección</div><div class="ficha-value">Calle Ancha, 12</div></div>
+              <div class="ficha-field"><div class="ficha-label">Localidad</div><div class="ficha-value">Jerez de la Frontera</div></div>
+              <div class="ficha-field"><div class="ficha-label">Provincia</div><div class="ficha-value">Cádiz</div></div>
+              <div class="ficha-field"><div class="ficha-label">Comunidad autónoma</div><div class="ficha-value">Andalucía</div></div>
+              <div class="ficha-field"><div class="ficha-label">Teléfono</div><div class="ficha-value">956 123 456</div></div>
+              <div class="ficha-field"><div class="ficha-label">Correo electrónico</div><div class="ficha-value">cifp.saludjerez@juntadeandalucia.es</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Equipo directivo actual -->
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Equipo directivo · 2024–2025</span>
+            <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-directivo')">Editar equipo</button>
+          </div>
+          <div class="sc-body">
+            <div class="equipo-grid">
+              <div class="equipo-card">
+                <div class="equipo-rol">Director/a</div>
+                <div class="equipo-nombre">Mª Carmen Ruiz Domínguez</div>
+                <div class="equipo-dni">DNI: 31.234.567-K</div>
+              </div>
+              <div class="equipo-card">
+                <div class="equipo-rol">Jefe/a de estudios</div>
+                <div class="equipo-nombre">Antonio Herrera Gómez</div>
+                <div class="equipo-dni">DNI: 45.678.901-M</div>
+              </div>
+              <div class="equipo-card">
+                <div class="equipo-rol">Secretario/a</div>
+                <div class="equipo-nombre">Laura Sánchez Pérez</div>
+                <div class="equipo-dni">DNI: 78.234.112-A</div>
+              </div>
+            </div>
+
+            <!-- Historial cursos anteriores -->
+            <div style="margin-top:0.5rem">
+              <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.625rem">Historial por curso escolar</div>
+              <table class="t">
+                <thead><tr><th>Curso</th><th>Director/a</th><th>Jefe/a de estudios</th><th>Secretario/a</th></tr></thead>
+                <tbody>
+                  <tr><td>2024–2025</td><td>Mª Carmen Ruiz Domínguez</td><td>Antonio Herrera Gómez</td><td>Laura Sánchez Pérez</td></tr>
+                  <tr><td>2023–2024</td><td>Francisco Morales Vega</td><td>Antonio Herrera Gómez</td><td>Laura Sánchez Pérez</td></tr>
+                  <tr><td>2022–2023</td><td>Francisco Morales Vega</td><td>Rosa Jiménez Castro</td><td>Laura Sánchez Pérez</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tab-datos -->
+
+      <!-- TAB: CALENDARIO ESCOLAR -->
+      <div id="tab-calendario" class="tab-content">
+
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Calendario escolar · 2024–2025</span>
+            <div style="display:flex;gap:0.5rem">
+              <button class="tb-btn tb-ghost" style="font-size:0.75rem" id="btn-vista-mes" onclick="setVistaCalendario('mes')">Vista mes</button>
+              <button class="tb-btn tb-ghost" style="font-size:0.75rem" id="btn-vista-anio" onclick="setVistaCalendario('anio')">Vista anual</button>
+              <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-festivo')">+ Añadir festivo</button>
+            </div>
+          </div>
+          <div class="sc-body">
+
+            <!-- Leyenda -->
+            <div class="cal-legend" style="margin-bottom:1rem;justify-content:flex-start;gap:1.25rem">
+              <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(155,28,28,0.2);border-radius:3px"></div>Día lectivo</div>
+              <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--amber-bg);border:1px solid #FCD34D;border-radius:3px"></div>Período no lectivo / vacaciones</div>
+              <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--bg);border:1px solid var(--border);border-radius:3px"></div>Festivo / fin de semana</div>
+            </div>
+
+            <!-- Vista mes -->
+            <div id="cal-vista-mes">
+              <div class="cal-controls">
+                <div class="cal-nav">
+                  <button class="cal-nav-btn" onclick="prevMonth()"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg></button>
+                  <div class="cal-month-label" id="cal-month-label">Octubre 2024</div>
+                  <button class="cal-nav-btn" onclick="nextMonth()"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg></button>
+                </div>
+                <div style="font-size:0.77rem;color:var(--text-muted);margin-left:0.5rem" id="cal-lectivos-label">21 días lectivos</div>
+              </div>
+              <div class="cal-grid" id="cal-grid">
+                <!-- generado por JS -->
+              </div>
+            </div>
+
+            <!-- Vista anual -->
+            <div id="cal-vista-anio" style="display:none">
+              <div class="cal-year-view" id="cal-year-grid">
+                <!-- generado por JS -->
+              </div>
+            </div>
+
+            <!-- Resumen lectivos -->
+            <div style="margin-top:1.25rem;padding:0.875rem 1rem;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+              <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.625rem">Resumen del curso 2024–2025</div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;text-align:center">
+                <div><div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text-main)">175</div><div style="font-size:0.7rem;color:var(--text-muted)">Días lectivos</div></div>
+                <div><div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--amber)">14</div><div style="font-size:0.7rem;color:var(--text-muted)">Festivos locales/CCAA</div></div>
+                <div><div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text-main)">12</div><div style="font-size:0.7rem;color:var(--text-muted)">Festivos nacionales</div></div>
+                <div><div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text-main)">104</div><div style="font-size:0.7rem;color:var(--text-muted)">Fines de semana</div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /tab-calendario -->
+
+      <!-- TAB: ESPACIOS -->
+      <div id="tab-espacios" class="tab-content">
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Espacios del centro</span>
+            <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-espacio')">+ Nuevo espacio</button>
+          </div>
+          <div style="padding:0 1.25rem">
+            <table class="t">
+              <thead><tr><th>Nombre</th><th>Tipo</th><th>Capacidad</th><th>Ciclos que lo usan</th><th>Estado</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>Aula 101</td><td><span class="espacio-tipo-badge">Aula teórica</span></td><td>30</td><td>TES · TCAE</td><td><span class="chip chip-green">Disponible</span></td><td><span class="t-action">Editar</span></td></tr>
+                <tr><td>Aula 102</td><td><span class="espacio-tipo-badge">Aula teórica</span></td><td>30</td><td>TES</td><td><span class="chip chip-green">Disponible</span></td><td><span class="t-action">Editar</span></td></tr>
+                <tr><td>Laboratorio de simulación sanitaria</td><td><span class="espacio-tipo-badge" style="background:var(--brand-light);color:var(--brand);border-color:#FECACA">Laboratorio</span></td><td>16</td><td>TES · TCAE</td><td><span class="chip chip-green">Disponible</span></td><td><span class="t-action">Editar</span></td></tr>
+                <tr><td>Sala de RCP y emergencias</td><td><span class="espacio-tipo-badge" style="background:var(--brand-light);color:var(--brand);border-color:#FECACA">Laboratorio</span></td><td>12</td><td>TES</td><td><span class="chip chip-green">Disponible</span></td><td><span class="t-action">Editar</span></td></tr>
+                <tr><td>Almacén de material sanitario</td><td><span class="espacio-tipo-badge" style="background:var(--slate-bg);color:var(--slate);border-color:#CBD5E1">Almacén</span></td><td>—</td><td>TES · TCAE</td><td><span class="chip chip-green">Disponible</span></td><td><span class="t-action">Editar</span></td></tr>
+                <tr><td>Sala de profesores</td><td><span class="espacio-tipo-badge" style="background:var(--slate-bg);color:var(--slate);border-color:#CBD5E1">Sala común</span></td><td>20</td><td>—</td><td><span class="chip chip-green">Disponible</span></td><td><span class="t-action">Editar</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- /tab-espacios -->
+
+      <!-- TAB: CICLOS IMPLANTADOS -->
+      <div id="tab-ciclos" class="tab-content">
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0118 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>Ciclos formativos implantados · 2024–2025</span>
+            <button class="tb-btn tb-ghost" style="font-size:0.75rem">+ Añadir ciclo</button>
+          </div>
+          <div style="padding:0 1.25rem">
+            <table class="t">
+              <thead><tr><th>Ciclo</th><th>Familia</th><th>Grado</th><th>Grupos</th><th>Alumnos</th><th>Estado</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="ciclo-row-name">Técnico Superior en Emergencias Sanitarias</div><div class="ciclo-row-sub">TES · RD 1397/2007</div></td>
+                  <td>Sanidad</td><td><span class="chip chip-red">CFGS</span></td><td>2</td><td>47</td>
+                  <td><span class="chip chip-green">Activo</span></td>
+                  <td><a href="ciclo-tes.html" class="t-action">Ver →</a></td>
+                </tr>
+                <tr>
+                  <td><div class="ciclo-row-name">Técnico en Cuidados Auxiliares de Enfermería</div><div class="ciclo-row-sub">TCAE · RD 546/1995</div></td>
+                  <td>Sanidad</td><td><span class="chip chip-amber">CFGM</span></td><td>2</td><td>52</td>
+                  <td><span class="chip chip-green">Activo</span></td>
+                  <td><span class="t-action">Ver →</span></td>
+                </tr>
+                <tr>
+                  <td><div class="ciclo-row-name">Certificado de Profesionalidad · Urgencias Sanitarias</div><div class="ciclo-row-sub">CP · Nivel 3</div></td>
+                  <td>Sanidad</td><td><span class="chip chip-blue">CP Niv. 3</span></td><td>1</td><td>28</td>
+                  <td><span class="chip chip-green">Activo</span></td>
+                  <td><span class="t-action">Ver →</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- /tab-ciclos -->
+
+    </div><!-- /view-detalle -->
+
+  </div><!-- /page -->
+</div><!-- /app-main -->
+
+<!-- MODAL: Nuevo centro -->
+<div class="modal-overlay" id="modal-centro">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo centro educativo</span>
+      <button class="modal-close" onclick="closeModal('modal-centro')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-title">Identificación</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Código de consejería <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Ej: 11023456">
+          <span class="form-hint">Código oficial del organismo autonómico</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tipo de centro <span>*</span></label>
+          <select class="form-select">
+            <option value="">Seleccionar tipo…</option>
+            <option>IES — Instituto de Educación Secundaria</option>
+            <option>CIFP — Centro Integrado de FP</option>
+            <option>IFP — Instituto de Formación Profesional</option>
+            <option>Centro concertado FP</option>
+            <option>Centro privado FP</option>
+            <option>CIPFP (C. Valenciana)</option>
+            <option>CIP (Navarra / País Vasco)</option>
+            <option>CPIFP (Aragón)</option>
+            <option>Centro adscrito universitario FP</option>
+            <option>Centro de referencia nacional (CRN)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nombre oficial del centro <span>*</span></label>
+        <input class="form-input" type="text" placeholder="Ej: Centro Integrado de Formación Profesional Salud Jerez">
+      </div>
+
+      <div class="modal-section-title">Ubicación</div>
+      <div class="form-group">
+        <label class="form-label">Dirección</label>
+        <input class="form-input" type="text" placeholder="Calle, número">
+      </div>
+      <div class="form-row-3">
+        <div class="form-group">
+          <label class="form-label">Localidad <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Localidad">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Provincia <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Provincia">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Comunidad autónoma <span>*</span></label>
+          <select class="form-select">
+            <option value="">Seleccionar…</option>
+            <option>Andalucía</option><option>Aragón</option><option>Asturias</option>
+            <option>Baleares</option><option>Canarias</option><option>Cantabria</option>
+            <option>Castilla-La Mancha</option><option>Castilla y León</option><option>Cataluña</option>
+            <option>C. Valenciana</option><option>Extremadura</option><option>Galicia</option>
+            <option>La Rioja</option><option>Madrid</option><option>Murcia</option>
+            <option>Navarra</option><option>País Vasco</option><option>Ceuta</option><option>Melilla</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-section-title">Contacto</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Teléfono</label>
+          <input class="form-input" type="tel" placeholder="956 000 000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Correo electrónico</label>
+          <input class="form-input" type="email" placeholder="centro@junta.es">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-centro')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-centro')">Crear centro</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Editar equipo directivo -->
+<div class="modal-overlay" id="modal-directivo">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Equipo directivo · 2024–2025</span>
+      <button class="modal-close" onclick="closeModal('modal-directivo')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-title">Director/a</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">DNI <span>*</span></label><input class="form-input" type="text" placeholder="00.000.000-X" value="31.234.567-K"><span class="form-hint">Debe existir en el registro de Personas</span></div>
+        <div class="form-group"><label class="form-label">Nombre</label><input class="form-input" type="text" value="Mª Carmen Ruiz Domínguez" readonly style="background:var(--bg);color:var(--text-muted)"></div>
+      </div>
+      <div class="modal-section-title">Jefe/a de estudios</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">DNI <span>*</span></label><input class="form-input" type="text" placeholder="00.000.000-X" value="45.678.901-M"></div>
+        <div class="form-group"><label class="form-label">Nombre</label><input class="form-input" type="text" value="Antonio Herrera Gómez" readonly style="background:var(--bg);color:var(--text-muted)"></div>
+      </div>
+      <div class="modal-section-title">Secretario/a</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">DNI <span>*</span></label><input class="form-input" type="text" placeholder="00.000.000-X" value="78.234.112-A"></div>
+        <div class="form-group"><label class="form-label">Nombre</label><input class="form-input" type="text" value="Laura Sánchez Pérez" readonly style="background:var(--bg);color:var(--text-muted)"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-directivo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-directivo')">Guardar equipo</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Añadir festivo -->
+<div class="modal-overlay" id="modal-festivo">
+  <div class="modal" style="width:400px">
+    <div class="modal-head">
+      <span class="modal-title">Añadir día no lectivo</span>
+      <button class="modal-close" onclick="closeModal('modal-festivo')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Fecha <span>*</span></label>
+        <input class="form-input" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción</label>
+        <input class="form-input" type="text" placeholder="Ej: Feria de Jerez, Día de Andalucía…">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tipo</label>
+        <select class="form-select">
+          <option>Festivo local</option>
+          <option>Festivo de comunidad autónoma</option>
+          <option>Festivo nacional</option>
+          <option>Período de vacaciones</option>
+          <option>Día no lectivo del centro</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-festivo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-festivo')">Añadir</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo espacio -->
+<div class="modal-overlay" id="modal-espacio">
+  <div class="modal" style="width:440px">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo espacio</span>
+      <button class="modal-close" onclick="closeModal('modal-espacio')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nombre del espacio <span>*</span></label>
+        <input class="form-input" type="text" placeholder="Ej: Laboratorio de simulación sanitaria">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Tipo <span>*</span></label>
+          <select class="form-select">
+            <option>Aula teórica</option>
+            <option>Laboratorio</option>
+            <option>Taller</option>
+            <option>Aula de informática</option>
+            <option>Gimnasio / Pabellón</option>
+            <option>Sala común</option>
+            <option>Almacén</option>
+            <option>Otros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Capacidad (personas)</label>
+          <input class="form-input" type="number" placeholder="Ej: 30">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Observaciones</label>
+        <input class="form-input" type="text" placeholder="Equipamiento especial, accesibilidad…">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-espacio')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-espacio')">Crear espacio</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Vistas lista/detalle ──
+function showDetalle(){
+  document.getElementById('view-lista').style.display='none';
+  document.getElementById('view-detalle').style.display='block';
+  document.getElementById('breadcrumb').innerHTML='<a href="index.html">Inicio</a><span class="bc-sep">›</span><span>Administración</span><span class="bc-sep">›</span><a href="#" onclick="showLista();return false;" style="color:var(--text-muted)">Centros educativos</a><span class="bc-sep">›</span><strong>CIFP Salud Jerez</strong>';
+  renderCalMes();
+}
+function showLista(){
+  document.getElementById('view-lista').style.display='block';
+  document.getElementById('view-detalle').style.display='none';
+  document.getElementById('breadcrumb').innerHTML='<a href="index.html">Inicio</a><span class="bc-sep">›</span><span>Administración</span><span class="bc-sep">›</span><strong>Centros educativos</strong>';
+}
+
+// ── Tabs ──
+function switchTab(tabId,el){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  el.classList.add('active');
+  if(tabId==='tab-calendario') renderCalMes();
+}
+
+// ── Modales ──
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')})
+});
+
+// ── Calendario ──
+const MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+let calYear=2024, calMonth=9; // oct 2024 (0-indexed)
+
+// Días no lectivos (festivos) del centro — sample data
+const festivos = new Set([
+  '2024-10-12','2024-11-01','2024-11-02','2024-12-06','2024-12-08','2024-12-25',
+  '2025-01-01','2025-01-06','2025-02-28','2025-04-17','2025-04-18','2025-04-21',
+  '2025-05-01','2025-06-24'
+]);
+// Vacaciones (rangos)
+function isVacaciones(y,m,d){
+  const dt=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  const v=[
+    ['2024-12-23','2025-01-07'],
+    ['2025-03-17','2025-03-28'],
+  ];
+  for(const [a,b] of v) if(dt>=a&&dt<=b) return true;
+  return false;
+}
+function isFestivo(y,m,d){
+  const dt=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  return festivos.has(dt);
+}
+function isWeekend(dow){return dow===0||dow===6}
+
+function renderCalMes(){
+  const grid=document.getElementById('cal-grid');
+  if(!grid) return;
+  const label=document.getElementById('cal-month-label');
+  label.textContent=MONTHS[calMonth]+' '+calYear;
+  const days=['L','M','X','J','V','S','D'];
+  let html=days.map(d=>`<div class="cal-day-header">${d}</div>`).join('');
+  const firstDay=new Date(calYear,calMonth,1).getDay();
+  const startOffset=(firstDay+6)%7; // lunes=0
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  for(let i=0;i<startOffset;i++) html+=`<div class="cal-day empty"></div>`;
+  let lectivos=0;
+  for(let d=1;d<=daysInMonth;d++){
+    const dow=new Date(calYear,calMonth,d).getDay();
+    const isToday=(calYear===2024&&calMonth===9&&d===15);
+    let cls='cal-day';
+    if(isVacaciones(calYear,calMonth,d)) cls+=' vacaciones';
+    else if(isFestivo(calYear,calMonth,d)) cls+=' festivo';
+    else if(isWeekend(dow)) cls+=' finde';
+    else{cls+=' lectivo';lectivos++;}
+    if(isToday) cls+=' today';
+    html+=`<div class="${cls}">${d}</div>`;
+  }
+  grid.innerHTML=html;
+  document.getElementById('cal-lectivos-label').textContent=lectivos+' días lectivos';
+}
+
+function prevMonth(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalMes()}
+function nextMonth(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalMes()}
+
+function setVistaCalendario(v){
+  document.getElementById('cal-vista-mes').style.display=v==='mes'?'block':'none';
+  document.getElementById('cal-vista-anio').style.display=v==='anio'?'block':'none';
+  if(v==='anio') renderCalAnio();
+}
+
+function renderCalAnio(){
+  const grid=document.getElementById('cal-year-grid');
+  let html='';
+  // Sep 2024 - Jun 2025
+  const meses=[[2024,8],[2024,9],[2024,10],[2024,11],[2025,0],[2025,1],[2025,2],[2025,3],[2025,4],[2025,5]];
+  for(const [y,m] of meses){
+    const firstDay=new Date(y,m,1).getDay();
+    const startOff=(firstDay+6)%7;
+    const dim=new Date(y,m+1,0).getDate();
+    let mini='<div class="cal-mini-grid">';
+    mini+=['L','M','X','J','V','S','D'].map(d=>`<div class="cal-mini-day" style="font-weight:700;color:var(--text-muted)">${d}</div>`).join('');
+    for(let i=0;i<startOff;i++) mini+=`<div class="cal-mini-day empty"></div>`;
+    for(let d=1;d<=dim;d++){
+      const dow=new Date(y,m,d).getDay();
+      let cls='cal-mini-day';
+      if(isVacaciones(y,m,d)) cls+=' vacaciones';
+      else if(isFestivo(y,m,d)) cls+=' festivo';
+      else if(isWeekend(dow)) cls+=' finde';
+      else cls+=' lectivo';
+      mini+=`<div class="${cls}">${d}</div>`;
+    }
+    mini+='</div>';
+    html+=`<div class="cal-month-mini"><div class="cal-month-mini-title">${MONTHS[m]} ${y}</div>${mini}</div>`;
+  }
+  grid.innerHTML=html;
+}
+
+// Init
+renderCalMes();
+</script>
+</body>
+</html>
