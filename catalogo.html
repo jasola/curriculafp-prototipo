@@ -190,16 +190,44 @@ svg{display:block}a{text-decoration:none;color:inherit}
 .cp-num{width:24px;height:24px;border-radius:50%;background:var(--brand-light);color:var(--brand);display:grid;place-items:center;font-size:0.67rem;font-weight:700;flex-shrink:0;margin-top:1px}
 .cp-text{font-size:0.8rem;color:var(--text-sub);line-height:1.5}
 
-/* MODULO LIST */
-.mod-troncal-item{display:flex;align-items:center;gap:0.75rem;padding:0.625rem 0.875rem;background:var(--bg-white);border:1px solid var(--border);border-radius:8px;margin-bottom:0.375rem;transition:border-color 0.15s}
-.mod-troncal-item:hover{border-color:var(--border-dark)}
+/* MODULO LIST — expandible */
 .mod-curso-badge{width:26px;height:26px;border-radius:6px;display:grid;place-items:center;font-size:0.65rem;font-weight:700;flex-shrink:0}
 .mc-1{background:var(--brand-light);color:var(--brand)}
 .mc-2{background:var(--green-bg);color:var(--green)}
 .mc-fct{background:var(--amber-bg);color:var(--amber)}
-.mod-troncal-name{flex:1;font-size:0.82rem;font-weight:600;color:var(--text-main)}
-.mod-troncal-horas{font-size:0.75rem;font-weight:600;color:var(--text-sub);white-space:nowrap}
-.mod-troncal-tag{font-size:0.7rem;color:var(--text-muted);margin-left:0.5rem}
+
+.mod-exp{border:1px solid var(--border);border-radius:8px;margin-bottom:0.375rem;overflow:hidden;background:var(--bg-white)}
+.mod-exp-hd{display:flex;align-items:center;gap:0.75rem;padding:0.625rem 0.875rem;cursor:pointer;transition:background 0.15s;user-select:none}
+.mod-exp-hd:hover{background:#FAFAF9}
+.mod-exp-chevron{font-size:9px;color:var(--text-muted);transition:transform 0.18s;flex-shrink:0}
+.mod-exp.open .mod-exp-chevron{transform:rotate(90deg)}
+.mod-exp-name{flex:1;font-size:0.82rem;font-weight:600;color:var(--text-main)}
+.mod-exp-horas{font-size:0.75rem;font-weight:600;color:var(--text-sub);white-space:nowrap}
+.mod-exp-ra-count{font-size:0.7rem;color:var(--text-muted);white-space:nowrap}
+.mod-exp-body{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:0.875rem 1rem}
+.mod-exp.open .mod-exp-body{display:block}
+
+.ra-exp{border:1px solid var(--border);border-radius:6px;margin-bottom:0.375rem;overflow:hidden;background:var(--bg-white)}
+.ra-exp-hd{display:flex;align-items:flex-start;gap:0.6rem;padding:0.5rem 0.75rem;cursor:pointer;transition:background 0.12s;user-select:none}
+.ra-exp-hd:hover{background:#FAFAF9}
+.ra-exp-chevron{font-size:9px;color:var(--text-muted);transition:transform 0.15s;flex-shrink:0;margin-top:3px}
+.ra-exp.open .ra-exp-chevron{transform:rotate(90deg)}
+.ra-exp-num{width:20px;height:20px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:0.67rem;font-weight:700;display:grid;place-items:center;flex-shrink:0}
+.ra-exp-text{flex:1;font-size:0.8rem;color:var(--text-sub);line-height:1.4}
+.ra-exp-peso{font-size:0.7rem;font-weight:600;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:1px 6px;flex-shrink:0;white-space:nowrap}
+.ra-exp-body{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:0.625rem 0.875rem 0.625rem 2.25rem}
+.ra-exp.open .ra-exp-body{display:block}
+
+.cont-section{margin-bottom:0.625rem}
+.mini-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.35rem}
+.cont-tag{display:inline-block;background:var(--bg-white);border:1px solid var(--border);border-radius:3px;padding:1px 7px;font-size:0.75rem;color:var(--text-sub);margin:2px 2px 2px 0}
+.ce-list{display:flex;flex-direction:column;gap:0.25rem;margin-bottom:0.5rem}
+.ce-row-cat{display:flex;align-items:flex-start;gap:0.5rem;padding:4px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+.ce-row-cat:last-child{border-bottom:none}
+.ce-letra-cat{width:18px;height:18px;border-radius:3px;background:var(--border);color:var(--text-sub);font-size:0.65rem;font-weight:700;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.ce-text-cat{flex:1;font-size:0.78rem;color:var(--text-sub);line-height:1.4}
+.btn-add-inline{background:none;border:none;color:var(--brand);font-size:0.75rem;font-weight:600;cursor:pointer;padding:4px 0;display:inline-flex;align-items:center;gap:4px;font-family:'Inter',sans-serif}
+.btn-add-inline:hover{text-decoration:underline}
 
 /* CENTROS IMPLANTADOS */
 .centro-impl-item{display:flex;align-items:center;gap:0.75rem;padding:0.625rem 0.875rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:0.375rem}
@@ -679,79 +707,312 @@ svg{display:block}a{text-decoration:none;color:inherit}
             </div>
 
             <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.625rem">1º Curso</div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-1">1º</div>
-              <div class="mod-troncal-name">Atención sanitaria inicial en situaciones de emergencia</div>
-              <div class="mod-troncal-horas">224 h</div>
-              <span class="mod-troncal-tag">6 RA</span>
+
+            <!-- MÓDULO 0055 -->
+            <div class="mod-exp" id="mcat-0055">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0055')">
+                <span class="mod-exp-chevron">▶</span>
+                <div class="mod-curso-badge mc-1">1º</div>
+                <span class="mod-exp-name">Atención sanitaria inicial en situaciones de emergencia</span>
+                <span class="mod-exp-horas">224 h mín.</span>
+                <span class="mod-exp-ra-count">3 RA · 18 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div class="ra-exp" id="rcat-0055-1">
+                  <div class="ra-exp-hd" onclick="toggleRACat('rcat-0055-1')">
+                    <span class="ra-exp-chevron">▶</span>
+                    <div class="ra-exp-num">1</div>
+                    <div class="ra-exp-text">Reconoce los signos de compromiso vital relacionándolos con el estado del paciente.</div>
+                    <span class="ra-exp-peso">30%</span>
+                  </div>
+                  <div class="ra-exp-body">
+                    <div class="cont-section">
+                      <div class="mini-label">Contenidos básicos</div>
+                      <span class="cont-tag">Valoración inicial del paciente</span>
+                      <span class="cont-tag">Escala de Glasgow</span>
+                      <span class="cont-tag">Signos vitales</span>
+                      <span class="cont-tag">Triángulo de evaluación pediátrica</span>
+                    </div>
+                    <div class="mini-label">Criterios de evaluación</div>
+                    <div class="ce-list">
+                      <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han identificado los signos de compromiso vital en el adulto y en el niño.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">b</div><div class="ce-text-cat">Se han relacionado los signos clínicos con las posibles causas de compromiso vital.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">c</div><div class="ce-text-cat">Se ha aplicado la sistemática de valoración inicial al paciente en situación de emergencia.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">d</div><div class="ce-text-cat">Se han priorizado las acciones de intervención en función del riesgo vital.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">e</div><div class="ce-text-cat">Se ha transmitido la información recogida al equipo de salud de forma precisa y sistemática.</div></div>
+                    </div>
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                  </div>
+                </div>
+                <div class="ra-exp" id="rcat-0055-2">
+                  <div class="ra-exp-hd" onclick="toggleRACat('rcat-0055-2')">
+                    <span class="ra-exp-chevron">▶</span>
+                    <div class="ra-exp-num">2</div>
+                    <div class="ra-exp-text">Aplica técnicas de soporte vital básico describiéndolas y relacionándolas con el objetivo a conseguir.</div>
+                    <span class="ra-exp-peso">40%</span>
+                  </div>
+                  <div class="ra-exp-body">
+                    <div class="cont-section">
+                      <div class="mini-label">Contenidos básicos</div>
+                      <span class="cont-tag">RCP básica adulto y pediátrico</span>
+                      <span class="cont-tag">DESA / DEA</span>
+                      <span class="cont-tag">Obstrucción vía aérea</span>
+                      <span class="cont-tag">Hemorragias y heridas</span>
+                    </div>
+                    <div class="mini-label">Criterios de evaluación</div>
+                    <div class="ce-list">
+                      <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han descrito las técnicas de SVB en adultos y niños según protocolos vigentes.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">b</div><div class="ce-text-cat">Se ha realizado la RCP básica con calidad técnica adecuada.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">c</div><div class="ce-text-cat">Se ha manejado el DESA de forma autónoma y segura.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">d</div><div class="ce-text-cat">Se ha aplicado el protocolo de desobstrucción de vía aérea en adultos y lactantes.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">e</div><div class="ce-text-cat">Se han controlado hemorragias mediante técnicas de compresión directa y torniquete.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">f</div><div class="ce-text-cat">Se ha verificado la efectividad de las técnicas aplicadas.</div></div>
+                    </div>
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                  </div>
+                </div>
+                <div class="ra-exp" id="rcat-0055-3">
+                  <div class="ra-exp-hd" onclick="toggleRACat('rcat-0055-3')">
+                    <span class="ra-exp-chevron">▶</span>
+                    <div class="ra-exp-num">3</div>
+                    <div class="ra-exp-text">Aplica criterios de clasificación de víctimas relacionando recursos con gravedad y probabilidad de supervivencia.</div>
+                    <span class="ra-exp-peso">30%</span>
+                  </div>
+                  <div class="ra-exp-body">
+                    <div class="cont-section">
+                      <div class="mini-label">Contenidos básicos</div>
+                      <span class="cont-tag">Sistemas de triage START y SALT</span>
+                      <span class="cont-tag">Categorías de gravedad</span>
+                      <span class="cont-tag">Tarjetas de triage</span>
+                    </div>
+                    <div class="mini-label">Criterios de evaluación</div>
+                    <div class="ce-list">
+                      <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han descrito los criterios y las categorías de clasificación de víctimas en catástrofes.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">b</div><div class="ce-text-cat">Se ha aplicado el método START en un escenario simulado.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">c</div><div class="ce-text-cat">Se ha priorizado la asistencia en función de la clasificación realizada.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">d</div><div class="ce-text-cat">Se ha documentado el triage mediante las tarjetas normalizadas.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">e</div><div class="ce-text-cat">Se ha comunicado la información del triage al coordinador médico.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">f</div><div class="ce-text-cat">Se han reconocido los errores más frecuentes en la clasificación y sus consecuencias.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">g</div><div class="ce-text-cat">Se ha reevaluado la clasificación ante cambios en el estado del paciente.</div></div>
+                    </div>
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                  </div>
+                </div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-1">1º</div>
-              <div class="mod-troncal-name">Soporte vital básico y primeros auxilios</div>
-              <div class="mod-troncal-horas">96 h</div>
-              <span class="mod-troncal-tag">4 RA</span>
+
+            <!-- MÓDULO 0056 -->
+            <div class="mod-exp" id="mcat-0056">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0056')">
+                <span class="mod-exp-chevron">▶</span>
+                <div class="mod-curso-badge mc-1">1º</div>
+                <span class="mod-exp-name">Atención sanitaria especial en situaciones de emergencia</span>
+                <span class="mod-exp-horas">160 h mín.</span>
+                <span class="mod-exp-ra-count">3 RA · 17 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div class="ra-exp" id="rcat-0056-1">
+                  <div class="ra-exp-hd" onclick="toggleRACat('rcat-0056-1')">
+                    <span class="ra-exp-chevron">▶</span>
+                    <div class="ra-exp-num">1</div>
+                    <div class="ra-exp-text">Realiza operaciones de apoyo al equipo de salud en el soporte vital avanzado relacionándolas con las patologías de emergencia.</div>
+                    <span class="ra-exp-peso">40%</span>
+                  </div>
+                  <div class="ra-exp-body">
+                    <div class="cont-section">
+                      <div class="mini-label">Contenidos básicos</div>
+                      <span class="cont-tag">Algoritmo SVA adulto y pediátrico</span>
+                      <span class="cont-tag">Vía aérea avanzada</span>
+                      <span class="cont-tag">Monitor-desfibrilador</span>
+                      <span class="cont-tag">Canalización venosa</span>
+                      <span class="cont-tag">Fármacos en PCR</span>
+                    </div>
+                    <div class="mini-label">Criterios de evaluación</div>
+                    <div class="ce-list">
+                      <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se ha identificado el material de emergencias y sus funciones.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">b</div><div class="ce-text-cat">Se ha descrito la utilidad y el manejo de los equipos electromédicos.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">c</div><div class="ce-text-cat">Se han clasificado los equipos según las diferentes situaciones de emergencia.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">d</div><div class="ce-text-cat">Se ha seleccionado y preparado el material de monitorización.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">e</div><div class="ce-text-cat">Se ha colaborado en el aislamiento de la vía aérea.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">f</div><div class="ce-text-cat">Se ha seleccionado el material para la ventilación mecánica.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">g</div><div class="ce-text-cat">Se ha determinado la saturación de oxígeno por pulsioximetría.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">h</div><div class="ce-text-cat">Se ha colaborado en la canalización de la vía venosa.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">i</div><div class="ce-text-cat">Se ha preparado el material para el registro electrocardiográfico.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">j</div><div class="ce-text-cat">Se ha apoyado al médico en las técnicas de SVA en pediatría.</div></div>
+                    </div>
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                  </div>
+                </div>
+                <div class="ra-exp" id="rcat-0056-2">
+                  <div class="ra-exp-hd" onclick="toggleRACat('rcat-0056-2')">
+                    <span class="ra-exp-chevron">▶</span>
+                    <div class="ra-exp-num">2</div>
+                    <div class="ra-exp-text">Atiende el parto inminente extrahospitalario aplicando los protocolos de actuación establecidos.</div>
+                    <span class="ra-exp-peso">30%</span>
+                  </div>
+                  <div class="ra-exp-body">
+                    <div class="cont-section">
+                      <div class="mini-label">Contenidos básicos</div>
+                      <span class="cont-tag">Fases del parto</span>
+                      <span class="cont-tag">Complicaciones obstétricas</span>
+                      <span class="cont-tag">Atención al recién nacido</span>
+                      <span class="cont-tag">Traslado materno-neonatal</span>
+                    </div>
+                    <div class="mini-label">Criterios de evaluación</div>
+                    <div class="ce-list">
+                      <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han descrito las fases del parto y las complicaciones más frecuentes.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">b</div><div class="ce-text-cat">Se ha preparado el material para la atención del parto.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">c</div><div class="ce-text-cat">Se ha aplicado el protocolo de atención al recién nacido.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">d</div><div class="ce-text-cat">Se ha gestionado el traslado materno-neonatal al centro hospitalario.</div></div>
+                    </div>
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                  </div>
+                </div>
+                <div class="ra-exp" id="rcat-0056-3">
+                  <div class="ra-exp-hd" onclick="toggleRACat('rcat-0056-3')">
+                    <span class="ra-exp-chevron">▶</span>
+                    <div class="ra-exp-num">3</div>
+                    <div class="ra-exp-text">Aplica técnicas de inmovilización y traslado a pacientes con lesiones traumáticas especiales.</div>
+                    <span class="ra-exp-peso">30%</span>
+                  </div>
+                  <div class="ra-exp-body">
+                    <div class="cont-section">
+                      <div class="mini-label">Contenidos básicos</div>
+                      <span class="cont-tag">Traumatismos graves</span>
+                      <span class="cont-tag">Inmovilización traumática</span>
+                      <span class="cont-tag">Hemostasia en PCR traumática</span>
+                    </div>
+                    <div class="mini-label">Criterios de evaluación</div>
+                    <div class="ce-list">
+                      <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han identificado las lesiones traumáticas que requieren atención especial.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">b</div><div class="ce-text-cat">Se han aplicado técnicas de inmovilización adaptadas al tipo de lesión.</div></div>
+                      <div class="ce-row-cat"><div class="ce-letra-cat">c</div><div class="ce-text-cat">Se ha realizado el traslado respetando los protocolos de seguridad del paciente.</div></div>
+                    </div>
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                  </div>
+                </div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-1">1º</div>
-              <div class="mod-troncal-name">Logística sanitaria en emergencias</div>
-              <div class="mod-troncal-horas">128 h</div>
-              <span class="mod-troncal-tag">5 RA</span>
+
+            <!-- MÓDULOS restantes colapsados -->
+            <div class="mod-exp" id="mcat-0054">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0054')">
+                <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-1">1º</div>
+                <span class="mod-exp-name">Dotación sanitaria</span>
+                <span class="mod-exp-horas">64 h mín.</span>
+                <span class="mod-exp-ra-count">3 RA · 12 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="color:var(--text-muted);font-size:0.8rem;padding:0.25rem 0">RA y CE de este módulo — pendiente de expandir en demo.</div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-1">1º</div>
-              <div class="mod-troncal-name">Dotación sanitaria</div>
-              <div class="mod-troncal-horas">64 h</div>
-              <span class="mod-troncal-tag">3 RA</span>
-            </div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-1">1º</div>
-              <div class="mod-troncal-name">Formación y orientación laboral</div>
-              <div class="mod-troncal-horas">96 h</div>
-              <span class="mod-troncal-tag">6 RA</span>
+            <div class="mod-exp" id="mcat-0061">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0061')">
+                <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-1">1º</div>
+                <span class="mod-exp-name">Formación y orientación laboral</span>
+                <span class="mod-exp-horas">96 h mín.</span>
+                <span class="mod-exp-ra-count">6 RA · 30 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="color:var(--text-muted);font-size:0.8rem;padding:0.25rem 0">RA y CE de este módulo — pendiente de expandir en demo.</div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
 
             <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin:1rem 0 0.625rem">2º Curso</div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-2">2º</div>
-              <div class="mod-troncal-name">Triage y clasificación de víctimas en catástrofes</div>
-              <div class="mod-troncal-horas">160 h</div>
-              <span class="mod-troncal-tag">5 RA</span>
+
+            <div class="mod-exp" id="mcat-0053">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0053')">
+                <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-name">Logística sanitaria en emergencias</span>
+                <span class="mod-exp-horas">128 h mín.</span>
+                <span class="mod-exp-ra-count">5 RA · 24 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="color:var(--text-muted);font-size:0.8rem;padding:0.25rem 0">RA y CE pendiente de expandir en demo.</div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-2">2º</div>
-              <div class="mod-troncal-name">Intervención en emergencias colectivas y catástrofes</div>
-              <div class="mod-troncal-horas">96 h</div>
-              <span class="mod-troncal-tag">4 RA</span>
+            <div class="mod-exp" id="mcat-0052">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0052')">
+                <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-name">Mantenimiento mecánico preventivo del vehículo</span>
+                <span class="mod-exp-horas">160 h mín.</span>
+                <span class="mod-exp-ra-count">4 RA · 20 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="color:var(--text-muted);font-size:0.8rem;padding:0.25rem 0">RA y CE pendiente de expandir en demo.</div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-2">2º</div>
-              <div class="mod-troncal-name">Evacuación y traslado de pacientes</div>
-              <div class="mod-troncal-horas">96 h</div>
-              <span class="mod-troncal-tag">4 RA</span>
+            <div class="mod-exp" id="mcat-0057">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0057')">
+                <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-name">Evacuación y traslado de pacientes</span>
+                <span class="mod-exp-horas">96 h mín.</span>
+                <span class="mod-exp-ra-count">4 RA · 18 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="color:var(--text-muted);font-size:0.8rem;padding:0.25rem 0">RA y CE pendiente de expandir en demo.</div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-2">2º</div>
-              <div class="mod-troncal-name">Vehículos de transporte sanitario</div>
-              <div class="mod-troncal-horas">64 h</div>
-              <span class="mod-troncal-tag">3 RA</span>
+            <div class="mod-exp" id="mcat-0059">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0059')">
+                <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-name">Planes de emergencias y dispositivos de riesgos previsibles</span>
+                <span class="mod-exp-horas">84 h mín.</span>
+                <span class="mod-exp-ra-count">2 RA · 14 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="color:var(--text-muted);font-size:0.8rem;padding:0.25rem 0">RA y CE pendiente de expandir en demo.</div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-2">2º</div>
-              <div class="mod-troncal-name">Empresa e iniciativa emprendedora</div>
-              <div class="mod-troncal-horas">64 h</div>
-              <span class="mod-troncal-tag">4 RA</span>
+            <div class="mod-exp" id="mcat-0060">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0060')">
+                <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-name">Teleemergencia</span>
+                <span class="mod-exp-horas">63 h mín.</span>
+                <span class="mod-exp-ra-count">3 RA · 15 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="color:var(--text-muted);font-size:0.8rem;padding:0.25rem 0">RA y CE pendiente de expandir en demo.</div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
+            </div>
+            <div class="mod-exp" id="mcat-0062">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-0062')">
+                <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-name">Empresa e iniciativa emprendedora</span>
+                <span class="mod-exp-horas">63 h mín.</span>
+                <span class="mod-exp-ra-count">4 RA · 22 CE</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="color:var(--text-muted);font-size:0.8rem;padding:0.25rem 0">RA y CE pendiente de expandir en demo.</div>
+                <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
+              </div>
             </div>
 
             <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin:1rem 0 0.625rem">Módulo FCT</div>
-            <div class="mod-troncal-item">
-              <div class="mod-curso-badge mc-fct">FCT</div>
-              <div class="mod-troncal-name">Formación en Centros de Trabajo</div>
-              <div class="mod-troncal-horas">410 h</div>
-              <span class="mod-troncal-tag">En empresa</span>
+            <div class="mod-exp" id="mcat-fct">
+              <div class="mod-exp-hd" onclick="toggleModCat('mcat-fct')">
+                <span class="mod-exp-chevron">▶</span>
+                <div class="mod-curso-badge mc-fct">FCT</div>
+                <span class="mod-exp-name">Formación en Centros de Trabajo</span>
+                <span class="mod-exp-horas">410 h</span>
+                <span class="mod-exp-ra-count">En empresa</span>
+              </div>
+              <div class="mod-exp-body">
+                <div style="font-size:0.8rem;color:var(--text-muted);line-height:1.6;padding:0.25rem 0">La FCT no tiene RA/CE en el sentido curricular. Las competencias a verificar en empresa se definen en la implantación del ciclo en cada centro.</div>
+              </div>
             </div>
 
             <div style="margin-top:1rem;padding:0.75rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);font-size:0.77rem;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between">
-              <span><strong style="color:var(--text-main)">Total: 1.590 h</strong> en centro + 410 h FCT = 2.000 h totales</span>
+              <span><strong style="color:var(--text-main)">Total: 1.590 h</strong> en centro + 410 h FCT = 2.000 h totales · Las horas indicadas son los mínimos estatales</span>
               <span class="norm-ref">RD 1397/2007</span>
             </div>
 
@@ -945,6 +1206,93 @@ svg{display:block}a{text-decoration:none;color:inherit}
   </div>
 </div>
 
+<!-- Nuevo Resultado de Aprendizaje -->
+<div class="modal-overlay" id="modal-nuevo-ra">
+  <div class="modal" style="width:540px">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo resultado de aprendizaje</span>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-ra')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-title">Identificación</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:80px">
+          <label class="form-label">Número <span>*</span></label>
+          <input class="form-input" type="number" placeholder="4" min="1">
+          <span class="form-hint">Correlativo en el módulo</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso en la calificación del módulo <span>*</span></label>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input class="form-input" type="number" placeholder="25" min="1" max="100" style="max-width:80px">
+            <span style="font-size:0.85rem;color:var(--text-sub)">%</span>
+            <span style="font-size:0.75rem;color:var(--text-muted)">La suma de todos los RA del módulo debe ser 100%</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Enunciado del resultado de aprendizaje <span>*</span></label>
+        <textarea class="form-textarea" rows="3" placeholder="Verbo en tercera persona del singular + objeto + contexto de desempeño. Ej: Aplica técnicas de soporte vital básico describiéndolas y relacionándolas con el objetivo a conseguir."></textarea>
+        <span class="form-hint">Redactar según la formulación normativa del RD del título</span>
+      </div>
+      <div class="modal-section-title">Contenidos básicos normativos</div>
+      <div class="form-group">
+        <label class="form-label">Contenidos asociados a este RA</label>
+        <textarea class="form-textarea" rows="2" placeholder="Uno por línea. Ej:&#10;RCP básica adulto y pediátrico&#10;DESA / DEA&#10;Obstrucción de vía aérea"></textarea>
+        <span class="form-hint">Se mostrarán como etiquetas en la estructura normativa del módulo</span>
+      </div>
+      <div style="padding:0.625rem 0.875rem;background:var(--blue-bg);border:1px solid #93C5FD;border-radius:8px;font-size:0.77rem;color:var(--blue)">
+        Los criterios de evaluación de este RA se añadirán a continuación, una vez creado el resultado de aprendizaje.
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nuevo-ra')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-ra')">Crear RA</button>
+    </div>
+  </div>
+</div>
+
+<!-- Nuevo Criterio de Evaluación -->
+<div class="modal-overlay" id="modal-nuevo-ce">
+  <div class="modal" style="width:520px">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo criterio de evaluación</span>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-ce')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="alert-box alert-info" style="margin-bottom:0">
+        <div class="alert-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div><div class="alert-text">Añadiendo CE al <strong>RA 1 · Módulo 0055</strong>. Los CE se ordenan alfabéticamente por letra automáticamente.</div></div>
+      </div>
+      <div class="modal-section-title">Identificación</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:90px">
+          <label class="form-label">Letra <span>*</span></label>
+          <input class="form-input" type="text" placeholder="f" maxlength="2">
+          <span class="form-hint">Siguiente disponible</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso en la calificación del RA <span>*</span></label>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input class="form-input" type="number" placeholder="15" min="1" max="100" style="max-width:80px">
+            <span style="font-size:0.85rem;color:var(--text-sub)">%</span>
+            <span style="font-size:0.75rem;color:var(--text-muted)">La suma de CE del RA debe ser 100%</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Enunciado del criterio de evaluación <span>*</span></label>
+        <textarea class="form-textarea" rows="3" placeholder="Se ha / Se han + participio pasado + objeto. Ej: Se han identificado los signos de compromiso vital en el adulto y en el niño."></textarea>
+        <span class="form-hint">Redactar en tercera persona del plural o singular según la norma</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nuevo-ce')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-ce')">Añadir CE</button>
+    </div>
+  </div>
+</div>
+
 <!-- Nuevo módulo troncal -->
 <div class="modal-overlay" id="modal-nuevo-mod">
   <div class="modal" style="width:500px">
@@ -974,6 +1322,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
 </div>
 
 <script>
+function toggleModCat(id){document.getElementById(id).classList.toggle('open')}
+function toggleRACat(id){document.getElementById(id).classList.toggle('open')}
 function showDetalle(){
   document.getElementById('view-lista').style.display='none';
   document.getElementById('view-detalle').style.display='block';
@@ -991,10 +1341,13 @@ function switchTab(tabId,el){
   while(cur){if(cur.classList&&cur.classList.contains('tab-content'))cur.classList.remove('active');cur=cur.nextElementSibling;}
   document.getElementById(tabId).classList.add('active');
 }
-function openModal(id){document.getElementById(id).classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
+function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow=''}
 document.querySelectorAll('.modal-overlay').forEach(o=>{
-  o.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')})
+  o.addEventListener('click',function(e){if(e.target===this)closeModal(this.id)})
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') document.querySelectorAll('.modal-overlay.open').forEach(o=>closeModal(o.id))
 });
 </script>
 </body>

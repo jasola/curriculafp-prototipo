@@ -320,8 +320,73 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 .sa-empty-title{font-size:14px;font-weight:600;color:var(--text-mid);margin-bottom:6px;}
 .sa-empty-text{font-size:12.5px;line-height:1.6;}
 
-/* COMPETENCIAS */
-.comp-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+/* ── VISTA LISTADO DE CICLOS IMPLANTADOS ── */
+.ciclos-list-view{display:block}
+.ciclo-detalle-view{display:none}
+
+.ciclo-row{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:8px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow-sm);cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s}
+.ciclo-row:hover{border-color:var(--border-dark);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.ciclo-row-badge{font-family:monospace;font-size:11px;font-weight:700;color:var(--garnet);background:var(--garnet-pale);padding:3px 8px;border-radius:3px;flex-shrink:0}
+.ciclo-row-info{flex:1}
+.ciclo-row-name{font-size:14px;font-weight:600;color:var(--text-dark)}
+.ciclo-row-meta{font-size:12px;color:var(--text-soft);margin-top:3px}
+.ciclo-row-kpis{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.ciclo-row-kpi{text-align:center}
+.ciclo-row-kpi-val{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text-dark);line-height:1}
+.ciclo-row-kpi-label{font-size:10px;color:var(--text-soft);margin-top:2px}
+.ciclo-row-status{flex-shrink:0}
+.ciclo-row-action{color:var(--garnet);font-size:12px;font-weight:600;flex-shrink:0}
+
+/* ── BADGES DE ORIGEN NORMATIVO ── */
+.origen-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.ob-rd{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.ob-ca{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
+.ob-centro{background:#F7F4F0;color:#78716C;border:1px solid #D4CEC7}
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,0.2);width:560px;max-width:100%;max-height:90vh;overflow-y:auto;animation:modalIn 0.2s ease}
+.modal-wide{width:660px}
+@keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:1}
+.modal-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text-dark)}
+.modal-subtitle{font-size:11px;color:var(--text-soft);margin-top:2px}
+.modal-close{width:28px;height:28px;border-radius:5px;border:none;background:var(--bg);cursor:pointer;display:grid;place-items:center;color:var(--text-soft);font-size:16px;transition:background 0.15s}
+.modal-close:hover{background:var(--border)}
+.modal-body{padding:20px;display:flex;flex-direction:column;gap:16px}
+.modal-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;background:var(--bg);position:sticky;bottom:0}
+.modal-section{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:var(--text-soft);padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:4px}
+
+/* ── FORM ELEMENTS ── */
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.form-label{font-size:12px;font-weight:600;color:var(--text-mid)}
+.form-label span{color:var(--garnet)}
+.form-input{padding:7px 10px;border:1px solid var(--border-dark);border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text-dark);background:var(--white);outline:none;transition:border-color 0.15s,box-shadow 0.15s}
+.form-input:focus{border-color:var(--garnet);box-shadow:0 0 0 3px rgba(155,28,28,0.08)}
+.form-select{padding:7px 10px;border:1px solid var(--border-dark);border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text-dark);background:var(--white);outline:none;cursor:pointer}
+.form-select:focus{border-color:var(--garnet)}
+.form-textarea{padding:8px 10px;border:1px solid var(--border-dark);border-radius:5px;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--text-dark);background:var(--white);outline:none;resize:vertical;min-height:72px;transition:border-color 0.15s}
+.form-textarea:focus{border-color:var(--garnet);box-shadow:0 0 0 3px rgba(155,28,28,0.08)}
+.form-hint{font-size:11px;color:var(--text-soft)}
+.form-pct{display:flex;align-items:center;gap:6px}
+.form-pct .form-input{max-width:72px}
+.form-pct-label{font-size:12px;color:var(--text-soft)}
+.form-pct-note{font-size:11px;color:var(--text-soft)}
+
+/* Checkbox group */
+.check-group{display:flex;flex-direction:column;gap:6px;max-height:160px;overflow-y:auto;padding:8px;border:1px solid var(--border);border-radius:5px;background:var(--bg)}
+.check-item{display:flex;align-items:center;gap:8px;cursor:pointer}
+.check-item input{width:14px;height:14px;accent-color:var(--garnet);cursor:pointer}
+.check-item-label{font-size:12.5px;color:var(--text-mid)}
+.check-item-sub{font-size:11px;color:var(--text-soft)}
+
+/* Tag input preview */
+.tag-preview{display:flex;flex-wrap:wrap;gap:4px;padding:6px 8px;border:1px solid var(--border);border-radius:5px;background:var(--bg);min-height:36px}
+.tag-item{display:inline-flex;align-items:center;gap:4px;background:var(--white);border:1px solid var(--border-dark);border-radius:3px;padding:2px 8px;font-size:11.5px;color:var(--text-mid)}
+.tag-item-rm{background:none;border:none;cursor:pointer;color:var(--text-soft);font-size:13px;line-height:1;padding:0}
 .comp-item:last-child{border-bottom:none;}
 .comp-code{font-family:monospace;font-size:11px;font-weight:700;color:var(--garnet);background:var(--garnet-pale);padding:3px 7px;border-radius:3px;flex-shrink:0;margin-top:1px;}
 .comp-text{font-size:13px;color:var(--text-mid);line-height:1.5;}
@@ -422,7 +487,64 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 
   <div class="content">
 
-    <!-- HEADER -->
+    <!-- ══ VISTA LISTADO DE CICLOS IMPLANTADOS ══ -->
+    <div class="ciclos-list-view" id="view-listado">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px">
+        <div>
+          <h1 class="page-title">Ciclos implantados</h1>
+          <div class="page-sub">CIFP Salud Jerez · Capa 1 — Definición estructural atemporal</div>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('modal-implantar-ciclo')">+ Implantar nuevo ciclo</button>
+      </div>
+
+      <div class="alert info" style="margin-bottom:20px">
+        <span class="alert-icon">ℹ</span>
+        <div>Cada ciclo implantado en el centro tiene su propia definición estructural en <strong>Capa 1</strong> — independiente del año académico. Al iniciar un curso, el sistema genera la instancia de <strong>Capa 2</strong> para ese grupo y año.</div>
+      </div>
+
+      <!-- TES — activo, con programación parcial -->
+      <div class="ciclo-row" onclick="showDetalleCiclo()">
+        <div class="ciclo-row-badge">TES</div>
+        <div class="ciclo-row-info">
+          <div class="ciclo-row-name">Técnico en Emergencias Sanitarias</div>
+          <div class="ciclo-row-meta">CFGM · Sanidad · Andalucía · Implantado desde 01/09/2010 · 15 cursos académicos</div>
+        </div>
+        <div class="ciclo-row-kpis">
+          <div class="ciclo-row-kpi"><div class="ciclo-row-kpi-val">11</div><div class="ciclo-row-kpi-label">Módulos</div></div>
+          <div class="ciclo-row-kpi"><div class="ciclo-row-kpi-val">47</div><div class="ciclo-row-kpi-label">RA</div></div>
+          <div class="ciclo-row-kpi"><div class="ciclo-row-kpi-val">312</div><div class="ciclo-row-kpi-label">CE</div></div>
+          <div class="ciclo-row-kpi"><div class="ciclo-row-kpi-val" style="color:#F59E0B">11%</div><div class="ciclo-row-kpi-label">Prog. base</div></div>
+        </div>
+        <div class="ciclo-row-status"><span class="status-pill pill-active"><span class="pill-dot"></span>Implantado</span></div>
+        <div class="ciclo-row-action">Ver detalle →</div>
+      </div>
+
+      <!-- TCAE — en configuración -->
+      <div class="ciclo-row" style="opacity:0.75">
+        <div class="ciclo-row-badge" style="background:var(--bg);color:var(--text-soft)">TCAE</div>
+        <div class="ciclo-row-info">
+          <div class="ciclo-row-name">Técnico en Cuidados Auxiliares de Enfermería</div>
+          <div class="ciclo-row-meta">CFGM · Sanidad · Andalucía · Implantado desde 01/09/2018 · 7 cursos académicos</div>
+        </div>
+        <div class="ciclo-row-kpis">
+          <div class="ciclo-row-kpi"><div class="ciclo-row-kpi-val">9</div><div class="ciclo-row-kpi-label">Módulos</div></div>
+          <div class="ciclo-row-kpi"><div class="ciclo-row-kpi-val">38</div><div class="ciclo-row-kpi-label">RA</div></div>
+          <div class="ciclo-row-kpi"><div class="ciclo-row-kpi-val">241</div><div class="ciclo-row-kpi-label">CE</div></div>
+          <div class="ciclo-row-kpi"><div class="ciclo-row-kpi-val" style="color:#9CA3AF">0%</div><div class="ciclo-row-kpi-label">Prog. base</div></div>
+        </div>
+        <div class="ciclo-row-status"><span class="status-pill" style="background:#F3F4F6;color:#6B7280;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px">En configuración</span></div>
+        <div class="ciclo-row-action" style="color:var(--text-soft)">Ver detalle →</div>
+      </div>
+    </div><!-- /view-listado -->
+
+    <!-- ══ VISTA DETALLE DEL CICLO (TES) ══ -->
+    <div class="ciclo-detalle-view" id="view-detalle">
+
+      <div style="margin-bottom:16px">
+        <button class="btn-link" onclick="showListado()" style="font-size:12px;color:var(--text-soft);margin-bottom:12px">
+          ← Volver a ciclos implantados
+        </button>
+      </div>
     <div style="margin-bottom:20px;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
         <div>
@@ -499,6 +621,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
         <span class="alert-icon">ℹ</span>
         <div><strong>Dos zonas por módulo.</strong> <em>Estructura normativa</em>: RA, contenidos básicos y CE — gestión del administrador. <em>Programación del profesor</em>: SA/UD con su secuencia de sesiones, metodología e instrumentos de evaluación vinculados a CE — la define el docente responsable. La suma de sesiones de todas las SA debe cubrir las horas lectivas del módulo (sesión = 55 min en este centro).</div>
       </div>
+      <div class="alert info" style="margin-bottom:20px;background:#F0FDF4;border-color:#BBF7D0;color:#166534;">
+        <span class="alert-icon">📋</span>
+        <div><strong>Origen normativo de cada elemento:</strong> <span style="display:inline-flex;align-items:center;gap:3px;background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">RD Estatal</span> estructura heredada del catálogo nacional — solo editable por Superadmin. <span style="display:inline-flex;align-items:center;gap:3px;background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">CA Andalucía</span> adaptación autonómica — editable por el administrador de centro. <span style="display:inline-flex;align-items:center;gap:3px;background:#F7F4F0;color:#78716C;border:1px solid #D4CEC7;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">Centro</span> módulos de libre disposición — definidos por el centro.</div>
+      </div>
 
       <!-- 1er CURSO -->
       <div class="curso-label">1.er curso<span class="cl-line"></span><span class="cl-count">6 módulos · 1.188 h</span></div>
@@ -535,6 +661,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                   <div class="ra-chevron">▶</div>
                   <div class="ra-num">1</div>
                   <div class="ra-text">Realiza operaciones de apoyo al equipo de salud en el soporte vital avanzado relacionándolas con las patologías de emergencia.</div>
+                  <span class="origen-badge ob-rd">RD Estatal</span>
                   <div class="ra-peso">Peso: <input value="40" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
@@ -565,6 +692,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                     <div class="ce-row"><div class="ce-letra">h</div><div class="ce-text">Se ha colaborado en la canalización de la vía venosa.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">i</div><div class="ce-text">Se ha seleccionado y preparado el material para la realización del registro electrocardiográfico.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">j</div><div class="ce-text">Se ha apoyado al médico o enfermero en las técnicas de SVA en pediatría.</div><div class="ce-peso"><input value="8"><span>%</span></div></div>
+                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-ce-tes')">+ Añadir criterio de evaluación</button></div>
                   </div>
                 </div>
               </div>
@@ -574,6 +702,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                   <div class="ra-chevron">▶</div>
                   <div class="ra-num">2</div>
                   <div class="ra-text">Atiende el parto inminente extrahospitalario aplicando los protocolos de actuación establecidos.</div>
+                  <span class="origen-badge ob-rd">RD Estatal</span>
                   <div class="ra-peso">Peso: <input value="30" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
@@ -591,6 +720,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                     <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Se ha preparado el material necesario para la atención del parto.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Se ha aplicado el protocolo de atención al recién nacido.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">d</div><div class="ce-text">Se ha gestionado el traslado materno-neonatal al centro hospitalario.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
+                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-ce-tes')">+ Añadir criterio de evaluación</button></div>
                   </div>
                 </div>
               </div>
@@ -600,6 +730,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                   <div class="ra-chevron">▶</div>
                   <div class="ra-num">3</div>
                   <div class="ra-text">Aplica técnicas de inmovilización y traslado a pacientes con lesiones traumáticas especiales adaptando el protocolo a la situación.</div>
+                  <span class="origen-badge ob-ca">CA Andalucía</span>
                   <div class="ra-peso">Peso: <input value="30" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
@@ -615,12 +746,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                     <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Se han identificado las lesiones traumáticas que requieren atención especial.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Se han aplicado técnicas de inmovilización adaptadas al tipo de lesión.</div><div class="ce-peso"><input value="35"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Se ha realizado el traslado respetando los protocolos de seguridad del paciente.</div><div class="ce-peso"><input value="40"><span>%</span></div></div>
+                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-ce-tes')">+ Añadir criterio de evaluación</button></div>
                   </div>
                 </div>
               </div>
 
               <div style="padding:4px 0;">
-                <button class="btn-ghost" style="font-size:12px;">+ Añadir resultado de aprendizaje</button>
+                <button class="btn-ghost" style="font-size:12px;" onclick="openModal('modal-nuevo-ra-tes')">+ Añadir resultado de aprendizaje</button>
               </div>
             </div>
           </div>
@@ -633,7 +765,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                   <div class="prof-name">María Jesús Romero Pérez</div>
                   <div class="prof-esp">PT Procedimientos Sanitarios y Asistenciales</div>
                 </div>
-                <button class="btn btn-primary btn-sm">+ Nueva SA / UD</button>
+                <button class="btn btn-primary btn-sm" onclick="openModal('modal-nueva-sa')">+ Nueva SA / UD</button>
               </div>
 
               <!-- RESUMEN HORAS -->
@@ -869,7 +1001,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                         </tr>
                       </tbody>
                     </table>
-                    <button class="btn-link" style="margin-top:8px;">+ Añadir sesión</button>
+                    <button class="btn-link" style="margin-top:8px;" onclick="openModal('modal-nueva-sesion')">+ Añadir sesión</button>
                   </div>
 
                   <!-- Instrumentos de evaluación -->
@@ -968,7 +1100,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                       <div class="instr-r3">Sesión 12 · Individual · Calificable · Nota mínima 5/10 para hacer media</div>
                     </div>
 
-                    <button class="btn-link" style="margin-top:4px;">+ Añadir instrumento</button>
+                    <button class="btn-link" style="margin-top:4px;" onclick="openModal('modal-nuevo-instrumento')">+ Añadir instrumento</button>
                   </div>
 
                   <!-- Criterios de calificación -->
@@ -1020,13 +1152,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                       <span class="alert-icon">⚠</span>
                       <span>Esta SA no tiene instrumentos de evaluación definidos. Los CE del RA 2 no quedarán cubiertos en la calificación.</span>
                     </div>
-                    <button class="btn-link">+ Añadir instrumento</button>
+                    <button class="btn-link" onclick="openModal('modal-nuevo-instrumento')">+ Añadir instrumento</button>
                   </div>
                 </div>
               </div>
 
               <div style="margin-top:6px;">
-                <button class="btn btn-secondary" style="font-size:12px;width:100%;justify-content:center;">+ Nueva SA / UD para este módulo</button>
+                <button class="btn btn-secondary" style="font-size:12px;width:100%;justify-content:center;" onclick="openModal('modal-nueva-sa')">+ Nueva SA / UD para este módulo</button>
               </div>
 
             </div>
@@ -1049,7 +1181,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
         <div class="mod-body">
           <div class="mod-tabs" id="modtabs-0055"><div class="mod-tab active" onclick="switchModTab(&#39;0055&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0055&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
           <div id="norm-0055" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">RA, contenidos básicos y CE del módulo 0055 — pendiente de expandir.</div></div>
-          <div id="prog-0055" class="mod-tab-panel"><div class="prog-zone"><div class="sa-empty"><div class="sa-empty-icon">📋</div><div class="sa-empty-title">Sin programación base definida</div><div class="sa-empty-text">El profesor responsable aún no ha creado SA/UD para este módulo.</div></div><button class="btn btn-primary btn-sm">+ Nueva SA / UD</button></div></div>
+          <div id="prog-0055" class="mod-tab-panel"><div class="prog-zone"><div class="sa-empty"><div class="sa-empty-icon">📋</div><div class="sa-empty-title">Sin programación base definida</div><div class="sa-empty-text">El profesor responsable aún no ha creado SA/UD para este módulo.</div></div><button class="btn btn-primary btn-sm" onclick="openModal('modal-nueva-sa')">+ Nueva SA / UD</button></div></div>
         </div>
       </div>
 
@@ -1614,7 +1746,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
             <div class="esp-item"><div class="esp-ico">🚑</div><div class="esp-info"><div class="esp-name">Aula de Simulación Clínica</div><div class="esp-meta">Laboratorio SVB/SVA · 16 puestos · Planta B</div></div><span class="esp-badge eb-warn">Compartido (TCAE)</span></div>
             <div class="esp-item"><div class="esp-ico">🔧</div><div class="esp-info"><div class="esp-name">Taller de vehículos sanitarios</div><div class="esp-meta">Taller mecánico · 12 puestos · Nave exterior</div></div><span class="esp-badge eb-ok">Asignado</span></div>
             <div class="esp-item"><div class="esp-ico">📡</div><div class="esp-info"><div class="esp-name">Sala de Teleemergencia</div><div class="esp-meta">Aula TIC especializada · 16 puestos · Planta 1</div></div><span class="esp-badge eb-ok">Asignado</span></div>
-            <button class="btn-link" style="margin-top:8px;">+ Asignar espacio al ciclo</button>
+            <button class="btn-link" style="margin-top:8px;" onclick="openModal('modal-asignar-espacio')">+ Asignar espacio al ciclo</button>
           </div>
         </div>
         <div>
@@ -1641,17 +1773,481 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
       </div>
     </div>
 
-  </div>
+  </div><!-- /content -->
+  </div><!-- /view-detalle -->
+
 </main>
 
+<!-- ══════════════════════════════════════════
+     MODALES — ciclo-tes.html
+     ══════════════════════════════════════════ -->
+
+<!-- MODAL: Nuevo RA -->
+<div class="modal-overlay" id="modal-nuevo-ra-tes">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nuevo resultado de aprendizaje</div>
+        <div class="modal-subtitle">Módulo 0056 · Atención sanitaria especial</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-ra-tes')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">Identificación</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:90px">
+          <label class="form-label">Número <span>*</span></label>
+          <input class="form-input" type="number" placeholder="4" min="1">
+          <span class="form-hint">Correlativo en el módulo</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso en calificación del módulo <span>*</span></label>
+          <div class="form-pct">
+            <input class="form-input" type="number" placeholder="20" min="1" max="100">
+            <span class="form-pct-label">%</span>
+            <span class="form-pct-note">La suma de todos los RA debe ser 100%</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Enunciado del RA <span>*</span></label>
+        <textarea class="form-textarea" rows="3" placeholder="Verbo en 3ª persona + objeto + contexto de desempeño. Ej: Aplica técnicas de soporte vital básico describiéndolas y relacionándolas con el objetivo a conseguir."></textarea>
+        <span class="form-hint">Redactar según la formulación normativa del RD del título</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="rd">RD Estatal — heredado del catálogo nacional</option>
+          <option value="ca">Adaptación autonómica — CA Andalucía</option>
+          <option value="centro">Libre disposición — definido por el centro</option>
+        </select>
+        <span class="form-hint">Determina quién puede editar este RA y con qué badge se muestra</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Contenidos básicos normativos</label>
+        <textarea class="form-textarea" rows="2" placeholder="Uno por línea. Ej:&#10;Técnicas de inmovilización espinal&#10;Collarín cervical y camilla de cuchara"></textarea>
+        <span class="form-hint">Se mostrarán como etiquetas en la estructura normativa</span>
+      </div>
+      <div class="alert info" style="font-size:12px">
+        <span class="alert-icon">ℹ</span>
+        <span>Los criterios de evaluación se añaden una vez creado el RA, desde el botón <strong>+ Añadir CE</strong> en la estructura del módulo.</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-ra-tes')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-ra-tes')">Crear RA</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo CE -->
+<div class="modal-overlay" id="modal-nuevo-ce-tes">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nuevo criterio de evaluación</div>
+        <div class="modal-subtitle">Módulo 0056 · RA seleccionado</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-ce-tes')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">Identificación</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:90px">
+          <label class="form-label">Letra <span>*</span></label>
+          <input class="form-input" type="text" placeholder="k" maxlength="2">
+          <span class="form-hint">Siguiente libre</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso en calificación del RA <span>*</span></label>
+          <div class="form-pct">
+            <input class="form-input" type="number" placeholder="10" min="1" max="100">
+            <span class="form-pct-label">%</span>
+            <span class="form-pct-note">La suma de CE del RA debe ser 100%</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Enunciado del CE <span>*</span></label>
+        <textarea class="form-textarea" rows="3" placeholder="Se ha / Se han + participio pasado + objeto. Ej: Se han verificado los signos de efectividad de las maniobras de SVA aplicadas."></textarea>
+        <span class="form-hint">Indicador observable del aprendizaje, redactado en 3ª persona</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="rd">RD Estatal</option>
+          <option value="ca">Adaptación CA Andalucía</option>
+          <option value="centro">Libre disposición — Centro</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-ce-tes')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-ce-tes')">Añadir CE</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nueva SA / UD -->
+<div class="modal-overlay" id="modal-nueva-sa">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nueva situación de aprendizaje / UD</div>
+        <div class="modal-subtitle">Programación base · Módulo 0056</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nueva-sa')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">Identificación</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Título de la SA / UD <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Ej: Soporte Vital Avanzado en situaciones de emergencia">
+        </div>
+        <div class="form-group" style="max-width:120px">
+          <label class="form-label">Número UD <span>*</span></label>
+          <input class="form-input" type="number" placeholder="12" min="1">
+          <span class="form-hint">Nº en la programación</span>
+        </div>
+      </div>
+
+      <div class="modal-section">Resultados de aprendizaje que trabaja</div>
+      <div class="form-group">
+        <label class="form-label">Selecciona los RA del módulo que cubre esta SA <span>*</span></label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" checked><div><div class="check-item-label">RA 1 · Realiza operaciones de apoyo al equipo de salud en el SVA</div><div class="check-item-sub">Peso: 40% del módulo</div></div></label>
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">RA 2 · Atiende el parto inminente extrahospitalario</div><div class="check-item-sub">Peso: 30% del módulo</div></div></label>
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">RA 3 · Aplica técnicas de inmovilización y traslado traumático</div><div class="check-item-sub">Peso: 30% del módulo · CA Andalucía</div></div></label>
+        </div>
+      </div>
+
+      <div class="modal-section">Metodologías</div>
+      <div class="form-group">
+        <label class="form-label">Metodologías empleadas</label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" checked><div class="check-item-label">Aprendizaje Basado en Simulación (SimBL)</div></label>
+          <label class="check-item"><input type="checkbox"><div class="check-item-label">Aprendizaje Basado en Problemas (ABP)</div></label>
+          <label class="check-item"><input type="checkbox"><div class="check-item-label">Aula Invertida (Flipped Classroom)</div></label>
+          <label class="check-item"><input type="checkbox"><div class="check-item-label">Aprendizaje Cooperativo</div></label>
+          <label class="check-item"><input type="checkbox"><div class="check-item-label">Método repetitivo-demostrativo</div></label>
+          <label class="check-item"><input type="checkbox"><div class="check-item-label">Debriefing clínico</div></label>
+          <label class="check-item"><input type="checkbox"><div class="check-item-label">Aprendizaje por proyectos (ABPy)</div></label>
+        </div>
+      </div>
+
+      <div class="modal-section">Estimación de carga</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Sesiones previstas <span>*</span></label>
+          <input class="form-input" type="number" placeholder="14" min="1">
+          <span class="form-hint">A 55 min/sesión en este centro</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Horas lectivas estimadas</label>
+          <input class="form-input" type="text" placeholder="Calculado automáticamente" disabled style="background:var(--bg);color:var(--text-soft)">
+        </div>
+      </div>
+
+      <div class="alert warning" style="font-size:12px">
+        <span class="alert-icon">⚠</span>
+        <span>La secuencia detallada de sesiones y los instrumentos de evaluación se definen dentro de la SA una vez creada.</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-sa')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-sa')">Crear SA / UD</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nueva sesión -->
+<div class="modal-overlay" id="modal-nueva-sesion">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nueva sesión</div>
+        <div class="modal-subtitle">SA-01 / UD 11 · Soporte Vital Avanzado</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nueva-sesion')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="max-width:90px">
+          <label class="form-label">Nº sesión <span>*</span></label>
+          <input class="form-input" type="number" placeholder="13" min="1">
+          <span class="form-hint">Número en la SA</span>
+        </div>
+        <div class="form-group" style="max-width:110px">
+          <label class="form-label">Duración (min) <span>*</span></label>
+          <input class="form-input" type="number" value="55" min="5" step="5">
+          <span class="form-hint">55 min por defecto</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tipo de sesión <span>*</span></label>
+          <select class="form-select">
+            <option>Introducción</option>
+            <option>Conocimientos previos</option>
+            <option selected>Desarrollo</option>
+            <option>Síntesis</option>
+            <option>Consolidación</option>
+            <option>Evaluación</option>
+            <option>Complementaria</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción de la actividad <span>*</span></label>
+        <textarea class="form-textarea" rows="3" placeholder="Describir brevemente qué se hace en esta sesión, qué aprende el alumno y cómo se organiza la clase."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Espacio</label>
+          <select class="form-select">
+            <option>Aula teórica</option>
+            <option>Aula de Simulación Clínica</option>
+            <option>Taller de vehículos sanitarios</option>
+            <option>Sala de Teleemergencia</option>
+            <option>Aula prácticas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Agrupamiento</label>
+          <select class="form-select">
+            <option>Grupo clase</option>
+            <option>Grupos 4-5</option>
+            <option>Parejas</option>
+            <option>Individual</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-sesion')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-sesion')">Añadir sesión</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo instrumento de evaluación -->
+<div class="modal-overlay" id="modal-nuevo-instrumento">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nuevo instrumento de evaluación</div>
+        <div class="modal-subtitle">SA-01 / UD 11 · Soporte Vital Avanzado</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-instrumento')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">Identificación</div>
+      <div class="form-group">
+        <label class="form-label">Denominación del instrumento <span>*</span></label>
+        <input class="form-input" type="text" placeholder="Ej: Prueba práctica de simulación SVA — rúbrica analítica">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Tipo <span>*</span></label>
+          <select class="form-select">
+            <option>Prueba escrita</option>
+            <option>Rúbrica</option>
+            <option>Lista de cotejo / Checklist</option>
+            <option>Prueba práctica</option>
+            <option>Observación sistemática</option>
+            <option>Dossier / Portfolio</option>
+            <option>Proyecto técnico</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Momento de evaluación</label>
+          <select class="form-select">
+            <option>Formativo (durante el proceso)</option>
+            <option>Sumativo (al final de la SA)</option>
+            <option>Inicial (diagnóstico)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-section">Peso y calificación</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Peso en la nota de la SA <span>*</span></label>
+          <div class="form-pct">
+            <input class="form-input" type="number" placeholder="40" min="0" max="100">
+            <span class="form-pct-label">%</span>
+            <span class="form-pct-note">0% = no calificable directamente</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Condición mínima</label>
+          <select class="form-select">
+            <option value="">Sin condición</option>
+            <option>Nota mínima 5/10 para hacer media</option>
+            <option>Entrega obligatoria</option>
+            <option>Presentación obligatoria</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-section">Criterios de evaluación que cubre</div>
+      <div class="form-group">
+        <label class="form-label">Vincula este instrumento a los CE que evalúa <span>*</span></label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">RA1-a · Se ha identificado el material de emergencias</div><div class="check-item-sub">Peso CE en RA1: 8%</div></div></label>
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">RA1-b · Se ha descrito la utilidad y manejo de equipos electromédicos</div><div class="check-item-sub">Peso CE en RA1: 10%</div></div></label>
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">RA1-c · Se han clasificado los equipos según situaciones</div><div class="check-item-sub">Peso CE en RA1: 10%</div></div></label>
+          <label class="check-item"><input type="checkbox" checked><div><div class="check-item-label">RA1-d · Se ha seleccionado y preparado material de monitorización</div><div class="check-item-sub">Peso CE en RA1: 12%</div></div></label>
+          <label class="check-item"><input type="checkbox" checked><div><div class="check-item-label">RA1-e · Se ha colaborado en el aislamiento de la vía aérea</div><div class="check-item-sub">Peso CE en RA1: 12%</div></div></label>
+          <label class="check-item"><input type="checkbox" checked><div><div class="check-item-label">RA1-f · Se ha seleccionado material para ventilación mecánica</div><div class="check-item-sub">Peso CE en RA1: 10%</div></div></label>
+          <label class="check-item"><input type="checkbox" checked><div><div class="check-item-label">RA1-g · Se ha determinado la saturación de oxígeno</div><div class="check-item-sub">Peso CE en RA1: 10%</div></div></label>
+        </div>
+        <span class="form-hint" style="margin-top:6px">Para cada CE seleccionado, indica qué porcentaje de ese CE evalúa este instrumento (el resto lo cubrirán otros instrumentos).</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Sesión en la que se aplica</label>
+        <select class="form-select">
+          <option>Sesión 12 — Evaluación práctica individual</option>
+          <option>Sesión 11 — Examen teórico</option>
+          <option>Sesión 10 — Presentación infografías</option>
+          <option>Otra sesión</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-instrumento')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-instrumento')">Añadir instrumento</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Asignar espacio al ciclo -->
+<div class="modal-overlay" id="modal-asignar-espacio">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Asignar espacio al ciclo</div>
+        <div class="modal-subtitle">TES · CIFP Salud Jerez</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-asignar-espacio')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Espacio del centro <span>*</span></label>
+        <select class="form-select">
+          <option value="">— Seleccionar espacio —</option>
+          <option>Aula polivalente 1.1 · Aula teórica · 30 puestos</option>
+          <option>Aula polivalente 1.3 · Aula teórica · 28 puestos</option>
+          <option>Laboratorio de Anatomía · Lab. especializado · 20 puestos</option>
+          <option>Aula de informática · TIC · 25 puestos</option>
+          <option>Gimnasio · Polideportivo · Planta baja</option>
+        </select>
+        <span class="form-hint">Solo se muestran los espacios del centro no asignados ya a este ciclo</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tipo de uso en el ciclo</label>
+        <select class="form-select">
+          <option>Asignado exclusivamente a este ciclo</option>
+          <option>Compartido con otros ciclos</option>
+        </select>
+      </div>
+      <div class="form-group" id="compartido-nota" style="display:none">
+        <label class="form-label">Nota sobre el uso compartido</label>
+        <textarea class="form-textarea" rows="2" placeholder="Ej: Compartido con TCAE. Reservar franja horaria en el calendario de centro."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Verificación normativa</label>
+        <select class="form-select">
+          <option>Cubre requisito normativo de espacio mínimo</option>
+          <option>Uso complementario (no es espacio mínimo)</option>
+        </select>
+        <span class="form-hint">Los espacios mínimos exigidos por el RD del título se verifican automáticamente</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-asignar-espacio')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-asignar-espacio')">Asignar espacio</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Implantar nuevo ciclo (desde el listado) -->
+<div class="modal-overlay" id="modal-implantar-ciclo">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Implantar ciclo en el centro</div>
+        <div class="modal-subtitle">CIFP Salud Jerez</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-implantar-ciclo')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert info" style="font-size:12px">
+        <span class="alert-icon">ℹ</span>
+        <span>Al implantar un ciclo, el sistema copia la <strong>plantilla troncal del catálogo nacional</strong> a este centro. A partir de ahí puedes adaptar las horas y añadir módulos autonómicos.</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ciclo a implantar <span>*</span></label>
+        <select class="form-select">
+          <option value="">— Seleccionar del catálogo —</option>
+          <option>SAN301 · Técnico en Emergencias Sanitarias (CFGM)</option>
+          <option>SAN302 · Técnico Superior en Anatomía Patológica (CFGS)</option>
+          <option>SAN303 · Técnico en Cuidados Auxiliares de Enfermería (CFGM)</option>
+          <option>INF001 · Técnico Superior en DAM (CFGS)</option>
+          <option>ADM001 · Técnico en Gestión Administrativa (CFGM)</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Fecha de implantación <span>*</span></label>
+          <input class="form-input" type="date">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Comunidad autónoma</label>
+          <input class="form-input" type="text" value="Andalucía" disabled style="background:var(--bg);color:var(--text-soft)">
+          <span class="form-hint">Tomado del centro</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duración de sesión en este centro (min) <span>*</span></label>
+        <input class="form-input" type="number" value="55" min="45" max="60">
+        <span class="form-hint">Normativa andaluza: 55 min. Usado para calcular horas lectivas de las SA.</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-implantar-ciclo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-implantar-ciclo')">Implantar ciclo</button>
+    </div>
+  </div>
+</div>
+
 <script>
+/* ── Navegación listado / detalle ── */
+function showDetalleCiclo(){
+  document.getElementById('view-listado').style.display='none';
+  document.getElementById('view-detalle').style.display='block';
+}
+function showListado(){
+  document.getElementById('view-listado').style.display='block';
+  document.getElementById('view-detalle').style.display='none';
+}
+
+/* ── Pestañas principales ── */
 function switchMainTab(id,el){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   el.classList.add('active');
 }
-function toggleMod(id){document.getElementById(id).classList.toggle('open');}
+
+/* ── Módulos, RA, SA, Competencias ── */
+function toggleMod(id){document.getElementById(id).classList.toggle('open')}
+function toggleRA(id){document.getElementById(id).classList.toggle('open')}
+function toggleSA(id){document.getElementById(id).classList.toggle('open')}
+function toggleComp(id){document.getElementById(id).classList.toggle('open')}
+
+/* ── Subpestañas módulo ── */
 function switchModTab(modId,tipo,el){
   const container=document.getElementById('modtabs-'+modId);
   container.querySelectorAll('.mod-tab').forEach(t=>t.classList.remove('active'));
@@ -1660,10 +2256,26 @@ function switchModTab(modId,tipo,el){
   document.getElementById('prog-'+modId).classList.remove('active');
   document.getElementById(tipo+'-'+modId).classList.add('active');
 }
-function toggleRA(id){document.getElementById(id).classList.toggle('open');}
-function toggleSA(id){document.getElementById(id).classList.toggle('open');}
-function toggleComp(id){document.getElementById(id).classList.toggle('open');}
-</script>
 
+/* ── Modales ── */
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',function(e){
+    if(e.target===this) closeModal(this.id);
+  });
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    document.querySelectorAll('.modal-overlay.open').forEach(o=>closeModal(o.id));
+  }
+});
+</script>
 
 </body></html>
