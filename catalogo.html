@@ -204,6 +204,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
 .mod-exp-name{flex:1;font-size:0.82rem;font-weight:600;color:var(--text-main)}
 .mod-exp-horas{font-size:0.75rem;font-weight:600;color:var(--text-sub);white-space:nowrap}
 .mod-exp-ra-count{font-size:0.7rem;color:var(--text-muted);white-space:nowrap}
+.mod-exp-code{font-family:monospace;font-size:0.72rem;font-weight:700;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:1px 6px;flex-shrink:0;white-space:nowrap}
+.mod-exp-code{font-family:monospace;font-size:0.72rem;font-weight:700;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:2px 6px;flex-shrink:0;}
 .mod-exp-body{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:0.875rem 1rem}
 .mod-exp.open .mod-exp-body{display:block}
 
@@ -713,6 +715,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0055')">
                 <span class="mod-exp-chevron">▶</span>
                 <div class="mod-curso-badge mc-1">1º</div>
+                <span class="mod-exp-code">0055</span>
+                <span class="mod-exp-code">0055</span>
                 <span class="mod-exp-name">Atención sanitaria inicial en situaciones de emergencia</span>
                 <span class="mod-exp-horas">224 h mín.</span>
                 <span class="mod-exp-ra-count">3 RA · 18 CE</span>
@@ -723,7 +727,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     <span class="ra-exp-chevron">▶</span>
                     <div class="ra-exp-num">1</div>
                     <div class="ra-exp-text">Reconoce los signos de compromiso vital relacionándolos con el estado del paciente.</div>
-                    <span class="ra-exp-peso">30%</span>
+                    
                   </div>
                   <div class="ra-exp-body">
                     <div class="cont-section">
@@ -741,7 +745,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                       <div class="ce-row-cat"><div class="ce-letra-cat">d</div><div class="ce-text-cat">Se han priorizado las acciones de intervención en función del riesgo vital.</div></div>
                       <div class="ce-row-cat"><div class="ce-letra-cat">e</div><div class="ce-text-cat">Se ha transmitido la información recogida al equipo de salud de forma precisa y sistemática.</div></div>
                     </div>
-                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                    <button class="btn-add-inline" onclick="addContenidoRA(this);event.stopPropagation()" style="color:var(--text-soft);margin-right:8px">+ Añadir contenido</button><button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
                   </div>
                 </div>
                 <div class="ra-exp" id="rcat-0055-2">
@@ -749,7 +753,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     <span class="ra-exp-chevron">▶</span>
                     <div class="ra-exp-num">2</div>
                     <div class="ra-exp-text">Aplica técnicas de soporte vital básico describiéndolas y relacionándolas con el objetivo a conseguir.</div>
-                    <span class="ra-exp-peso">40%</span>
+                    
                   </div>
                   <div class="ra-exp-body">
                     <div class="cont-section">
@@ -768,7 +772,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                       <div class="ce-row-cat"><div class="ce-letra-cat">e</div><div class="ce-text-cat">Se han controlado hemorragias mediante técnicas de compresión directa y torniquete.</div></div>
                       <div class="ce-row-cat"><div class="ce-letra-cat">f</div><div class="ce-text-cat">Se ha verificado la efectividad de las técnicas aplicadas.</div></div>
                     </div>
-                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                    <button class="btn-add-inline" onclick="addContenidoRA(this);event.stopPropagation()" style="color:var(--text-soft);margin-right:8px">+ Añadir contenido</button><button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
                   </div>
                 </div>
                 <div class="ra-exp" id="rcat-0055-3">
@@ -776,7 +780,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     <span class="ra-exp-chevron">▶</span>
                     <div class="ra-exp-num">3</div>
                     <div class="ra-exp-text">Aplica criterios de clasificación de víctimas relacionando recursos con gravedad y probabilidad de supervivencia.</div>
-                    <span class="ra-exp-peso">30%</span>
+                    
                   </div>
                   <div class="ra-exp-body">
                     <div class="cont-section">
@@ -795,7 +799,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                       <div class="ce-row-cat"><div class="ce-letra-cat">f</div><div class="ce-text-cat">Se han reconocido los errores más frecuentes en la clasificación y sus consecuencias.</div></div>
                       <div class="ce-row-cat"><div class="ce-letra-cat">g</div><div class="ce-text-cat">Se ha reevaluado la clasificación ante cambios en el estado del paciente.</div></div>
                     </div>
-                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                    <button class="btn-add-inline" onclick="addContenidoRA(this);event.stopPropagation()" style="color:var(--text-soft);margin-right:8px">+ Añadir contenido</button><button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
                   </div>
                 </div>
                 <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
@@ -807,6 +811,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0056')">
                 <span class="mod-exp-chevron">▶</span>
                 <div class="mod-curso-badge mc-1">1º</div>
+                <span class="mod-exp-code">0056</span>
+                <span class="mod-exp-code">0056</span>
                 <span class="mod-exp-name">Atención sanitaria especial en situaciones de emergencia</span>
                 <span class="mod-exp-horas">160 h mín.</span>
                 <span class="mod-exp-ra-count">3 RA · 17 CE</span>
@@ -817,7 +823,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     <span class="ra-exp-chevron">▶</span>
                     <div class="ra-exp-num">1</div>
                     <div class="ra-exp-text">Realiza operaciones de apoyo al equipo de salud en el soporte vital avanzado relacionándolas con las patologías de emergencia.</div>
-                    <span class="ra-exp-peso">40%</span>
+                    
                   </div>
                   <div class="ra-exp-body">
                     <div class="cont-section">
@@ -841,7 +847,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                       <div class="ce-row-cat"><div class="ce-letra-cat">i</div><div class="ce-text-cat">Se ha preparado el material para el registro electrocardiográfico.</div></div>
                       <div class="ce-row-cat"><div class="ce-letra-cat">j</div><div class="ce-text-cat">Se ha apoyado al médico en las técnicas de SVA en pediatría.</div></div>
                     </div>
-                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                    <button class="btn-add-inline" onclick="addContenidoRA(this);event.stopPropagation()" style="color:var(--text-soft);margin-right:8px">+ Añadir contenido</button><button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
                   </div>
                 </div>
                 <div class="ra-exp" id="rcat-0056-2">
@@ -849,7 +855,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     <span class="ra-exp-chevron">▶</span>
                     <div class="ra-exp-num">2</div>
                     <div class="ra-exp-text">Atiende el parto inminente extrahospitalario aplicando los protocolos de actuación establecidos.</div>
-                    <span class="ra-exp-peso">30%</span>
+                    
                   </div>
                   <div class="ra-exp-body">
                     <div class="cont-section">
@@ -866,7 +872,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                       <div class="ce-row-cat"><div class="ce-letra-cat">c</div><div class="ce-text-cat">Se ha aplicado el protocolo de atención al recién nacido.</div></div>
                       <div class="ce-row-cat"><div class="ce-letra-cat">d</div><div class="ce-text-cat">Se ha gestionado el traslado materno-neonatal al centro hospitalario.</div></div>
                     </div>
-                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                    <button class="btn-add-inline" onclick="addContenidoRA(this);event.stopPropagation()" style="color:var(--text-soft);margin-right:8px">+ Añadir contenido</button><button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
                   </div>
                 </div>
                 <div class="ra-exp" id="rcat-0056-3">
@@ -874,7 +880,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     <span class="ra-exp-chevron">▶</span>
                     <div class="ra-exp-num">3</div>
                     <div class="ra-exp-text">Aplica técnicas de inmovilización y traslado a pacientes con lesiones traumáticas especiales.</div>
-                    <span class="ra-exp-peso">30%</span>
+                    
                   </div>
                   <div class="ra-exp-body">
                     <div class="cont-section">
@@ -889,7 +895,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
                       <div class="ce-row-cat"><div class="ce-letra-cat">b</div><div class="ce-text-cat">Se han aplicado técnicas de inmovilización adaptadas al tipo de lesión.</div></div>
                       <div class="ce-row-cat"><div class="ce-letra-cat">c</div><div class="ce-text-cat">Se ha realizado el traslado respetando los protocolos de seguridad del paciente.</div></div>
                     </div>
-                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
+                    <button class="btn-add-inline" onclick="addContenidoRA(this);event.stopPropagation()" style="color:var(--text-soft);margin-right:8px">+ Añadir contenido</button><button class="btn-add-inline" onclick="openModal('modal-nuevo-ce');event.stopPropagation()">+ Añadir criterio de evaluación</button>
                   </div>
                 </div>
                 <button class="btn-add-inline" onclick="openModal('modal-nuevo-ra');event.stopPropagation()" style="margin-top:4px">+ Añadir resultado de aprendizaje</button>
@@ -900,6 +906,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0054">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0054')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-1">1º</div>
+                <span class="mod-exp-code">0054</span>
+                <span class="mod-exp-code">0054</span>
                 <span class="mod-exp-name">Dotación sanitaria</span>
                 <span class="mod-exp-horas">64 h mín.</span>
                 <span class="mod-exp-ra-count">3 RA · 12 CE</span>
@@ -912,6 +920,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0061">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0061')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-1">1º</div>
+                <span class="mod-exp-code">0061</span>
+                <span class="mod-exp-code">0061</span>
                 <span class="mod-exp-name">Formación y orientación laboral</span>
                 <span class="mod-exp-horas">96 h mín.</span>
                 <span class="mod-exp-ra-count">6 RA · 30 CE</span>
@@ -927,6 +937,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0053">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0053')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-code">0053</span>
+                <span class="mod-exp-code">0053</span>
                 <span class="mod-exp-name">Logística sanitaria en emergencias</span>
                 <span class="mod-exp-horas">128 h mín.</span>
                 <span class="mod-exp-ra-count">5 RA · 24 CE</span>
@@ -939,6 +951,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0052">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0052')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-code">0052</span>
+                <span class="mod-exp-code">0052</span>
                 <span class="mod-exp-name">Mantenimiento mecánico preventivo del vehículo</span>
                 <span class="mod-exp-horas">160 h mín.</span>
                 <span class="mod-exp-ra-count">4 RA · 20 CE</span>
@@ -951,6 +965,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0057">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0057')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-code">0057</span>
+                <span class="mod-exp-code">0057</span>
                 <span class="mod-exp-name">Evacuación y traslado de pacientes</span>
                 <span class="mod-exp-horas">96 h mín.</span>
                 <span class="mod-exp-ra-count">4 RA · 18 CE</span>
@@ -963,6 +979,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0059">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0059')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-code">0059</span>
+                <span class="mod-exp-code">0059</span>
                 <span class="mod-exp-name">Planes de emergencias y dispositivos de riesgos previsibles</span>
                 <span class="mod-exp-horas">84 h mín.</span>
                 <span class="mod-exp-ra-count">2 RA · 14 CE</span>
@@ -975,6 +993,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0060">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0060')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-code">0060</span>
+                <span class="mod-exp-code">0060</span>
                 <span class="mod-exp-name">Teleemergencia</span>
                 <span class="mod-exp-horas">63 h mín.</span>
                 <span class="mod-exp-ra-count">3 RA · 15 CE</span>
@@ -987,6 +1007,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0062">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0062')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
+                <span class="mod-exp-code">0062</span>
+                <span class="mod-exp-code">0062</span>
                 <span class="mod-exp-name">Empresa e iniciativa emprendedora</span>
                 <span class="mod-exp-horas">63 h mín.</span>
                 <span class="mod-exp-ra-count">4 RA · 22 CE</span>
@@ -1002,6 +1024,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-fct')">
                 <span class="mod-exp-chevron">▶</span>
                 <div class="mod-curso-badge mc-fct">FCT</div>
+                <span class="mod-exp-code">FCT</span>
+                <span class="mod-exp-code">FCT</span>
                 <span class="mod-exp-name">Formación en Centros de Trabajo</span>
                 <span class="mod-exp-horas">410 h</span>
                 <span class="mod-exp-ra-count">En empresa</span>
@@ -1221,14 +1245,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
           <input class="form-input" type="number" placeholder="4" min="1">
           <span class="form-hint">Correlativo en el módulo</span>
         </div>
-        <div class="form-group">
-          <label class="form-label">Peso en la calificación del módulo <span>*</span></label>
-          <div style="display:flex;align-items:center;gap:6px">
-            <input class="form-input" type="number" placeholder="25" min="1" max="100" style="max-width:80px">
-            <span style="font-size:0.85rem;color:var(--text-sub)">%</span>
-            <span style="font-size:0.75rem;color:var(--text-muted)">La suma de todos los RA del módulo debe ser 100%</span>
-          </div>
-        </div>
+
       </div>
       <div class="form-group">
         <label class="form-label">Enunciado del resultado de aprendizaje <span>*</span></label>
@@ -1237,8 +1254,14 @@ svg{display:block}a{text-decoration:none;color:inherit}
       </div>
       <div class="modal-section-title">Contenidos básicos normativos</div>
       <div class="form-group">
-        <label class="form-label">Contenidos asociados a este RA</label>
-        <textarea class="form-textarea" rows="2" placeholder="Uno por línea. Ej:&#10;RCP básica adulto y pediátrico&#10;DESA / DEA&#10;Obstrucción de vía aérea"></textarea>
+        <label class="form-label">Añadir contenidos uno a uno</label>
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <input class="form-input" id="cont-input" type="text" placeholder="Ej: RCP básica adulto y pediátrico" style="flex:1">
+          <button type="button" class="btn btn-ghost" onclick="addContenido()" style="white-space:nowrap;padding:6px 12px;font-size:12px">+ Añadir</button>
+        </div>
+        <div id="cont-preview" style="display:flex;flex-wrap:wrap;gap:4px;min-height:32px;padding:6px 8px;border:1px solid var(--border);border-radius:5px;background:var(--bg)">
+          <span style="font-size:11px;color:var(--text-muted);align-self:center">Sin contenidos añadidos aún</span>
+        </div>
         <span class="form-hint">Se mostrarán como etiquetas en la estructura normativa del módulo</span>
       </div>
       <div style="padding:0.625rem 0.875rem;background:var(--blue-bg);border:1px solid #93C5FD;border-radius:8px;font-size:0.77rem;color:var(--blue)">
@@ -1271,14 +1294,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
           <input class="form-input" type="text" placeholder="f" maxlength="2">
           <span class="form-hint">Siguiente disponible</span>
         </div>
-        <div class="form-group">
-          <label class="form-label">Peso en la calificación del RA <span>*</span></label>
-          <div style="display:flex;align-items:center;gap:6px">
-            <input class="form-input" type="number" placeholder="15" min="1" max="100" style="max-width:80px">
-            <span style="font-size:0.85rem;color:var(--text-sub)">%</span>
-            <span style="font-size:0.75rem;color:var(--text-muted)">La suma de CE del RA debe ser 100%</span>
-          </div>
-        </div>
+
       </div>
       <div class="form-group">
         <label class="form-label">Enunciado del criterio de evaluación <span>*</span></label>
@@ -1301,7 +1317,10 @@ svg{display:block}a{text-decoration:none;color:inherit}
       <button class="modal-close" onclick="closeModal('modal-nuevo-mod')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
     </div>
     <div class="modal-body">
-      <div class="form-group"><label class="form-label">Denominación del módulo <span>*</span></label><input class="form-input" type="text" placeholder="Nombre oficial según el RD del título"></div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:110px"><label class="form-label">Código oficial <span>*</span></label><input class="form-input" type="text" placeholder="0055"><span class="form-hint">Código del RD (4 dígitos)</span></div>
+        <div class="form-group"><label class="form-label">Denominación del módulo <span>*</span></label><input class="form-input" type="text" placeholder="Nombre oficial según el RD del título"></div>
+      </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Curso <span>*</span></label>
@@ -1310,8 +1329,8 @@ svg{display:block}a{text-decoration:none;color:inherit}
         <div class="form-group"><label class="form-label">Horas (estatal mínimo) <span>*</span></label><input class="form-input" type="number" placeholder="224"></div>
       </div>
       <div class="form-group"><label class="form-label">Referencia normativa</label><input class="form-input" type="text" placeholder="Ej: RD 1397/2007 · Anexo módulos"></div>
-      <div style="padding:0.625rem 0.875rem;background:var(--amber-bg);border:1px solid #FCD34D;border-radius:8px;font-size:0.77rem;color:var(--amber)">
-        Los Resultados de Aprendizaje y Criterios de Evaluación de este módulo se añadirán desde la pantalla de estructura del ciclo implantado en el centro.
+      <div style="padding:0.625rem 0.875rem;background:var(--blue-bg);border:1px solid #93C5FD;border-radius:8px;font-size:0.77rem;color:var(--blue)">
+        Una vez creado el módulo, añade sus Resultados de Aprendizaje desde el botón <strong>+ Añadir RA</strong> dentro del módulo expandido. Los CE se añaden dentro de cada RA.
       </div>
     </div>
     <div class="modal-foot">
@@ -1322,7 +1341,53 @@ svg{display:block}a{text-decoration:none;color:inherit}
 </div>
 
 <script>
+
+function addContenido(){
+  const input = document.getElementById('cont-input');
+  const preview = document.getElementById('cont-preview');
+  const val = input.value.trim();
+  if(!val) return;
+  // Remove placeholder text if present
+  const placeholder = preview.querySelector('span[style]');
+  if(placeholder) placeholder.remove();
+  // Create tag
+  const tag = document.createElement('span');
+  tag.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--border-dark);border-radius:3px;padding:2px 8px;font-size:11.5px;color:var(--text-sub)';
+  tag.innerHTML = val + ' <button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:13px;line-height:1;padding:0;margin-left:2px">×</button>';
+  preview.appendChild(tag);
+  input.value = '';
+  input.focus();
+}
+// Allow Enter key in contenido input
+document.addEventListener('DOMContentLoaded', function(){
+  const ci = document.getElementById('cont-input');
+  if(ci) ci.addEventListener('keydown', function(e){ if(e.key==='Enter'){e.preventDefault();addContenido();} });
+});
 function toggleModCat(id){document.getElementById(id).classList.toggle('open')}
+function addContenido(){
+  var input=document.getElementById('cont-input');
+  var val=input.value.trim();
+  if(!val) return;
+  var preview=document.getElementById('cont-preview');
+  var empty=preview.querySelector('span[style*="color"]');
+  if(empty) empty.remove();
+  var tag=document.createElement('span');
+  tag.style.cssText='display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--border);border-radius:3px;padding:2px 8px;font-size:11.5px;color:var(--text-sub)';
+  tag.innerHTML=val+' <button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:13px;line-height:1;padding:0">×</button>';
+  preview.appendChild(tag);
+  input.value='';
+  input.focus();
+}
+function addContenidoRA(btn){
+  var val=prompt('Nuevo contenido básico:');
+  if(!val||!val.trim()) return;
+  var contZone=btn.closest('.ra-exp-body').querySelector('.cont-section');
+  var tag=document.createElement('span');
+  tag.className='cont-tag';
+  tag.style.cssText='background:#F0FDF4;border-color:#BBF7D0;color:#166534';
+  tag.textContent=val.trim()+' ✦';
+  contZone.appendChild(tag);
+}
 function toggleRACat(id){document.getElementById(id).classList.toggle('open')}
 function showDetalle(){
   document.getElementById('view-lista').style.display='none';

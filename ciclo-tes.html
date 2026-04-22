@@ -625,8 +625,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
         <span class="alert-icon">📋</span>
         <div><strong>Origen normativo de cada elemento:</strong> <span style="display:inline-flex;align-items:center;gap:3px;background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">RD Estatal</span> estructura heredada del catálogo nacional — solo editable por Superadmin. <span style="display:inline-flex;align-items:center;gap:3px;background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">CA Andalucía</span> adaptación autonómica — editable por el administrador de centro. <span style="display:inline-flex;align-items:center;gap:3px;background:#F7F4F0;color:#78716C;border:1px solid #D4CEC7;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">Centro</span> módulos de libre disposición — definidos por el centro.</div>
       </div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+        <button class="btn btn-secondary" style="font-size:12px" onclick="openModal('modal-nuevo-modulo-centro')">+ Añadir módulo autonómico / libre disposición</button>
+      </div>
 
       <!-- 1er CURSO -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+        <button class="btn btn-secondary" onclick="openModal('modal-nuevo-modulo-centro')" style="font-size:12px">+ Añadir módulo autonómico o de libre disposición</button>
+      </div>
+
       <div class="curso-label">1.er curso<span class="cl-line"></span><span class="cl-count">6 módulos · 1.188 h</span></div>
 
       <!-- ════ MÓDULO 0056 — COMPLETO ════ -->
@@ -1817,11 +1824,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
       <div class="form-group">
         <label class="form-label">Origen normativo</label>
         <select class="form-select">
-          <option value="rd">RD Estatal — heredado del catálogo nacional</option>
           <option value="ca">Adaptación autonómica — CA Andalucía</option>
           <option value="centro">Libre disposición — definido por el centro</option>
         </select>
-        <span class="form-hint">Determina quién puede editar este RA y con qué badge se muestra</span>
+        <span class="form-hint">Los RA troncales del RD se heredan del catálogo nacional y no pueden crearse aquí</span>
       </div>
       <div class="form-group">
         <label class="form-label">Contenidos básicos normativos</label>
@@ -1875,10 +1881,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
       <div class="form-group">
         <label class="form-label">Origen normativo</label>
         <select class="form-select">
-          <option value="rd">RD Estatal</option>
           <option value="ca">Adaptación CA Andalucía</option>
           <option value="centro">Libre disposición — Centro</option>
         </select>
+        <span class="form-hint">Los CE troncales del RD se heredan del catálogo nacional</span>
       </div>
     </div>
     <div class="modal-foot">
@@ -2172,6 +2178,77 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
   </div>
 </div>
 
+<!-- MODAL: Nuevo módulo autonómico / libre disposición -->
+<div class="modal-overlay" id="modal-nuevo-modulo-centro">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Añadir módulo al ciclo</div>
+        <div class="modal-subtitle">TES · CIFP Salud Jerez — Solo módulos no troncales</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-modulo-centro')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert info" style="font-size:12px">
+        <span class="alert-icon">ℹ</span>
+        <span>Los módulos troncales del RD se heredan automáticamente del catálogo nacional. Aquí solo se añaden módulos adicionales permitidos por la normativa autonómica o de libre disposición del centro.</span>
+      </div>
+      <div class="modal-section">Identificación</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:110px">
+          <label class="form-label">Código <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Ej: 0063">
+          <span class="form-hint">Código asignado por la CA o el centro</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Nombre oficial del módulo">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Origen <span>*</span></label>
+          <select class="form-select">
+            <option value="ca" selected>Adaptación autonómica — CA Andalucía</option>
+            <option value="centro">Libre disposición — Centro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Curso <span>*</span></label>
+          <select class="form-select">
+            <option>1º curso</option>
+            <option>2º curso</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Horas lectivas (normativa CA) <span>*</span></label>
+          <input class="form-input" type="number" placeholder="63">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Especialidad docente requerida</label>
+          <select class="form-select">
+            <option value="">— Seleccionar —</option>
+            <option>PT Procedimientos Sanitarios y Asistenciales</option>
+            <option>PT Diagnóstico Clínico y Ortoprotésico</option>
+            <option>PT Mantenimiento de Vehículos</option>
+            <option>Profesorado FOL</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Referencia normativa</label>
+        <input class="form-input" type="text" placeholder="Ej: Orden de 7 de julio de 2009 — Junta de Andalucía">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-modulo-centro')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-modulo-centro')">Añadir módulo</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL: Implantar nuevo ciclo (desde el listado) -->
 <div class="modal-overlay" id="modal-implantar-ciclo">
   <div class="modal">
@@ -2221,6 +2298,79 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
     </div>
   </div>
 </div>
+
+<!-- MODAL: Nuevo módulo autonómico / libre disposición -->
+<div class="modal-overlay" id="modal-nuevo-modulo-centro">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nuevo módulo profesional</div>
+        <div class="modal-subtitle">TES · CIFP Salud Jerez · Solo módulos CA o libre disposición</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-modulo-centro')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert info" style="font-size:12px;margin-bottom:0">
+        <span class="alert-icon">ℹ</span>
+        <span>Los módulos troncales del RD se heredan automáticamente del catálogo nacional. Aquí solo puedes añadir módulos que introduce la normativa autonómica o módulos de libre disposición del centro.</span>
+      </div>
+      <div class="modal-section">Identificación</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:110px">
+          <label class="form-label">Código <span>*</span></label>
+          <input class="form-input" type="text" placeholder="AND-01">
+          <span class="form-hint">Código local del módulo</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Nombre del módulo autonómico o libre disposición">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Origen normativo <span>*</span></label>
+          <select class="form-select">
+            <option value="ca">Adaptación CA Andalucía</option>
+            <option value="centro">Libre disposición — Centro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Curso <span>*</span></label>
+          <select class="form-select">
+            <option>1º curso</option>
+            <option>2º curso</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Horas lectivas <span>*</span></label>
+          <input class="form-input" type="number" placeholder="63">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Especialidad docente requerida</label>
+          <select class="form-select">
+            <option value="">— Sin especialidad específica —</option>
+            <option>PT Procedimientos Sanitarios y Asistenciales</option>
+            <option>PT Diagnóstico Clínico y Ortoprotésico</option>
+            <option>PT Mantenimiento de Vehículos</option>
+            <option>Profesorado FOL</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Referencia normativa</label>
+        <input class="form-input" type="text" placeholder="Ej: Orden de 7 de julio de 2009 — Junta de Andalucía">
+        <span class="form-hint">Normativa que introduce este módulo en el currículo autonómico</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-modulo-centro')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-modulo-centro')">Añadir módulo</button>
+    </div>
+  </div>
+</div>
+
 
 <script>
 /* ── Navegación listado / detalle ── */
