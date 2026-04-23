@@ -626,12 +626,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
         <div><strong>Origen normativo de cada elemento:</strong> <span style="display:inline-flex;align-items:center;gap:3px;background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">RD Estatal</span> estructura heredada del catálogo nacional — solo editable por Superadmin. <span style="display:inline-flex;align-items:center;gap:3px;background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">CA Andalucía</span> adaptación autonómica — editable por el administrador de centro. <span style="display:inline-flex;align-items:center;gap:3px;background:#F7F4F0;color:#78716C;border:1px solid #D4CEC7;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin:0 2px">Centro</span> módulos de libre disposición — definidos por el centro.</div>
       </div>
       <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
-        <button class="btn btn-secondary" style="font-size:12px" onclick="openModal('modal-nuevo-modulo-centro')">+ Añadir módulo autonómico / libre disposición</button>
-      </div>
-
-      <!-- 1er CURSO -->
-      <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
-        <button class="btn btn-secondary" onclick="openModal('modal-nuevo-modulo-centro')" style="font-size:12px">+ Añadir módulo autonómico o de libre disposición</button>
+        <button class="btn btn-secondary" style="font-size:12px" onclick="openModal('modal-nuevo-modulo-centro')">+ Añadir módulo autonómico o de libre disposición</button>
       </div>
 
       <div class="curso-label">1.er curso<span class="cl-line"></span><span class="cl-count">6 módulos · 1.188 h</span></div>
@@ -769,8 +764,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
             <div class="prog-zone">
               <div class="prog-header">
                 <div class="prog-header-left">
-                  <div class="prof-name">María Jesús Romero Pérez</div>
-                  <div class="prof-esp">PT Procedimientos Sanitarios y Asistenciales</div>
+                  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:var(--text-soft);margin-bottom:6px">Responsables de programación base</div>
+                  <div class="resp-prog-list" id="resp-0056">
+                    <div class="resp-item">
+                      <div class="resp-avatar">MR</div>
+                      <div class="resp-info">
+                        <div class="resp-name">María Jesús Romero Pérez</div>
+                        <div class="resp-esp">PT Procedimientos Sanitarios y Asistenciales</div>
+                      </div>
+                      <button class="resp-quitar btn-ghost" style="font-size:11px;padding:2px 6px;color:var(--text-soft)">Quitar</button>
+                    </div>
+                  </div>
+                  <button class="btn-link" style="font-size:11.5px;margin-top:6px" onclick="openModal('modal-asignar-responsable')">+ Asignar responsable de programación</button>
                 </div>
                 <button class="btn btn-primary btn-sm" onclick="openModal('modal-nueva-sa')">+ Nueva SA / UD</button>
               </div>
@@ -2300,73 +2305,52 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 </div>
 
 <!-- MODAL: Nuevo módulo autonómico / libre disposición -->
-<div class="modal-overlay" id="modal-nuevo-modulo-centro">
+<!-- MODAL: Asignar responsable de programación base -->
+<div class="modal-overlay" id="modal-asignar-responsable">
   <div class="modal">
     <div class="modal-head">
       <div>
-        <div class="modal-title">Nuevo módulo profesional</div>
-        <div class="modal-subtitle">TES · CIFP Salud Jerez · Solo módulos CA o libre disposición</div>
+        <div class="modal-title">Asignar responsable de programación</div>
+        <div class="modal-subtitle">Módulo 0056 · Atención sanitaria especial</div>
       </div>
-      <button class="modal-close" onclick="closeModal('modal-nuevo-modulo-centro')">✕</button>
+      <button class="modal-close" onclick="closeModal('modal-asignar-responsable')">✕</button>
     </div>
     <div class="modal-body">
       <div class="alert info" style="font-size:12px;margin-bottom:0">
         <span class="alert-icon">ℹ</span>
-        <span>Los módulos troncales del RD se heredan automáticamente del catálogo nacional. Aquí solo puedes añadir módulos que introduce la normativa autonómica o módulos de libre disposición del centro.</span>
+        <span>El responsable de programación define las SA/UD, sesiones e instrumentos de evaluación en Capa 1. Puede haber más de uno por módulo. La asignación de docente para impartir el módulo en cada curso se gestiona en <strong>Capa 2 → Grupos y docentes</strong>.</span>
       </div>
-      <div class="modal-section">Identificación</div>
-      <div class="form-row">
-        <div class="form-group" style="max-width:110px">
-          <label class="form-label">Código <span>*</span></label>
-          <input class="form-input" type="text" placeholder="AND-01">
-          <span class="form-hint">Código local del módulo</span>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Denominación <span>*</span></label>
-          <input class="form-input" type="text" placeholder="Nombre del módulo autonómico o libre disposición">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Origen normativo <span>*</span></label>
-          <select class="form-select">
-            <option value="ca">Adaptación CA Andalucía</option>
-            <option value="centro">Libre disposición — Centro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Curso <span>*</span></label>
-          <select class="form-select">
-            <option>1º curso</option>
-            <option>2º curso</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Horas lectivas <span>*</span></label>
-          <input class="form-input" type="number" placeholder="63">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Especialidad docente requerida</label>
-          <select class="form-select">
-            <option value="">— Sin especialidad específica —</option>
-            <option>PT Procedimientos Sanitarios y Asistenciales</option>
-            <option>PT Diagnóstico Clínico y Ortoprotésico</option>
-            <option>PT Mantenimiento de Vehículos</option>
-            <option>Profesorado FOL</option>
-          </select>
-        </div>
+      <div class="modal-section">Seleccionar docente</div>
+      <div class="form-group">
+        <label class="form-label">Docente del centro <span>*</span></label>
+        <select class="form-select">
+          <option value="">— Buscar por nombre o DNI —</option>
+          <option value="1">María Jesús Romero Pérez · PT Proc. Sanitarios</option>
+          <option value="2">Antonio López Fernández · PT Proc. Sanitarios</option>
+          <option value="3">Carmen Vega Ruiz · PT Proc. Sanitarios</option>
+          <option value="4">José Moreno García · PT Diagnóstico Clínico</option>
+        </select>
+        <span class="form-hint">Solo se muestran docentes con la especialidad requerida por este módulo</span>
       </div>
       <div class="form-group">
-        <label class="form-label">Referencia normativa</label>
-        <input class="form-input" type="text" placeholder="Ej: Orden de 7 de julio de 2009 — Junta de Andalucía">
-        <span class="form-hint">Normativa que introduce este módulo en el currículo autonómico</span>
+        <label class="form-label">Rol en este módulo</label>
+        <select class="form-select">
+          <option>Responsable principal — define y mantiene la programación base</option>
+          <option>Co-responsable — colabora en la definición de parte de la programación</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Vigencia</label>
+        <select class="form-select">
+          <option>Indefinida — hasta que se cambie manualmente</option>
+          <option>Solo para el curso 2024-25</option>
+        </select>
+        <span class="form-hint">La asignación indefinida es la recomendada para la programación base de Capa 1</span>
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-modulo-centro')">Cancelar</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-modulo-centro')">Añadir módulo</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-asignar-responsable')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-asignar-responsable')">Asignar responsable</button>
     </div>
   </div>
 </div>

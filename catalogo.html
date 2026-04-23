@@ -185,6 +185,32 @@ svg{display:block}a{text-decoration:none;color:inherit}
 .gb-medio{background:var(--blue-bg);color:var(--blue);border:1px solid #93C5FD}
 .gb-superior{background:var(--purple-bg);color:var(--purple);border:1px solid #C4B5FD}
 
+
+/* CP EXPANDIBLES */
+.cp-exp{border:1px solid var(--border);border-radius:8px;margin-bottom:0.375rem;overflow:hidden;background:var(--bg-white)}
+.cp-exp-hd{display:flex;align-items:flex-start;gap:0.75rem;padding:0.75rem 1rem;cursor:pointer;transition:background 0.15s;user-select:none}
+.cp-exp-hd:hover{background:#FAFAF9}
+.cp-exp-chevron{font-size:9px;color:var(--text-muted);transition:transform 0.18s;flex-shrink:0;margin-top:4px}
+.cp-exp.open .cp-exp-chevron{transform:rotate(90deg)}
+.cp-exp-text{flex:1;font-size:0.82rem;color:var(--text-sub);line-height:1.5}
+.cp-exp-uc-badge{font-size:0.68rem;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--purple-bg);color:var(--purple);border:1px solid #C4B5FD;flex-shrink:0;white-space:nowrap;align-self:flex-start;margin-top:2px}
+.cp-uc-empty{background:var(--slate-bg);color:var(--slate);border-color:#CBD5E1}
+.cp-exp-body{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:1rem}
+.cp-exp.open .cp-exp-body{display:block}
+
+/* CNCP sections */
+.cp-cncp-section{margin-bottom:1rem}
+.cp-cert-section{margin-top:0}
+.cp-cncp-label{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border)}
+.cp-uc-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.625rem 0.75rem;background:var(--bg-white);border:1px solid var(--border);border-radius:7px;margin-bottom:0.375rem}
+.cp-uc-code{font-family:monospace;font-size:0.75rem;font-weight:700;color:var(--purple);background:var(--purple-bg);border:1px solid #C4B5FD;padding:3px 8px;border-radius:4px;flex-shrink:0;white-space:nowrap}
+.cp-uc-name{font-size:0.8rem;font-weight:600;color:var(--text-main)}
+.cp-uc-meta{font-size:0.72rem;color:var(--text-muted);margin-top:2px}
+.cp-uc-info{flex:1}
+.cp-cert-item{display:flex;align-items:center;gap:0.625rem;padding:0.5rem 0.75rem;background:var(--bg-white);border:1px solid var(--border);border-radius:6px;margin-bottom:0.25rem;font-size:0.78rem}
+.cp-cert-code{font-family:monospace;font-size:0.72rem;font-weight:700;color:var(--blue);background:var(--blue-bg);border:1px solid #93C5FD;padding:2px 7px;border-radius:3px;flex-shrink:0}
+.cp-cert-name{flex:1;font-weight:500;color:var(--text-main)}
+.cp-cert-nivel{font-size:0.68rem;font-weight:600;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:1px 6px;border-radius:3px}
 /* CP LIST */
 .cp-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.625rem 0.75rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);margin-bottom:0.375rem}
 .cp-num{width:24px;height:24px;border-radius:50%;background:var(--brand-light);color:var(--brand);display:grid;place-items:center;font-size:0.67rem;font-weight:700;flex-shrink:0;margin-top:1px}
@@ -204,8 +230,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
 .mod-exp-name{flex:1;font-size:0.82rem;font-weight:600;color:var(--text-main)}
 .mod-exp-horas{font-size:0.75rem;font-weight:600;color:var(--text-sub);white-space:nowrap}
 .mod-exp-ra-count{font-size:0.7rem;color:var(--text-muted);white-space:nowrap}
-.mod-exp-code{font-family:monospace;font-size:0.72rem;font-weight:700;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:1px 6px;flex-shrink:0;white-space:nowrap}
-.mod-exp-code{font-family:monospace;font-size:0.72rem;font-weight:700;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:2px 6px;flex-shrink:0;}
+.mod-exp-code{font-family:monospace;font-size:0.72rem;font-weight:700;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:2px 6px;flex-shrink:0;white-space:nowrap}
 .mod-exp-body{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:0.875rem 1rem}
 .mod-exp.open .mod-exp-body{display:block}
 
@@ -661,32 +686,164 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-nueva-cp')">+ Añadir CP</button>
           </div>
           <div class="sc-body">
-            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem">Competencias definidas en el RD 1397/2007. Son la base del expediente global del alumno y de la acreditación parcial acumulable.</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem">Competencias definidas en el RD 1397/2007. Expandir cada CP para ver su vinculación con el Catálogo Nacional de Cualificaciones Profesionales (CNCP) y los Certificados de Profesionalidad asociados — base de la acreditación parcial acumulable (LO 3/2022, art. 10).</div>
 
-            <div class="cp-item">
-              <div class="cp-num">CP1</div>
-              <div class="cp-text">Atender a múltiples víctimas en situaciones de emergencia aplicando técnicas de triage y clasificación según protocolos establecidos.</div>
+            <!-- CP1 -->
+            <div class="cp-exp" id="cpcat-1">
+              <div class="cp-exp-hd" onclick="toggleCPCat('cpcat-1')">
+                <span class="cp-exp-chevron">▶</span>
+                <div class="cp-num">CP1</div>
+                <div class="cp-exp-text">Atender a múltiples víctimas en situaciones de emergencia aplicando técnicas de triage y clasificación según protocolos establecidos.</div>
+                <span class="cp-exp-uc-badge">UC0069_2</span>
+              </div>
+              <div class="cp-exp-body">
+                <div class="cp-cncp-section">
+                  <div class="cp-cncp-label">Vinculación CNCP</div>
+                  <div class="cp-uc-item">
+                    <div class="cp-uc-code">UC0069_2</div>
+                    <div class="cp-uc-info">
+                      <div class="cp-uc-name">Prestar atención sanitaria básica en situaciones de emergencia extrahospitalaria</div>
+                      <div class="cp-uc-meta">Cualificación: <strong>SAN069_2</strong> · Atención sanitaria a múltiples víctimas y catástrofes · Nivel 2 · EQF 3</div>
+                    </div>
+                    <button class="btn-add-inline" style="color:var(--text-muted);font-size:11px" onclick="openModal('modal-editar-uc');event.stopPropagation()">Editar</button>
+                  </div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-uc');event.stopPropagation()">+ Vincular UC del CNCP</button>
+                </div>
+                <div class="cp-cert-section">
+                  <div class="cp-cncp-label">Certificados de Profesionalidad que incluyen esta UC</div>
+                  <div class="cp-cert-item">
+                    <span class="cp-cert-code">SANT0208</span>
+                    <span class="cp-cert-name">Transporte Sanitario</span>
+                    <span class="cp-cert-nivel">Nivel 2</span>
+                  </div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-cert');event.stopPropagation()">+ Añadir certificado de profesionalidad</button>
+                </div>
+              </div>
             </div>
-            <div class="cp-item">
-              <div class="cp-num">CP2</div>
-              <div class="cp-text">Aplicar técnicas de soporte vital básico y avanzado según los protocolos de actuación en emergencias sanitarias extrahospitalarias.</div>
+
+            <!-- CP2 -->
+            <div class="cp-exp" id="cpcat-2">
+              <div class="cp-exp-hd" onclick="toggleCPCat('cpcat-2')">
+                <span class="cp-exp-chevron">▶</span>
+                <div class="cp-num">CP2</div>
+                <div class="cp-exp-text">Aplicar técnicas de soporte vital básico y avanzado según los protocolos de actuación en emergencias sanitarias extrahospitalarias.</div>
+                <span class="cp-exp-uc-badge">UC0070_2</span>
+              </div>
+              <div class="cp-exp-body">
+                <div class="cp-cncp-section">
+                  <div class="cp-cncp-label">Vinculación CNCP</div>
+                  <div class="cp-uc-item">
+                    <div class="cp-uc-code">UC0070_2</div>
+                    <div class="cp-uc-info">
+                      <div class="cp-uc-name">Aplicar técnicas de soporte vital avanzado y traslado al centro sanitario</div>
+                      <div class="cp-uc-meta">Cualificación: <strong>SAN070_2</strong> · Emergencias Sanitarias · Nivel 2 · EQF 3</div>
+                    </div>
+                    <button class="btn-add-inline" style="color:var(--text-muted);font-size:11px" onclick="openModal('modal-editar-uc');event.stopPropagation()">Editar</button>
+                  </div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-uc');event.stopPropagation()">+ Vincular UC del CNCP</button>
+                </div>
+                <div class="cp-cert-section">
+                  <div class="cp-cncp-label">Certificados de Profesionalidad que incluyen esta UC</div>
+                  <div class="cp-cert-item">
+                    <span class="cp-cert-code">SANT0208</span>
+                    <span class="cp-cert-name">Transporte Sanitario</span>
+                    <span class="cp-cert-nivel">Nivel 2</span>
+                  </div>
+                  <div class="cp-cert-item">
+                    <span class="cp-cert-code">SANT0108</span>
+                    <span class="cp-cert-name">Primeros Auxilios</span>
+                    <span class="cp-cert-nivel">Nivel 2</span>
+                  </div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-cert');event.stopPropagation()">+ Añadir certificado de profesionalidad</button>
+                </div>
+              </div>
             </div>
-            <div class="cp-item">
-              <div class="cp-num">CP3</div>
-              <div class="cp-text">Realizar la atención sanitaria inicial al paciente en situación de urgencia o emergencia en el lugar del suceso, durante el traslado y en la entrega al centro receptor.</div>
+
+            <!-- CP3–CP6 colapsadas sin UC vinculada todavía -->
+            <div class="cp-exp" id="cpcat-3">
+              <div class="cp-exp-hd" onclick="toggleCPCat('cpcat-3')">
+                <span class="cp-exp-chevron">▶</span>
+                <div class="cp-num">CP3</div>
+                <div class="cp-exp-text">Realizar la atención sanitaria inicial al paciente en situación de urgencia o emergencia en el lugar del suceso, durante el traslado y en la entrega al centro receptor.</div>
+                <span class="cp-exp-uc-badge cp-uc-empty">Sin UC vinculada</span>
+              </div>
+              <div class="cp-exp-body">
+                <div class="cp-cncp-section">
+                  <div class="cp-cncp-label">Vinculación CNCP</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:6px 0">Esta competencia aún no tiene una UC del CNCP vinculada.</div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-uc');event.stopPropagation()">+ Vincular UC del CNCP</button>
+                </div>
+                <div class="cp-cert-section">
+                  <div class="cp-cncp-label">Certificados de Profesionalidad</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:6px 0">Sin certificados vinculados.</div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-cert');event.stopPropagation()">+ Añadir certificado de profesionalidad</button>
+                </div>
+              </div>
             </div>
-            <div class="cp-item">
-              <div class="cp-num">CP4</div>
-              <div class="cp-text">Manejar y conducir vehículos de transporte sanitario terrestre y aéreo, asegurando el traslado del paciente en condiciones de seguridad.</div>
+
+            <div class="cp-exp" id="cpcat-4">
+              <div class="cp-exp-hd" onclick="toggleCPCat('cpcat-4')">
+                <span class="cp-exp-chevron">▶</span>
+                <div class="cp-num">CP4</div>
+                <div class="cp-exp-text">Manejar y conducir vehículos de transporte sanitario terrestre y aéreo, asegurando el traslado del paciente en condiciones de seguridad.</div>
+                <span class="cp-exp-uc-badge cp-uc-empty">Sin UC vinculada</span>
+              </div>
+              <div class="cp-exp-body">
+                <div class="cp-cncp-section">
+                  <div class="cp-cncp-label">Vinculación CNCP</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:6px 0">Esta competencia aún no tiene una UC del CNCP vinculada.</div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-uc');event.stopPropagation()">+ Vincular UC del CNCP</button>
+                </div>
+                <div class="cp-cert-section">
+                  <div class="cp-cncp-label">Certificados de Profesionalidad</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:6px 0">Sin certificados vinculados.</div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-cert');event.stopPropagation()">+ Añadir certificado de profesionalidad</button>
+                </div>
+              </div>
             </div>
-            <div class="cp-item">
-              <div class="cp-num">CP5</div>
-              <div class="cp-text">Colaborar en la coordinación con los servicios de emergencias sanitarias, cuerpos de seguridad y protección civil en situaciones de catástrofe.</div>
+
+            <div class="cp-exp" id="cpcat-5">
+              <div class="cp-exp-hd" onclick="toggleCPCat('cpcat-5')">
+                <span class="cp-exp-chevron">▶</span>
+                <div class="cp-num">CP5</div>
+                <div class="cp-exp-text">Colaborar en la coordinación con los servicios de emergencias sanitarias, cuerpos de seguridad y protección civil en situaciones de catástrofe.</div>
+                <span class="cp-exp-uc-badge cp-uc-empty">Sin UC vinculada</span>
+              </div>
+              <div class="cp-exp-body">
+                <div class="cp-cncp-section">
+                  <div class="cp-cncp-label">Vinculación CNCP</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:6px 0">Esta competencia aún no tiene una UC del CNCP vinculada.</div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-uc');event.stopPropagation()">+ Vincular UC del CNCP</button>
+                </div>
+                <div class="cp-cert-section">
+                  <div class="cp-cncp-label">Certificados de Profesionalidad</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:6px 0">Sin certificados vinculados.</div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-cert');event.stopPropagation()">+ Añadir certificado de profesionalidad</button>
+                </div>
+              </div>
             </div>
-            <div class="cp-item">
-              <div class="cp-num">CP6</div>
-              <div class="cp-text">Aplicar los protocolos de logística sanitaria en emergencias, gestionando el material y los equipos de intervención.</div>
+
+            <div class="cp-exp" id="cpcat-6">
+              <div class="cp-exp-hd" onclick="toggleCPCat('cpcat-6')">
+                <span class="cp-exp-chevron">▶</span>
+                <div class="cp-num">CP6</div>
+                <div class="cp-exp-text">Aplicar los protocolos de logística sanitaria en emergencias, gestionando el material y los equipos de intervención.</div>
+                <span class="cp-exp-uc-badge cp-uc-empty">Sin UC vinculada</span>
+              </div>
+              <div class="cp-exp-body">
+                <div class="cp-cncp-section">
+                  <div class="cp-cncp-label">Vinculación CNCP</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:6px 0">Esta competencia aún no tiene una UC del CNCP vinculada.</div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-uc');event.stopPropagation()">+ Vincular UC del CNCP</button>
+                </div>
+                <div class="cp-cert-section">
+                  <div class="cp-cncp-label">Certificados de Profesionalidad</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:6px 0">Sin certificados vinculados.</div>
+                  <button class="btn-add-inline" onclick="openModal('modal-vincular-cert');event.stopPropagation()">+ Añadir certificado de profesionalidad</button>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </div><!-- /td-competencias -->
@@ -715,7 +872,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0055')">
                 <span class="mod-exp-chevron">▶</span>
                 <div class="mod-curso-badge mc-1">1º</div>
-                <span class="mod-exp-code">0055</span>
                 <span class="mod-exp-code">0055</span>
                 <span class="mod-exp-name">Atención sanitaria inicial en situaciones de emergencia</span>
                 <span class="mod-exp-horas">224 h mín.</span>
@@ -812,7 +968,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
                 <span class="mod-exp-chevron">▶</span>
                 <div class="mod-curso-badge mc-1">1º</div>
                 <span class="mod-exp-code">0056</span>
-                <span class="mod-exp-code">0056</span>
                 <span class="mod-exp-name">Atención sanitaria especial en situaciones de emergencia</span>
                 <span class="mod-exp-horas">160 h mín.</span>
                 <span class="mod-exp-ra-count">3 RA · 17 CE</span>
@@ -907,7 +1062,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0054')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-1">1º</div>
                 <span class="mod-exp-code">0054</span>
-                <span class="mod-exp-code">0054</span>
                 <span class="mod-exp-name">Dotación sanitaria</span>
                 <span class="mod-exp-horas">64 h mín.</span>
                 <span class="mod-exp-ra-count">3 RA · 12 CE</span>
@@ -920,7 +1074,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0061">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0061')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-1">1º</div>
-                <span class="mod-exp-code">0061</span>
                 <span class="mod-exp-code">0061</span>
                 <span class="mod-exp-name">Formación y orientación laboral</span>
                 <span class="mod-exp-horas">96 h mín.</span>
@@ -938,7 +1091,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0053')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
                 <span class="mod-exp-code">0053</span>
-                <span class="mod-exp-code">0053</span>
                 <span class="mod-exp-name">Logística sanitaria en emergencias</span>
                 <span class="mod-exp-horas">128 h mín.</span>
                 <span class="mod-exp-ra-count">5 RA · 24 CE</span>
@@ -951,7 +1103,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0052">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0052')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
-                <span class="mod-exp-code">0052</span>
                 <span class="mod-exp-code">0052</span>
                 <span class="mod-exp-name">Mantenimiento mecánico preventivo del vehículo</span>
                 <span class="mod-exp-horas">160 h mín.</span>
@@ -966,7 +1117,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0057')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
                 <span class="mod-exp-code">0057</span>
-                <span class="mod-exp-code">0057</span>
                 <span class="mod-exp-name">Evacuación y traslado de pacientes</span>
                 <span class="mod-exp-horas">96 h mín.</span>
                 <span class="mod-exp-ra-count">4 RA · 18 CE</span>
@@ -979,7 +1129,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0059">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0059')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
-                <span class="mod-exp-code">0059</span>
                 <span class="mod-exp-code">0059</span>
                 <span class="mod-exp-name">Planes de emergencias y dispositivos de riesgos previsibles</span>
                 <span class="mod-exp-horas">84 h mín.</span>
@@ -994,7 +1143,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0060')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
                 <span class="mod-exp-code">0060</span>
-                <span class="mod-exp-code">0060</span>
                 <span class="mod-exp-name">Teleemergencia</span>
                 <span class="mod-exp-horas">63 h mín.</span>
                 <span class="mod-exp-ra-count">3 RA · 15 CE</span>
@@ -1007,7 +1155,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
             <div class="mod-exp" id="mcat-0062">
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-0062')">
                 <span class="mod-exp-chevron">▶</span><div class="mod-curso-badge mc-2">2º</div>
-                <span class="mod-exp-code">0062</span>
                 <span class="mod-exp-code">0062</span>
                 <span class="mod-exp-name">Empresa e iniciativa emprendedora</span>
                 <span class="mod-exp-horas">63 h mín.</span>
@@ -1024,7 +1171,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
               <div class="mod-exp-hd" onclick="toggleModCat('mcat-fct')">
                 <span class="mod-exp-chevron">▶</span>
                 <div class="mod-curso-badge mc-fct">FCT</div>
-                <span class="mod-exp-code">FCT</span>
                 <span class="mod-exp-code">FCT</span>
                 <span class="mod-exp-name">Formación en Centros de Trabajo</span>
                 <span class="mod-exp-horas">410 h</span>
@@ -1363,6 +1509,7 @@ document.addEventListener('DOMContentLoaded', function(){
   const ci = document.getElementById('cont-input');
   if(ci) ci.addEventListener('keydown', function(e){ if(e.key==='Enter'){e.preventDefault();addContenido();} });
 });
+function toggleCPCat(id){document.getElementById(id).classList.toggle('open')}
 function toggleModCat(id){document.getElementById(id).classList.toggle('open')}
 function addContenido(){
   var input=document.getElementById('cont-input');
@@ -1415,5 +1562,158 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape') document.querySelectorAll('.modal-overlay.open').forEach(o=>closeModal(o.id))
 });
 </script>
+<!-- MODAL: Vincular UC del CNCP -->
+<div class="modal-overlay" id="modal-vincular-uc">
+  <div class="modal" style="width:560px">
+    <div class="modal-head">
+      <span class="modal-title">Vincular Unidad de Competencia del CNCP</span>
+      <button class="modal-close" onclick="closeModal('modal-vincular-uc')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="alert-box alert-info" style="margin-bottom:0">
+        <div class="alert-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div><div class="alert-text">La vinculación UC-CP es la base de la <strong>acreditación parcial acumulable</strong> (LO 3/2022, art. 10) y de la correspondencia con <strong>Certificados de Profesionalidad</strong>. Permite al alumno acreditar competencias sueltas aunque no complete el ciclo.</div></div>
+      </div>
+      <div class="modal-section-title">Identificación de la UC</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:140px">
+          <label class="form-label">Código UC <span>*</span></label>
+          <input class="form-input" type="text" placeholder="UC0069_2">
+          <span class="form-hint">Código oficial CNCP</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación de la UC <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Denominación oficial según el CNCP">
+        </div>
+      </div>
+      <div class="modal-section-title">Cualificación profesional de referencia</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:140px">
+          <label class="form-label">Código cualificación <span>*</span></label>
+          <input class="form-input" type="text" placeholder="SAN069_2">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación de la cualificación <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Denominación oficial según el CNCP">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Familia profesional</label>
+          <select class="form-select">
+            <option>Sanidad</option><option>Seguridad y Medio Ambiente</option><option>Servicios Socioculturales</option><option>Otra</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nivel de cualificación</label>
+          <select class="form-select">
+            <option>Nivel 1</option><option selected>Nivel 2</option><option>Nivel 3</option>
+          </select>
+          <span class="form-hint">Equivalente EQF: Nivel+1</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-vincular-uc')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-vincular-uc')">Vincular UC</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Editar UC vinculada -->
+<div class="modal-overlay" id="modal-editar-uc">
+  <div class="modal" style="width:520px">
+    <div class="modal-head">
+      <span class="modal-title">Editar vinculación UC · UC0069_2</span>
+      <button class="modal-close" onclick="closeModal('modal-editar-uc')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="max-width:140px">
+          <label class="form-label">Código UC</label>
+          <input class="form-input" type="text" value="UC0069_2">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación de la UC</label>
+          <input class="form-input" type="text" value="Prestar atención sanitaria básica en situaciones de emergencia extrahospitalaria">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:140px">
+          <label class="form-label">Código cualificación</label>
+          <input class="form-input" type="text" value="SAN069_2">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación de la cualificación</label>
+          <input class="form-input" type="text" value="Atención sanitaria a múltiples víctimas y catástrofes">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Familia profesional</label>
+          <select class="form-select"><option selected>Sanidad</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nivel</label>
+          <select class="form-select"><option>Nivel 1</option><option selected>Nivel 2</option><option>Nivel 3</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-editar-uc')" style="color:#DC2626">Desvincular UC</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-editar-uc')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-editar-uc')">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Vincular Certificado de Profesionalidad -->
+<div class="modal-overlay" id="modal-vincular-cert">
+  <div class="modal" style="width:520px">
+    <div class="modal-head">
+      <span class="modal-title">Vincular Certificado de Profesionalidad</span>
+      <button class="modal-close" onclick="closeModal('modal-vincular-cert')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="max-width:140px">
+          <label class="form-label">Código certificado <span>*</span></label>
+          <input class="form-input" type="text" placeholder="SANT0208">
+          <span class="form-hint">Código oficial SEPE</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación del certificado <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Denominación oficial según el SEPE">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nivel del certificado</label>
+          <select class="form-select">
+            <option>Nivel 1</option><option selected>Nivel 2</option><option>Nivel 3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Módulo formativo equivalente</label>
+          <input class="form-input" type="text" placeholder="Ej: MF0069_2 · Soporte vital básico">
+          <span class="form-hint">Módulo del certificado que corresponde a esta UC</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tipo de correspondencia</label>
+        <select class="form-select">
+          <option>Correspondencia total — la UC cubre íntegramente el módulo formativo</option>
+          <option>Correspondencia parcial — la UC cubre parte del módulo formativo</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-vincular-cert')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-vincular-cert')">Vincular certificado</button>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>
