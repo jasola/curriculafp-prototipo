@@ -253,6 +253,42 @@ svg{display:block}a{text-decoration:none;color:inherit}
 .ce-row-cat:last-child{border-bottom:none}
 .ce-letra-cat{width:18px;height:18px;border-radius:3px;background:var(--border);color:var(--text-sub);font-size:0.65rem;font-weight:700;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
 .ce-text-cat{flex:1;font-size:0.78rem;color:var(--text-sub);line-height:1.4}
+
+/* ── BLOQUES / UT / CONTENIDOS ── */
+.origen-badge-mini{font-size:0.62rem;font-weight:700;padding:1px 5px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.ob-rd-mini{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.ob-ca-mini{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
+.ob-centro-mini{background:#F7F4F0;color:#78716C;border:1px solid #D4CEC7}
+.ob-rd-dot{background:#1D4ED8}
+
+.cont-mod-panel{}
+.bloque-exp{border:1px solid var(--border);border-radius:8px;margin-bottom:0.5rem;overflow:hidden;background:var(--bg-white)}
+.bloque-hd{display:flex;align-items:center;gap:0.625rem;padding:0.625rem 0.875rem;cursor:pointer;transition:background 0.15s;user-select:none}
+.bloque-hd:hover{background:#FAFAF9}
+.bloque-chevron{font-size:9px;color:var(--text-muted);transition:transform 0.18s;flex-shrink:0}
+.bloque-exp.open .bloque-chevron{transform:rotate(90deg)}
+.bloque-num{min-width:28px;height:22px;border-radius:4px;background:var(--brand-light);color:var(--brand);font-size:0.68rem;font-weight:700;display:grid;place-items:center;flex-shrink:0;padding:0 4px}
+.bloque-name{flex:1;font-size:0.83rem;font-weight:600;color:var(--text-main)}
+.bloque-count{font-size:0.7rem;color:var(--text-muted);white-space:nowrap}
+.bloque-actions{display:flex;gap:4px;flex-shrink:0}
+.bloque-body{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:0.75rem 0.875rem}
+.bloque-exp.open .bloque-body{display:block}
+
+.ut-exp{border:1px solid var(--border);border-radius:6px;margin-bottom:0.375rem;overflow:hidden;background:var(--bg-white)}
+.ut-hd{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.75rem;cursor:pointer;transition:background 0.12s;user-select:none}
+.ut-hd:hover{background:#FAFAF9}
+.ut-chevron{font-size:9px;color:var(--text-muted);transition:transform 0.15s;flex-shrink:0}
+.ut-exp.open .ut-chevron{transform:rotate(90deg)}
+.ut-num{font-size:0.68rem;font-weight:700;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:1px 6px;flex-shrink:0;white-space:nowrap}
+.ut-name{flex:1;font-size:0.8rem;font-weight:500;color:var(--text-sub)}
+.ut-actions{display:flex;gap:4px;flex-shrink:0}
+.ut-body{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:0.5rem 0.875rem 0.5rem 2rem}
+.ut-exp.open .ut-body{display:block}
+
+.cont-row{display:flex;align-items:center;gap:0.5rem;padding:4px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+.cont-row:last-child{border-bottom:none}
+.cont-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.cont-item-text{flex:1;font-size:0.78rem;color:var(--text-sub)}
 .btn-add-inline{background:none;border:none;color:var(--brand);font-size:0.75rem;font-weight:600;cursor:pointer;padding:4px 0;display:inline-flex;align-items:center;gap:4px;font-family:'Inter',sans-serif}
 .btn-add-inline:hover{text-decoration:underline}
 
@@ -599,6 +635,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
         <div class="tab active" onclick="switchTab('td-ficha',this)">Ficha normativa</div>
         <div class="tab" onclick="switchTab('td-competencias',this)">Competencias profesionales</div>
         <div class="tab" onclick="switchTab('td-modulos',this)">Módulos profesionales</div>
+        <div class="tab" onclick="switchTab('td-contenidos',this)">Contenidos</div>
         <div class="tab" onclick="switchTab('td-centros',this)">Centros implantados</div>
       </div>
 
@@ -886,13 +923,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     
                   </div>
                   <div class="ra-exp-body">
-                    <div class="cont-section">
-                      <div class="mini-label">Contenidos básicos</div>
-                      <span class="cont-tag">Valoración inicial del paciente</span>
-                      <span class="cont-tag">Escala de Glasgow</span>
-                      <span class="cont-tag">Signos vitales</span>
-                      <span class="cont-tag">Triángulo de evaluación pediátrica</span>
-                    </div>
                     <div class="mini-label">Criterios de evaluación</div>
                     <div class="ce-list">
                       <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han identificado los signos de compromiso vital en el adulto y en el niño.</div></div>
@@ -912,13 +942,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     
                   </div>
                   <div class="ra-exp-body">
-                    <div class="cont-section">
-                      <div class="mini-label">Contenidos básicos</div>
-                      <span class="cont-tag">RCP básica adulto y pediátrico</span>
-                      <span class="cont-tag">DESA / DEA</span>
-                      <span class="cont-tag">Obstrucción vía aérea</span>
-                      <span class="cont-tag">Hemorragias y heridas</span>
-                    </div>
                     <div class="mini-label">Criterios de evaluación</div>
                     <div class="ce-list">
                       <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han descrito las técnicas de SVB en adultos y niños según protocolos vigentes.</div></div>
@@ -939,12 +962,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     
                   </div>
                   <div class="ra-exp-body">
-                    <div class="cont-section">
-                      <div class="mini-label">Contenidos básicos</div>
-                      <span class="cont-tag">Sistemas de triage START y SALT</span>
-                      <span class="cont-tag">Categorías de gravedad</span>
-                      <span class="cont-tag">Tarjetas de triage</span>
-                    </div>
                     <div class="mini-label">Criterios de evaluación</div>
                     <div class="ce-list">
                       <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han descrito los criterios y las categorías de clasificación de víctimas en catástrofes.</div></div>
@@ -981,14 +998,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     
                   </div>
                   <div class="ra-exp-body">
-                    <div class="cont-section">
-                      <div class="mini-label">Contenidos básicos</div>
-                      <span class="cont-tag">Algoritmo SVA adulto y pediátrico</span>
-                      <span class="cont-tag">Vía aérea avanzada</span>
-                      <span class="cont-tag">Monitor-desfibrilador</span>
-                      <span class="cont-tag">Canalización venosa</span>
-                      <span class="cont-tag">Fármacos en PCR</span>
-                    </div>
                     <div class="mini-label">Criterios de evaluación</div>
                     <div class="ce-list">
                       <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se ha identificado el material de emergencias y sus funciones.</div></div>
@@ -1013,13 +1022,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     
                   </div>
                   <div class="ra-exp-body">
-                    <div class="cont-section">
-                      <div class="mini-label">Contenidos básicos</div>
-                      <span class="cont-tag">Fases del parto</span>
-                      <span class="cont-tag">Complicaciones obstétricas</span>
-                      <span class="cont-tag">Atención al recién nacido</span>
-                      <span class="cont-tag">Traslado materno-neonatal</span>
-                    </div>
                     <div class="mini-label">Criterios de evaluación</div>
                     <div class="ce-list">
                       <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han descrito las fases del parto y las complicaciones más frecuentes.</div></div>
@@ -1038,12 +1040,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
                     
                   </div>
                   <div class="ra-exp-body">
-                    <div class="cont-section">
-                      <div class="mini-label">Contenidos básicos</div>
-                      <span class="cont-tag">Traumatismos graves</span>
-                      <span class="cont-tag">Inmovilización traumática</span>
-                      <span class="cont-tag">Hemostasia en PCR traumática</span>
-                    </div>
                     <div class="mini-label">Criterios de evaluación</div>
                     <div class="ce-list">
                       <div class="ce-row-cat"><div class="ce-letra-cat">a</div><div class="ce-text-cat">Se han identificado las lesiones traumáticas que requieren atención especial.</div></div>
@@ -1191,6 +1187,217 @@ svg{display:block}a{text-decoration:none;color:inherit}
       </div><!-- /td-modulos -->
 
       <!-- CENTROS IMPLANTADOS -->
+
+      <div id="td-contenidos" class="tab-content">
+        <div class="sc">
+          <div class="sc-head">
+            <span class="sc-title">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>
+              Contenidos básicos · Plantilla troncal estatal
+            </span>
+            <div style="display:flex;gap:6px">
+              <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-nuevo-bloque')">+ Añadir bloque</button>
+              <button class="tb-btn tb-ghost" style="font-size:0.75rem" onclick="openModal('modal-nuevo-contenido-suelto')">+ Añadir contenido suelto</button>
+            </div>
+          </div>
+          <div class="sc-body">
+
+            <div class="alert-box alert-info" style="margin-bottom:1rem">
+              <div class="alert-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <div><div class="alert-text">Los contenidos se organizan opcionalmente en <strong>bloques</strong> y <strong>unidades de trabajo</strong> según la normativa del RD del título. Un contenido puede existir sin bloque ni UT. Los contenidos heredados del RD se muestran con el badge <span class="origen-badge-mini ob-rd-mini">RD</span>. Solo el Superadmin puede editarlos.</div></div>
+            </div>
+
+            <!-- MÓDULO SELECTOR -->
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px">
+              <span style="font-size:12px;font-weight:600;color:var(--text-sub)">Viendo contenidos del módulo:</span>
+              <select class="form-select" style="max-width:320px;font-size:12px" onchange="switchModContenidos(this.value)">
+                <option value="0056">0056 · Atención sanitaria especial en situaciones de emergencia</option>
+                <option value="0055">0055 · Atención sanitaria inicial en situaciones de emergencia</option>
+                <option value="0054">0054 · Dotación sanitaria</option>
+                <option value="0061">0061 · Formación y orientación laboral</option>
+                <option value="0053">0053 · Logística sanitaria en emergencias</option>
+                <option value="0052">0052 · Mantenimiento mecánico preventivo del vehículo</option>
+                <option value="0057">0057 · Evacuación y traslado de pacientes</option>
+              </select>
+            </div>
+
+            <!-- CONTENIDOS MÓDULO 0056 -->
+            <div id="cont-mod-0056" class="cont-mod-panel">
+
+              <!-- BLOQUE 1 -->
+              <div class="bloque-exp" id="blq-0056-1">
+                <div class="bloque-hd" onclick="toggleBloque('blq-0056-1')">
+                  <span class="bloque-chevron">▶</span>
+                  <div class="bloque-num">B1</div>
+                  <div class="bloque-name">Aplica técnicas de soporte vital avanzado</div>
+                  <span class="origen-badge-mini ob-rd-mini">RD</span>
+                  <span class="bloque-count">3 UT · 12 contenidos</span>
+                  <div class="bloque-actions" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" onclick="openModal('modal-nueva-ut')">+ UT</button>
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-contenido')">+ Contenido</button>
+                  </div>
+                </div>
+                <div class="bloque-body">
+
+                  <!-- UT 1.1 -->
+                  <div class="ut-exp" id="ut-0056-1-1">
+                    <div class="ut-hd" onclick="toggleUT('ut-0056-1-1')">
+                      <span class="ut-chevron">▶</span>
+                      <div class="ut-num">UT 1.1</div>
+                      <div class="ut-name">Material de emergencias. Reconocimiento, uso y manejo</div>
+                      <span class="origen-badge-mini ob-rd-mini">RD</span>
+                      <div class="ut-actions" onclick="event.stopPropagation()">
+                        <button class="btn-add-inline" onclick="openModal('modal-nuevo-contenido')">+ Contenido</button>
+                      </div>
+                    </div>
+                    <div class="ut-body">
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Material de inmovilización</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Material de ventilación y oxigenoterapia</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Material de control circulatorio</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Material de curas</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Maletín asistencial</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Maletín asistencial pediátrico</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Equipos electromédicos</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Equipos de monitorización</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Equipo de registro electrocardiográfico</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                    </div>
+                  </div>
+
+                  <!-- UT 1.2 -->
+                  <div class="ut-exp" id="ut-0056-1-2">
+                    <div class="ut-hd" onclick="toggleUT('ut-0056-1-2')">
+                      <span class="ut-chevron">▶</span>
+                      <div class="ut-num">UT 1.2</div>
+                      <div class="ut-name">Técnicas de manejo de la vía aérea y ventilación</div>
+                      <span class="origen-badge-mini ob-rd-mini">RD</span>
+                      <div class="ut-actions" onclick="event.stopPropagation()">
+                        <button class="btn-add-inline" onclick="openModal('modal-nuevo-contenido')">+ Contenido</button>
+                      </div>
+                    </div>
+                    <div class="ut-body">
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Aislamiento de la vía aérea</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Ventilación mecánica</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Administración de oxígeno medicinal. Indicaciones. Dispositivos de consumo. Pulsioximetría</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                    </div>
+                  </div>
+
+                  <!-- UT 1.3 -->
+                  <div class="ut-exp" id="ut-0056-1-3">
+                    <div class="ut-hd" onclick="toggleUT('ut-0056-1-3')">
+                      <span class="ut-chevron">▶</span>
+                      <div class="ut-num">UT 1.3</div>
+                      <div class="ut-name">Técnicas de soporte circulatorio</div>
+                      <span class="origen-badge-mini ob-rd-mini">RD</span>
+                      <div class="ut-actions" onclick="event.stopPropagation()">
+                        <button class="btn-add-inline" onclick="openModal('modal-nuevo-contenido')">+ Contenido</button>
+                      </div>
+                    </div>
+                    <div class="ut-body">
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Técnicas de Hemostasia</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Técnicas de canalización venosa</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Registro electrocardiográfico</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Técnicas de soporte vital avanzado en pediatría en lactantes y niños</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Secuencia de actuación en RCP avanzada</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div><!-- /blq-0056-1 -->
+
+              <!-- BLOQUE 2 -->
+              <div class="bloque-exp" id="blq-0056-2">
+                <div class="bloque-hd" onclick="toggleBloque('blq-0056-2')">
+                  <span class="bloque-chevron">▶</span>
+                  <div class="bloque-num">B2</div>
+                  <div class="bloque-name">Administración de medicamentos de emergencia</div>
+                  <span class="origen-badge-mini ob-rd-mini">RD</span>
+                  <span class="bloque-count">2 UT · 8 contenidos</span>
+                  <div class="bloque-actions" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" onclick="openModal('modal-nueva-ut')">+ UT</button>
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-contenido')">+ Contenido</button>
+                  </div>
+                </div>
+                <div class="bloque-body">
+
+                  <div class="ut-exp" id="ut-0056-2-1">
+                    <div class="ut-hd" onclick="toggleUT('ut-0056-2-1')">
+                      <span class="ut-chevron">▶</span>
+                      <div class="ut-num">UT 2.1</div>
+                      <div class="ut-name">Fármacos en emergencias</div>
+                      <span class="origen-badge-mini ob-rd-mini">RD</span>
+                      <div class="ut-actions" onclick="event.stopPropagation()">
+                        <button class="btn-add-inline" onclick="openModal('modal-nuevo-contenido')">+ Contenido</button>
+                      </div>
+                    </div>
+                    <div class="ut-body">
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Fármacos más utilizados en emergencias. RCP. Indicaciones, efectos adversos e interacciones</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Vías de administración: oral, respiratoria, parenteral, tópica y rectal</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Reconocimiento y uso de material</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Precauciones para una administración segura: medicamento, dosis, vía</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                    </div>
+                  </div>
+
+                  <div class="ut-exp" id="ut-0056-2-2">
+                    <div class="ut-hd" onclick="toggleUT('ut-0056-2-2')">
+                      <span class="ut-chevron">▶</span>
+                      <div class="ut-num">UT 2.2</div>
+                      <div class="ut-name">Técnica de administración</div>
+                      <span class="origen-badge-mini ob-rd-mini">RD</span>
+                      <div class="ut-actions" onclick="event.stopPropagation()">
+                        <button class="btn-add-inline" onclick="openModal('modal-nuevo-contenido')">+ Contenido</button>
+                      </div>
+                    </div>
+                    <div class="ut-body">
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Preparación de la medicación</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                      <div class="cont-row"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text">Operaciones de administración de medicación sobre maniquís de entrenamiento</span><span class="origen-badge-mini ob-rd-mini">RD</span></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div><!-- /blq-0056-2 -->
+
+              <!-- CONTENIDO SUELTO (sin bloque) -->
+              <div class="bloque-exp" id="blq-0056-sueltos" style="border-style:dashed;opacity:0.7">
+                <div class="bloque-hd" onclick="toggleBloque('blq-0056-sueltos')">
+                  <span class="bloque-chevron">▶</span>
+                  <div class="bloque-num" style="background:var(--bg);color:var(--text-muted);border:1px solid var(--border)">—</div>
+                  <div class="bloque-name" style="color:var(--text-muted);font-style:italic">Contenidos sin bloque asignado</div>
+                  <span class="bloque-count">0 contenidos</span>
+                  <div class="bloque-actions" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" onclick="openModal('modal-nuevo-contenido-suelto')">+ Contenido suelto</button>
+                  </div>
+                </div>
+                <div class="bloque-body">
+                  <div style="font-size:0.78rem;color:var(--text-muted);padding:8px 0">No hay contenidos sueltos en este módulo.</div>
+                </div>
+              </div>
+
+            </div><!-- /cont-mod-0056 -->
+
+            <!-- Otros módulos - placeholder -->
+            <div id="cont-mod-0055" class="cont-mod-panel" style="display:none">
+              <div style="color:var(--text-muted);font-size:0.82rem;padding:1rem;text-align:center">Contenidos del módulo 0055 — pendiente de expandir en demo.</div>
+            </div>
+            <div id="cont-mod-0054" class="cont-mod-panel" style="display:none">
+              <div style="color:var(--text-muted);font-size:0.82rem;padding:1rem;text-align:center">Contenidos del módulo 0054 — pendiente de expandir en demo.</div>
+            </div>
+            <div id="cont-mod-0061" class="cont-mod-panel" style="display:none">
+              <div style="color:var(--text-muted);font-size:0.82rem;padding:1rem;text-align:center">Contenidos del módulo 0061 — pendiente de expandir en demo.</div>
+            </div>
+            <div id="cont-mod-0053" class="cont-mod-panel" style="display:none">
+              <div style="color:var(--text-muted);font-size:0.82rem;padding:1rem;text-align:center">Contenidos del módulo 0053 — pendiente de expandir en demo.</div>
+            </div>
+            <div id="cont-mod-0052" class="cont-mod-panel" style="display:none">
+              <div style="color:var(--text-muted);font-size:0.82rem;padding:1rem;text-align:center">Contenidos del módulo 0052 — pendiente de expandir en demo.</div>
+            </div>
+            <div id="cont-mod-0057" class="cont-mod-panel" style="display:none">
+              <div style="color:var(--text-muted);font-size:0.82rem;padding:1rem;text-align:center">Contenidos del módulo 0057 — pendiente de expandir en demo.</div>
+            </div>
+
+          </div>
+        </div>
+      </div><!-- /td-contenidos -->
+
       <div id="td-centros" class="tab-content">
         <div class="sc">
           <div class="sc-head">
@@ -1509,6 +1716,14 @@ document.addEventListener('DOMContentLoaded', function(){
   const ci = document.getElementById('cont-input');
   if(ci) ci.addEventListener('keydown', function(e){ if(e.key==='Enter'){e.preventDefault();addContenido();} });
 });
+
+function toggleBloque(id){document.getElementById(id).classList.toggle('open')}
+function toggleUT(id){document.getElementById(id).classList.toggle('open')}
+function switchModContenidos(modCode){
+  document.querySelectorAll('.cont-mod-panel').forEach(p=>p.style.display='none');
+  var panel=document.getElementById('cont-mod-'+modCode);
+  if(panel) panel.style.display='block';
+}
 function toggleCPCat(id){document.getElementById(id).classList.toggle('open')}
 function toggleModCat(id){document.getElementById(id).classList.toggle('open')}
 function addContenido(){
@@ -1710,6 +1925,179 @@ document.addEventListener('keydown',function(e){
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="closeModal('modal-vincular-cert')">Cancelar</button>
       <button class="btn btn-primary" onclick="closeModal('modal-vincular-cert')">Vincular certificado</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL: Nuevo bloque didáctico -->
+<div class="modal-overlay" id="modal-nuevo-bloque">
+  <div class="modal" style="width:500px">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo bloque didáctico</span>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-bloque')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="max-width:90px">
+          <label class="form-label">Número <span>*</span></label>
+          <input class="form-input" type="text" placeholder="B3">
+          <span class="form-hint">Ej: B3, B4...</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación del bloque <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Nombre del bloque según la normativa">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Módulo al que pertenece <span>*</span></label>
+        <select class="form-select">
+          <option>0056 · Atención sanitaria especial</option>
+          <option>0055 · Atención sanitaria inicial</option>
+          <option>0054 · Dotación sanitaria</option>
+          <option>0061 · Formación y orientación laboral</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="rd">RD Estatal — heredado del Real Decreto del título</option>
+          <option value="ca">Adaptación CA — introducido por la normativa autonómica</option>
+          <option value="centro">Libre disposición — definido por el centro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción / notas</label>
+        <textarea class="form-textarea" rows="2" placeholder="Descripción adicional o referencia al texto normativo..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nuevo-bloque')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-bloque')">Crear bloque</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nueva unidad de trabajo -->
+<div class="modal-overlay" id="modal-nueva-ut">
+  <div class="modal" style="width:500px">
+    <div class="modal-head">
+      <span class="modal-title">Nueva unidad de trabajo</span>
+      <button class="modal-close" onclick="closeModal('modal-nueva-ut')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="max-width:90px">
+          <label class="form-label">Código UT <span>*</span></label>
+          <input class="form-input" type="text" placeholder="UT 1.4">
+          <span class="form-hint">Ej: UT 1.4</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Nombre de la unidad de trabajo">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Bloque al que pertenece <span>*</span></label>
+        <select class="form-select">
+          <option>B1 · Aplica técnicas de soporte vital avanzado</option>
+          <option>B2 · Administración de medicamentos de emergencia</option>
+          <option>— Sin bloque (UT suelta) —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="rd">RD Estatal</option>
+          <option value="ca">Adaptación CA</option>
+          <option value="centro">Libre disposición — Centro</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nueva-ut')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-ut')">Crear UT</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo contenido (dentro de bloque/UT) -->
+<div class="modal-overlay" id="modal-nuevo-contenido">
+  <div class="modal" style="width:500px">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo contenido</span>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-contenido')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Texto del contenido <span>*</span></label>
+        <textarea class="form-textarea" rows="2" placeholder="Ej: Técnicas de hemostasia y control de hemorragias externas"></textarea>
+        <span class="form-hint">Redactar según la formulación de la normativa</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ubicación en la jerarquía</label>
+        <select class="form-select">
+          <option>B1 · UT 1.1 · Material de emergencias</option>
+          <option>B1 · UT 1.2 · Técnicas de vía aérea</option>
+          <option>B1 · UT 1.3 · Técnicas de soporte circulatorio</option>
+          <option>B1 · Sin UT (directamente en el bloque)</option>
+          <option>B2 · UT 2.1 · Fármacos en emergencias</option>
+          <option>B2 · UT 2.2 · Técnica de administración</option>
+          <option>Sin bloque ni UT (contenido suelto)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="rd">RD Estatal</option>
+          <option value="ca">Adaptación CA</option>
+          <option value="centro">Libre disposición — Centro</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nuevo-contenido')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-contenido')">Añadir contenido</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo contenido suelto -->
+<div class="modal-overlay" id="modal-nuevo-contenido-suelto">
+  <div class="modal" style="width:500px">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo contenido suelto</span>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-contenido-suelto')"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="alert-box alert-info" style="margin-bottom:0">
+        <div class="alert-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div><div class="alert-text">Este contenido no se asignará a ningún bloque ni unidad de trabajo. Puede reasignarse posteriormente desde los Bloques didácticos.</div></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Texto del contenido <span>*</span></label>
+        <textarea class="form-textarea" rows="2" placeholder="Ej: Aspectos éticos y legales de la intervención sanitaria en emergencias"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Módulo <span>*</span></label>
+        <select class="form-select">
+          <option>0056 · Atención sanitaria especial</option>
+          <option>0055 · Atención sanitaria inicial</option>
+          <option>0054 · Dotación sanitaria</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="rd">RD Estatal</option>
+          <option value="ca">Adaptación CA</option>
+          <option value="centro">Libre disposición — Centro</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-nuevo-contenido-suelto')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-contenido-suelto')">Añadir contenido</button>
     </div>
   </div>
 </div>
