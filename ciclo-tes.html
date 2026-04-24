@@ -409,6 +409,43 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 .chk{color:#16A34A;font-weight:700;}
 .mis{color:#DC2626;font-weight:700;}
 
+/* ── RESPONSABLES PROGRAMACIÓN ── */
+.resp-prog-list{display:flex;flex-direction:column;gap:4px}
+.resp-item{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--bg);border:1px solid var(--border);border-radius:5px}
+.resp-avatar{width:28px;height:28px;border-radius:50%;background:var(--garnet);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:700;flex-shrink:0}
+.resp-name{font-size:12.5px;font-weight:500;color:var(--text-dark)}
+.resp-esp{font-size:11px;color:var(--text-soft)}
+.resp-info{flex:1}
+
+/* ── BLOQUES DIDÁCTICOS TES ── */
+.bloque-exp-tes{border:1px solid var(--border);border-radius:8px;margin-bottom:6px;overflow:hidden;background:var(--white)}
+.bloque-exp-tes.open .bloque-chevron{transform:rotate(90deg)}
+.bloque-hd-tes{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;transition:background 0.15s;user-select:none}
+.bloque-hd-tes:hover{background:#FAFAF9}
+.bloque-num-tes{min-width:26px;height:20px;border-radius:4px;background:var(--garnet-pale);color:var(--garnet);font-size:10.5px;font-weight:700;display:grid;place-items:center;padding:0 4px;flex-shrink:0}
+.bloque-name-tes{flex:1;font-size:12.5px;font-weight:600;color:var(--text-dark)}
+.bloque-body-tes{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:8px 12px}
+.bloque-exp-tes.open .bloque-body-tes{display:block}
+.bloque-kpis{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.blq-kpi{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;background:var(--bg);border:1px solid var(--border);color:var(--text-soft);white-space:nowrap}
+.blq-kpi.sa-ok{background:#F0FDF4;color:#166534;border-color:#BBF7D0}
+.blq-kpi.ra-ref{background:#EFF6FF;color:#1D4ED8;border-color:#BFDBFE}
+.ut-tes-exp{border:1px solid var(--border);border-radius:5px;margin-bottom:4px;overflow:hidden;background:var(--white)}
+.ut-tes-hd{display:flex;align-items:center;gap:6px;padding:6px 10px;cursor:pointer;transition:background 0.12s;user-select:none}
+.ut-tes-hd:hover{background:#FAFAF9}
+.ut-tes-exp.open .ut-body-tes{display:block}
+.ut-body-tes{display:none;border-top:1px solid var(--border);background:#FAFAF9;padding:4px 10px 4px 24px}
+.cont-row-tes{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+.cont-row-tes:last-child{border-bottom:none}
+.cont-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.ob-rd-dot{background:#1D4ED8}
+.cont-sa-ref{font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;white-space:nowrap;flex-shrink:0}
+.cont-ra-ref{font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE;white-space:nowrap;flex-shrink:0}
+.origen-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;flex-shrink:0;white-space:nowrap}
+.ob-rd{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.ob-ca{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
+.ob-centro{background:#F7F4F0;color:#78716C;border:1px solid #D4CEC7}
+
 </style>
 </head>
 <body>
@@ -632,7 +669,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
       <div class="curso-label">1.er curso<span class="cl-line"></span><span class="cl-count">6 módulos · 1.188 h</span></div>
 
       <!-- ════ MÓDULO 0056 — COMPLETO ════ -->
-      <div class="mod-block" id="mod-0056">
+      <div class="mod-block open" id="mod-0056">
         <div class="mod-header" onclick="toggleMod(&#39;mod-0056&#39;)">
           <div class="mod-chevron">▶</div>
           <span class="mod-code">0056</span>
@@ -652,6 +689,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-tabs" id="modtabs-0056">
             <div class="mod-tab active" onclick="switchModTab(&#39;0056&#39;,&#39;norm&#39;,this)">Estructura normativa</div>
             <div class="mod-tab" onclick="switchModTab(&#39;0056&#39;,&#39;prog&#39;,this)">Programación del profesor</div>
+            <div class="mod-tab" onclick="switchModTab(&#39;0056&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div>
           </div>
 
           <!-- NORMATIVA 0056 -->
@@ -667,21 +705,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                   <div class="ra-peso">Peso: <input value="40" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
-                  <div class="cont-zone">
-                    <div class="zone-label">Contenidos básicos normativos</div>
-                    <span class="cont-tag">Concepto y objetivos del SVA</span>
-                    <span class="cont-tag">Cadena de supervivencia</span>
-                    <span class="cont-tag">Algoritmo ABCDE</span>
-                    <span class="cont-tag">Material de emergencias</span>
-                    <span class="cont-tag">Manejo avanzado de vía aérea</span>
-                    <span class="cont-tag">Ventilación mecánica y oxigenoterapia</span>
-                    <span class="cont-tag">Pulsioximetría</span>
-                    <span class="cont-tag">Canalización venosa</span>
-                    <span class="cont-tag">Registro ECG</span>
-                    <span class="cont-tag">RCP de alta calidad</span>
-                    <span class="cont-tag">Monitor-desfibrilador</span>
-                    <span class="cont-tag">Fármacos en PCR (función de apoyo)</span>
-                  </div>
                   <div class="ce-zone">
                     <div class="zone-label">Criterios de evaluación</div>
                     <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Se ha identificado el material de emergencias.</div><div class="ce-peso"><input value="8"><span>%</span></div></div>
@@ -692,7 +715,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                     <div class="ce-row"><div class="ce-letra">f</div><div class="ce-text">Se ha seleccionado el material necesario para la ventilación mecánica.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">g</div><div class="ce-text">Se ha determinado la saturación de oxígeno del paciente por pulsioximetría.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">h</div><div class="ce-text">Se ha colaborado en la canalización de la vía venosa.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">i</div><div class="ce-text">Se ha seleccionado y preparado el material para la realización del registro electrocardiográfico.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
+                    <div class="ce-row"><div class="ce-letra">i</div><div class="ce-text">Se ha seleccionado y preparado el material para el registro electrocardiográfico.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
                     <div class="ce-row"><div class="ce-letra">j</div><div class="ce-text">Se ha apoyado al médico o enfermero en las técnicas de SVA en pediatría.</div><div class="ce-peso"><input value="8"><span>%</span></div></div>
                     <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-ce-tes')">+ Añadir criterio de evaluación</button></div>
                   </div>
@@ -708,14 +731,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                   <div class="ra-peso">Peso: <input value="30" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
-                  <div class="cont-zone">
-                    <div class="zone-label">Contenidos básicos normativos</div>
-                    <span class="cont-tag">Fases del parto</span>
-                    <span class="cont-tag">Complicaciones obstétricas frecuentes</span>
-                    <span class="cont-tag">Material para atención del parto</span>
-                    <span class="cont-tag">Protocolo de atención al recién nacido</span>
-                    <span class="cont-tag">Traslado materno-neonatal</span>
-                  </div>
                   <div class="ce-zone">
                     <div class="zone-label">Criterios de evaluación</div>
                     <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Se han descrito las fases del parto y las complicaciones más frecuentes.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
@@ -736,13 +751,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                   <div class="ra-peso">Peso: <input value="30" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
-                  <div class="cont-zone">
-                    <div class="zone-label">Contenidos básicos normativos</div>
-                    <span class="cont-tag">Traumatismos graves: clasificación</span>
-                    <span class="cont-tag">Inmovilización en paciente traumático</span>
-                    <span class="cont-tag">Hemostasia en PCR traumática</span>
-                    <span class="cont-tag">Traslado en situaciones especiales</span>
-                  </div>
                   <div class="ce-zone">
                     <div class="zone-label">Criterios de evaluación</div>
                     <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Se han identificado las lesiones traumáticas que requieren atención especial.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
@@ -1174,7 +1182,160 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
               </div>
 
             </div>
-          </div><!-- /prog-0056 -->
+          </div>
+
+          <div id="bloques-0056" class="mod-tab-panel">
+            <div class="prog-zone">
+
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text-dark)">Bloques didácticos · Módulo 0056</div>
+                  <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Vista integrada: estructura normativa + programación. Se actualiza conforme se definen SA.</div>
+                </div>
+                <div style="display:flex;gap:6px">
+                  <button class="btn btn-secondary" style="font-size:11.5px" onclick="openModal('modal-nuevo-bloque-tes')">+ Bloque</button>
+                  <button class="btn btn-secondary" style="font-size:11.5px" onclick="openModal('modal-nueva-ut-tes')">+ UT</button>
+                  <button class="btn btn-secondary" style="font-size:11.5px" onclick="openModal('modal-nuevo-contenido-tes')">+ Contenido</button>
+                </div>
+              </div>
+
+              <div class="alert info" style="font-size:11.5px;margin-bottom:14px">
+                <span class="alert-icon">ℹ</span>
+                <span>Elementos con badge <span class="origen-badge ob-rd" style="font-size:9px;padding:1px 5px">RD Estatal</span> heredados del catálogo. Puedes eliminarlos o modificarlos bajo tu responsabilidad — los cambios solo afectan a este ciclo en este centro.</span>
+              </div>
+
+              <!-- BLOQUE 1 -->
+              <div class="bloque-exp-tes open" id="blq-tes-0056-1">
+                <div class="bloque-hd-tes" onclick="toggleBloquesTes('blq-tes-0056-1')">
+                  <span class="bloque-chevron" style="font-size:9px;color:var(--text-soft);transition:transform 0.18s;flex-shrink:0">▶</span>
+                  <div class="bloque-num-tes">B1</div>
+                  <div class="bloque-name-tes">Aplica técnicas de soporte vital avanzado</div>
+                  <span class="origen-badge ob-rd" style="font-size:9px;padding:1px 5px">RD Estatal</span>
+                  <div class="bloque-kpis">
+                    <span class="blq-kpi">3 UT</span>
+                    <span class="blq-kpi">17 contenidos</span>
+                    <span class="blq-kpi sa-ok">SA-01 · 14 ses.</span>
+                    <span class="blq-kpi ra-ref">RA1 · RA2</span>
+                  </div>
+                  <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nueva-ut-tes')">+ UT</button>
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-contenido-tes')">+ Contenido</button>
+                    <button class="btn-add-inline" style="font-size:10.5px;color:#DC2626">Eliminar</button>
+                  </div>
+                </div>
+                <div class="bloque-body-tes">
+                  <div class="ut-tes-exp open" id="ut-tes-0056-1-1">
+                    <div class="ut-tes-hd" onclick="toggleUTTes('ut-tes-0056-1-1')">
+                      <span style="font-size:9px;color:var(--text-muted);flex-shrink:0;transition:transform 0.15s">▶</span>
+                      <div class="ut-num">UT 1.1</div>
+                      <div class="ut-name" style="flex:1">Material de emergencias. Reconocimiento, uso y manejo</div>
+                      <span class="origen-badge ob-rd" style="font-size:9px;padding:1px 5px">RD</span>
+                      <div class="bloque-kpis" style="margin-left:8px">
+                        <span class="blq-kpi sa-ok">SA-01</span>
+                        <span class="blq-kpi">3 ses.</span>
+                        <span class="blq-kpi ra-ref">RA1-a,b,c,d</span>
+                      </div>
+                      <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                        <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-contenido-tes')">+ Contenido</button>
+                        <button class="btn-add-inline" style="font-size:10.5px;color:#DC2626">Eliminar</button>
+                      </div>
+                    </div>
+                    <div class="ut-body-tes">
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Material de inmovilización</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref">SA-01 · ses.1</span><span class="cont-ra-ref">RA1-a</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Material de ventilación y oxigenoterapia</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref">SA-01 · ses.1</span><span class="cont-ra-ref">RA1-a</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Material de control circulatorio</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref">SA-01 · ses.2</span><span class="cont-ra-ref">RA1-b</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Equipos electromédicos</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref" style="background:#FEF9C3;color:#854D0E;border-color:#FDE047">Sin SA</span><span class="cont-ra-ref">RA1-b</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Equipos de monitorización</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref" style="background:#FEF9C3;color:#854D0E;border-color:#FDE047">Sin SA</span><span class="cont-ra-ref">RA1-d</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                    </div>
+                  </div>
+                  <div class="ut-tes-exp" id="ut-tes-0056-1-2">
+                    <div class="ut-tes-hd" onclick="toggleUTTes('ut-tes-0056-1-2')">
+                      <span style="font-size:9px;color:var(--text-muted);flex-shrink:0">▶</span>
+                      <div class="ut-num">UT 1.2</div>
+                      <div class="ut-name" style="flex:1">Técnicas de manejo de la vía aérea y ventilación</div>
+                      <span class="origen-badge ob-rd" style="font-size:9px;padding:1px 5px">RD</span>
+                      <div class="bloque-kpis" style="margin-left:8px">
+                        <span class="blq-kpi sa-ok">SA-01</span>
+                        <span class="blq-kpi">5 ses.</span>
+                        <span class="blq-kpi ra-ref">RA1-e,f,g</span>
+                      </div>
+                      <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                        <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-contenido-tes')">+ Contenido</button>
+                        <button class="btn-add-inline" style="font-size:10.5px;color:#DC2626">Eliminar</button>
+                      </div>
+                    </div>
+                    <div class="ut-body-tes">
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Aislamiento de la vía aérea</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref">SA-01 · ses.4</span><span class="cont-ra-ref">RA1-e</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Ventilación mecánica</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref">SA-01 · ses.4</span><span class="cont-ra-ref">RA1-f</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Pulsioximetría y administración de O₂</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref">SA-01 · ses.5</span><span class="cont-ra-ref">RA1-g</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                    </div>
+                  </div>
+                  <div class="ut-tes-exp" id="ut-tes-0056-1-3">
+                    <div class="ut-tes-hd" onclick="toggleUTTes('ut-tes-0056-1-3')">
+                      <span style="font-size:9px;color:var(--text-muted);flex-shrink:0">▶</span>
+                      <div class="ut-num">UT 1.3</div>
+                      <div class="ut-name" style="flex:1">Técnicas de soporte circulatorio</div>
+                      <span class="origen-badge ob-rd" style="font-size:9px;padding:1px 5px">RD</span>
+                      <div class="bloque-kpis" style="margin-left:8px">
+                        <span class="blq-kpi" style="background:#FEF9C3;color:#854D0E;border-color:#FDE047">Sin SA</span>
+                        <span class="blq-kpi">0 ses.</span>
+                        <span class="blq-kpi ra-ref">RA1-h,i,j</span>
+                      </div>
+                      <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                        <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-contenido-tes')">+ Contenido</button>
+                        <button class="btn-add-inline" style="font-size:10.5px;color:#DC2626">Eliminar</button>
+                      </div>
+                    </div>
+                    <div class="ut-body-tes">
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Técnicas de Hemostasia</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref" style="background:#FEF9C3;color:#854D0E;border-color:#FDE047">Sin SA</span><span class="cont-ra-ref">RA1-h</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Técnicas de canalización venosa</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref" style="background:#FEF9C3;color:#854D0E;border-color:#FDE047">Sin SA</span><span class="cont-ra-ref">RA1-i</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                      <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">RCP avanzada en pediatría</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span><span class="cont-sa-ref" style="background:#FEF9C3;color:#854D0E;border-color:#FDE047">Sin SA</span><span class="cont-ra-ref">RA1-j</span><button class="btn-add-inline" style="font-size:10px;color:#DC2626;padding:0 4px">✕</button></div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /blq-tes-0056-1 -->
+
+              <!-- BLOQUE 2 -->
+              <div class="bloque-exp-tes" id="blq-tes-0056-2">
+                <div class="bloque-hd-tes" onclick="toggleBloquesTes('blq-tes-0056-2')">
+                  <span class="bloque-chevron" style="font-size:9px;color:var(--text-soft)">▶</span>
+                  <div class="bloque-num-tes">B2</div>
+                  <div class="bloque-name-tes">Administración de medicamentos de emergencia</div>
+                  <span class="origen-badge ob-rd" style="font-size:9px;padding:1px 5px">RD Estatal</span>
+                  <div class="bloque-kpis">
+                    <span class="blq-kpi">2 UT · 6 contenidos</span>
+                    <span class="blq-kpi" style="background:#FEF9C3;color:#854D0E;border-color:#FDE047">Sin SA</span>
+                    <span class="blq-kpi ra-ref">RA2</span>
+                  </div>
+                  <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nueva-ut-tes')">+ UT</button>
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-contenido-tes')">+ Contenido</button>
+                    <button class="btn-add-inline" style="font-size:10.5px;color:#DC2626">Eliminar</button>
+                  </div>
+                </div>
+                <div class="bloque-body-tes">
+                  <div style="font-size:11.5px;color:var(--text-soft);padding:8px 4px">Expande para ver UT y contenidos · <strong style="color:#854D0E">Sin SA programada aún</strong></div>
+                </div>
+              </div>
+
+              <!-- CONTENIDOS SUELTOS -->
+              <div class="bloque-exp-tes" id="blq-tes-sueltos" style="border-style:dashed;opacity:0.8">
+                <div class="bloque-hd-tes" onclick="toggleBloquesTes('blq-tes-sueltos')">
+                  <span style="font-size:9px;color:var(--text-muted)">▶</span>
+                  <div class="bloque-num-tes" style="background:var(--bg);color:var(--text-muted);border:1px solid var(--border)">—</div>
+                  <div class="bloque-name-tes" style="color:var(--text-muted);font-style:italic">Contenidos sin bloque asignado</div>
+                  <div class="bloque-kpis"><span class="blq-kpi">0 contenidos</span></div>
+                  <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-contenido-tes')">+ Contenido suelto</button>
+                  </div>
+                </div>
+                <div class="bloque-body-tes">
+                  <div style="font-size:11.5px;color:var(--text-soft);padding:6px 4px">No hay contenidos sueltos en este módulo.</div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /bloques-0056 -->
         </div>
       </div><!-- /mod-0056 -->
 
@@ -1191,7 +1352,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           </div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0055"><div class="mod-tab active" onclick="switchModTab(&#39;0055&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0055&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0055"><div class="mod-tab active" onclick="switchModTab(&#39;0055&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0055&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0055&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0055" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">RA, contenidos básicos y CE del módulo 0055 — pendiente de expandir.</div></div>
           <div id="prog-0055" class="mod-tab-panel"><div class="prog-zone"><div class="sa-empty"><div class="sa-empty-icon">📋</div><div class="sa-empty-title">Sin programación base definida</div><div class="sa-empty-text">El profesor responsable aún no ha creado SA/UD para este módulo.</div></div><button class="btn btn-primary btn-sm" onclick="openModal('modal-nueva-sa')">+ Nueva SA / UD</button></div></div>
         </div>
@@ -1204,7 +1365,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-meta"><div class="horas-indicator"><div class="hi-bar"><div class="hi-fill" style="width:0%"></div></div><span class="hi-text">0 / 231 h</span></div><span class="mod-esp">PT Proc. Sanitarios y Asistenciales</span><span class="mod-horas">231 h</span><span class="curso-pill cp-1">1.er curso</span></div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0057"><div class="mod-tab active" onclick="switchModTab(&#39;0057&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0057&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0057"><div class="mod-tab active" onclick="switchModTab(&#39;0057&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0057&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0057&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0057" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">Contenido normativo pendiente.</div></div>
           <div id="prog-0057" class="mod-tab-panel"><div class="prog-zone" style="color:var(--text-soft);font-size:12.5px;">Programación base pendiente.</div></div>
         </div>
@@ -1217,7 +1378,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-meta"><div class="horas-indicator"><div class="hi-bar"><div class="hi-fill" style="width:0%"></div></div><span class="hi-text">0 / 132 h</span></div><span class="mod-esp">PT Diagnóstico Clínico y Ortoprotésico</span><span class="mod-horas">132 h</span><span class="curso-pill cp-1">1.er curso</span></div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0054"><div class="mod-tab active" onclick="switchModTab(&#39;0054&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0054&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0054"><div class="mod-tab active" onclick="switchModTab(&#39;0054&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0054&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0054&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0054" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">Contenido normativo pendiente.</div></div>
           <div id="prog-0054" class="mod-tab-panel"><div class="prog-zone" style="color:var(--text-soft);font-size:12.5px;">Programación base pendiente.</div></div>
         </div>
@@ -1230,7 +1391,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-meta"><div class="horas-indicator"><div class="hi-bar"><div class="hi-fill" style="width:0%"></div></div><span class="hi-text">0 / 96 h</span></div><span class="mod-esp">Profesorado FOL</span><span class="mod-horas">96 h</span><span class="curso-pill cp-1">1.er curso</span></div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0061"><div class="mod-tab active" onclick="switchModTab(&#39;0061&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0061&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0061"><div class="mod-tab active" onclick="switchModTab(&#39;0061&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0061&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0061&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0061" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">Contenido normativo pendiente.</div></div>
           <div id="prog-0061" class="mod-tab-panel"><div class="prog-zone" style="color:var(--text-soft);font-size:12.5px;">Programación base pendiente.</div></div>
         </div>
@@ -1243,7 +1404,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-meta"><div class="horas-indicator"><div class="hi-bar"><div class="hi-fill" style="width:0%"></div></div><span class="hi-text">0 / 63 h</span></div><span class="mod-esp">Profesorado FOL</span><span class="mod-horas">63 h</span><span class="curso-pill cp-1">1.er curso</span></div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0062"><div class="mod-tab active" onclick="switchModTab(&#39;0062&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0062&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0062"><div class="mod-tab active" onclick="switchModTab(&#39;0062&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0062&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0062&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0062" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">Contenido normativo pendiente.</div></div>
           <div id="prog-0062" class="mod-tab-panel"><div class="prog-zone" style="color:var(--text-soft);font-size:12.5px;">Programación base pendiente.</div></div>
         </div>
@@ -1259,7 +1420,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-meta"><div class="horas-indicator"><div class="hi-bar"><div class="hi-fill" style="width:0%"></div></div><span class="hi-text">0 / 168 h</span></div><span class="mod-esp">PT Proc. Sanitarios y Asistenciales</span><span class="mod-horas">168 h</span><span class="curso-pill cp-2">2.º curso</span></div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0053"><div class="mod-tab active" onclick="switchModTab(&#39;0053&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0053&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0053"><div class="mod-tab active" onclick="switchModTab(&#39;0053&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0053&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0053&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0053" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">Contenido normativo pendiente.</div></div>
           <div id="prog-0053" class="mod-tab-panel"><div class="prog-zone" style="color:var(--text-soft);font-size:12.5px;">Programación base pendiente.</div></div>
         </div>
@@ -1272,7 +1433,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-meta"><div class="horas-indicator"><div class="hi-bar"><div class="hi-fill over" style="width:0%"></div></div><span class="hi-text" style="color:#DC2626;">⚠ Sin docente</span></div><span class="mod-esp" style="color:#DC2626;">PT Mantenimiento Vehículos</span><span class="mod-horas">189 h</span><span class="curso-pill cp-2">2.º curso</span></div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0052"><div class="mod-tab active" onclick="switchModTab(&#39;0052&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0052&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0052"><div class="mod-tab active" onclick="switchModTab(&#39;0052&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0052&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0052&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0052" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">Contenido normativo pendiente.</div></div>
           <div id="prog-0052" class="mod-tab-panel"><div class="prog-zone"><div class="alert warning"><span class="alert-icon">⚠</span><span>No hay docente de la especialidad PT Mantenimiento de Vehículos asignado. Asignar en Gestión del curso antes de definir la programación base.</span></div></div></div>
         </div>
@@ -1285,7 +1446,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-meta"><div class="horas-indicator"><div class="hi-bar"><div class="hi-fill" style="width:0%"></div></div><span class="hi-text">0 / 84 h</span></div><span class="mod-esp">PT Proc. Sanitarios y Asistenciales</span><span class="mod-horas">84 h</span><span class="curso-pill cp-2">2.º curso</span></div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0059"><div class="mod-tab active" onclick="switchModTab(&#39;0059&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0059&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0059"><div class="mod-tab active" onclick="switchModTab(&#39;0059&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0059&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0059&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0059" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">Contenido normativo pendiente.</div></div>
           <div id="prog-0059" class="mod-tab-panel"><div class="prog-zone" style="color:var(--text-soft);font-size:12.5px;">Programación base pendiente.</div></div>
         </div>
@@ -1298,7 +1459,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
           <div class="mod-meta"><div class="horas-indicator"><div class="hi-bar"><div class="hi-fill" style="width:0%"></div></div><span class="hi-text">0 / 63 h</span></div><span class="mod-esp">PT Proc. Sanitarios y Asistenciales</span><span class="mod-horas">63 h</span><span class="curso-pill cp-2">2.º curso</span></div>
         </div>
         <div class="mod-body">
-          <div class="mod-tabs" id="modtabs-0060"><div class="mod-tab active" onclick="switchModTab(&#39;0060&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0060&#39;,&#39;prog&#39;,this)">Programación del profesor</div></div>
+          <div class="mod-tabs" id="modtabs-0060"><div class="mod-tab active" onclick="switchModTab(&#39;0060&#39;,&#39;norm&#39;,this)">Estructura normativa</div><div class="mod-tab" onclick="switchModTab(&#39;0060&#39;,&#39;prog&#39;,this)">Programación del profesor</div><div class="mod-tab" onclick="switchModTab(&#39;0060&#39;,&#39;bloques&#39;,this)">Bloques didácticos</div></div>
           <div id="norm-0060" class="mod-tab-panel active"><div class="norm-zone" style="color:var(--text-soft);font-size:12.5px;">Contenido normativo pendiente.</div></div>
           <div id="prog-0060" class="mod-tab-panel"><div class="prog-zone" style="color:var(--text-soft);font-size:12.5px;">Programación base pendiente.</div></div>
         </div>
@@ -1960,6 +2121,35 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
         </div>
       </div>
 
+      <div class="modal-section">Contenidos que trabaja esta SA</div>
+      <div class="form-group">
+        <label class="form-label">Selecciona los contenidos del módulo que cubre esta SA</label>
+        <span class="form-hint" style="margin-bottom:8px;display:block">Selecciona un bloque entero, una UT o contenidos individuales. Puedes mezclar niveles.</span>
+        <div class="check-group" style="max-height:200px">
+          <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft);padding:4px 0 2px">📦 Bloque 1 · Aplica técnicas de SVA</div>
+          <label class="check-item" style="padding-left:8px">
+            <input type="checkbox" onchange="toggleBloqueSA(this,'b1')" checked>
+            <div><div class="check-item-label">Seleccionar bloque completo</div><div class="check-item-sub">Incluye todas las UT y contenidos del bloque</div></div>
+          </label>
+          <div id="b1-uts" style="padding-left:16px">
+            <label class="check-item"><input type="checkbox" checked class="b1-item"><div class="check-item-label">UT 1.1 · Material de emergencias (9 contenidos)</div></label>
+            <label class="check-item"><input type="checkbox" checked class="b1-item"><div class="check-item-label">UT 1.2 · Técnicas de vía aérea (3 contenidos)</div></label>
+            <label class="check-item"><input type="checkbox" class="b1-item"><div class="check-item-label">UT 1.3 · Soporte circulatorio (5 contenidos)</div></label>
+          </div>
+          <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft);padding:8px 0 2px">📦 Bloque 2 · Administración de medicamentos</div>
+          <label class="check-item" style="padding-left:8px">
+            <input type="checkbox" onchange="toggleBloqueSA(this,'b2')">
+            <div><div class="check-item-label">Seleccionar bloque completo</div><div class="check-item-sub">Incluye todas las UT y contenidos del bloque</div></div>
+          </label>
+          <div id="b2-uts" style="padding-left:16px;display:none">
+            <label class="check-item"><input type="checkbox" class="b2-item"><div class="check-item-label">UT 2.1 · Fármacos en emergencias (4 contenidos)</div></label>
+            <label class="check-item"><input type="checkbox" class="b2-item"><div class="check-item-label">UT 2.2 · Técnica de administración (2 contenidos)</div></label>
+          </div>
+          <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft);padding:8px 0 2px">📎 Contenidos sueltos (sin bloque)</div>
+          <label class="check-item" style="padding-left:8px"><input type="checkbox"><div class="check-item-label">Sin contenidos sueltos definidos</div></label>
+        </div>
+        <button class="btn-add-inline" style="margin-top:6px" onclick="openModal('modal-nuevo-contenido-tes-sa')">+ Añadir nuevo contenido aquí</button>
+      </div>
       <div class="alert warning" style="font-size:12px">
         <span class="alert-icon">⚠</span>
         <span>La secuencia detallada de sesiones y los instrumentos de evaluación se definen dentro de la SA una vez creada.</span>
@@ -2356,6 +2546,177 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 </div>
 
 
+<!-- MODAL: Nuevo bloque en ciclo-tes -->
+<div class="modal-overlay" id="modal-nuevo-bloque-tes">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nuevo bloque didáctico</div>
+        <div class="modal-subtitle">Módulo 0056 · CIFP Salud Jerez</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-bloque-tes')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert info" style="font-size:12px;margin-bottom:0">
+        <span class="alert-icon">ℹ</span>
+        <span>Los bloques troncales del RD se heredan del catálogo. Aquí puedes añadir bloques autonómicos o de libre disposición, o modificar los existentes.</span>
+      </div>
+      <div class="modal-section">Identificación</div>
+      <div class="form-row">
+        <div class="form-group" style="max-width:90px">
+          <label class="form-label">Número <span>*</span></label>
+          <input class="form-input" type="text" placeholder="B3">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Nombre del bloque">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="ca">Adaptación CA Andalucía</option>
+          <option value="centro">Libre disposición — Centro</option>
+          <option value="profesor">Añadido por el profesor responsable</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-bloque-tes')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-bloque-tes')">Crear bloque</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nueva UT en ciclo-tes -->
+<div class="modal-overlay" id="modal-nueva-ut-tes">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nueva unidad de trabajo</div>
+        <div class="modal-subtitle">Módulo 0056 · CIFP Salud Jerez</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nueva-ut-tes')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="max-width:90px">
+          <label class="form-label">Código UT <span>*</span></label>
+          <input class="form-input" type="text" placeholder="UT 1.4">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Denominación <span>*</span></label>
+          <input class="form-input" type="text" placeholder="Nombre de la unidad de trabajo">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Bloque al que pertenece</label>
+        <select class="form-select">
+          <option>B1 · Aplica técnicas de SVA</option>
+          <option>B2 · Administración de medicamentos</option>
+          <option>— Sin bloque asignado —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="ca">Adaptación CA Andalucía</option>
+          <option value="centro">Libre disposición — Centro</option>
+          <option value="profesor">Añadido por el profesor</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-ut-tes')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-ut-tes')">Crear UT</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo contenido en ciclo-tes -->
+<div class="modal-overlay" id="modal-nuevo-contenido-tes">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nuevo contenido</div>
+        <div class="modal-subtitle">Módulo 0056 · CIFP Salud Jerez</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-contenido-tes')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Texto del contenido <span>*</span></label>
+        <textarea class="form-textarea" rows="2" placeholder="Ej: Técnicas de inmovilización cervical en traumatismo espinal"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ubicación en la jerarquía</label>
+        <select class="form-select">
+          <option>B1 · UT 1.1 · Material de emergencias</option>
+          <option>B1 · UT 1.2 · Técnicas de vía aérea</option>
+          <option>B1 · UT 1.3 · Soporte circulatorio</option>
+          <option>B1 · Sin UT (directamente en el bloque)</option>
+          <option>B2 · UT 2.1 · Fármacos en emergencias</option>
+          <option>B2 · UT 2.2 · Técnica de administración</option>
+          <option>Sin bloque ni UT (contenido suelto)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option value="ca">Adaptación CA Andalucía</option>
+          <option value="centro">Libre disposición — Centro</option>
+          <option value="profesor">Añadido por el profesor</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-contenido-tes')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-contenido-tes')">Añadir contenido</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Añadir contenido nuevo desde SA -->
+<div class="modal-overlay" id="modal-nuevo-contenido-tes-sa">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Nuevo contenido desde SA</div>
+        <div class="modal-subtitle">Se añadirá a los Bloques didácticos del módulo</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-contenido-tes-sa')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Texto del contenido <span>*</span></label>
+        <textarea class="form-textarea" rows="2" placeholder="Ej: Aspectos éticos de la atención en emergencias"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Asignar a bloque/UT</label>
+        <select class="form-select">
+          <option>B1 · UT 1.1 · Material de emergencias</option>
+          <option>B1 · UT 1.2 · Técnicas de vía aérea</option>
+          <option>B1 · Sin UT</option>
+          <option>B2 · UT 2.1 · Fármacos</option>
+          <option>Sin bloque ni UT</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen</label>
+        <select class="form-select">
+          <option value="profesor">Añadido por el profesor</option>
+          <option value="centro">Libre disposición — Centro</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-contenido-tes-sa')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-contenido-tes-sa')">Añadir y seleccionar</button>
+    </div>
+  </div>
+</div>
+
+
 <script>
 /* ── Navegación listado / detalle ── */
 function showDetalleCiclo(){
@@ -2381,14 +2742,31 @@ function toggleRA(id){document.getElementById(id).classList.toggle('open')}
 function toggleSA(id){document.getElementById(id).classList.toggle('open')}
 function toggleComp(id){document.getElementById(id).classList.toggle('open')}
 
+/* ── Bloques didácticos TES ── */
+function toggleBloquesTes(id){
+  var el=document.getElementById(id);
+  el.classList.toggle('open');
+  var chev=el.querySelector('.bloque-chevron');
+  if(chev) chev.style.transform=el.classList.contains('open')?'rotate(90deg)':'rotate(0deg)';
+}
+function toggleUTTes(id){
+  var el=document.getElementById(id);
+  el.classList.toggle('open');
+  var chev=el.querySelector('.ut-tes-hd span:first-child');
+  if(chev) chev.style.transform=el.classList.contains('open')?'rotate(90deg)':'rotate(0deg)';
+}
+
 /* ── Subpestañas módulo ── */
 function switchModTab(modId,tipo,el){
   const container=document.getElementById('modtabs-'+modId);
   container.querySelectorAll('.mod-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('norm-'+modId).classList.remove('active');
-  document.getElementById('prog-'+modId).classList.remove('active');
-  document.getElementById(tipo+'-'+modId).classList.add('active');
+  ['norm','prog','bloques'].forEach(t=>{
+    const p=document.getElementById(t+'-'+modId);
+    if(p) p.classList.remove('active');
+  });
+  const target=document.getElementById(tipo+'-'+modId);
+  if(target) target.classList.add('active');
 }
 
 /* ── Modales ── */
