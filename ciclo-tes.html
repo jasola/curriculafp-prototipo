@@ -1466,15 +1466,456 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
       </div>
 
       <div class="mod-block" id="mod-fct">
-        <div class="mod-header" onclick="toggleMod(&#39;mod-fct&#39;)">
+        <div class="mod-header" onclick="toggleMod('mod-fct')">
           <div class="mod-chevron">▶</div><span class="mod-code">FCT</span>
-          <span class="mod-name">Formación en centros de trabajo</span>
-          <div class="mod-meta"><span class="mod-esp">Tutor FCT del centro</span><span class="mod-horas">380 h</span><span class="curso-pill cp-fct">FCT</span></div>
+          <span class="mod-name">Formación en empresa</span>
+          <div class="mod-meta">
+            <span class="mod-esp">Tutor FCT del centro</span>
+            <span class="mod-horas">410 h</span>
+            <span class="curso-pill cp-fct">FCT</span>
+          </div>
         </div>
         <div class="mod-body">
-          <div style="padding:16px 20px;font-size:12.5px;color:var(--text-soft);line-height:1.6;">La FCT se gestiona en la sección <strong>FCT</strong> del menú lateral. La Capa 1 recoge las competencias a verificar en empresa y los criterios del tutor. La asignación de empresas y seguimiento individualizado se realiza en Capa 2.</div>
+          <div class="mod-tabs" id="modtabs-fct">
+            <div class="mod-tab active" onclick="switchModTab('fct','datos',this)">Datos generales</div>
+            <div class="mod-tab" onclick="switchModTab('fct','cee',this)">Competencias a verificar</div>
+            <div class="mod-tab" onclick="switchModTab('fct','instrumentos',this)">Instrumentos base</div>
+            <div class="mod-tab" onclick="switchModTab('fct','requisitos',this)">Requisitos de empresa</div>
+          </div>
+
+          <!-- DATOS GENERALES FCT -->
+          <div id="datos-fct" class="mod-tab-panel active">
+            <div class="norm-zone">
+              <div class="alert info" style="font-size:12px;margin-bottom:16px">
+                <span class="alert-icon">ℹ</span>
+                <span>La <strong>Formación en empresa</strong> es dependiente del ciclo — sus horas, competencias a verificar y estructura están definidas en el RD de cada título. Para el TES, el módulo FCT se rige por el RD 1397/2007 y la Orden de 7 de julio de 2009 de la Junta de Andalucía.</span>
+              </div>
+
+              <div class="form-row" style="margin-bottom:14px">
+                <div class="form-group">
+                  <label class="form-label">Denominación normativa aplicable</label>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:13px;font-weight:500;color:var(--text-dark)">
+                    Formación en Centros de Trabajo (FCT)
+                    <span class="origen-badge ob-rd" style="margin-left:auto">RD Estatal</span>
+                  </div>
+                  <span class="form-hint">Títulos LOGSE/LOE vigentes. Los nuevos grados D/E usan "Fase de formación en empresa u organismo equiparado".</span>
+                </div>
+              </div>
+
+              <div class="form-row" style="margin-bottom:14px">
+                <div class="form-group">
+                  <label class="form-label">Horas totales</label>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:13px;font-weight:600;color:var(--text-dark)">
+                    410 h
+                    <span class="origen-badge ob-rd" style="margin-left:auto">RD 1397/2007</span>
+                  </div>
+                  <span class="form-hint">Fijadas en el RD del título. El TES tiene 410 h (5 títulos LOGSE oscilan entre 380-440 h).</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Modalidad base</label>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:13px;font-weight:500;color:var(--text-dark)">
+                    General
+                  </div>
+                  <span class="form-hint">General / Intensiva / Dual general / Dual intensiva</span>
+                </div>
+              </div>
+
+              <div class="form-row" style="margin-bottom:14px">
+                <div class="form-group">
+                  <label class="form-label">Distribución por cursos</label>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--text-dark)">
+                    2º curso · Generalmente marzo–junio
+                    <span class="origen-badge ob-ca" style="margin-left:auto">CA Andalucía</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Criterio de calificación</label>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--text-dark)">
+                    Tutor empresa 60% · Tutor centro 40%
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label">Referencias normativas</label>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--bg-white);border:1px solid var(--border);border-radius:5px;font-size:12px">
+                    <span style="flex:1;color:var(--text-sub)">RD 1397/2007 — Establece el título TES y fija las enseñanzas mínimas</span>
+                    <span class="origen-badge ob-rd">RD Estatal</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--bg-white);border:1px solid var(--border);border-radius:5px;font-size:12px">
+                    <span style="flex:1;color:var(--text-sub)">Orden de 7 de julio de 2009 — Currículo TES en Andalucía</span>
+                    <span class="origen-badge ob-ca">CA Andalucía</span>
+                  </div>
+                </div>
+                <button class="btn-add-inline" style="margin-top:6px" onclick="openModal('modal-fct-datos')">✎ Editar datos generales</button>
+              </div>
+
+              <!-- EXENCIÓN FCT -->
+              <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--text-dark)">Exención de FCT</div>
+                    <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Condiciones bajo las que un alumno puede solicitar exención total o parcial. La gestión por alumno se realiza en Capa 2.</div>
+                  </div>
+                  <button class="btn btn-secondary" style="font-size:12px" onclick="openModal('modal-fct-exencion')">✎ Editar condiciones</button>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:7px">
+                    <div style="width:20px;height:20px;border-radius:50%;background:#F0FDF4;border:1.5px solid #86EFAC;display:grid;place-items:center;flex-shrink:0;margin-top:1px">
+                      <span style="font-size:10px;color:#16A34A;font-weight:700">✓</span>
+                    </div>
+                    <div style="flex:1">
+                      <div style="font-size:12.5px;font-weight:600;color:var(--text-dark)">Exención total</div>
+                      <div style="font-size:11.5px;color:var(--text-sub);margin-top:3px;line-height:1.5">Acreditación de experiencia laboral de al menos 1 año a jornada completa en puesto relacionado con el perfil del TES (TES, auxiliar de enfermería en emergencias, socorrista acreditado). Mediante contrato de trabajo o certificado de empresa con cotización a la Seguridad Social.</div>
+                      <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+                        <span class="origen-badge ob-rd">RD 1397/2007 · Art. 15</span>
+                        <span class="origen-badge ob-ca">Orden 7 jul. 2009 · CA Andalucía</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:7px">
+                    <div style="width:20px;height:20px;border-radius:50%;background:#FEF9C3;border:1.5px solid #FDE047;display:grid;place-items:center;flex-shrink:0;margin-top:1px">
+                      <span style="font-size:10px;color:#854D0E;font-weight:700">½</span>
+                    </div>
+                    <div style="flex:1">
+                      <div style="font-size:12.5px;font-weight:600;color:var(--text-dark)">Exención parcial</div>
+                      <div style="font-size:11.5px;color:var(--text-sub);margin-top:3px;line-height:1.5">Acreditación de experiencia laboral de al menos 6 meses en puesto relacionado con el perfil. El alumno deberá completar las horas de FCT no eximidas en empresa colaboradora. La distribución de horas exentas/no exentas la determina el tutor FCT del centro.</div>
+                      <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+                        <span class="origen-badge ob-rd">RD 1397/2007 · Art. 15</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="padding:8px 12px;background:var(--bg);border-radius:6px;font-size:11.5px;color:var(--text-soft)">
+                    <strong style="color:var(--text-dark)">Documentación requerida:</strong> Solicitud formal del alumno · Contrato/certificado empresa · Vida laboral (TGSS) · Informe del tutor FCT · Resolución del director del centro
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /datos-fct -->
+
+          <!-- COMPETENCIAS A VERIFICAR EN EMPRESA -->
+          <div id="cee-fct" class="mod-tab-panel">
+            <div class="norm-zone">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text-dark)">Capacidades a verificar en empresa</div>
+                  <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Derivan de las competencias profesionales del ciclo. El tutor de empresa las observa y valora durante las prácticas.</div>
+                </div>
+                <button class="btn btn-secondary" style="font-size:12px" onclick="openModal('modal-nueva-cee')">+ Añadir capacidad</button>
+              </div>
+
+              <!-- CEE 1 -->
+              <div class="ra-block" id="cee-1">
+                <div class="ra-header" onclick="toggleRA('cee-1')">
+                  <div class="ra-chevron">▶</div>
+                  <div class="ra-num" style="background:var(--garnet-pale);color:var(--garnet)">CEE1</div>
+                  <div class="ra-text">Realiza maniobras de soporte vital básico y avanzado siguiendo los protocolos del servicio de emergencias de la empresa.</div>
+                  <span class="origen-badge ob-rd">RD Estatal</span>
+                  <div class="ra-peso" style="min-width:80px">Peso: <input value="25" onclick="event.stopPropagation()"> %</div>
+                </div>
+                <div class="ra-body">
+                  <div class="ce-zone">
+                    <div class="zone-label">Vinculación con competencias profesionales del título</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+                      <span class="origen-badge ob-rd">CP1 · Atender a múltiples víctimas</span>
+                      <span class="origen-badge ob-rd">CP2 · SVB y SVA</span>
+                    </div>
+                    <div class="zone-label">Indicadores de verificación</div>
+                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Identifica correctamente los signos de parada cardiorrespiratoria.</div></div>
+                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Aplica las maniobras de RCP con calidad técnica suficiente en situación real.</div></div>
+                    <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Maneja el DEA/DESA de forma autónoma y segura.</div></div>
+                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CEE 2 -->
+              <div class="ra-block" id="cee-2">
+                <div class="ra-header" onclick="toggleRA('cee-2')">
+                  <div class="ra-chevron">▶</div>
+                  <div class="ra-num" style="background:var(--garnet-pale);color:var(--garnet)">CEE2</div>
+                  <div class="ra-text">Conduce el vehículo de transporte sanitario con seguridad y aplica los protocolos de movilización y traslado del paciente.</div>
+                  <span class="origen-badge ob-rd">RD Estatal</span>
+                  <div class="ra-peso" style="min-width:80px">Peso: <input value="25" onclick="event.stopPropagation()"> %</div>
+                </div>
+                <div class="ra-body">
+                  <div class="ce-zone">
+                    <div class="zone-label">Vinculación con competencias profesionales del título</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+                      <span class="origen-badge ob-rd">CP4 · Conducción vehículo sanitario</span>
+                    </div>
+                    <div class="zone-label">Indicadores de verificación</div>
+                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Conduce el vehículo respetando las normas de circulación y los protocolos del servicio.</div></div>
+                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Realiza la movilización del paciente con las técnicas adecuadas y sin riesgo.</div></div>
+                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CEE 3 -->
+              <div class="ra-block" id="cee-3">
+                <div class="ra-header" onclick="toggleRA('cee-3')">
+                  <div class="ra-chevron">▶</div>
+                  <div class="ra-num" style="background:var(--garnet-pale);color:var(--garnet)">CEE3</div>
+                  <div class="ra-text">Se integra en el equipo de trabajo del servicio de emergencias actuando con profesionalidad, iniciativa y responsabilidad.</div>
+                  <span class="origen-badge ob-rd">RD Estatal</span>
+                  <div class="ra-peso" style="min-width:80px">Peso: <input value="20" onclick="event.stopPropagation()"> %</div>
+                </div>
+                <div class="ra-body">
+                  <div class="ce-zone">
+                    <div class="zone-label">Vinculación con competencias profesionales del título</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+                      <span class="origen-badge ob-rd">CP5 · Coordinación con servicios de emergencia</span>
+                      <span class="origen-badge ob-rd">CP6 · Logística sanitaria</span>
+                    </div>
+                    <div class="zone-label">Indicadores de verificación</div>
+                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Muestra puntualidad, responsabilidad y actitud positiva ante el trabajo.</div></div>
+                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Se comunica con el equipo de forma clara y respeta la jerarquía del servicio.</div></div>
+                    <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Mantiene correctamente el material y el vehículo asignado.</div></div>
+                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:6px;font-size:11.5px;color:var(--text-soft);display:flex;justify-content:space-between;align-items:center">
+                <span>3 capacidades · Suma de pesos: <strong style="color:var(--text-dark)">70%</strong> — <span style="color:#F59E0B">pendiente asignar 30% restante</span></span>
+                <button class="btn-add-inline" onclick="openModal('modal-nueva-cee')">+ Añadir capacidad</button>
+              </div>
+            </div>
+          </div><!-- /cee-fct -->
+
+          <!-- INSTRUMENTOS BASE -->
+          <div id="instrumentos-fct" class="mod-tab-panel">
+            <div class="norm-zone">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text-dark)">Instrumentos de seguimiento y evaluación base</div>
+                  <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Plantillas definidas en Capa 1. Se instancian por alumno en Capa 2 al asignar empresa y tutor.</div>
+                </div>
+                <button class="btn btn-secondary" style="font-size:12px" onclick="openModal('modal-nuevo-instrumento-fct')">+ Añadir instrumento</button>
+              </div>
+
+              <!-- Instrumento 1: Ficha de visita -->
+              <div class="sa-block" id="inst-fct-1">
+                <div class="sa-header" onclick="toggleSA('inst-fct-1')">
+                  <div class="sa-chevron">▶</div>
+                  <span class="sa-num">INS-1</span>
+                  <span class="sa-name">Ficha de visita del tutor del centro</span>
+                  <div class="sa-pills">
+                    <span class="sa-pill sp-ra">Tutor centro</span>
+                    <span class="sa-pill sp-ses">Cada visita</span>
+                  </div>
+                </div>
+                <div class="sa-body">
+                  <div class="sa-sec">
+                    <div class="sa-sec-label">Campos de la ficha</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;color:var(--text-sub)">
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Fecha de visita</div>
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Empresa / Organismo</div>
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Tutor de empresa</div>
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Actividades observadas</div>
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Valoración general (1-10)</div>
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Observaciones e incidencias</div>
+                    </div>
+                  </div>
+                  <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+                    <span style="font-size:11.5px;color:var(--text-soft)">El tutor del centro la cumplimenta en cada visita a la empresa</span>
+                    <button class="btn btn-secondary" style="font-size:11.5px" onclick="openModal('modal-preview-doc-fct')">👁 Vista previa del documento</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Instrumento 2: Rúbrica tutor empresa -->
+              <div class="sa-block" id="inst-fct-2">
+                <div class="sa-header" onclick="toggleSA('inst-fct-2')">
+                  <div class="sa-chevron">▶</div>
+                  <span class="sa-num">INS-2</span>
+                  <span class="sa-name">Rúbrica de evaluación final — Tutor de empresa</span>
+                  <div class="sa-pills">
+                    <span class="sa-pill sp-ra">Tutor empresa</span>
+                    <span class="sa-pill sp-ses">Al finalizar FCT</span>
+                    <span class="sa-pill sp-instr">60% calificación</span>
+                  </div>
+                </div>
+                <div class="sa-body">
+                  <div class="sa-sec">
+                    <div class="sa-sec-label">Criterios de la rúbrica (vinculados a CEE)</div>
+                    <div class="ce-row"><div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">CEE1</div><div class="ce-text">SVB/SVA — observación directa en intervenciones reales o simuladas</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
+                    <div class="ce-row"><div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">CEE2</div><div class="ce-text">Conducción y movilización del paciente</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
+                    <div class="ce-row"><div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">CEE3</div><div class="ce-text">Integración profesional y actitud en el equipo</div><div class="ce-peso"><input value="20"><span>%</span></div></div>
+                    <div class="ce-row"><div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">CEE4</div><div class="ce-text">Puntualidad, responsabilidad y cumplimiento de normas</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
+                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-criterio-rubrica')">+ Añadir criterio</button></div>
+                  </div>
+                  <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+                    <span style="font-size:11.5px;color:var(--text-soft)">Se entrega al tutor de empresa en blanco para que evalúe al alumno al final de la FCT</span>
+                    <button class="btn btn-secondary" style="font-size:11.5px" onclick="openModal('modal-preview-doc-fct')">👁 Vista previa del documento</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Instrumento 3: Cuaderno prácticas -->
+              <div class="sa-block" id="inst-fct-3">
+                <div class="sa-header" onclick="toggleSA('inst-fct-3')">
+                  <div class="sa-chevron">▶</div>
+                  <span class="sa-num">INS-3</span>
+                  <span class="sa-name">Cuaderno de prácticas del alumno</span>
+                  <div class="sa-pills">
+                    <span class="sa-pill sp-ra">Alumno</span>
+                    <span class="sa-pill sp-ses">Diario</span>
+                    <span class="sa-pill sp-instr">40% calificación</span>
+                  </div>
+                </div>
+                <div class="sa-body">
+                  <div class="sa-sec">
+                    <div class="sa-sec-label">Secciones del cuaderno</div>
+                    <div style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-sub)">
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Registro diario de actividades realizadas</div>
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Intervenciones sanitarias observadas / participadas (tipo, descripción, reflexión)</div>
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Relación de materiales y equipos utilizados</div>
+                      <div style="padding:5px 8px;background:var(--bg);border-radius:4px;border:1px solid var(--border)">Valoración personal y autoevaluación semanal</div>
+                    </div>
+                    <button class="btn-ghost" style="font-size:11.5px;color:var(--garnet);margin-top:6px" onclick="openModal('modal-nueva-seccion-cuaderno')">+ Añadir sección</button>
+                  </div>
+                  <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+                    <span style="font-size:11.5px;color:var(--text-soft)">Se entrega al alumno en blanco al inicio de la FCT</span>
+                    <button class="btn btn-secondary" style="font-size:11.5px" onclick="openModal('modal-preview-doc-fct')">👁 Vista previa del documento</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RESUMEN DE DOCUMENTOS FCT -->
+              <div style="margin-top:16px;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px">
+                <div style="font-size:12px;font-weight:700;color:var(--text-dark);margin-bottom:10px;display:flex;align-items:center;gap:6px">
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  Documentos que se generarán en Capa 2 a partir de estas plantillas
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+                  <div style="padding:8px 10px;background:var(--bg-white);border:1px solid var(--border);border-radius:6px">
+                    <div style="font-size:12px;font-weight:600;color:var(--text-dark)">📋 Guía de la empresa colaboradora</div>
+                    <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Requisitos, CEE y perfil del tutor. Se entrega a cada empresa al inicio.</div>
+                    <div style="margin-top:6px"><span style="font-size:10px;font-weight:600;color:#166534;background:#F0FDF4;border:1px solid #BBF7D0;padding:1px 6px;border-radius:3px">Capa 2 · Por empresa</span></div>
+                  </div>
+                  <div style="padding:8px 10px;background:var(--bg-white);border:1px solid var(--border);border-radius:6px">
+                    <div style="font-size:12px;font-weight:600;color:var(--text-dark)">📝 Acuerdo de formación</div>
+                    <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Convenio centro-empresa con datos del alumno, tutor y fechas.</div>
+                    <div style="margin-top:6px"><span style="font-size:10px;font-weight:600;color:#166534;background:#F0FDF4;border:1px solid #BBF7D0;padding:1px 6px;border-radius:3px">Capa 2 · Por alumno</span></div>
+                  </div>
+                  <div style="padding:8px 10px;background:var(--bg-white);border:1px solid var(--border);border-radius:6px">
+                    <div style="font-size:12px;font-weight:600;color:var(--text-dark)">📊 Rúbrica de evaluación</div>
+                    <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Para el tutor de empresa. Generada con las CEE y los indicadores definidos aquí.</div>
+                    <div style="margin-top:6px"><span style="font-size:10px;font-weight:600;color:#166534;background:#F0FDF4;border:1px solid #BBF7D0;padding:1px 6px;border-radius:3px">Capa 2 · Por alumno</span></div>
+                  </div>
+                  <div style="padding:8px 10px;background:var(--bg-white);border:1px solid var(--border);border-radius:6px">
+                    <div style="font-size:12px;font-weight:600;color:var(--text-dark)">📓 Cuaderno de prácticas</div>
+                    <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Cuaderno en blanco personalizado para este ciclo. Se entrega al alumno.</div>
+                    <div style="margin-top:6px"><span style="font-size:10px;font-weight:600;color:#166534;background:#F0FDF4;border:1px solid #BBF7D0;padding:1px 6px;border-radius:3px">Capa 2 · Por alumno</span></div>
+                  </div>
+                  <div style="padding:8px 10px;background:var(--bg-white);border:1px solid var(--border);border-radius:6px">
+                    <div style="font-size:12px;font-weight:600;color:var(--text-dark)">📁 Ficha de visita</div>
+                    <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Para el tutor del centro. Una por cada visita realizada a la empresa.</div>
+                    <div style="margin-top:6px"><span style="font-size:10px;font-weight:600;color:#166534;background:#F0FDF4;border:1px solid #BBF7D0;padding:1px 6px;border-radius:3px">Capa 2 · Por visita</span></div>
+                  </div>
+                  <div style="padding:8px 10px;background:var(--bg-white);border:1px solid var(--border);border-radius:6px">
+                    <div style="font-size:12px;font-weight:600;color:var(--text-dark)">🏅 Certificado de prácticas</div>
+                    <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Para el alumno al completar la FCT con calificación positiva.</div>
+                    <div style="margin-top:6px"><span style="font-size:10px;font-weight:600;color:#166534;background:#F0FDF4;border:1px solid #BBF7D0;padding:1px 6px;border-radius:3px">Capa 2 · Por alumno</span></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /instrumentos-fct -->
+
+          <!-- REQUISITOS DE EMPRESA -->
+          <div id="requisitos-fct" class="mod-tab-panel">
+            <div class="norm-zone">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text-dark)">Requisitos de la empresa colaboradora</div>
+                  <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Condiciones mínimas que debe cumplir una empresa para ser apta para este ciclo.</div>
+                </div>
+                <button class="btn btn-secondary" style="font-size:12px" onclick="openModal('modal-nuevo-requisito-empresa')">+ Añadir requisito</button>
+              </div>
+
+              <!-- Actividades mínimas -->
+              <div class="bloque-exp-tes open" id="req-actividades">
+                <div class="bloque-hd-tes" onclick="toggleBloquesTes('req-actividades')">
+                  <span class="bloque-chevron" style="font-size:9px;color:var(--text-soft);transition:transform 0.18s;flex-shrink:0">▶</span>
+                  <div class="bloque-num-tes">A</div>
+                  <div class="bloque-name-tes">Actividades mínimas que debe ofrecer al alumno</div>
+                  <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-requisito-empresa')">+ Añadir</button>
+                  </div>
+                </div>
+                <div class="bloque-body-tes">
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Participación en salidas de emergencia con UVI móvil o SVB</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Atención a pacientes en situación de urgencia o emergencia</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Manejo de material electromédico (monitor-desfibrilador, ventilador)</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Conducción o acompañamiento en traslados sanitarios</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                </div>
+              </div>
+
+              <!-- Equipamiento mínimo -->
+              <div class="bloque-exp-tes" id="req-equipamiento">
+                <div class="bloque-hd-tes" onclick="toggleBloquesTes('req-equipamiento')">
+                  <span class="bloque-chevron" style="font-size:9px;color:var(--text-soft);transition:transform 0.18s;flex-shrink:0">▶</span>
+                  <div class="bloque-num-tes">E</div>
+                  <div class="bloque-name-tes">Equipamiento mínimo requerido</div>
+                  <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-requisito-empresa')">+ Añadir</button>
+                  </div>
+                </div>
+                <div class="bloque-body-tes">
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Vehículo de transporte sanitario (SVB o UVI móvil)</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Material de reanimación cardiopulmonar avanzada</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Sistema de comunicación con central de coordinación</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                </div>
+              </div>
+
+              <!-- Perfil tutor empresa -->
+              <div class="bloque-exp-tes" id="req-tutor">
+                <div class="bloque-hd-tes" onclick="toggleBloquesTes('req-tutor')">
+                  <span class="bloque-chevron" style="font-size:9px;color:var(--text-soft);transition:transform 0.18s;flex-shrink:0">▶</span>
+                  <div class="bloque-num-tes">T</div>
+                  <div class="bloque-name-tes">Perfil del tutor de empresa</div>
+                  <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-requisito-empresa')">+ Añadir</button>
+                  </div>
+                </div>
+                <div class="bloque-body-tes">
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Titulación: TES o titulación sanitaria equivalente (DUE, Médico)</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Experiencia mínima de 2 años en el puesto</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">Disponibilidad para recibir al tutor del centro en visitas de seguimiento</span><span class="origen-badge ob-rd" style="font-size:9px;padding:1px 4px">RD</span></div>
+                </div>
+              </div>
+
+              <!-- Sectores CNAE -->
+              <div class="bloque-exp-tes" id="req-cnae">
+                <div class="bloque-hd-tes" onclick="toggleBloquesTes('req-cnae')">
+                  <span class="bloque-chevron" style="font-size:9px;color:var(--text-soft);transition:transform 0.18s;flex-shrink:0">▶</span>
+                  <div class="bloque-num-tes">S</div>
+                  <div class="bloque-name-tes">Sectores de actividad válidos (CNAE)</div>
+                  <div style="display:flex;gap:4px;flex-shrink:0" onclick="event.stopPropagation()">
+                    <button class="btn-add-inline" style="font-size:10.5px" onclick="openModal('modal-nuevo-requisito-empresa')">+ Añadir</button>
+                  </div>
+                </div>
+                <div class="bloque-body-tes">
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">CNAE 8621 · Actividades de los médicos de medicina general</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">CNAE 8690 · Otras actividades sanitarias</span></div>
+                  <div class="cont-row-tes"><span class="cont-dot ob-rd-dot"></span><span class="cont-item-text" style="flex:1">CNAE 8412 · Actividades de protección civil — Servicios de emergencia</span></div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /requisitos-fct -->
+
         </div>
-      </div>
+      </div><!-- /mod-fct -->
 
     </div><!-- /tab-modulos -->
 
@@ -2717,8 +3158,298 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 </div>
 
 
+<!-- MODAL: Editar datos generales FCT -->
+<div class="modal-overlay" id="modal-fct-datos">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Datos generales · Formación en empresa</div><div class="modal-subtitle">TES · CIFP Salud Jerez</div></div>
+      <button class="modal-close" onclick="closeModal('modal-fct-datos')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Denominación normativa <span>*</span></label>
+        <select class="form-select">
+          <option selected>Formación en Centros de Trabajo (FCT) — títulos LOGSE/LOE vigentes</option>
+          <option>Fase de formación en empresa u organismo equiparado — nuevos grados D/E</option>
+          <option>Otro (especificar)</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Horas totales <span>*</span></label>
+          <input class="form-input" type="number" value="410">
+          <span class="form-hint">Fijadas en el RD del título</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Modalidad base</label>
+          <select class="form-select">
+            <option selected>General</option>
+            <option>Intensiva</option>
+            <option>Dual general</option>
+            <option>Dual intensiva</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Distribución por cursos</label>
+        <select class="form-select">
+          <option>1º curso</option>
+          <option selected>2º curso</option>
+          <option>Ambos cursos</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Peso tutor empresa en calificación</label>
+          <div class="form-pct"><input class="form-input" type="number" value="60"><span class="form-pct-label">%</span></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso tutor centro en calificación</label>
+          <div class="form-pct"><input class="form-input" type="number" value="40"><span class="form-pct-label">%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-fct-datos')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-fct-datos')">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nueva capacidad a verificar en empresa (CEE) -->
+<div class="modal-overlay" id="modal-nueva-cee">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Nueva capacidad a verificar en empresa</div><div class="modal-subtitle">FCT · TES · CIFP Salud Jerez</div></div>
+      <button class="modal-close" onclick="closeModal('modal-nueva-cee')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group" style="max-width:100px">
+          <label class="form-label">Código <span>*</span></label>
+          <input class="form-input" type="text" placeholder="CEE4">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Peso en calificación FCT <span>*</span></label>
+          <div class="form-pct"><input class="form-input" type="number" placeholder="15" min="1" max="100"><span class="form-pct-label">%</span><span class="form-pct-note">La suma de todas las CEE debe ser 100%</span></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción de la capacidad <span>*</span></label>
+        <textarea class="form-textarea" rows="3" placeholder="Ej: Aplica los protocolos de logística sanitaria del servicio gestionando correctamente el material y los equipos de intervención."></textarea>
+        <span class="form-hint">Formulada de forma observable para el tutor de empresa</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Competencias profesionales del título vinculadas</label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">CP1 · Atender a múltiples víctimas</div></div></label>
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">CP2 · SVB y SVA</div></div></label>
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">CP3 · Atención sanitaria inicial</div></div></label>
+          <label class="check-item"><input type="checkbox"><div><div class="check-item-label">CP4 · Conducción vehículo sanitario</div></div></label>
+          <label class="check-item"><input type="checkbox" checked><div><div class="check-item-label">CP5 · Coordinación con servicios</div></div></label>
+          <label class="check-item"><input type="checkbox" checked><div><div class="check-item-label">CP6 · Logística sanitaria</div></div></label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-cee')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-cee')">Añadir capacidad</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo instrumento FCT -->
+<div class="modal-overlay" id="modal-nuevo-instrumento-fct">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Nuevo instrumento de seguimiento / evaluación</div><div class="modal-subtitle">FCT · TES</div></div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-instrumento-fct')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Denominación <span>*</span></label>
+        <input class="form-input" type="text" placeholder="Ej: Informe final del tutor de empresa">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Tipo</label>
+          <select class="form-select">
+            <option>Ficha de visita</option>
+            <option>Rúbrica de evaluación</option>
+            <option>Cuaderno de prácticas</option>
+            <option>Informe final</option>
+            <option>Autoevaluación del alumno</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Responsable</label>
+          <select class="form-select">
+            <option>Tutor del centro</option>
+            <option>Tutor de empresa</option>
+            <option>Alumno</option>
+            <option>Tutor centro + Tutor empresa</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Peso en la calificación final de FCT</label>
+        <div class="form-pct"><input class="form-input" type="number" placeholder="0" min="0" max="100"><span class="form-pct-label">%</span><span class="form-pct-note">0% = instrumento de seguimiento sin calificación directa</span></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-instrumento-fct')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-instrumento-fct')">Añadir instrumento</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo requisito de empresa -->
+<div class="modal-overlay" id="modal-nuevo-requisito-empresa">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Nuevo requisito de empresa</div><div class="modal-subtitle">FCT · TES</div></div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-requisito-empresa')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Categoría</label>
+        <select class="form-select">
+          <option>A · Actividades mínimas</option>
+          <option>E · Equipamiento mínimo</option>
+          <option>T · Perfil tutor de empresa</option>
+          <option>S · Sectores CNAE válidos</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción del requisito <span>*</span></label>
+        <textarea class="form-textarea" rows="2" placeholder="Ej: Disponer de ambulancia medicalizada con material de SVA completo"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Origen normativo</label>
+        <select class="form-select">
+          <option>RD Estatal</option>
+          <option>CA Andalucía</option>
+          <option>Centro — libre disposición</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-requisito-empresa')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-requisito-empresa')">Añadir requisito</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Condiciones de exención FCT -->
+<div class="modal-overlay" id="modal-fct-exencion">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div><div class="modal-title">Condiciones de exención de FCT</div><div class="modal-subtitle">TES · CIFP Salud Jerez</div></div>
+      <button class="modal-close" onclick="closeModal('modal-fct-exencion')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert info" style="font-size:12px;margin-bottom:0">
+        <span class="alert-icon">ℹ</span>
+        <span>Las condiciones de exención las fija la normativa estatal y autonómica. La solicitud individual de cada alumno se gestiona en <strong>Capa 2 → FCT / Dual → Exenciones</strong>.</span>
+      </div>
+      <div class="modal-section">Exención total</div>
+      <div class="form-group">
+        <label class="form-label">¿Se contempla exención total?</label>
+        <select class="form-select"><option selected>Sí — según normativa vigente</option><option>No</option></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Experiencia mínima para exención total (meses)</label>
+        <input class="form-input" type="number" value="12">
+        <span class="form-hint">La normativa estatal fija 1 año (12 meses)</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Puestos válidos para exención total</label>
+        <textarea class="form-textarea" rows="3" placeholder="Uno por línea. Ej: Técnico en Emergencias Sanitarias&#10;Auxiliar de enfermería en urgencias"></textarea>
+      </div>
+      <div class="modal-section">Exención parcial</div>
+      <div class="form-group">
+        <label class="form-label">¿Se contempla exención parcial?</label>
+        <select class="form-select"><option selected>Sí — según normativa vigente</option><option>No</option></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Experiencia mínima para exención parcial (meses)</label>
+        <input class="form-input" type="number" value="6">
+      </div>
+      <div class="modal-section">Documentación requerida</div>
+      <div class="form-group">
+        <label class="form-label">Documentos que debe aportar el alumno</label>
+        <textarea class="form-textarea" rows="3" placeholder="Solicitud formal del alumno&#10;Contrato de trabajo o certificado de empresa&#10;Vida laboral (TGSS)&#10;Informe del tutor FCT&#10;Resolución del director"></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-fct-exencion')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-fct-exencion')">Guardar condiciones</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Vista previa documentos FCT -->
+<div class="modal-overlay" id="modal-preview-doc-fct">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div><div class="modal-title">Vista previa · Documentos FCT</div><div class="modal-subtitle">TES · CIFP Salud Jerez · Plantillas base — los documentos reales se generan en Capa 2</div></div>
+      <button class="modal-close" onclick="closeModal('modal-preview-doc-fct')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Documento a previsualizar</label>
+        <select class="form-select" onchange="switchPreviewDoc(this.value)">
+          <option value="ficha">Ficha de visita del tutor del centro</option>
+          <option value="rubrica">Rúbrica de evaluación — Tutor de empresa</option>
+          <option value="cuaderno">Cuaderno de prácticas del alumno</option>
+          <option value="guia">Guía de la empresa colaboradora</option>
+        </select>
+      </div>
+      <div id="preview-ficha" class="preview-doc-panel" style="border:1px solid var(--border);border-radius:8px;padding:20px;background:var(--bg-white)">
+        <div style="text-align:center;margin-bottom:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft)">CIFP Salud Jerez · Formación en Centros de Trabajo</div>
+          <div style="font-size:16px;font-weight:700;color:var(--text-dark);margin-top:4px">FICHA DE VISITA DE SEGUIMIENTO</div>
+          <div style="font-size:12px;color:var(--text-soft)">Ciclo TES · Técnico en Emergencias Sanitarias</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+          <div style="padding:8px;border:1px solid var(--border);border-radius:5px"><div style="font-size:10px;font-weight:700;color:var(--text-soft);margin-bottom:4px">ALUMNO/A</div><div style="font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border);padding-bottom:4px">________________________________</div></div>
+          <div style="padding:8px;border:1px solid var(--border);border-radius:5px"><div style="font-size:10px;font-weight:700;color:var(--text-soft);margin-bottom:4px">EMPRESA</div><div style="font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border);padding-bottom:4px">________________________________</div></div>
+          <div style="padding:8px;border:1px solid var(--border);border-radius:5px"><div style="font-size:10px;font-weight:700;color:var(--text-soft);margin-bottom:4px">FECHA</div><div style="font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border);padding-bottom:4px">________________________________</div></div>
+          <div style="padding:8px;border:1px solid var(--border);border-radius:5px"><div style="font-size:10px;font-weight:700;color:var(--text-soft);margin-bottom:4px">TUTOR DE EMPRESA</div><div style="font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border);padding-bottom:4px">________________________________</div></div>
+        </div>
+        <div style="padding:8px;border:1px solid var(--border);border-radius:5px;margin-bottom:8px"><div style="font-size:10px;font-weight:700;color:var(--text-soft);margin-bottom:6px">ACTIVIDADES OBSERVADAS</div><div style="height:60px"></div></div>
+        <div style="padding:8px;border:1px solid var(--border);border-radius:5px;margin-bottom:8px"><div style="font-size:10px;font-weight:700;color:var(--text-soft);margin-bottom:4px">VALORACIÓN GENERAL (1-10)</div><div style="font-size:12px;color:var(--text-muted)">Nota: ________ / Observaciones: _________________________</div></div>
+        <div style="padding:8px;border:1px solid var(--border);border-radius:5px"><div style="font-size:10px;font-weight:700;color:var(--text-soft);margin-bottom:4px">INCIDENCIAS</div><div style="height:40px"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:14px;font-size:11px;color:var(--text-soft)"><div>Firma tutor centro: ________________</div><div>Firma tutor empresa: ________________</div></div>
+      </div>
+      <div id="preview-rubrica" class="preview-doc-panel" style="display:none;border:1px solid var(--border);border-radius:8px;padding:20px;background:var(--bg-white)">
+        <div style="text-align:center;margin-bottom:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft)">CIFP Salud Jerez · FCT</div>
+          <div style="font-size:16px;font-weight:700;color:var(--text-dark);margin-top:4px">RÚBRICA DE EVALUACIÓN FINAL</div>
+          <div style="font-size:12px;color:var(--text-soft)">Para cumplimentar por el tutor de empresa · TES</div>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:11.5px">
+          <thead><tr style="background:var(--bg)"><th style="padding:6px 8px;border:1px solid var(--border);text-align:left">Capacidad a verificar</th><th style="padding:6px 8px;border:1px solid var(--border);width:60px;text-align:center">Peso</th><th style="padding:6px 8px;border:1px solid var(--border);width:80px;text-align:center">Valoración (1-10)</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:6px 8px;border:1px solid var(--border)">CEE1 · SVB/SVA en situación real</td><td style="padding:6px 8px;border:1px solid var(--border);text-align:center">25%</td><td style="padding:6px 8px;border:1px solid var(--border);text-align:center">___</td></tr>
+            <tr><td style="padding:6px 8px;border:1px solid var(--border)">CEE2 · Conducción y movilización</td><td style="padding:6px 8px;border:1px solid var(--border);text-align:center">25%</td><td style="padding:6px 8px;border:1px solid var(--border);text-align:center">___</td></tr>
+            <tr><td style="padding:6px 8px;border:1px solid var(--border)">CEE3 · Integración profesional</td><td style="padding:6px 8px;border:1px solid var(--border);text-align:center">20%</td><td style="padding:6px 8px;border:1px solid var(--border);text-align:center">___</td></tr>
+            <tr style="background:var(--bg);font-weight:600"><td style="padding:6px 8px;border:1px solid var(--border)">CALIFICACIÓN FINAL TUTOR EMPRESA (60%)</td><td style="padding:6px 8px;border:1px solid var(--border);text-align:center">70%</td><td style="padding:6px 8px;border:1px solid var(--border);text-align:center">___</td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;justify-content:flex-end;margin-top:14px;font-size:11px;color:var(--text-soft)">Firma y sello tutor de empresa: ________________</div>
+      </div>
+      <div id="preview-cuaderno" class="preview-doc-panel" style="display:none;padding:40px;text-align:center;background:var(--bg);border:1px dashed var(--border);border-radius:8px;color:var(--text-soft);font-size:13px">Vista previa del Cuaderno de Prácticas — disponible en versión completa del prototipo.</div>
+      <div id="preview-guia" class="preview-doc-panel" style="display:none;padding:40px;text-align:center;background:var(--bg);border:1px dashed var(--border);border-radius:8px;color:var(--text-soft);font-size:13px">Vista previa de la Guía de Empresa Colaboradora — disponible en versión completa del prototipo.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-preview-doc-fct')">Cerrar</button>
+    </div>
+  </div>
+</div>
+
 <script>
-/* ── Navegación listado / detalle ── */
 function showDetalleCiclo(){
   document.getElementById('view-listado').style.display='none';
   document.getElementById('view-detalle').style.display='block';
@@ -2761,7 +3492,11 @@ function switchModTab(modId,tipo,el){
   const container=document.getElementById('modtabs-'+modId);
   container.querySelectorAll('.mod-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  ['norm','prog','bloques'].forEach(t=>{
+  // FCT tiene subpestañas distintas
+  const fctTabs = ['datos','cee','instrumentos','requisitos'];
+  const stdTabs = ['norm','prog','bloques'];
+  const allTabs = fctTabs.concat(stdTabs);
+  allTabs.forEach(t=>{
     const p=document.getElementById(t+'-'+modId);
     if(p) p.classList.remove('active');
   });
@@ -2777,6 +3512,11 @@ function openModal(id){
 function closeModal(id){
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow='';
+}
+function switchPreviewDoc(val){
+  document.querySelectorAll('.preview-doc-panel').forEach(p=>p.style.display='none');
+  var el=document.getElementById('preview-'+val);
+  if(el) el.style.display='block';
 }
 document.querySelectorAll('.modal-overlay').forEach(o=>{
   o.addEventListener('click',function(e){
