@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CurriculaFP — Calendario del año</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html,body{font-size:14px !important}
+  :root{
+    --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+    --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+    --text-main:#1C1917;--text-sub:#57534E;--text-muted:#A8A29E;
+    --border:#E7E5E0;--border-dark:#D4D0CA;
+    --green:#15803D;--green-light:#F0FDF4;--green-border:#BBF7D0;
+    --amber:#B45309;--amber-light:#FFFBEB;--amber-border:#FDE68A;
+    --blue:#1D4ED8;--blue-light:#EFF6FF;--blue-border:#BFDBFE;
+    --purple:#7C3AED;--purple-light:#EDE9FE;--purple-border:#DDD6FE;
+    --radius:8px;--radius-lg:12px;--radius-sm:6px;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+    --shadow:0 4px 12px rgba(0,0,0,0.08);
+    --sidebar-w:232px;--topbar-h:52px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;font-size:14px}
+  a{text-decoration:none;color:inherit}
+
+  /* SIDEBAR */
+  .sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+  .sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+  .sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+  .sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+  .sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+  .sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+  .sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .nav-group{padding:0 0.625rem 0.25rem}
+  .nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+  .nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+  .nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+  .nav-item.active{background:var(--brand);color:#fff}
+  .nav-item.active .ni{opacity:1}
+  .nav-badge{margin-left:auto;background:rgba(255,255,255,0.15);color:#fff;font-size:0.62rem;font-weight:700;padding:0.08rem 0.42rem;border-radius:999px}
+  .nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+  .nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
+  .sb-bottom{margin-top:auto;padding:0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+  .user-tile{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:7px;background:rgba(255,255,255,0.05);cursor:pointer}
+  .user-tile:hover{background:rgba(255,255,255,0.09)}
+  .user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-weight:700;font-size:0.69rem;color:#fff;flex-shrink:0}
+  .user-name{font-size:0.775rem;font-weight:600;color:#F7F4F0}
+  .user-role{font-size:0.63rem;color:rgba(255,255,255,0.3);margin-top:1px}
+  .ni{width:16px;height:16px;flex-shrink:0;opacity:0.6}
+
+  /* MAIN */
+  .app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+  .topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:0.625rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm)}
+  .topbar-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-main)}
+  .topbar-sub{font-size:0.75rem;color:var(--text-muted);margin-left:0.5rem}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:0.5rem}
+  .content{padding:1.75rem 2rem;max-width:1200px}
+
+  /* BOTONES */
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);font-size:12.5px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-dark)}
+  .btn-secondary{background:var(--bg-white);color:var(--text-main);border:1px solid var(--border)}
+  .btn-secondary:hover{background:var(--bg);border-color:var(--border-dark)}
+  .btn-sm{padding:5px 10px;font-size:11.5px}
+  .btn-ghost{background:none;border:none;color:var(--text-sub);cursor:pointer;font-size:12px;padding:3px 6px;border-radius:4px}
+  .btn-ghost:hover{background:var(--bg);color:var(--text-main)}
+  .btn-danger{background:#FEF2F2;color:var(--brand);border:1px solid #FECACA}
+  .btn-danger:hover{background:#FEE2E2}
+
+  /* CARDS */
+  .card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:16px}
+  .card-header{padding:1rem 1.375rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+  .card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main)}
+  .card-body{padding:1.375rem}
+
+  /* KPI */
+  .kpi-grid{display:grid;gap:1rem;margin-bottom:1.5rem}
+  .kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+  .kpi-card::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+  .k-red::after{background:var(--brand)}
+  .k-green::after{background:var(--green)}
+  .k-amber::after{background:var(--amber)}
+  .k-blue::after{background:var(--blue)}
+  .k-purple::after{background:var(--purple)}
+  .kpi-label{font-size:0.7rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem}
+  .kpi-value{font-size:1.75rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);line-height:1}
+  .kpi-sub{font-size:0.7rem;color:var(--text-sub);margin-top:0.3rem}
+
+  /* CENTROS GRID */
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.2s}
+  .centro-card:hover{box-shadow:var(--shadow);transform:translateY(-1px);border-color:var(--border-dark)}
+  .centro-card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+  .centro-avatar{width:40px;height:40px;border-radius:10px;background:var(--brand-light);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--brand);flex-shrink:0}
+  .centro-name{font-size:13px;font-weight:700;color:var(--text-main);margin-bottom:2px}
+  .centro-loc{font-size:11.5px;color:var(--text-muted)}
+  .centro-stats{display:flex;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+  .centro-stat{text-align:center}
+  .centro-stat-val{font-size:15px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)}
+  .centro-stat-label{font-size:10px;color:var(--text-muted)}
+  .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .sd-green{background:var(--green)}
+  .sd-amber{background:var(--amber)}
+
+  /* VISTA DETALLE */
+  .view-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap}
+  .view-back{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-sub);cursor:pointer;padding:5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-white)}
+  .view-back:hover{background:var(--bg)}
+  .view-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text-main)}
+  .view-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+  /* SELECTOR AÑO */
+  .anio-selector{display:flex;align-items:center;gap:8px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 12px;font-size:12.5px}
+  .anio-selector select{border:none;background:none;font-size:12.5px;font-family:'Inter',sans-serif;color:var(--text-main);font-weight:600;cursor:pointer;outline:none}
+
+  /* TABS DETALLE */
+  .detail-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px;gap:0}
+  .detail-tab{padding:9px 18px;font-size:12.5px;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.15s;white-space:nowrap}
+  .detail-tab:hover{color:var(--text-main)}
+  .detail-tab.active{color:var(--brand);border-bottom-color:var(--brand);font-weight:600}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* FORM */
+  .form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+  .form-label{font-size:12px;font-weight:600;color:var(--text-sub)}
+  .form-label span{color:var(--brand)}
+  .form-input{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);outline:none;transition:border-color 0.15s}
+  .form-input:focus{border-color:var(--brand)}
+  .form-select{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);outline:none;cursor:pointer}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
+
+  /* ALERTS */
+  .alert{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:14px;font-size:12.5px;line-height:1.5}
+  .alert-info{background:var(--blue-light);border:1px solid var(--blue-border);color:#1e3a5f}
+  .alert-warning{background:var(--amber-light);border:1px solid var(--amber-border);color:#78350f}
+  .alert-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+
+  /* TRIMESTRE BLOCK */
+  .trim-block{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+  .trim-header{display:flex;align-items:center;padding:12px 16px;gap:10px;cursor:pointer;user-select:none}
+  .trim-header:hover{background:#FAFAF9}
+  .trim-chevron{font-size:10px;color:var(--text-muted);transition:transform 0.2s}
+  .trim-block.open .trim-chevron{transform:rotate(90deg)}
+  .trim-badge{font-size:11px;font-weight:700;padding:2px 10px;border-radius:4px}
+  .t1-badge{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+  .t2-badge{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0}
+  .t3-badge{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A}
+  .trim-title{font-size:13px;font-weight:700;color:var(--text-main);flex:1}
+  .trim-dates{font-size:11.5px;color:var(--text-muted)}
+  .trim-body{display:none;border-top:1px solid var(--border);padding:16px}
+  .trim-block.open .trim-body{display:block}
+  .trim-stats{display:flex;gap:16px;margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border)}
+  .trim-stat{text-align:center}
+  .trim-stat-val{font-size:18px;font-weight:700;font-family:'Playfair Display',serif;color:var(--brand)}
+  .trim-stat-label{font-size:10.5px;color:var(--text-muted);margin-top:2px}
+
+  /* HORARIO BLOQUES */
+  .horario-bloque{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+  .horario-bloque-header{display:flex;align-items:center;padding:12px 16px;gap:10px;background:var(--bg)}
+  .horario-bloque-title{font-size:13px;font-weight:700;color:var(--text-main);flex:1}
+  .horario-bloque-body{padding:14px 16px}
+  .sesiones-preview{display:flex;gap:4px;flex-wrap:wrap;margin-top:10px}
+  .sesion-pill{font-size:10.5px;padding:3px 8px;border-radius:3px;font-weight:600;background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-border)}
+  .recreo-pill{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
+
+  /* CALENDARIO */
+  .cal-leyenda{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .ley-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text-sub)}
+  .ley-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+  .cal-grid-anual{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .cal-month{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .cal-month-title{padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--border);font-size:12px;font-weight:700;color:var(--text-main);text-align:center;text-transform:uppercase;letter-spacing:0.05em}
+  .cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);padding:4px 6px 0}
+  .cal-day-name{text-align:center;font-size:9.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;padding:3px 0}
+  .cal-days{display:grid;grid-template-columns:repeat(7,1fr);padding:0 6px 6px;gap:2px}
+  .cal-day{text-align:center;font-size:11px;padding:4px 2px;border-radius:4px;min-height:24px;display:flex;align-items:center;justify-content:center}
+  .cal-day.empty{color:transparent}
+  .cal-day.lectivo{background:#F0FDF4;color:#15803D}
+  .cal-day.festivo{background:#DBEAFE;color:#1D4ED8;font-weight:700}
+  .cal-day.vacaciones{background:#FEE2E2;color:#991B1B}
+  .cal-day.evaluacion{background:#F5F3FF;color:#6D28D9;font-weight:700}
+  .cal-day.weekend{color:var(--text-muted);background:#FAFAF9}
+  .cal-day.no-lectivo{background:var(--bg);color:var(--text-muted)}
+  .trim-filter{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px}
+  .trim-btn{padding:5px 11px;border-radius:4px;font-size:11.5px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-sub);transition:all 0.15s;white-space:nowrap}
+  .trim-btn.active{background:var(--bg-white);color:var(--text-main);box-shadow:var(--shadow-sm);font-weight:600}
+  .cal-month-hidden{display:none !important}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;padding:20px}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--bg-white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(0,0,0,0.2);width:520px;max-width:100%;max-height:90vh;overflow-y:auto;animation:modalIn 0.2s ease}
+  @keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg-white);z-index:1}
+  .modal-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text-main)}
+  .modal-subtitle{font-size:11px;color:var(--text-muted);margin-top:2px}
+  .modal-close{width:28px;height:28px;border-radius:5px;border:none;background:var(--bg);cursor:pointer;display:grid;place-items:center;color:var(--text-muted);font-size:16px}
+  .modal-close:hover{background:var(--border)}
+  .modal-body{padding:20px;display:flex;flex-direction:column;gap:4px}
+  .modal-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;background:var(--bg);position:sticky;bottom:0}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-mark">C</div>
+    <div class="sb-logo-text">CurriculaFP<small>Superadministrador</small></div>
+  </div>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 activo</div>
+  <nav style="flex:1;padding-top:0.5rem">
+    <div class="nav-group">
+      <div class="nav-group-label">General</div>
+      <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Configuración</div>
+      <a class="nav-item" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+      <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+      <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas</a>
+      <a class="nav-item" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Años académicos</a>
+      <a class="nav-item" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Catálogo de ciclos</a>
+      <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Catálogo normativo</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditoría del sistema</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Planificación</div>
+      <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Planificación de ciclos</a>
+      <a class="nav-item" href="festivos.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Festivos del centro</a>
+      <a class="nav-item active" href="calendario.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Calendario del año</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Gestión de cursos</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Formación en empresa</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Gestión académica</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluación</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Boletín de notas</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Comunicación</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Informes</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y analítica</a>
+    </div>
+  </nav>
+  <div class="sb-bottom">
+    <div class="user-tile">
+      <div class="user-av">SA</div>
+      <div><div class="user-name">Superadmin</div><div class="user-role">Administrador global</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="app-main">
+  <div class="topbar">
+    <span class="topbar-title">Calendario del año</span>
+    <span class="topbar-sub" id="topbar-sub">Vista global del sistema · Superadministrador</span>
+    <div class="topbar-actions" id="topbar-actions"></div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══ VISTA CUADRÍCULA DE CENTROS ══ -->
+    <div id="vista-centros">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text-main);">Calendario del año académico</div>
+          <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px;">Estructura temporal del curso por centro. Selecciona un centro para configurar su calendario.</div>
+        </div>
+      </div>
+
+      <!-- KPIs globales -->
+      <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="kpi-card k-blue">
+          <div class="kpi-label">Centros configurados</div>
+          <div class="kpi-value">2</div>
+          <div class="kpi-sub">de 3 centros activos</div>
+        </div>
+        <div class="kpi-card k-green">
+          <div class="kpi-label">Días lectivos medios</div>
+          <div class="kpi-value">175</div>
+          <div class="kpi-sub">Por centro 2024–25</div>
+        </div>
+        <div class="kpi-card k-amber">
+          <div class="kpi-label">Pendientes configurar</div>
+          <div class="kpi-value">1</div>
+          <div class="kpi-sub">Sin calendario definido</div>
+        </div>
+        <div class="kpi-card k-red">
+          <div class="kpi-label">Año académico activo</div>
+          <div class="kpi-value">2024–25</div>
+          <div class="kpi-sub">Sep 2024 – Jun 2025</div>
+        </div>
+      </div>
+
+      <!-- Grid centros -->
+      <div class="centros-grid">
+        <div class="centro-card" onclick="mostrarDetalle('cifp-salud')">
+          <div class="centro-card-head">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="centro-avatar">CS</div>
+              <div>
+                <div class="centro-name">CIFP Salud Jerez</div>
+                <div class="centro-loc">Jerez de la Frontera · Cádiz · Andalucía</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <div class="status-dot sd-green"></div>
+              <span style="font-size:11px;color:var(--green);font-weight:600;">Completo</span>
+            </div>
+          </div>
+          <div class="centro-stats">
+            <div class="centro-stat"><div class="centro-stat-val">175</div><div class="centro-stat-label">Días lectivos</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">3</div><div class="centro-stat-label">Trimestres</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">2</div><div class="centro-stat-label">Bloques horarios</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">55'</div><div class="centro-stat-label">Duración sesión</div></div>
+          </div>
+        </div>
+
+        <div class="centro-card" onclick="mostrarDetalle('ies-cartuja')">
+          <div class="centro-card-head">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="centro-avatar">IC</div>
+              <div>
+                <div class="centro-name">IES La Cartuja</div>
+                <div class="centro-loc">Granada · Andalucía</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <div class="status-dot sd-green"></div>
+              <span style="font-size:11px;color:var(--green);font-weight:600;">Completo</span>
+            </div>
+          </div>
+          <div class="centro-stats">
+            <div class="centro-stat"><div class="centro-stat-val">173</div><div class="centro-stat-label">Días lectivos</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">3</div><div class="centro-stat-label">Trimestres</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">1</div><div class="centro-stat-label">Bloques horarios</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">60'</div><div class="centro-stat-label">Duración sesión</div></div>
+          </div>
+        </div>
+
+        <div class="centro-card" onclick="mostrarDetalle('ies-ribera')">
+          <div class="centro-card-head">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="centro-avatar">IR</div>
+              <div>
+                <div class="centro-name">IES Ribera del Genil</div>
+                <div class="centro-loc">Écija · Sevilla · Andalucía</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <div class="status-dot sd-amber"></div>
+              <span style="font-size:11px;color:var(--amber);font-weight:600;">Sin configurar</span>
+            </div>
+          </div>
+          <div class="centro-stats">
+            <div class="centro-stat"><div class="centro-stat-val">—</div><div class="centro-stat-label">Días lectivos</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">—</div><div class="centro-stat-label">Trimestres</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">—</div><div class="centro-stat-label">Bloques horarios</div></div>
+            <div class="centro-stat"><div class="centro-stat-val">—</div><div class="centro-stat-label">Duración sesión</div></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /vista-centros -->
+
+    <!-- ══ VISTA DETALLE CENTRO ══ -->
+    <div id="vista-detalle" style="display:none;">
+
+      <!-- Cabecera -->
+      <div class="view-header">
+        <button class="view-back" onclick="volverCentros()">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+          Todos los centros
+        </button>
+        <div>
+          <div class="view-title">CIFP Salud Jerez</div>
+          <div class="view-subtitle">Jerez de la Frontera · Cádiz · Andalucía · Calendario del año académico</div>
+        </div>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+          <div class="anio-selector">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <select>
+              <option selected>2024–2025</option>
+              <option>2025–2026</option>
+              <option>2023–2024</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openModal('modal-guardar')">Guardar calendario</button>
+        </div>
+      </div>
+
+      <!-- KPIs del centro -->
+      <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:1.25rem;">
+        <div class="kpi-card k-blue">
+          <div class="kpi-label">Días lectivos</div>
+          <div class="kpi-value">175</div>
+          <div class="kpi-sub">Total curso 2024–25</div>
+        </div>
+        <div class="kpi-card k-green">
+          <div class="kpi-label">1.er trimestre</div>
+          <div class="kpi-value">58</div>
+          <div class="kpi-sub">días lectivos</div>
+        </div>
+        <div class="kpi-card k-amber">
+          <div class="kpi-label">2.º trimestre</div>
+          <div class="kpi-value">62</div>
+          <div class="kpi-sub">días lectivos</div>
+        </div>
+        <div class="kpi-card k-red">
+          <div class="kpi-label">3.er trimestre</div>
+          <div class="kpi-value">55</div>
+          <div class="kpi-sub">días lectivos</div>
+        </div>
+        <div class="kpi-card k-purple">
+          <div class="kpi-label">Sesiones/día</div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-sub">mañana + tarde</div>
+        </div>
+      </div>
+
+      <!-- PESTAÑAS -->
+      <div class="detail-tabs">
+        <div class="detail-tab active" onclick="switchTab('tab-estructura',this)">Estructura del curso</div>
+        <div class="detail-tab" onclick="switchTab('tab-horario',this)">Horario del centro</div>
+        <div class="detail-tab" onclick="switchTab('tab-calendario',this)">Vista calendario</div>
+      </div>
+
+      <!-- ── TAB: ESTRUCTURA DEL CURSO ── -->
+      <div id="tab-estructura" class="tab-panel active">
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ</span>
+          <div>Los festivos nacionales, autonómicos y locales se heredan automáticamente de <strong><a href="festivos.html" style="color:var(--blue);text-decoration:underline;">Festivos del centro</a></strong> — 22 festivos importados para 2024–25. Aquí se definen las fechas de inicio/fin, trimestres, vacaciones y evaluaciones.</div>
+        </div>
+
+        <!-- Datos generales del curso -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Datos generales del curso</div>
+            <button class="btn btn-secondary btn-sm">✎ Editar</button>
+          </div>
+          <div class="card-body">
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Inicio del curso <span>*</span></label>
+                <input class="form-input" type="date" value="2024-09-09">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Fin del curso <span>*</span></label>
+                <input class="form-input" type="date" value="2025-06-20">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trimestres -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Trimestres y evaluaciones</div>
+          </div>
+          <div class="card-body" style="padding:12px;">
+
+            <!-- 1er trimestre -->
+            <div class="trim-block open" id="trim-1">
+              <div class="trim-header" onclick="toggleTrim('trim-1')">
+                <div class="trim-chevron">▶</div>
+                <span class="trim-badge t1-badge">1.er trimestre</span>
+                <span class="trim-title">Septiembre – Diciembre 2024</span>
+                <span class="trim-dates">9 sep – 20 dic 2024</span>
+              </div>
+              <div class="trim-body">
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Inicio <span>*</span></label>
+                    <input class="form-input" type="date" value="2024-09-09">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Fin <span>*</span></label>
+                    <input class="form-input" type="date" value="2024-12-20">
+                  </div>
+                </div>
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Vacaciones de Navidad — inicio</label>
+                    <input class="form-input" type="date" value="2024-12-23">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Vacaciones de Navidad — fin</label>
+                    <input class="form-input" type="date" value="2025-01-07">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fecha junta de evaluación 1.ª evaluación</label>
+                  <input class="form-input" type="date" value="2024-12-18">
+                </div>
+                <div class="trim-stats">
+                  <div class="trim-stat"><div class="trim-stat-val">58</div><div class="trim-stat-label">Días lectivos</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">464</div><div class="trim-stat-label">Sesiones mañana</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">232</div><div class="trim-stat-label">Sesiones tarde</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">696</div><div class="trim-stat-label">Sesiones totales</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2º trimestre -->
+            <div class="trim-block open" id="trim-2">
+              <div class="trim-header" onclick="toggleTrim('trim-2')">
+                <div class="trim-chevron">▶</div>
+                <span class="trim-badge t2-badge">2.º trimestre</span>
+                <span class="trim-title">Enero – Marzo 2025</span>
+                <span class="trim-dates">8 ene – 28 mar 2025</span>
+              </div>
+              <div class="trim-body">
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Inicio <span>*</span></label>
+                    <input class="form-input" type="date" value="2025-01-08">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Fin <span>*</span></label>
+                    <input class="form-input" type="date" value="2025-03-28">
+                  </div>
+                </div>
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Vacaciones de Semana Santa — inicio</label>
+                    <input class="form-input" type="date" value="2025-04-14">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Vacaciones de Semana Santa — fin</label>
+                    <input class="form-input" type="date" value="2025-04-22">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fecha junta de evaluación 2.ª evaluación</label>
+                  <input class="form-input" type="date" value="2025-03-26">
+                </div>
+                <div class="trim-stats">
+                  <div class="trim-stat"><div class="trim-stat-val">62</div><div class="trim-stat-label">Días lectivos</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">496</div><div class="trim-stat-label">Sesiones mañana</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">248</div><div class="trim-stat-label">Sesiones tarde</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">744</div><div class="trim-stat-label">Sesiones totales</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3er trimestre -->
+            <div class="trim-block open" id="trim-3">
+              <div class="trim-header" onclick="toggleTrim('trim-3')">
+                <div class="trim-chevron">▶</div>
+                <span class="trim-badge t3-badge">3.er trimestre</span>
+                <span class="trim-title">Abril – Junio 2025</span>
+                <span class="trim-dates">23 abr – 20 jun 2025</span>
+              </div>
+              <div class="trim-body">
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Inicio <span>*</span></label>
+                    <input class="form-input" type="date" value="2025-04-23">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Fin <span>*</span></label>
+                    <input class="form-input" type="date" value="2025-06-20">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fecha junta de evaluación final</label>
+                  <input class="form-input" type="date" value="2025-06-18">
+                </div>
+                <div class="trim-stats">
+                  <div class="trim-stat"><div class="trim-stat-val">55</div><div class="trim-stat-label">Días lectivos</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">440</div><div class="trim-stat-label">Sesiones mañana</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">220</div><div class="trim-stat-label">Sesiones tarde</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">660</div><div class="trim-stat-label">Sesiones totales</div></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Otros períodos no lectivos -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Otros períodos no lectivos</div>
+            <button class="btn btn-secondary btn-sm" onclick="openModal('modal-nuevo-periodo')">+ Añadir período</button>
+          </div>
+          <div class="card-body" style="padding:0;">
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr style="background:var(--bg);">
+                  <th style="padding:8px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);">Período</th>
+                  <th style="padding:8px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);">Desde</th>
+                  <th style="padding:8px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);">Hasta</th>
+                  <th style="padding:8px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);">Días</th>
+                  <th style="padding:8px 14px;border-bottom:2px solid var(--border);"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">Vacaciones de Navidad</td>
+                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">23 dic 2024</td>
+                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">7 ene 2025</td>
+                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);font-weight:700;color:var(--brand);">11</td>
+                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);">
+                    <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-periodo')">✎ Editar</button>
+                    <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">Vacaciones de Semana Santa</td>
+                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">14 abr 2025</td>
+                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">22 abr 2025</td>
+                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);font-weight:700;color:var(--brand);">7</td>
+                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);">
+                    <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-periodo')">✎ Editar</button>
+                    <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /tab-estructura -->
+
+      <!-- ── TAB: HORARIO DEL CENTRO ── -->
+      <div id="tab-horario" class="tab-panel">
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ</span>
+          <div>Define los bloques horarios del centro y la duración de sesión. El horario específico de cada grupo (si 1º entra a las 8h y 2º a las 15h) se configura en <strong>Gestión de cursos → Grupos y docentes</strong>.</div>
+        </div>
+
+        <!-- Duración de sesión -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Configuración general</div>
+          </div>
+          <div class="card-body">
+            <div class="grid-3">
+              <div class="form-group">
+                <label class="form-label">Duración de sesión (minutos) <span>*</span></label>
+                <input class="form-input" type="number" value="55" style="width:100px;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Días lectivos por semana</label>
+                <select class="form-select" style="width:120px;">
+                  <option selected>5 días (L–V)</option>
+                  <option>6 días (L–S)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tipo de jornada del centro</label>
+                <select class="form-select">
+                  <option selected>Jornada completa (mañana + tarde)</option>
+                  <option>Solo mañana</option>
+                  <option>Solo tarde</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloques horarios -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main);">Bloques horarios</div>
+          <button class="btn btn-secondary btn-sm" onclick="openModal('modal-nuevo-bloque')">+ Nuevo bloque</button>
+        </div>
+
+        <!-- Bloque mañana -->
+        <div class="horario-bloque">
+          <div class="horario-bloque-header">
+            <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-light);display:grid;place-items:center;font-size:16px;">🌅</div>
+            <div class="horario-bloque-title">Bloque Mañana</div>
+            <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-bloque')">✎ Editar</button>
+            <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕ Eliminar</button>
+          </div>
+          <div class="horario-bloque-body">
+            <div class="grid-4">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Entrada</div>
+                <div style="font-size:16px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);">08:00</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Recreo</div>
+                <div style="font-size:16px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);">10:20 – 10:40</div>
+                <div style="font-size:11px;color:var(--text-muted);">20 minutos</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Fin mañana</div>
+                <div style="font-size:16px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);">14:00</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Sesiones</div>
+                <div style="font-size:16px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green);">4 sesiones</div>
+                <div style="font-size:11px;color:var(--text-muted);">× 55 min</div>
+              </div>
+            </div>
+            <div class="sesiones-preview">
+              <span class="sesion-pill">1.ª · 08:00–08:55</span>
+              <span class="sesion-pill">2.ª · 08:55–09:50</span>
+              <span class="sesion-pill">3.ª · 09:50–10:45</span>
+              <span class="recreo-pill sesion-pill">Recreo · 10:45–11:05</span>
+              <span class="sesion-pill">4.ª · 11:05–12:00</span>
+              <span class="sesion-pill">5.ª · 12:00–12:55</span>
+              <span class="sesion-pill">6.ª · 12:55–13:50</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloque tarde -->
+        <div class="horario-bloque">
+          <div class="horario-bloque-header">
+            <div style="width:36px;height:36px;border-radius:8px;background:var(--amber-light);display:grid;place-items:center;font-size:16px;">🌆</div>
+            <div class="horario-bloque-title">Bloque Tarde</div>
+            <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-bloque')">✎ Editar</button>
+            <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕ Eliminar</button>
+          </div>
+          <div class="horario-bloque-body">
+            <div class="grid-4">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Entrada</div>
+                <div style="font-size:16px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);">15:00</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Recreo</div>
+                <div style="font-size:16px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);">16:40 – 17:00</div>
+                <div style="font-size:11px;color:var(--text-muted);">20 minutos</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Fin tarde</div>
+                <div style="font-size:16px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);">18:30</div>
+              </div>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Sesiones</div>
+                <div style="font-size:16px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green);">3 sesiones</div>
+                <div style="font-size:11px;color:var(--text-muted);">× 55 min</div>
+              </div>
+            </div>
+            <div class="sesiones-preview">
+              <span class="sesion-pill">7.ª · 15:00–15:55</span>
+              <span class="sesion-pill">8.ª · 15:55–16:50</span>
+              <span class="recreo-pill sesion-pill">Recreo · 16:50–17:10</span>
+              <span class="sesion-pill">9.ª · 17:10–18:05</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tab-horario -->
+
+      <!-- ── TAB: VISTA CALENDARIO ── -->
+      <div id="tab-calendario" class="tab-panel">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+          <div class="cal-leyenda" style="margin-bottom:0;">
+            <div class="ley-item"><div class="ley-dot" style="background:#F0FDF4;border:1px solid #BBF7D0"></div>Lectivo</div>
+            <div class="ley-item"><div class="ley-dot" style="background:#DBEAFE;border:1px solid #BFDBFE"></div>Festivo</div>
+            <div class="ley-item"><div class="ley-dot" style="background:#FEE2E2;border:1px solid #FECACA"></div>Vacaciones</div>
+            <div class="ley-item"><div class="ley-dot" style="background:#F5F3FF;border:1px solid #DDD6FE"></div>Evaluación</div>
+            <div class="ley-item"><div class="ley-dot" style="background:#FAFAF9;border:1px solid var(--border)"></div>Fin de semana</div>
+          </div>
+          <div class="trim-filter">
+            <button class="trim-btn active" onclick="filtrarTrimestre('todos',this)">Todos</button>
+            <button class="trim-btn" onclick="filtrarTrimestre('t1',this)">1.er trim · Sep–Dic</button>
+            <button class="trim-btn" onclick="filtrarTrimestre('t2',this)">2.º trim · Ene–Mar</button>
+            <button class="trim-btn" onclick="filtrarTrimestre('t3',this)">3.er trim · Abr–Jun</button>
+          </div>
+        </div>
+        <div class="cal-grid-anual" id="cal-grid"></div>
+      </div><!-- /tab-calendario -->
+
+    </div><!-- /vista-detalle -->
+
+  </div><!-- /content -->
+</div><!-- /app-main -->
+
+<!-- MODAL: Guardar calendario -->
+<div class="modal-overlay" id="modal-guardar">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Guardar calendario</div><div class="modal-subtitle">CIFP Salud Jerez · 2024–2025</div></div>
+      <button class="modal-close" onclick="closeModal('modal-guardar')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-warning"><span class="alert-icon">⚠</span><span>Al guardar el calendario, los profesores podrán comenzar a distribuir sus programaciones sobre este marco temporal. Los cambios posteriores pueden afectar a programaciones ya realizadas.</span></div>
+      <p style="font-size:13px;color:var(--text-sub);line-height:1.6;">¿Confirmas que el calendario de <strong>CIFP Salud Jerez para 2024–2025</strong> está completo y listo para usar?</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-guardar')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-guardar')">Confirmar y guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo período no lectivo -->
+<div class="modal-overlay" id="modal-nuevo-periodo">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Añadir período no lectivo</div><div class="modal-subtitle">CIFP Salud Jerez · 2024–2025</div></div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-periodo')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Denominación <span>*</span></label>
+        <input class="form-input" placeholder="Ej: Puente de mayo, Semana cultural…">
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Fecha inicio <span>*</span></label>
+          <input class="form-input" type="date">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fecha fin <span>*</span></label>
+          <input class="form-input" type="date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Observaciones</label>
+        <input class="form-input" placeholder="Acuerdo de claustro, resolución de la consejería…">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-periodo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-periodo')">Añadir período</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Editar período -->
+<div class="modal-overlay" id="modal-editar-periodo">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Editar período no lectivo</div><div class="modal-subtitle">CIFP Salud Jerez · 2024–2025</div></div>
+      <button class="modal-close" onclick="closeModal('modal-editar-periodo')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Denominación <span>*</span></label>
+        <input class="form-input" value="Vacaciones de Navidad">
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Fecha inicio <span>*</span></label>
+          <input class="form-input" type="date" value="2024-12-23">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fecha fin <span>*</span></label>
+          <input class="form-input" type="date" value="2025-01-07">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-editar-periodo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-editar-periodo')">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nuevo bloque horario -->
+<div class="modal-overlay" id="modal-nuevo-bloque">
+  <div class="modal" style="width:560px;">
+    <div class="modal-head">
+      <div><div class="modal-title">Nuevo bloque horario</div><div class="modal-subtitle">CIFP Salud Jerez · 2024–2025</div></div>
+      <button class="modal-close" onclick="closeModal('modal-nuevo-bloque')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nombre del bloque <span>*</span></label>
+        <input class="form-input" placeholder="Ej: Mañana, Tarde, Noche…">
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Hora de entrada <span>*</span></label>
+          <input class="form-input" type="time">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hora de fin <span>*</span></label>
+          <input class="form-input" type="time">
+        </div>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:8px;margin-top:4px;">Recreo</div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Inicio recreo</label>
+          <input class="form-input" type="time">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Duración (minutos)</label>
+          <input class="form-input" type="number" placeholder="20" style="width:80px;">
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:4px;"><span class="alert-icon">ℹ</span><span>Las sesiones se calcularán automáticamente según la duración configurada (55 min) descontando el recreo.</span></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nuevo-bloque')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nuevo-bloque')">Crear bloque</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Editar bloque horario -->
+<div class="modal-overlay" id="modal-editar-bloque">
+  <div class="modal" style="width:560px;">
+    <div class="modal-head">
+      <div><div class="modal-title">Editar bloque horario</div><div class="modal-subtitle">Bloque Mañana · CIFP Salud Jerez</div></div>
+      <button class="modal-close" onclick="closeModal('modal-editar-bloque')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nombre del bloque</label>
+        <input class="form-input" value="Bloque Mañana">
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Hora de entrada</label>
+          <input class="form-input" type="time" value="08:00">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hora de fin</label>
+          <input class="form-input" type="time" value="14:00">
+        </div>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:8px;margin-top:4px;">Recreo</div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Inicio recreo</label>
+          <input class="form-input" type="time" value="10:45">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Duración (minutos)</label>
+          <input class="form-input" type="number" value="20" style="width:80px;">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-danger btn-sm">✕ Eliminar bloque</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-editar-bloque')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-editar-bloque')">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── NAVEGACIÓN ──
+function mostrarDetalle(centro){
+  document.getElementById('vista-centros').style.display='none';
+  document.getElementById('vista-detalle').style.display='block';
+  document.getElementById('topbar-sub').textContent='CIFP Salud Jerez · Calendario 2024–2025 · Superadministrador';
+  renderCalendario();
+}
+function volverCentros(){
+  document.getElementById('vista-detalle').style.display='none';
+  document.getElementById('vista-centros').style.display='block';
+  document.getElementById('topbar-sub').textContent='Vista global del sistema · Superadministrador';
+}
+
+// ── TABS ──
+function switchTab(id,el){
+  document.querySelectorAll('.detail-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  if(id==='tab-calendario') renderCalendario();
+}
+
+// ── TRIMESTRES ──
+function toggleTrim(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ── MODALES ──
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); });
+});
+
+// ── CALENDARIO ──
+const diasTipo = {
+  // Festivos nacionales/autonómicos/locales
+  '2024-09-24':'festivo','2024-09-25':'festivo',
+  '2024-10-04':'no-lectivo','2024-10-12':'festivo',
+  '2024-10-30':'festivo','2024-11-01':'festivo',
+  '2024-12-06':'festivo','2024-12-08':'festivo','2024-12-25':'festivo',
+  '2025-01-01':'festivo','2025-01-06':'festivo',
+  '2025-02-28':'festivo','2025-03-03':'festivo','2025-03-04':'festivo',
+  '2025-04-17':'festivo','2025-04-18':'festivo','2025-04-21':'festivo',
+  '2025-05-01':'festivo','2025-06-20':'no-lectivo','2025-08-15':'festivo',
+  // Vacaciones
+  '2024-12-23':'vacaciones','2024-12-24':'vacaciones','2024-12-26':'vacaciones',
+  '2024-12-27':'vacaciones','2024-12-30':'vacaciones','2024-12-31':'vacaciones',
+  '2025-01-02':'vacaciones','2025-01-03':'vacaciones','2025-01-07':'vacaciones',
+  '2025-04-14':'vacaciones','2025-04-15':'vacaciones','2025-04-16':'vacaciones',
+  '2025-04-22':'vacaciones',
+  // Evaluaciones
+  '2024-12-18':'evaluacion','2025-03-26':'evaluacion','2025-06-18':'evaluacion',
+};
+
+const meses=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const diasSem=['L','M','X','J','V','S','D'];
+
+const MESES_ANIO=[
+  {m:8,a:2024},{m:9,a:2024},{m:10,a:2024},{m:11,a:2024},
+  {m:0,a:2025},{m:1,a:2025},{m:2,a:2025},
+  {m:3,a:2025},{m:4,a:2025},{m:5,a:2025},
+  {m:6,a:2025},{m:7,a:2025}
+];
+
+const TRIMESTRES={
+  't1':[0,1,2,3],'t2':[4,5,6],'t3':[7,8,9],'todos':[0,1,2,3,4,5,6,7,8,9,10,11]
+};
+
+let trimestreActivo='todos';
+
+function renderCalendario(){
+  const grid=document.getElementById('cal-grid');
+  if(!grid) return;
+  grid.innerHTML='';
+  MESES_ANIO.forEach(({m,a},idx)=>{
+    const div=document.createElement('div');
+    div.className='cal-month';
+    div.dataset.idx=idx;
+    if(!TRIMESTRES[trimestreActivo].includes(idx)) div.classList.add('cal-month-hidden');
+    const primero=new Date(a,m,1).getDay();
+    const offset=(primero===0?6:primero-1);
+    const totalDias=new Date(a,m+1,0).getDate();
+    const trimLabel=idx<4?'T1':idx<7?'T2':idx<10?'T3':'—';
+    let html=`<div class="cal-month-title">${meses[m]} ${a} <span style="font-size:9px;opacity:0.5;margin-left:4px;">${trimLabel}</span></div>`;
+    html+=`<div class="cal-days-header">${diasSem.map(d=>`<div class="cal-day-name">${d}</div>`).join('')}</div>`;
+    html+='<div class="cal-days">';
+    for(let i=0;i<offset;i++) html+=`<div class="cal-day empty"></div>`;
+    for(let d=1;d<=totalDias;d++){
+      const fecha=`${a}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const tipo=diasTipo[fecha]||'';
+      const dow=(offset+d-1)%7;
+      let cls='cal-day';
+      if(tipo) cls+=` ${tipo}`;
+      else if(dow>=5) cls+=' weekend';
+      else cls+=' lectivo';
+      html+=`<div class="${cls}">${d}</div>`;
+    }
+    html+='</div>';
+    div.innerHTML=html;
+    grid.appendChild(div);
+  });
+}
+
+function filtrarTrimestre(trim,el){
+  trimestreActivo=trim;
+  document.querySelectorAll('.trim-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('#cal-grid .cal-month').forEach(m=>{
+    const idx=parseInt(m.dataset.idx);
+    m.classList.toggle('cal-month-hidden',!TRIMESTRES[trim].includes(idx));
+  });
+  const grid=document.getElementById('cal-grid');
+  const visible=TRIMESTRES[trim].length;
+  grid.style.gridTemplateColumns=visible<=3?'repeat(3,1fr)':'repeat(4,1fr)';
+}
+</script>
+</body>
+</html>
