@@ -454,7 +454,7 @@
 
         <div class="alert alert-info">
           <span class="alert-icon">ℹ</span>
-          <div>Los festivos nacionales, autonómicos y locales se heredan automáticamente de <strong><a href="festivos.html" style="color:var(--blue);text-decoration:underline;">Festivos del centro</a></strong> — 22 festivos importados para 2024–25. Aquí se definen las fechas de inicio/fin, trimestres, vacaciones y evaluaciones.</div>
+          <div>Los festivos y períodos no lectivos se heredan automáticamente de <strong><a href="festivos.html" style="color:var(--blue);text-decoration:underline;">Festivos del centro</a></strong> — 22 días no lectivos importados para 2024–25. Aquí se definen las fechas de inicio/fin de curso, trimestres y sesiones de evaluación.</div>
         </div>
 
         <!-- Datos generales del curso -->
@@ -480,7 +480,7 @@
         <!-- Trimestres -->
         <div class="card">
           <div class="card-header">
-            <div class="card-title">Trimestres y evaluaciones</div>
+            <div class="card-title">Trimestres y sesiones de evaluación</div>
           </div>
           <div class="card-body" style="padding:12px;">
 
@@ -493,7 +493,7 @@
                 <span class="trim-dates">9 sep – 20 dic 2024</span>
               </div>
               <div class="trim-body">
-                <div class="grid-2">
+                <div class="grid-2" style="margin-bottom:16px;">
                   <div class="form-group">
                     <label class="form-label">Inicio <span>*</span></label>
                     <input class="form-input" type="date" value="2024-09-09">
@@ -503,22 +503,62 @@
                     <input class="form-input" type="date" value="2024-12-20">
                   </div>
                 </div>
-                <div class="grid-2">
-                  <div class="form-group">
-                    <label class="form-label">Vacaciones de Navidad — inicio</label>
-                    <input class="form-input" type="date" value="2024-12-23">
+
+                <!-- Festivos heredados T1 -->
+                <div style="margin-bottom:16px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Días no lectivos heredados de Festivos</div>
+                    <a href="festivos.html" style="font-size:11px;color:var(--blue);">Ver en Festivos →</a>
                   </div>
-                  <div class="form-group">
-                    <label class="form-label">Vacaciones de Navidad — fin</label>
-                    <input class="form-input" type="date" value="2025-01-07">
+                  <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">24 sep · Patrona de Jerez</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">25 sep · Feria del Caballo</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">4 oct · Jornada formación</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">12 oct · Fiesta Nacional</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">30 oct · Traslado festivo</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">1 nov · Todos los Santos</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#FEE2E2;color:#991B1B;border:1px solid #FECACA;">23 dic–7 ene · Vacaciones Navidad</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">6 dic · Constitución</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">25 dic · Navidad</span>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Fecha junta de evaluación 1.ª evaluación</label>
-                  <input class="form-input" type="date" value="2024-12-18">
+
+                <!-- Sesiones de evaluación T1 -->
+                <div style="margin-bottom:12px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Sesiones de evaluación</div>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('modal-nueva-sesion-eval','T1')">+ Añadir sesión</button>
+                  </div>
+                  <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                    <thead><tr style="background:var(--bg);">
+                      <th style="padding:6px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Fecha</th>
+                      <th style="padding:6px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Denominación</th>
+                      <th style="padding:6px 10px;border-bottom:2px solid var(--border);"></th>
+                    </tr></thead>
+                    <tbody>
+                      <tr>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);white-space:nowrap;font-weight:600;color:var(--purple);">18 dic 2024</td>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);">Junta de evaluación 1.ª evaluación</td>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);">
+                          <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sesion-eval')">✎</button>
+                          <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:7px 10px;white-space:nowrap;font-weight:600;color:var(--purple);">19 dic 2024</td>
+                        <td style="padding:7px 10px;">Reclamaciones 1.ª evaluación</td>
+                        <td style="padding:7px 10px;">
+                          <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sesion-eval')">✎</button>
+                          <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+
                 <div class="trim-stats">
                   <div class="trim-stat"><div class="trim-stat-val">58</div><div class="trim-stat-label">Días lectivos</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">9</div><div class="trim-stat-label">Días no lectivos</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">464</div><div class="trim-stat-label">Sesiones mañana</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">232</div><div class="trim-stat-label">Sesiones tarde</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">696</div><div class="trim-stat-label">Sesiones totales</div></div>
@@ -535,7 +575,7 @@
                 <span class="trim-dates">8 ene – 28 mar 2025</span>
               </div>
               <div class="trim-body">
-                <div class="grid-2">
+                <div class="grid-2" style="margin-bottom:16px;">
                   <div class="form-group">
                     <label class="form-label">Inicio <span>*</span></label>
                     <input class="form-input" type="date" value="2025-01-08">
@@ -545,22 +585,58 @@
                     <input class="form-input" type="date" value="2025-03-28">
                   </div>
                 </div>
-                <div class="grid-2">
-                  <div class="form-group">
-                    <label class="form-label">Vacaciones de Semana Santa — inicio</label>
-                    <input class="form-input" type="date" value="2025-04-14">
+
+                <!-- Festivos heredados T2 -->
+                <div style="margin-bottom:16px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Días no lectivos heredados de Festivos</div>
+                    <a href="festivos.html" style="font-size:11px;color:var(--blue);">Ver en Festivos →</a>
                   </div>
-                  <div class="form-group">
-                    <label class="form-label">Vacaciones de Semana Santa — fin</label>
-                    <input class="form-input" type="date" value="2025-04-22">
+                  <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">6 ene · Epifanía</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">28 feb · Día de Andalucía</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">3 mar · Lunes Carnaval</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">4 mar · Martes Carnaval</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#FEE2E2;color:#991B1B;border:1px solid #FECACA;">14–22 abr · Semana Santa</span>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Fecha junta de evaluación 2.ª evaluación</label>
-                  <input class="form-input" type="date" value="2025-03-26">
+
+                <!-- Sesiones de evaluación T2 -->
+                <div style="margin-bottom:12px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Sesiones de evaluación</div>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('modal-nueva-sesion-eval')">+ Añadir sesión</button>
+                  </div>
+                  <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                    <thead><tr style="background:var(--bg);">
+                      <th style="padding:6px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Fecha</th>
+                      <th style="padding:6px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Denominación</th>
+                      <th style="padding:6px 10px;border-bottom:2px solid var(--border);"></th>
+                    </tr></thead>
+                    <tbody>
+                      <tr>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);white-space:nowrap;font-weight:600;color:var(--purple);">26 mar 2025</td>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);">Junta de evaluación 2.ª evaluación</td>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);">
+                          <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sesion-eval')">✎</button>
+                          <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:7px 10px;white-space:nowrap;font-weight:600;color:var(--purple);">27 mar 2025</td>
+                        <td style="padding:7px 10px;">Reclamaciones 2.ª evaluación</td>
+                        <td style="padding:7px 10px;">
+                          <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sesion-eval')">✎</button>
+                          <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+
                 <div class="trim-stats">
                   <div class="trim-stat"><div class="trim-stat-val">62</div><div class="trim-stat-label">Días lectivos</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">5</div><div class="trim-stat-label">Días no lectivos</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">496</div><div class="trim-stat-label">Sesiones mañana</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">248</div><div class="trim-stat-label">Sesiones tarde</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">744</div><div class="trim-stat-label">Sesiones totales</div></div>
@@ -577,7 +653,7 @@
                 <span class="trim-dates">23 abr – 20 jun 2025</span>
               </div>
               <div class="trim-body">
-                <div class="grid-2">
+                <div class="grid-2" style="margin-bottom:16px;">
                   <div class="form-group">
                     <label class="form-label">Inicio <span>*</span></label>
                     <input class="form-input" type="date" value="2025-04-23">
@@ -587,12 +663,63 @@
                     <input class="form-input" type="date" value="2025-06-20">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Fecha junta de evaluación final</label>
-                  <input class="form-input" type="date" value="2025-06-18">
+
+                <!-- Festivos heredados T3 -->
+                <div style="margin-bottom:16px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Días no lectivos heredados de Festivos</div>
+                    <a href="festivos.html" style="font-size:11px;color:var(--blue);">Ver en Festivos →</a>
+                  </div>
+                  <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">1 may · Fiesta del Trabajo</span>
+                    <span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE;">20 jun · Convivencia fin de curso</span>
+                  </div>
                 </div>
+
+                <!-- Sesiones de evaluación T3 -->
+                <div style="margin-bottom:12px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Sesiones de evaluación</div>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('modal-nueva-sesion-eval')">+ Añadir sesión</button>
+                  </div>
+                  <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                    <thead><tr style="background:var(--bg);">
+                      <th style="padding:6px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Fecha</th>
+                      <th style="padding:6px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Denominación</th>
+                      <th style="padding:6px 10px;border-bottom:2px solid var(--border);"></th>
+                    </tr></thead>
+                    <tbody>
+                      <tr>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);white-space:nowrap;font-weight:600;color:var(--purple);">17 jun 2025</td>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);">Junta de evaluación final</td>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);">
+                          <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sesion-eval')">✎</button>
+                          <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);white-space:nowrap;font-weight:600;color:var(--purple);">18 jun 2025</td>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);">Evaluación extraordinaria</td>
+                        <td style="padding:7px 10px;border-bottom:1px solid var(--border);">
+                          <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sesion-eval')">✎</button>
+                          <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:7px 10px;white-space:nowrap;font-weight:600;color:var(--purple);">19 jun 2025</td>
+                        <td style="padding:7px 10px;">Reclamaciones evaluación final</td>
+                        <td style="padding:7px 10px;">
+                          <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sesion-eval')">✎</button>
+                          <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
                 <div class="trim-stats">
                   <div class="trim-stat"><div class="trim-stat-val">55</div><div class="trim-stat-label">Días lectivos</div></div>
+                  <div class="trim-stat"><div class="trim-stat-val">2</div><div class="trim-stat-label">Días no lectivos</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">440</div><div class="trim-stat-label">Sesiones mañana</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">220</div><div class="trim-stat-label">Sesiones tarde</div></div>
                   <div class="trim-stat"><div class="trim-stat-val">660</div><div class="trim-stat-label">Sesiones totales</div></div>
@@ -600,49 +727,6 @@
               </div>
             </div>
 
-          </div>
-        </div>
-
-        <!-- Otros períodos no lectivos -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">Otros períodos no lectivos</div>
-            <button class="btn btn-secondary btn-sm" onclick="openModal('modal-nuevo-periodo')">+ Añadir período</button>
-          </div>
-          <div class="card-body" style="padding:0;">
-            <table style="width:100%;border-collapse:collapse;">
-              <thead>
-                <tr style="background:var(--bg);">
-                  <th style="padding:8px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);">Período</th>
-                  <th style="padding:8px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);">Desde</th>
-                  <th style="padding:8px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);">Hasta</th>
-                  <th style="padding:8px 14px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);">Días</th>
-                  <th style="padding:8px 14px;border-bottom:2px solid var(--border);"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">Vacaciones de Navidad</td>
-                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">23 dic 2024</td>
-                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">7 ene 2025</td>
-                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);font-weight:700;color:var(--brand);">11</td>
-                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);">
-                    <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-periodo')">✎ Editar</button>
-                    <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">Vacaciones de Semana Santa</td>
-                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">14 abr 2025</td>
-                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);">22 abr 2025</td>
-                  <td style="padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border);font-weight:700;color:var(--brand);">7</td>
-                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);">
-                    <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-periodo')">✎ Editar</button>
-                    <button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
 
@@ -960,6 +1044,65 @@
       <button class="btn btn-danger btn-sm">✕ Eliminar bloque</button>
       <button class="btn btn-secondary" onclick="closeModal('modal-editar-bloque')">Cancelar</button>
       <button class="btn btn-primary" onclick="closeModal('modal-editar-bloque')">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nueva sesión de evaluación -->
+<div class="modal-overlay" id="modal-nueva-sesion-eval">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Añadir sesión de evaluación</div><div class="modal-subtitle">CIFP Salud Jerez · 2024–2025</div></div>
+      <button class="modal-close" onclick="closeModal('modal-nueva-sesion-eval')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Fecha <span>*</span></label>
+        <input class="form-input" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Denominación <span>*</span></label>
+        <input class="form-input" placeholder="Ej: Junta de evaluación, Reclamaciones, Evaluación extraordinaria…">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Observaciones</label>
+        <input class="form-input" placeholder="Sala, convocatoria, documentación necesaria…">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-sesion-eval')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-sesion-eval')">Añadir sesión</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Editar sesión de evaluación -->
+<div class="modal-overlay" id="modal-editar-sesion-eval">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Editar sesión de evaluación</div><div class="modal-subtitle">CIFP Salud Jerez · 2024–2025</div></div>
+      <button class="modal-close" onclick="closeModal('modal-editar-sesion-eval')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Fecha <span>*</span></label>
+        <input class="form-input" type="date" value="2024-12-18">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Denominación <span>*</span></label>
+        <input class="form-input" value="Junta de evaluación 1.ª evaluación">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Observaciones</label>
+        <input class="form-input" placeholder="Sala, convocatoria, documentación necesaria…">
+      </div>
+      <div style="padding-top:4px;border-top:1px solid var(--border);margin-top:4px;">
+        <button class="btn btn-danger btn-sm">✕ Eliminar esta sesión</button>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-editar-sesion-eval')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-editar-sesion-eval')">Guardar cambios</button>
     </div>
   </div>
 </div>
