@@ -41,6 +41,7 @@
   .nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
   .nav-item.active{background:var(--brand);color:#fff}
   .nav-item.active .ni{opacity:1}
+  .nav-badge{margin-left:auto;background:rgba(255,255,255,0.15);color:#fff;font-size:0.62rem;font-weight:700;padding:0.08rem 0.42rem;border-radius:999px}
   .nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
   .nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
   .sb-bottom{margin-top:auto;padding:0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
@@ -70,23 +71,21 @@
   .btn-ghost:hover{background:var(--bg);color:var(--text-main)}
   .btn-danger{background:#FEF2F2;color:var(--brand);border:1px solid #FECACA}
   .btn-danger:hover{background:#FEE2E2}
-  .btn-warning{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
 
   /* CARDS */
-  .card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:16px}
+  .card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden}
   .card-header{padding:1rem 1.375rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
   .card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main)}
   .card-body{padding:1.375rem}
 
   /* KPI */
-  .kpi-grid{display:grid;gap:1rem;margin-bottom:1.5rem}
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
   .kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
   .kpi-card::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
   .k-red::after{background:var(--brand)}
   .k-green::after{background:var(--green)}
   .k-amber::after{background:var(--amber)}
   .k-blue::after{background:var(--blue)}
-  .k-purple::after{background:var(--purple)}
   .kpi-label{font-size:0.7rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem}
   .kpi-value{font-size:1.75rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);line-height:1}
   .kpi-sub{font-size:0.7rem;color:var(--text-sub);margin-top:0.3rem}
@@ -95,109 +94,106 @@
   .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
   .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.2s}
   .centro-card:hover{box-shadow:var(--shadow);transform:translateY(-1px);border-color:var(--border-dark)}
+  .centro-card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
   .centro-avatar{width:40px;height:40px;border-radius:10px;background:var(--brand-light);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--brand);flex-shrink:0}
   .centro-name{font-size:13px;font-weight:700;color:var(--text-main);margin-bottom:2px}
   .centro-loc{font-size:11.5px;color:var(--text-muted)}
   .centro-stats{display:flex;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+  .centro-stat{text-align:center}
   .centro-stat-val{font-size:15px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)}
   .centro-stat-label{font-size:10px;color:var(--text-muted)}
   .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
   .sd-green{background:var(--green)}
   .sd-amber{background:var(--amber)}
 
-  /* NAVEGACIÓN */
-  .view-back{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-sub);cursor:pointer;padding:5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-white)}
+  /* VISTA DETALLE */
+  .view-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+  .view-back{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-sub);cursor:pointer;padding:5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-white)}
   .view-back:hover{background:var(--bg)}
-  .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
-  .bc-sep{color:var(--text-muted);font-size:12px}
-  .bc-item{font-size:12.5px;color:var(--text-muted);cursor:pointer}
-  .bc-item:hover{color:var(--text-main)}
-  .bc-item.active{font-weight:600;color:var(--text-main);cursor:default}
+  .view-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text-main)}
+  .view-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px}
 
-  /* SELECTORES */
-  .selector-bar{display:flex;align-items:center;gap:10px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 16px;margin-bottom:20px;flex-wrap:wrap}
-  .selector-label{font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap}
-  .form-select{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);outline:none;cursor:pointer}
-  .form-input{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);outline:none;transition:border-color 0.15s}
-  .form-input:focus{border-color:var(--brand)}
-  .form-label{font-size:12px;font-weight:600;color:var(--text-sub)}
-  .form-label span{color:var(--brand)}
-  .form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  /* SELECTOR AÑO */
+  .anio-selector{display:flex;align-items:center;gap:8px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 12px;font-size:12.5px}
+  .anio-selector select{border:none;background:none;font-size:12.5px;font-family:'Inter',sans-serif;color:var(--text-main);font-weight:600;cursor:pointer;outline:none}
 
-  /* TABS */
-  .main-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px}
-  .main-tab{padding:9px 18px;font-size:12.5px;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.15s;white-space:nowrap}
-  .main-tab:hover{color:var(--text-main)}
-  .main-tab.active{color:var(--brand);border-bottom-color:var(--brand);font-weight:600}
-  .tab-panel{display:none}
-  .tab-panel.active{display:block}
+  /* TOGGLE VISTA */
+  .vista-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px}
+  .vista-btn{padding:5px 12px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-sub);display:flex;align-items:center;gap:5px;transition:all 0.15s}
+  .vista-btn.active{background:var(--bg-white);color:var(--text-main);box-shadow:var(--shadow-sm);font-weight:600}
 
-  /* GRUPOS */
-  .grupo-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);margin-bottom:12px;overflow:hidden;transition:all 0.2s}
-  .grupo-card:hover{box-shadow:var(--shadow);border-color:var(--border-dark)}
-  .grupo-header{display:flex;align-items:center;padding:14px 16px;gap:12px;cursor:pointer}
-  .grupo-chevron{font-size:10px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
-  .grupo-card.open .grupo-chevron{transform:rotate(90deg)}
-  .grupo-avatar{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;flex-shrink:0}
-  .ga-1{background:#EFF6FF;color:#1D4ED8}
-  .ga-2{background:#F0FDF4;color:#15803D}
-  .grupo-name{font-size:13px;font-weight:700;color:var(--text-main)}
-  .grupo-meta{font-size:11.5px;color:var(--text-muted);margin-top:2px}
-  .grupo-pills{display:flex;gap:6px;margin-left:auto;align-items:center;flex-wrap:wrap}
-  .gpill{font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600}
-  .gp-alumnos{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
-  .gp-max{background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
-  .gp-warn{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
-  .gp-ok{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
-  .grupo-body{display:none;border-top:1px solid var(--border)}
-  .grupo-card.open .grupo-body{display:block}
+  /* BADGES ORIGEN */
+  .badge-origen{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:4px}
+  .bo-nacional{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+  .bo-autonomico{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0}
+  .bo-local{background:#FFFBEB;color:#B45309;border:1px solid #FDE68A}
+  .bo-centro{background:#F7F4F0;color:#78716C;border:1px solid #D4CEC7}
 
-  /* HORARIO SEMANAL */
-  .horario-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
-  .horario-dia{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center}
-  .horario-dia-name{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px}
-  .horario-hora{font-size:13px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)}
-  .horario-recreo{font-size:10.5px;color:var(--amber);margin-top:3px}
+  /* TABLA FESTIVOS */
+  .festivos-table{width:100%;border-collapse:collapse}
+  .festivos-table th{padding:8px 12px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--bg)}
+  .festivos-table td{padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--border);color:var(--text-main)}
+  .festivos-table tr:last-child td{border-bottom:none}
+  .festivos-table tr:hover td{background:#FAFAF9}
+  .festivo-fecha{font-family:'Playfair Display',serif;font-weight:700;font-size:13px;white-space:nowrap}
+  .festivo-dia{font-size:10.5px;color:var(--text-muted);margin-top:1px}
+  .festivo-heredad{font-size:11px;color:var(--text-muted);font-style:italic}
 
-  /* TABLA ALUMNOS */
-  .tabla{width:100%;border-collapse:collapse}
-  .tabla th{padding:8px 12px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--bg)}
-  .tabla td{padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--border);color:var(--text-main)}
-  .tabla tr:last-child td{border-bottom:none}
-  .tabla tr:hover td{background:#FAFAF9}
+  /* BLOQUE COLAPSABLE */
+  .festivo-group{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+  .festivo-group-header{display:flex;align-items:center;padding:12px 16px;cursor:pointer;user-select:none;gap:10px}
+  .festivo-group-header:hover{background:#FAFAF9}
+  .fg-chevron{font-size:10px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
+  .festivo-group.open .fg-chevron{transform:rotate(90deg)}
+  .fg-title{font-size:13px;font-weight:700;color:var(--text-main);flex:1}
+  .fg-count{font-size:11.5px;font-weight:600;color:var(--text-sub)}
+  .festivo-group-body{display:none;border-top:1px solid var(--border)}
+  .festivo-group.open .festivo-group-body{display:block}
 
-  /* MÓDULOS DOCENTES */
-  .modulo-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);gap:10px}
-  .modulo-row:last-child{border-bottom:none}
-  .modulo-row:hover{background:#FAFAF9}
-  .mod-code{font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--bg);border:1px solid var(--border);color:var(--text-sub);flex-shrink:0;font-family:'Inter',sans-serif}
-  .mod-name{font-size:13px;font-weight:500;color:var(--text-main);flex:1}
-  .mod-horas{font-size:11.5px;color:var(--text-muted);white-space:nowrap}
-  .docente-asignado{display:flex;align-items:center;gap:8px}
-  .docente-av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
-  .da-ok{background:#15803D}
-  .da-warn{background:var(--amber)}
-  .da-empty{background:var(--text-muted)}
-  .docente-name{font-size:12.5px;font-weight:500;color:var(--text-main)}
-  .docente-esp{font-size:11px;color:var(--text-muted)}
-  .esp-badge{font-size:10.5px;padding:2px 7px;border-radius:3px;font-weight:600}
-  .eb-ok{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
-  .eb-warn{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
-  .eb-empty{background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
+  /* CALENDARIO */
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .cal-nav-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text-main)}
+  .cal-grid-anual{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.trimestre-filter{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px}
+.trim-btn{padding:5px 11px;border-radius:4px;font-size:11.5px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-sub);transition:all 0.15s;white-space:nowrap}
+.trim-btn.active{background:var(--bg-white);color:var(--text-main);box-shadow:var(--shadow-sm);font-weight:600}
+.cal-month-hidden{display:none !important}
+  .cal-month{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .cal-month-title{padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--border);font-size:12px;font-weight:700;color:var(--text-main);text-align:center;text-transform:uppercase;letter-spacing:0.05em}
+  .cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);padding:4px 6px 0}
+  .cal-day-name{text-align:center;font-size:9.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;padding:3px 0}
+  .cal-days{display:grid;grid-template-columns:repeat(7,1fr);padding:0 6px 6px;gap:2px}
+  .cal-day{text-align:center;font-size:11px;padding:4px 2px;border-radius:4px;cursor:default;position:relative;min-height:28px;display:flex;align-items:center;justify-content:center}
+  .cal-day.empty{color:transparent}
+  .cal-day.festivo-nacional{background:#DBEAFE;color:#1D4ED8;font-weight:700}
+  .cal-day.festivo-autonomico{background:#DCFCE7;color:#15803D;font-weight:700}
+  .cal-day.festivo-local{background:#FEF3C7;color:#92400E;font-weight:700}
+  .cal-day.festivo-centro{background:#F5F3FF;color:#6D28D9;font-weight:700}
+  .cal-day.weekend{color:var(--text-muted)}
+  .cal-day.today{outline:2px solid var(--brand);outline-offset:1px}
+  .cal-leyenda{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .ley-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text-sub)}
+  .ley-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
   /* ALERTS */
   .alert{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:14px;font-size:12.5px;line-height:1.5}
   .alert-info{background:var(--blue-light);border:1px solid var(--blue-border);color:#1e3a5f}
   .alert-warning{background:var(--amber-light);border:1px solid var(--amber-border);color:#78350f}
-  .alert-success{background:var(--green-light);border:1px solid var(--green-border);color:#14532d}
   .alert-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+
+  /* FORM */
+  .form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+  .form-label{font-size:12px;font-weight:600;color:var(--text-sub)}
+  .form-label span{color:var(--brand)}
+  .form-input{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);outline:none;transition:border-color 0.15s}
+  .form-input:focus{border-color:var(--brand)}
+  .form-select{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);outline:none;cursor:pointer}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
   /* MODAL */
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;padding:20px}
   .modal-overlay.open{display:flex}
-  .modal{background:var(--bg-white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(0,0,0,0.2);width:560px;max-width:100%;max-height:90vh;overflow-y:auto;animation:modalIn 0.2s ease}
+  .modal{background:var(--bg-white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(0,0,0,0.2);width:520px;max-width:100%;max-height:90vh;overflow-y:auto;animation:modalIn 0.2s ease}
   @keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   .modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg-white);z-index:1}
   .modal-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text-main)}
@@ -206,21 +202,107 @@
   .modal-close:hover{background:var(--border)}
   .modal-body{padding:20px;display:flex;flex-direction:column;gap:4px}
   .modal-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;background:var(--bg);position:sticky;bottom:0}
-
-  /* TOGGLE FILTRO */
-  .toggle-filter{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg);font-size:12px;cursor:pointer;user-select:none}
-  .toggle-switch{width:32px;height:18px;border-radius:9px;background:var(--border-dark);position:relative;transition:background 0.2s;flex-shrink:0}
-  .toggle-switch.on{background:var(--green)}
-  .toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform 0.2s}
-  .toggle-switch.on::after{transform:translateX(14px)}
-
-  /* PROMOCIÓN */
-  .promocion-row{display:flex;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);gap:10px}
-  .promocion-row:last-child{border-bottom:none}
-  .prom-check{width:16px;height:16px;accent-color:var(--brand);cursor:pointer;flex-shrink:0}
-  .prom-estado{font-size:11px;padding:2px 7px;border-radius:3px;font-weight:600;flex-shrink:0}
+  /* TABLA CRUZADA DOCENTES */
+  .tabla-cruzada{width:100%;border-collapse:collapse;font-size:12px;}
+  .tabla-cruzada th{padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--bg);white-space:nowrap}
+  .tabla-cruzada th.grupo-col{text-align:center;min-width:160px}
+  .tabla-cruzada td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+  .tabla-cruzada tr:last-child td{border-bottom:none}
+  .tabla-cruzada tr:hover td{background:#FAFAF9}
+  .tc-mod-info{display:flex;flex-direction:column;gap:2px}
+  .tc-mod-code{font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--bg);border:1px solid var(--border);color:var(--text-sub);font-family:monospace;display:inline-block;margin-bottom:3px}
+  .tc-mod-name{font-size:12px;font-weight:600;color:var(--text-main)}
+  .tc-mod-horas{font-size:11px;color:var(--text-muted)}
+  .tc-celda{display:flex;flex-direction:column;gap:4px;min-height:32px}
+  .tc-vacia{background:#FAFAF9;}
+  .docente-tag{display:flex;align-items:center;gap:5px;padding:3px 7px;border-radius:4px;font-size:11px;background:var(--bg-white);border:1px solid var(--border)}
+  .docente-tag.dt-ok{border-color:var(--green-border);background:var(--green-light)}
+  .docente-tag.dt-warn{border-color:var(--amber-border);background:var(--amber-light)}
+  .dt-av{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0}
+  .dt-av-ok{background:var(--green)}
+  .dt-av-warn{background:var(--amber)}
+  .dt-name{font-size:11px;font-weight:500;color:var(--text-main);flex:1;white-space:nowrap}
+  .dt-esp{font-size:9.5px;}
+  .dt-ok .dt-esp{color:var(--green)}
+  .dt-warn .dt-esp{color:var(--amber)}
+  .dt-remove{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:12px;padding:0 2px;line-height:1}
+  .dt-remove:hover{color:var(--brand)}
+  .tc-sesiones{display:flex;align-items:center;gap:4px;margin-top:2px;}
+  .tc-sesiones input{width:36px;padding:2px 4px;border:1px solid var(--border);border-radius:3px;font-size:11px;text-align:center;font-family:monospace}
+  .tc-sesiones label{font-size:10.5px;color:var(--text-muted)}
+  .btn-add-doc{display:flex;align-items:center;gap:3px;font-size:10.5px;color:var(--blue);background:none;border:1px dashed var(--blue-border);border-radius:4px;padding:3px 7px;cursor:pointer;margin-top:2px}
+  .btn-add-doc:hover{background:var(--blue-light)}
+  .curso-separator{background:var(--bg);padding:8px 12px;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.07em;border-bottom:1px solid var(--border)}
+  /* CICLO SECTION */
+  .ciclo-section{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow-sm)}
+  .ciclo-section-header{display:flex;align-items:center;padding:12px 16px;background:var(--bg);border-bottom:1px solid var(--border);gap:10px}
+  .ciclo-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:var(--brand-light);color:var(--brand);border:1px solid #FECACA}
+  .ciclo-title{font-size:13px;font-weight:700;color:var(--text-main);flex:1}
+  .ciclo-meta-txt{font-size:11.5px;color:var(--text-muted)}
+  /* GRUPOS */
+  .grupo-card{border-bottom:1px solid var(--border);overflow:hidden}
+  .grupo-card:last-child{border-bottom:none}
+  .grupo-header{display:flex;align-items:center;padding:13px 16px;gap:12px;cursor:pointer;user-select:none}
+  .grupo-header:hover{background:#FAFAF9}
+  .grupo-chevron{font-size:10px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
+  .grupo-card.open .grupo-chevron{transform:rotate(90deg)}
+  .grupo-avatar{width:36px;height:36px;border-radius:8px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;flex-shrink:0}
+  .ga-1{background:#EFF6FF;color:#1D4ED8}
+  .ga-2{background:#F0FDF4;color:#15803D}
+  .grupo-name{font-size:13px;font-weight:700;color:var(--text-main)}
+  .grupo-meta-txt{font-size:11.5px;color:var(--text-muted);margin-top:2px}
+  .grupo-pills{display:flex;gap:6px;margin-left:auto;align-items:center;flex-wrap:wrap}
+  .gpill{font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600}
+  .gp-blue{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+  .gp-grey{background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
+  .gp-green{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
+  .grupo-body{display:none;border-top:1px solid var(--border);background:#FAFAF9}
+  .grupo-card.open .grupo-body{display:block}
+  /* HORARIO */
+  .horario-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+  .horario-dia{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px;text-align:center}
+  .horario-dia-name{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px}
+  .horario-hora{font-size:12.5px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)}
+  .horario-recreo{font-size:10px;color:var(--amber);margin-top:2px}
+  /* TABS */
+  .main-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px}
+  .main-tab{padding:9px 18px;font-size:12.5px;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.15s;white-space:nowrap}
+  .main-tab:hover{color:var(--text-main)}
+  .main-tab.active{color:var(--brand);border-bottom-color:var(--brand);font-weight:600}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+  /* SELECTOR */
+  .selector-bar{display:flex;align-items:center;gap:10px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 16px;margin-bottom:20px;flex-wrap:wrap}
+  .selector-label{font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap}
+  /* CENTROS */
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.2s}
+  .centro-card:hover{box-shadow:var(--shadow);transform:translateY(-1px);border-color:var(--border-dark)}
+  .centro-avatar{width:40px;height:40px;border-radius:10px;background:var(--brand-light);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--brand);flex-shrink:0}
+  /* TABLA */
+  .tabla{width:100%;border-collapse:collapse}
+  .tabla th{padding:7px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--bg)}
+  .tabla td{padding:8px 10px;font-size:12.5px;border-bottom:1px solid var(--border);color:var(--text-main)}
+  .tabla tr:last-child td{border-bottom:none}
+  .tabla tr:hover td{background:#F5F5F4}
+  /* TOGGLE */
+  .toggle-wrap{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg);font-size:12px;cursor:pointer;user-select:none}
+  .toggle-sw{width:30px;height:17px;border-radius:9px;background:var(--border-dark);position:relative;transition:background 0.2s;flex-shrink:0}
+  .toggle-sw.on{background:var(--green)}
+  .toggle-sw::after{content:'';position:absolute;top:2.5px;left:2.5px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform 0.2s}
+  .toggle-sw.on::after{transform:translateX(13px)}
+  /* BREADCRUMB */
+  .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
+  .view-back{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-sub);cursor:pointer;padding:5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-white)}
+  .view-back:hover{background:var(--bg)}
+  /* PROMOCION */
+  .prom-row{display:flex;align-items:center;padding:9px 14px;border-bottom:1px solid var(--border);gap:10px}
+  .prom-row:last-child{border-bottom:none}
+  .prom-check{width:15px;height:15px;accent-color:var(--brand);cursor:pointer;flex-shrink:0}
+  .prom-estado{font-size:10.5px;padding:2px 7px;border-radius:3px;font-weight:600;flex-shrink:0;white-space:nowrap}
   .pe-ok{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
   .pe-pend{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
+
 </style>
 </head>
 <body>
@@ -257,7 +339,7 @@
     <div class="nav-divider"></div>
     <div class="nav-group">
       <div class="nav-group-label">Gestión de cursos</div>
-      <a class="nav-item active" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
+      <a class="nav-item" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
       <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
       <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
       <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
@@ -295,160 +377,85 @@
     <span class="topbar-title">Grupos y docentes</span>
     <span class="topbar-sub" id="topbar-sub">Vista global del sistema · Superadministrador</span>
   </div>
+  <div class="content" style="max-width:1400px;">
 
-  <div class="content">
-
-    <!-- ══ VISTA 1: CUADRÍCULA DE CENTROS ══ -->
+    <!-- ══ VISTA 1: CENTROS ══ -->
     <div id="vista-centros">
       <div style="margin-bottom:1.5rem;">
-        <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text-main);">Grupos y docentes</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;">Grupos y docentes</div>
         <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px;">Gestión de grupos de alumnos y asignación de docentes por ciclo y año académico.</div>
       </div>
-
-      <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);">
-        <div class="kpi-card k-blue">
-          <div class="kpi-label">Grupos activos</div>
-          <div class="kpi-value">4</div>
-          <div class="kpi-sub">En todos los centros 2024–25</div>
-        </div>
-        <div class="kpi-card k-green">
-          <div class="kpi-label">Alumnos matriculados</div>
-          <div class="kpi-value">87</div>
-          <div class="kpi-sub">Total sistema 2024–25</div>
-        </div>
-        <div class="kpi-card k-amber">
-          <div class="kpi-label">Módulos sin docente</div>
-          <div class="kpi-value">2</div>
-          <div class="kpi-sub">Asignación pendiente</div>
-        </div>
-        <div class="kpi-card k-red">
-          <div class="kpi-label">Advertencias</div>
-          <div class="kpi-value">1</div>
-          <div class="kpi-sub">Especialidad no habilitante</div>
-        </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+        <div class="kpi-card k-blue"><div class="kpi-label">Grupos activos</div><div class="kpi-value">4</div><div class="kpi-sub">Todos los centros 2024–25</div></div>
+        <div class="kpi-card k-green"><div class="kpi-label">Alumnos matriculados</div><div class="kpi-value">87</div><div class="kpi-sub">Total sistema 2024–25</div></div>
+        <div class="kpi-card k-amber"><div class="kpi-label">Módulos sin docente</div><div class="kpi-value">2</div><div class="kpi-sub">Asignación pendiente</div></div>
+        <div class="kpi-card k-red"><div class="kpi-label">Advertencias especialidad</div><div class="kpi-value">1</div><div class="kpi-sub">Docente no habilitante</div></div>
       </div>
-
       <div class="centros-grid">
         <div class="centro-card" onclick="mostrarCentro()">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
             <div style="display:flex;align-items:center;gap:10px;">
               <div class="centro-avatar">CS</div>
-              <div>
-                <div class="centro-name">CIFP Salud Jerez</div>
-                <div class="centro-loc">Jerez de la Frontera · Cádiz · Andalucía</div>
-              </div>
+              <div><div style="font-size:13px;font-weight:700;">CIFP Salud Jerez</div><div style="font-size:11.5px;color:var(--text-muted);">Jerez de la Frontera · Cádiz</div></div>
             </div>
-            <div style="display:flex;align-items:center;gap:5px;">
-              <div class="status-dot sd-amber"></div>
-              <span style="font-size:11px;color:var(--amber);font-weight:600;">1 advertencia</span>
-            </div>
+            <div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;"></div><span style="font-size:11px;color:var(--amber);font-weight:600;">1 advertencia</span></div>
           </div>
-          <div class="centro-stats">
-            <div class="centro-stat"><div class="centro-stat-val">2</div><div class="centro-stat-label">Grupos TES</div></div>
-            <div class="centro-stat"><div class="centro-stat-val">52</div><div class="centro-stat-label">Alumnos</div></div>
-            <div class="centro-stat"><div class="centro-stat-val">9/11</div><div class="centro-stat-label">Módulos cubiertos</div></div>
+          <div style="display:flex;gap:14px;padding-top:10px;border-top:1px solid var(--border);">
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">2</div><div style="font-size:10px;color:var(--text-muted);">Ciclos</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">3</div><div style="font-size:10px;color:var(--text-muted);">Grupos</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">52</div><div style="font-size:10px;color:var(--text-muted);">Alumnos</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">9/11</div><div style="font-size:10px;color:var(--text-muted);">Módulos cubiertos</div></div>
           </div>
         </div>
-
         <div class="centro-card" style="opacity:0.7;cursor:default;">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
             <div style="display:flex;align-items:center;gap:10px;">
               <div class="centro-avatar">IC</div>
-              <div>
-                <div class="centro-name">IES La Cartuja</div>
-                <div class="centro-loc">Granada · Andalucía</div>
-              </div>
+              <div><div style="font-size:13px;font-weight:700;">IES La Cartuja</div><div style="font-size:11.5px;color:var(--text-muted);">Granada · Andalucía</div></div>
             </div>
-            <div style="display:flex;align-items:center;gap:5px;">
-              <div class="status-dot sd-green"></div>
-              <span style="font-size:11px;color:var(--green);font-weight:600;">Completo</span>
-            </div>
+            <div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;"></div><span style="font-size:11px;color:var(--green);font-weight:600;">Completo</span></div>
           </div>
-          <div class="centro-stats">
-            <div class="centro-stat"><div class="centro-stat-val">2</div><div class="centro-stat-label">Grupos</div></div>
-            <div class="centro-stat"><div class="centro-stat-val">35</div><div class="centro-stat-label">Alumnos</div></div>
-            <div class="centro-stat"><div class="centro-stat-val">11/11</div><div class="centro-stat-label">Módulos cubiertos</div></div>
+          <div style="display:flex;gap:14px;padding-top:10px;border-top:1px solid var(--border);">
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">1</div><div style="font-size:10px;color:var(--text-muted);">Ciclo</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">1</div><div style="font-size:10px;color:var(--text-muted);">Grupo</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">35</div><div style="font-size:10px;color:var(--text-muted);">Alumnos</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">11/11</div><div style="font-size:10px;color:var(--text-muted);">Módulos cubiertos</div></div>
           </div>
         </div>
       </div>
     </div><!-- /vista-centros -->
 
-    <!-- ══ VISTA 2: CENTRO — CICLO/CURSO ══ -->
+    <!-- ══ VISTA 2: DETALLE CENTRO ══ -->
     <div id="vista-centro" style="display:none;">
 
-      <!-- Breadcrumb -->
       <div class="breadcrumb">
         <button class="view-back" onclick="volverCentros()">
           <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
           Centros
         </button>
-        <span class="bc-sep">›</span>
-        <span class="bc-item active">CIFP Salud Jerez</span>
+        <span style="color:var(--text-muted);font-size:12px;">›</span>
+        <span style="font-size:12.5px;font-weight:600;color:var(--text-main);">CIFP Salud Jerez</span>
       </div>
 
-      <!-- Selector año / ciclo / curso -->
       <div class="selector-bar">
         <div style="display:flex;align-items:center;gap:8px;">
           <span class="selector-label">Año académico</span>
-          <select class="form-select">
-            <option selected>2024–2025</option>
-            <option>2025–2026</option>
-          </select>
+          <select class="form-select"><option selected>2024–2025</option><option>2025–2026</option></select>
         </div>
-        <div style="width:1px;height:24px;background:var(--border);margin:0 4px;"></div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="selector-label">Ciclo</span>
-          <select class="form-select">
-            <option selected>TES · Técnico en Emergencias Sanitarias</option>
-            <option>TCAE · Técnico en Cuidados Auxiliares de Enfermería</option>
-          </select>
-        </div>
-        <div style="width:1px;height:24px;background:var(--border);margin:0 4px;"></div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="selector-label">Curso</span>
-          <select class="form-select" onchange="filtrarCurso(this.value)">
-            <option value="todos" selected>Todos los cursos</option>
-            <option value="1">1.er curso</option>
-            <option value="2">2.º curso</option>
-          </select>
-        </div>
-        <div style="margin-left:auto;">
-          <button class="btn btn-warning btn-sm" onclick="openModal('modal-promocion')">
-            ↑ Promover alumnos a 2.º curso
-          </button>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <button class="btn btn-warning btn-sm" onclick="openModal('modal-promocion')">↑ Promover alumnos al curso siguiente</button>
+          <button class="btn btn-primary btn-sm" onclick="openModal('modal-nuevo-grupo')">+ Nuevo grupo</button>
         </div>
       </div>
 
-      <!-- KPIs del centro-ciclo -->
-      <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:1.25rem;">
-        <div class="kpi-card k-blue">
-          <div class="kpi-label">Grupos 1.er curso</div>
-          <div class="kpi-value">2</div>
-          <div class="kpi-sub">Grupo A · Grupo B</div>
-        </div>
-        <div class="kpi-card k-green">
-          <div class="kpi-label">Grupos 2.º curso</div>
-          <div class="kpi-value">1</div>
-          <div class="kpi-sub">Grupo A</div>
-        </div>
-        <div class="kpi-card k-amber">
-          <div class="kpi-label">Alumnos totales</div>
-          <div class="kpi-value">52</div>
-          <div class="kpi-sub">En todos los grupos TES</div>
-        </div>
-        <div class="kpi-card k-red">
-          <div class="kpi-label">Módulos sin docente</div>
-          <div class="kpi-value">2</div>
-          <div class="kpi-sub">Asignación pendiente</div>
-        </div>
-        <div class="kpi-card k-purple">
-          <div class="kpi-label">Advertencias</div>
-          <div class="kpi-value">1</div>
-          <div class="kpi-sub">Especialidad no habilitante</div>
-        </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:1.25rem;">
+        <div class="kpi-card k-blue"><div class="kpi-label">Ciclos activos</div><div class="kpi-value">2</div><div class="kpi-sub">TES · TCAE (config.)</div></div>
+        <div class="kpi-card k-green"><div class="kpi-label">Grupos totales</div><div class="kpi-value">3</div><div class="kpi-sub">2 de 1.º · 1 de 2.º</div></div>
+        <div class="kpi-card k-amber"><div class="kpi-label">Alumnos</div><div class="kpi-value">52</div><div class="kpi-sub">Matriculados 2024–25</div></div>
+        <div class="kpi-card k-red"><div class="kpi-label">Sin docente asignado</div><div class="kpi-value">2</div><div class="kpi-sub">Celdas pendientes</div></div>
+        <div class="kpi-card k-purple"><div class="kpi-label">Advertencias</div><div class="kpi-value">1</div><div class="kpi-sub">Especialidad no habilitante</div></div>
       </div>
 
-      <!-- TABS -->
       <div class="main-tabs">
         <div class="main-tab active" onclick="switchTab('tab-grupos',this)">Grupos <span style="font-size:11px;background:var(--brand-light);color:var(--brand);padding:1px 7px;border-radius:10px;margin-left:4px;font-weight:700;">3</span></div>
         <div class="main-tab" onclick="switchTab('tab-docentes',this)">Asignación de docentes <span style="font-size:11px;background:var(--amber-light);color:var(--amber);padding:1px 7px;border-radius:10px;margin-left:4px;font-weight:700;">⚠ 3</span></div>
@@ -457,356 +464,314 @@
       <!-- ── TAB GRUPOS ── -->
       <div id="tab-grupos" class="tab-panel active">
 
-        <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
-          <button class="btn btn-primary" onclick="openModal('modal-nuevo-grupo')">+ Nuevo grupo</button>
+        <!-- CICLO TES -->
+        <div class="ciclo-section">
+          <div class="ciclo-section-header">
+            <span class="ciclo-badge">TES</span>
+            <span class="ciclo-title">Técnico en Emergencias Sanitarias</span>
+            <span class="ciclo-meta-txt">3 grupos · 52 alumnos · 2024–25</span>
+          </div>
+
+          <div class="curso-separator">1.er curso</div>
+
+          <!-- Grupo 1A -->
+          <div class="grupo-card open" id="grupo-1a">
+            <div class="grupo-header" onclick="toggleGrupo('grupo-1a')">
+              <div class="grupo-chevron">▶</div>
+              <div class="grupo-avatar ga-1">1A</div>
+              <div><div class="grupo-name">1.er curso · Grupo A</div><div class="grupo-meta-txt">TES · Mañana · CIFP Salud Jerez · 2024–25</div></div>
+              <div class="grupo-pills">
+                <span class="gpill gp-blue">👥 22 alumnos</span>
+                <span class="gpill gp-grey">máx. 30</span>
+                <span class="gpill gp-green">✓ Completo</span>
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();openModal('modal-editar-grupo')" style="margin-left:4px;">✎ Editar</button>
+              </div>
+            </div>
+            <div class="grupo-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;">
+                <div style="padding:14px 16px;border-right:1px solid var(--border);">
+                  <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Horario semanal</div>
+                  <div class="horario-grid">
+                    <div class="horario-dia"><div class="horario-dia-name">Lun</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Mar</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Mié</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Jue</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Vie</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-muted);">55 min/sesión · 6 sesiones/día · 30 sesiones/semana</div>
+                </div>
+                <div style="padding:14px 16px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Alumnos del grupo</div>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignar-alumno')">+ Añadir alumno</button>
+                  </div>
+                  <table class="tabla" style="font-size:12px;">
+                    <thead><tr><th>Nombre</th><th>DNI</th><th>Estado</th><th></th></tr></thead>
+                    <tbody>
+                      <tr><td>García Moreno, Ana</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">12345678A</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Activo</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
+                      <tr><td>Pérez Ruiz, Carlos</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">87654321B</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Activo</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
+                      <tr><td style="color:var(--text-muted);font-style:italic;" colspan="4">+ 20 alumnos más · <a href="#" style="color:var(--blue);font-size:11.5px;">Ver todos</a></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grupo 1B -->
+          <div class="grupo-card" id="grupo-1b">
+            <div class="grupo-header" onclick="toggleGrupo('grupo-1b')">
+              <div class="grupo-chevron">▶</div>
+              <div class="grupo-avatar ga-1">1B</div>
+              <div><div class="grupo-name">1.er curso · Grupo B</div><div class="grupo-meta-txt">TES · Tarde · CIFP Salud Jerez · 2024–25</div></div>
+              <div class="grupo-pills">
+                <span class="gpill gp-blue">👥 18 alumnos</span>
+                <span class="gpill gp-grey">máx. 30</span>
+                <span class="gpill gp-green">✓ Completo</span>
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();openModal('modal-editar-grupo')" style="margin-left:4px;">✎ Editar</button>
+              </div>
+            </div>
+            <div class="grupo-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;">
+                <div style="padding:14px 16px;border-right:1px solid var(--border);">
+                  <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Horario semanal</div>
+                  <div class="horario-grid">
+                    <div class="horario-dia"><div class="horario-dia-name">Lun</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Mar</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Mié</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Jue</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Vie</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-muted);">55 min/sesión · 3 sesiones/día · 15 sesiones/semana</div>
+                </div>
+                <div style="padding:14px 16px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Alumnos del grupo</div>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignar-alumno')">+ Añadir alumno</button>
+                  </div>
+                  <table class="tabla" style="font-size:12px;">
+                    <thead><tr><th>Nombre</th><th>DNI</th><th>Estado</th><th></th></tr></thead>
+                    <tbody>
+                      <tr><td>Martínez López, Luis</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">55667788D</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Activo</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
+                      <tr><td style="color:var(--text-muted);font-style:italic;" colspan="4">+ 17 alumnos más · <a href="#" style="color:var(--blue);font-size:11.5px;">Ver todos</a></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="curso-separator">2.º curso</div>
+
+          <!-- Grupo 2A -->
+          <div class="grupo-card" id="grupo-2a">
+            <div class="grupo-header" onclick="toggleGrupo('grupo-2a')">
+              <div class="grupo-chevron">▶</div>
+              <div class="grupo-avatar ga-2">2A</div>
+              <div><div class="grupo-name">2.º curso · Grupo A</div><div class="grupo-meta-txt">TES · Mañana · CIFP Salud Jerez · 2024–25</div></div>
+              <div class="grupo-pills">
+                <span class="gpill gp-blue">👥 12 alumnos</span>
+                <span class="gpill gp-grey">máx. 30</span>
+                <span class="gpill gp-green">✓ Completo</span>
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();openModal('modal-editar-grupo')" style="margin-left:4px;">✎ Editar</button>
+              </div>
+            </div>
+            <div class="grupo-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;">
+                <div style="padding:14px 16px;border-right:1px solid var(--border);">
+                  <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Horario semanal</div>
+                  <div class="horario-grid">
+                    <div class="horario-dia"><div class="horario-dia-name">Lun</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Mar</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Mié</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Jue</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                    <div class="horario-dia"><div class="horario-dia-name">Vie</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-muted);">55 min/sesión · 6 sesiones/día · 30 sesiones/semana</div>
+                </div>
+                <div style="padding:14px 16px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Alumnos del grupo</div>
+                    <button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignar-alumno')">+ Añadir alumno</button>
+                  </div>
+                  <div class="alert alert-info" style="margin-bottom:8px;padding:7px 10px;"><span class="alert-icon">ℹ</span><span style="font-size:11.5px;">Alumnos promovidos desde 1.er curso 2023–24.</span></div>
+                  <table class="tabla" style="font-size:12px;">
+                    <thead><tr><th>Nombre</th><th>DNI</th><th>Estado</th><th></th></tr></thead>
+                    <tbody>
+                      <tr><td>Jiménez Ruiz, Pedro</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">33445566F</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--blue-light);color:var(--blue);border-radius:3px;border:1px solid var(--blue-border);">Promovido</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
+                      <tr><td style="color:var(--text-muted);font-style:italic;" colspan="4">+ 11 alumnos más · <a href="#" style="color:var(--blue);font-size:11.5px;">Ver todos</a></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /ciclo TES grupos -->
+
+        <!-- CICLO TCAE -->
+        <div class="ciclo-section" style="opacity:0.65;">
+          <div class="ciclo-section-header">
+            <span class="ciclo-badge" style="background:var(--amber-light);color:var(--amber);border-color:var(--amber-border);">TCAE</span>
+            <span class="ciclo-title">Técnico en Cuidados Auxiliares de Enfermería</span>
+            <span class="ciclo-meta-txt" style="color:var(--amber);">En configuración · Sin grupos creados</span>
+            <button class="btn btn-secondary btn-sm" style="margin-left:auto;" onclick="openModal('modal-nuevo-grupo')">+ Crear primer grupo</button>
+          </div>
+          <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:12.5px;">Aún no se han creado grupos para este ciclo en 2024–25.</div>
         </div>
-
-        <!-- 1er CURSO -->
-        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;padding-left:2px;">1.er curso · TES</div>
-
-        <!-- Grupo 1A -->
-        <div class="grupo-card open" id="grupo-1a">
-          <div class="grupo-header" onclick="toggleGrupo('grupo-1a')">
-            <div class="grupo-chevron">▶</div>
-            <div class="grupo-avatar ga-1">1A</div>
-            <div>
-              <div class="grupo-name">1.er curso · Grupo A</div>
-              <div class="grupo-meta">TES · CIFP Salud Jerez · 2024–25 · Mañana</div>
-            </div>
-            <div class="grupo-pills">
-              <span class="gpill gp-alumnos">👥 22 alumnos</span>
-              <span class="gpill gp-max">máx. 30</span>
-              <span class="gpill gp-ok">✓ Completo</span>
-              <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();openModal('modal-editar-grupo')" style="margin-left:4px;">✎ Editar</button>
-            </div>
-          </div>
-          <div class="grupo-body">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border);">
-
-              <!-- Horario semanal -->
-              <div style="padding:16px;border-right:1px solid var(--border);">
-                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Horario semanal</div>
-                <div class="horario-grid">
-                  <div class="horario-dia"><div class="horario-dia-name">Lun</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Mar</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Mié</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Jue</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Vie</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                </div>
-                <div style="font-size:11.5px;color:var(--text-muted);">Duración sesión: <strong style="color:var(--text-main);">55 min</strong> · 6 sesiones/día · 30 sesiones/semana</div>
-              </div>
-
-              <!-- Lista alumnos -->
-              <div style="padding:16px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-                  <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Alumnos del grupo</div>
-                  <button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignar-alumno')">+ Añadir alumno</button>
-                </div>
-                <table class="tabla" style="font-size:12px;">
-                  <thead><tr>
-                    <th>Nombre</th><th>DNI</th><th>Estado</th><th></th>
-                  </tr></thead>
-                  <tbody>
-                    <tr><td>García Moreno, Ana</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">12345678A</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Activo</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
-                    <tr><td>Pérez Ruiz, Carlos</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">87654321B</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Activo</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
-                    <tr><td>Romero Vega, Isabel</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">11223344C</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Activo</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
-                    <tr><td style="color:var(--text-muted);font-style:italic;" colspan="4">+ 19 alumnos más · <a href="#" style="color:var(--blue);font-size:11.5px;">Ver todos</a></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div><!-- /grupo-1a -->
-
-        <!-- Grupo 1B -->
-        <div class="grupo-card" id="grupo-1b">
-          <div class="grupo-header" onclick="toggleGrupo('grupo-1b')">
-            <div class="grupo-chevron">▶</div>
-            <div class="grupo-avatar ga-1">1B</div>
-            <div>
-              <div class="grupo-name">1.er curso · Grupo B</div>
-              <div class="grupo-meta">TES · CIFP Salud Jerez · 2024–25 · Tarde</div>
-            </div>
-            <div class="grupo-pills">
-              <span class="gpill gp-alumnos">👥 18 alumnos</span>
-              <span class="gpill gp-max">máx. 30</span>
-              <span class="gpill gp-ok">✓ Completo</span>
-              <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();openModal('modal-editar-grupo')" style="margin-left:4px;">✎ Editar</button>
-            </div>
-          </div>
-          <div class="grupo-body">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border);">
-              <div style="padding:16px;border-right:1px solid var(--border);">
-                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Horario semanal</div>
-                <div class="horario-grid">
-                  <div class="horario-dia"><div class="horario-dia-name">Lun</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Mar</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Mié</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Jue</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Vie</div><div class="horario-hora">15:00–18:30</div><div class="horario-recreo">Recreo 16:50</div></div>
-                </div>
-                <div style="font-size:11.5px;color:var(--text-muted);">Duración sesión: <strong style="color:var(--text-main);">55 min</strong> · 3 sesiones/día · 15 sesiones/semana</div>
-              </div>
-              <div style="padding:16px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-                  <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Alumnos del grupo</div>
-                  <button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignar-alumno')">+ Añadir alumno</button>
-                </div>
-                <table class="tabla" style="font-size:12px;">
-                  <thead><tr><th>Nombre</th><th>DNI</th><th>Estado</th><th></th></tr></thead>
-                  <tbody>
-                    <tr><td>Martínez López, Luis</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">55667788D</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Activo</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
-                    <tr><td>Sánchez Torres, María</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">99887766E</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Activo</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
-                    <tr><td style="color:var(--text-muted);font-style:italic;" colspan="4">+ 16 alumnos más · <a href="#" style="color:var(--blue);font-size:11.5px;">Ver todos</a></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div><!-- /grupo-1b -->
-
-        <!-- 2º CURSO -->
-        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.07em;margin:16px 0 8px;padding-left:2px;">2.º curso · TES</div>
-
-        <!-- Grupo 2A -->
-        <div class="grupo-card" id="grupo-2a">
-          <div class="grupo-header" onclick="toggleGrupo('grupo-2a')">
-            <div class="grupo-chevron">▶</div>
-            <div class="grupo-avatar ga-2">2A</div>
-            <div>
-              <div class="grupo-name">2.º curso · Grupo A</div>
-              <div class="grupo-meta">TES · CIFP Salud Jerez · 2024–25 · Mañana</div>
-            </div>
-            <div class="grupo-pills">
-              <span class="gpill gp-alumnos">👥 12 alumnos</span>
-              <span class="gpill gp-max">máx. 30</span>
-              <span class="gpill gp-ok">✓ Completo</span>
-              <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();openModal('modal-editar-grupo')" style="margin-left:4px;">✎ Editar</button>
-            </div>
-          </div>
-          <div class="grupo-body">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border);">
-              <div style="padding:16px;border-right:1px solid var(--border);">
-                <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Horario semanal</div>
-                <div class="horario-grid">
-                  <div class="horario-dia"><div class="horario-dia-name">Lun</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Mar</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Mié</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Jue</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                  <div class="horario-dia"><div class="horario-dia-name">Vie</div><div class="horario-hora">08:00–14:00</div><div class="horario-recreo">Recreo 10:45</div></div>
-                </div>
-                <div style="font-size:11.5px;color:var(--text-muted);">Duración sesión: <strong style="color:var(--text-main);">55 min</strong> · 6 sesiones/día · 30 sesiones/semana</div>
-              </div>
-              <div style="padding:16px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-                  <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Alumnos del grupo</div>
-                  <button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignar-alumno')">+ Añadir alumno</button>
-                </div>
-                <div class="alert alert-info" style="margin-bottom:8px;"><span class="alert-icon">ℹ</span><span>Alumnos promovidos desde 1.er curso 2023–24 más nuevas incorporaciones.</span></div>
-                <table class="tabla" style="font-size:12px;">
-                  <thead><tr><th>Nombre</th><th>DNI</th><th>Estado</th><th></th></tr></thead>
-                  <tbody>
-                    <tr><td>Jiménez Ruiz, Pedro</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">33445566F</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Promovido</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
-                    <tr><td>Navarro Gil, Laura</td><td style="color:var(--text-muted);font-family:monospace;font-size:11px;">77889900G</td><td><span style="font-size:10.5px;padding:2px 6px;background:var(--green-light);color:var(--green);border-radius:3px;border:1px solid var(--green-border);">Promovido</span></td><td><button class="btn-ghost" style="font-size:11px;color:var(--brand);">✕</button></td></tr>
-                    <tr><td style="color:var(--text-muted);font-style:italic;" colspan="4">+ 10 alumnos más · <a href="#" style="color:var(--blue);font-size:11.5px;">Ver todos</a></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div><!-- /grupo-2a -->
 
       </div><!-- /tab-grupos -->
 
       <!-- ── TAB DOCENTES ── -->
       <div id="tab-docentes" class="tab-panel">
 
-        <div class="alert alert-warning">
-          <span class="alert-icon">⚠</span>
-          <div><strong>2 módulos sin docente asignado</strong> y <strong>1 advertencia de especialidad</strong>. Revisa la asignación antes del inicio del curso.</div>
-        </div>
+        <div class="alert alert-warning"><span class="alert-icon">⚠</span><div><strong>2 celdas sin docente asignado</strong> y <strong>1 advertencia de especialidad</strong>. La tabla muestra la asignación por módulo, grupo y curso. Cada celda es independiente — puedes asignar distintos docentes y sesiones para cada combinación.</div></div>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
-          <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main);">Módulos del TES · 2024–2025</div>
-          <div style="display:flex;gap:8px;align-items:center;">
-            <select class="form-select" style="font-size:12px;">
-              <option selected>Todos los cursos</option>
-              <option>1.er curso</option>
-              <option>2.º curso</option>
-            </select>
+        <!-- CICLO TES — Tabla cruzada -->
+        <div class="ciclo-section">
+          <div class="ciclo-section-header">
+            <span class="ciclo-badge">TES</span>
+            <span class="ciclo-title">Técnico en Emergencias Sanitarias · Asignación de docentes por módulo y grupo</span>
           </div>
-        </div>
+          <div style="overflow-x:auto;">
+            <table class="tabla-cruzada">
+              <thead>
+                <tr>
+                  <th style="min-width:220px;">Módulo</th>
+                  <th class="grupo-col" style="background:#EFF6FF;border-left:2px solid #BFDBFE;">1.er curso · Grupo A<br><span style="font-weight:400;font-size:10px;color:#1D4ED8;">Mañana</span></th>
+                  <th class="grupo-col" style="background:#EFF6FF;border-left:1px solid #BFDBFE;">1.er curso · Grupo B<br><span style="font-weight:400;font-size:10px;color:#1D4ED8;">Tarde</span></th>
+                  <th class="grupo-col" style="background:#F0FDF4;border-left:2px solid var(--green-border);">2.º curso · Grupo A<br><span style="font-weight:400;font-size:10px;color:#15803D;">Mañana</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="4" class="curso-separator">1.er curso · 7 módulos</td></tr>
 
-        <!-- 1er curso módulos -->
-        <div class="card" style="margin-bottom:12px;">
-          <div class="card-header" style="padding:10px 14px;">
-            <div style="font-size:12px;font-weight:700;color:var(--text-main);">1.er curso</div>
-            <span style="font-size:11px;color:var(--text-muted);">7 módulos · 800 horas</span>
-          </div>
-          <div>
-            <!-- Módulo con docente OK -->
-            <div class="modulo-row">
-              <span class="mod-code">0056</span>
-              <div style="flex:1;">
-                <div class="mod-name">Atención sanitaria especial en situaciones de emergencia</div>
-                <div class="mod-horas" style="font-size:11px;color:var(--text-muted);margin-top:2px;">202 h · 1.er curso</div>
-              </div>
-              <div class="docente-asignado">
-                <div class="docente-av da-ok">GM</div>
-                <div>
-                  <div class="docente-name">García Moreno, Ana</div>
-                  <div class="docente-esp">PT Proc. Sanitarios y Asistenciales</div>
-                </div>
-                <span class="esp-badge eb-ok">✓ Habilitada</span>
-                <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-asignar-docente')">✎</button>
-              </div>
-            </div>
+                <tr>
+                  <td><div class="tc-mod-info"><span class="tc-mod-code">0056</span><div class="tc-mod-name">Atención sanitaria especial</div><div class="tc-mod-horas">202 h</div></div></td>
+                  <td style="border-left:2px solid #BFDBFE;">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">AG</div><div><div class="dt-name">García M., Ana</div><div class="dt-esp">✓ PT Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="6"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                  <td style="border-left:1px solid #BFDBFE;">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">IR</div><div><div class="dt-name">Romero V., Isabel</div><div class="dt-esp">✓ PT Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="4"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:2px solid var(--green-border);">— No aplica</td>
+                </tr>
 
-            <!-- Módulo con advertencia especialidad -->
-            <div class="modulo-row" style="background:#FFFBEB;">
-              <span class="mod-code">0057</span>
-              <div style="flex:1;">
-                <div class="mod-name">Atención sanitaria inicial a múltiples víctimas</div>
-                <div class="mod-horas" style="font-size:11px;color:var(--text-muted);margin-top:2px;">192 h · 1.er curso</div>
-              </div>
-              <div class="docente-asignado">
-                <div class="docente-av da-warn">PR</div>
-                <div>
-                  <div class="docente-name">Pérez Ruiz, Carlos</div>
-                  <div class="docente-esp">Prof. Enseñanza Secundaria — Enfermería</div>
-                </div>
-                <span class="esp-badge eb-warn">⚠ No habilitante</span>
-                <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-asignar-docente')">✎</button>
-              </div>
-            </div>
+                <tr>
+                  <td><div class="tc-mod-info"><span class="tc-mod-code">0057</span><div class="tc-mod-name">Atención inicial múltiples víctimas</div><div class="tc-mod-horas">192 h</div></div></td>
+                  <td style="border-left:2px solid #BFDBFE;">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-warn"><div class="dt-av dt-av-warn">CP</div><div><div class="dt-name">Pérez R., Carlos</div><div class="dt-esp">⚠ No habilitante</div></div><button class="dt-remove">✕</button></div>
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">AG</div><div><div class="dt-name">García M., Ana</div><div class="dt-esp">✓ PT Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="5"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                  <td style="border-left:1px solid #BFDBFE;">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">IR</div><div><div class="dt-name">Romero V., Isabel</div><div class="dt-esp">✓ PT Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="3"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:2px solid var(--green-border);">— No aplica</td>
+                </tr>
 
-            <!-- Módulo OK -->
-            <div class="modulo-row">
-              <span class="mod-code">0058</span>
-              <div style="flex:1;">
-                <div class="mod-name">Dotación sanitaria del vehículo de emergencias</div>
-                <div class="mod-horas" style="font-size:11px;color:var(--text-muted);margin-top:2px;">96 h · 1.er curso</div>
-              </div>
-              <div class="docente-asignado">
-                <div class="docente-av da-ok">RV</div>
-                <div>
-                  <div class="docente-name">Romero Vega, Isabel</div>
-                  <div class="docente-esp">PT Proc. Sanitarios y Asistenciales</div>
-                </div>
-                <span class="esp-badge eb-ok">✓ Habilitada</span>
-                <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-asignar-docente')">✎</button>
-              </div>
-            </div>
+                <tr style="background:#FEF9F9;">
+                  <td><div class="tc-mod-info"><span class="tc-mod-code">0059</span><div class="tc-mod-name">Urgencias psiquiátricas</div><div class="tc-mod-horas">64 h</div></div></td>
+                  <td style="border-left:2px solid #BFDBFE;">
+                    <div class="tc-celda">
+                      <div style="font-size:11px;color:var(--brand);font-style:italic;margin-bottom:4px;">Sin docente asignado</div>
+                      <div class="tc-sesiones"><input value="2"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')" style="border-color:var(--brand);color:var(--brand);">+ Asignar docente</button>
+                    </div>
+                  </td>
+                  <td style="border-left:1px solid #BFDBFE;">
+                    <div class="tc-celda">
+                      <div style="font-size:11px;color:var(--brand);font-style:italic;margin-bottom:4px;">Sin docente asignado</div>
+                      <div class="tc-sesiones"><input value="2"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')" style="border-color:var(--brand);color:var(--brand);">+ Asignar docente</button>
+                    </div>
+                  </td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:2px solid var(--green-border);">— No aplica</td>
+                </tr>
 
-            <!-- Módulo sin docente -->
-            <div class="modulo-row" style="background:#FEF2F2;">
-              <span class="mod-code">0059</span>
-              <div style="flex:1;">
-                <div class="mod-name">Atención sanitaria en urgencias y emergencias psiquiátricas</div>
-                <div class="mod-horas" style="font-size:11px;color:var(--text-muted);margin-top:2px;">64 h · 1.er curso</div>
-              </div>
-              <div class="docente-asignado">
-                <div class="docente-av da-empty">—</div>
-                <div>
-                  <div class="docente-name" style="color:var(--text-muted);font-style:italic;">Sin docente asignado</div>
-                </div>
-                <span class="esp-badge eb-empty">Pendiente</span>
-                <button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignar-docente')">Asignar</button>
-              </div>
-            </div>
+                <tr>
+                  <td><div class="tc-mod-info"><span class="tc-mod-code">0060</span><div class="tc-mod-name">Anatomofisiología y patología básicas</div><div class="tc-mod-horas">128 h</div></div></td>
+                  <td style="border-left:2px solid #BFDBFE;">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">ML</div><div><div class="dt-name">Martínez L., Sergio</div><div class="dt-esp">✓ Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="4"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                  <td style="border-left:1px solid #BFDBFE;">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">ML</div><div><div class="dt-name">Martínez L., Sergio</div><div class="dt-esp">✓ Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="3"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:2px solid var(--green-border);">— No aplica</td>
+                </tr>
 
-            <!-- Módulo OK -->
-            <div class="modulo-row">
-              <span class="mod-code">0060</span>
-              <div style="flex:1;">
-                <div class="mod-name">Anatomofisiología y patología básicas en emergencias</div>
-                <div class="mod-horas" style="font-size:11px;color:var(--text-muted);margin-top:2px;">128 h · 1.er curso</div>
-              </div>
-              <div class="docente-asignado">
-                <div class="docente-av da-ok">ML</div>
-                <div>
-                  <div class="docente-name">Martínez López, Sergio</div>
-                  <div class="docente-esp">Prof. Ens. Secundaria — Procesos Sanitarios</div>
-                </div>
-                <span class="esp-badge eb-ok">✓ Habilitado</span>
-                <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-asignar-docente')">✎</button>
-              </div>
-            </div>
+                <tr><td colspan="4" class="curso-separator">2.º curso · 5 módulos</td></tr>
 
-            <!-- FOL sin docente -->
-            <div class="modulo-row" style="background:#FEF2F2;">
-              <span class="mod-code">0064</span>
-              <div style="flex:1;">
-                <div class="mod-name">Formación y orientación laboral</div>
-                <div class="mod-horas" style="font-size:11px;color:var(--text-muted);margin-top:2px;">96 h · 1.er curso</div>
-              </div>
-              <div class="docente-asignado">
-                <div class="docente-av da-empty">—</div>
-                <div>
-                  <div class="docente-name" style="color:var(--text-muted);font-style:italic;">Sin docente asignado</div>
-                </div>
-                <span class="esp-badge eb-empty">Pendiente</span>
-                <button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignar-docente')">Asignar</button>
-              </div>
-            </div>
+                <tr>
+                  <td><div class="tc-mod-info"><span class="tc-mod-code">0061</span><div class="tc-mod-name">Logística sanitaria en emergencias</div><div class="tc-mod-horas">96 h</div></div></td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:2px solid #BFDBFE;">— No aplica</td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:1px solid #BFDBFE;">— No aplica</td>
+                  <td style="border-left:2px solid var(--green-border);">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">ST</div><div><div class="dt-name">Sánchez T., Rafael</div><div class="dt-esp">✓ PT Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="3"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                </tr>
 
-          </div>
-        </div>
+                <tr>
+                  <td><div class="tc-mod-info"><span class="tc-mod-code">0062</span><div class="tc-mod-name">Evacuación y traslado de pacientes</div><div class="tc-mod-horas">96 h</div></div></td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:2px solid #BFDBFE;">— No aplica</td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:1px solid #BFDBFE;">— No aplica</td>
+                  <td style="border-left:2px solid var(--green-border);">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">AG</div><div><div class="dt-name">García M., Ana</div><div class="dt-esp">✓ PT Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">IR</div><div><div class="dt-name">Romero V., Isabel</div><div class="dt-esp">✓ PT Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="3"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                </tr>
 
-        <!-- 2º curso módulos -->
-        <div class="card">
-          <div class="card-header" style="padding:10px 14px;">
-            <div style="font-size:12px;font-weight:700;color:var(--text-main);">2.º curso</div>
-            <span style="font-size:11px;color:var(--text-muted);">5 módulos · 666 horas</span>
-          </div>
-          <div>
-            <div class="modulo-row">
-              <span class="mod-code">0061</span>
-              <div style="flex:1;"><div class="mod-name">Logística sanitaria en emergencias</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">96 h · 2.º curso</div></div>
-              <div class="docente-asignado">
-                <div class="docente-av da-ok">ST</div>
-                <div><div class="docente-name">Sánchez Torres, Rafael</div><div class="docente-esp">PT Proc. Sanitarios y Asistenciales</div></div>
-                <span class="esp-badge eb-ok">✓ Habilitado</span>
-                <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-asignar-docente')">✎</button>
-              </div>
-            </div>
-            <div class="modulo-row">
-              <span class="mod-code">0062</span>
-              <div style="flex:1;"><div class="mod-name">Evacuación y traslado de pacientes</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">96 h · 2.º curso</div></div>
-              <div class="docente-asignado">
-                <div class="docente-av da-ok">GM</div>
-                <div><div class="docente-name">García Moreno, Ana</div><div class="docente-esp">PT Proc. Sanitarios y Asistenciales</div></div>
-                <span class="esp-badge eb-ok">✓ Habilitada</span>
-                <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-asignar-docente')">✎</button>
-              </div>
-            </div>
-            <div class="modulo-row">
-              <span class="mod-code">0063</span>
-              <div style="flex:1;"><div class="mod-name">Planes de emergencia y dispositivos de riesgo previsible</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">96 h · 2.º curso</div></div>
-              <div class="docente-asignado">
-                <div class="docente-av da-ok">RV</div>
-                <div><div class="docente-name">Romero Vega, Isabel</div><div class="docente-esp">PT Proc. Sanitarios y Asistenciales</div></div>
-                <span class="esp-badge eb-ok">✓ Habilitada</span>
-                <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-asignar-docente')">✎</button>
-              </div>
-            </div>
-            <div class="modulo-row">
-              <span class="mod-code">0065</span>
-              <div style="flex:1;"><div class="mod-name">Empresa e iniciativa emprendedora</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">63 h · 2.º curso</div></div>
-              <div class="docente-asignado">
-                <div class="docente-av da-ok">NG</div>
-                <div><div class="docente-name">Navarro Gil, Marta</div><div class="docente-esp">Prof. Ens. Secundaria — Economía</div></div>
-                <span class="esp-badge eb-ok">✓ Habilitada</span>
-                <button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-asignar-docente')">✎</button>
-              </div>
-            </div>
+                <tr>
+                  <td><div class="tc-mod-info"><span class="tc-mod-code">0063</span><div class="tc-mod-name">Planes de emergencia</div><div class="tc-mod-horas">96 h</div></div></td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:2px solid #BFDBFE;">— No aplica</td>
+                  <td class="tc-vacia" style="text-align:center;color:var(--text-muted);font-size:11px;vertical-align:middle;border-left:1px solid #BFDBFE;">— No aplica</td>
+                  <td style="border-left:2px solid var(--green-border);">
+                    <div class="tc-celda">
+                      <div class="docente-tag dt-ok"><div class="dt-av dt-av-ok">IR</div><div><div class="dt-name">Romero V., Isabel</div><div class="dt-esp">✓ PT Proc. Sanitarios</div></div><button class="dt-remove">✕</button></div>
+                      <div class="tc-sesiones"><input value="3"><label>ses/sem</label></div>
+                      <button class="btn-add-doc" onclick="openModal('modal-asignar-docente')">+ docente</button>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
           </div>
         </div>
 
       </div><!-- /tab-docentes -->
-
     </div><!-- /vista-centro -->
-
   </div><!-- /content -->
 </div><!-- /app-main -->
 
@@ -814,63 +779,33 @@
 <div class="modal-overlay" id="modal-nuevo-grupo">
   <div class="modal">
     <div class="modal-head">
-      <div><div class="modal-title">Nuevo grupo</div><div class="modal-subtitle">TES · CIFP Salud Jerez · 2024–2025</div></div>
+      <div><div class="modal-title">Nuevo grupo</div><div class="modal-subtitle">CIFP Salud Jerez · 2024–2025</div></div>
       <button class="modal-close" onclick="closeModal('modal-nuevo-grupo')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="grid-2">
-        <div class="form-group">
-          <label class="form-label">Curso <span>*</span></label>
-          <select class="form-select">
-            <option selected>1.er curso</option>
-            <option>2.º curso</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Identificador del grupo <span>*</span></label>
-          <input class="form-input" placeholder="Ej: A, B, C…" style="width:80px;">
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="form-group"><label class="form-label">Ciclo <span>*</span></label><select class="form-select"><option>TES · Técnico en Emergencias Sanitarias</option><option>TCAE · Cuidados Auxiliares de Enfermería</option></select></div>
+        <div class="form-group"><label class="form-label">Curso <span>*</span></label><select class="form-select"><option>1.er curso</option><option>2.º curso</option></select></div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Jornada</label>
-        <select class="form-select">
-          <option selected>Mañana</option>
-          <option>Tarde</option>
-          <option>Mañana y tarde</option>
-        </select>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="form-group"><label class="form-label">Identificador <span>*</span></label><input class="form-input" placeholder="A, B, C…" style="width:80px;"></div>
+        <div class="form-group"><label class="form-label">Máx. alumnos <span style="color:var(--text-muted);font-weight:400;">(informativo)</span></label><input class="form-input" type="number" value="30" style="width:80px;"></div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Número máximo de alumnos <span style="color:var(--text-muted);font-weight:400;">(informativo)</span></label>
-        <input class="form-input" type="number" value="30" style="width:80px;">
+      <div style="font-size:11.5px;font-weight:700;color:var(--text-sub);margin-bottom:8px;">Horario por días de la semana</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:5px;">
+        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">LUN</div><div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">MAR</div><div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">MIÉ</div><div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">JUE</div><div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">VIE</div>
       </div>
-      <div style="font-size:11.5px;font-weight:700;color:var(--text-sub);margin-bottom:8px;margin-top:4px;">Horario por días de la semana</div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:4px;">
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">LUN</div>
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">MAR</div>
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">MIÉ</div>
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">JUE</div>
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">VIE</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
       </div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-      </div>
-      <div class="grid-3">
-        <div class="form-group">
-          <label class="form-label">Hora fin</label>
-          <input class="form-input" type="time" value="14:00">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Inicio recreo</label>
-          <input class="form-input" type="time" value="10:45">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Duración recreo (min)</label>
-          <input class="form-input" type="number" value="20" style="width:70px;">
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+        <div class="form-group"><label class="form-label">Hora fin</label><input class="form-input" type="time" value="14:00"></div>
+        <div class="form-group"><label class="form-label">Inicio recreo</label><input class="form-input" type="time" value="10:45"></div>
+        <div class="form-group"><label class="form-label">Duración recreo (min)</label><input class="form-input" type="number" value="20" style="width:70px;"></div>
       </div>
     </div>
     <div class="modal-foot">
@@ -888,48 +823,25 @@
       <button class="modal-close" onclick="closeModal('modal-editar-grupo')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="grid-2">
-        <div class="form-group">
-          <label class="form-label">Curso</label>
-          <select class="form-select"><option selected>1.er curso</option><option>2.º curso</option></select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Identificador</label>
-          <input class="form-input" value="A" style="width:80px;">
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="form-group"><label class="form-label">Identificador</label><input class="form-input" value="A" style="width:80px;"></div>
+        <div class="form-group"><label class="form-label">Máx. alumnos <span style="color:var(--text-muted);font-weight:400;">(informativo)</span></label><input class="form-input" type="number" value="30" style="width:80px;"></div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Número máximo de alumnos <span style="color:var(--text-muted);font-weight:400;">(informativo)</span></label>
-        <input class="form-input" type="number" value="30" style="width:80px;">
+      <div style="font-size:11.5px;font-weight:700;color:var(--text-sub);margin-bottom:8px;">Horario por días de la semana</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:5px;">
+        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">LUN</div><div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">MAR</div><div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">MIÉ</div><div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">JUE</div><div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">VIE</div>
       </div>
-      <div style="font-size:11.5px;font-weight:700;color:var(--text-sub);margin-bottom:8px;margin-top:4px;">Horario por días de la semana</div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:4px;">
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">LUN</div>
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">MAR</div>
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">MIÉ</div>
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">JUE</div>
-        <div style="font-size:10px;font-weight:700;text-align:center;color:var(--text-muted);">VIE</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
+        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 4px;text-align:center;">
       </div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-        <input class="form-input" type="time" value="08:00" style="font-size:11px;padding:5px 6px;text-align:center;">
-      </div>
-      <div class="grid-3">
-        <div class="form-group">
-          <label class="form-label">Hora fin</label>
-          <input class="form-input" type="time" value="14:00">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Inicio recreo</label>
-          <input class="form-input" type="time" value="10:45">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Duración recreo (min)</label>
-          <input class="form-input" type="number" value="20" style="width:70px;">
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+        <div class="form-group"><label class="form-label">Hora fin</label><input class="form-input" type="time" value="14:00"></div>
+        <div class="form-group"><label class="form-label">Inicio recreo</label><input class="form-input" type="time" value="10:45"></div>
+        <div class="form-group"><label class="form-label">Duración recreo (min)</label><input class="form-input" type="number" value="20" style="width:70px;"></div>
       </div>
       <div style="padding-top:8px;border-top:1px solid var(--border);margin-top:4px;">
         <button class="btn btn-danger btn-sm">✕ Eliminar grupo</button>
@@ -942,7 +854,7 @@
   </div>
 </div>
 
-<!-- MODAL: Asignar alumno al grupo -->
+<!-- MODAL: Asignar alumno -->
 <div class="modal-overlay" id="modal-asignar-alumno">
   <div class="modal">
     <div class="modal-head">
@@ -950,27 +862,18 @@
       <button class="modal-close" onclick="closeModal('modal-asignar-alumno')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>Introduce el DNI del alumno. Si ya existe en CurriculaFP (en cualquier centro), sus datos se recuperarán automáticamente junto con su historial académico.</div></div>
+      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>Introduce el DNI del alumno. Si ya existe en CurriculaFP, sus datos y historial académico se recuperarán automáticamente.</div></div>
       <div class="form-group">
         <label class="form-label">DNI del alumno <span>*</span></label>
-        <div style="display:flex;gap:8px;">
-          <input class="form-input" placeholder="12345678A" style="flex:1;font-family:monospace;">
-          <button class="btn btn-secondary">Buscar</button>
-        </div>
+        <div style="display:flex;gap:8px;"><input class="form-input" placeholder="12345678A" style="flex:1;font-family:monospace;"><button class="btn btn-secondary">Buscar</button></div>
       </div>
       <div style="background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">✓ Alumno encontrado en CurriculaFP</div>
+        <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px;">✓ Alumno encontrado en CurriculaFP</div>
         <div style="font-size:13px;font-weight:600;color:var(--text-main);">Torres Fernández, Miguel</div>
         <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">DNI: 12345678A · Procedente de: IES La Cartuja (Granada)</div>
         <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Historial: 3 módulos TES superados en curso anterior</div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Asignar al grupo <span>*</span></label>
-        <select class="form-select">
-          <option selected>1.er curso · Grupo A</option>
-          <option>1.er curso · Grupo B</option>
-        </select>
-      </div>
+      <div class="form-group"><label class="form-label">Asignar al grupo <span>*</span></label><select class="form-select"><option>1.er curso · Grupo A</option><option>1.er curso · Grupo B</option></select></div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-secondary" onclick="closeModal('modal-asignar-alumno')">Cancelar</button>
@@ -983,95 +886,65 @@
 <div class="modal-overlay" id="modal-asignar-docente">
   <div class="modal">
     <div class="modal-head">
-      <div><div class="modal-title">Asignar docente</div><div class="modal-subtitle">Módulo 0059 · Urgencias psiquiátricas · TES 2024–25</div></div>
+      <div><div class="modal-title">Asignar docente</div><div class="modal-subtitle">Módulo 0059 · Urgencias psiquiátricas · Grupo A · TES 2024–25</div></div>
       <button class="modal-close" onclick="closeModal('modal-asignar-docente')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-info"><span class="alert-icon">ℹ</span><span>Especialidades habilitantes para este módulo: <strong>PT Procesos Sanitarios y Asistenciales</strong></span></div>
+      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>Especialidades habilitantes: <strong>PT Procesos Sanitarios y Asistenciales</strong>. Puedes asignar varios docentes al mismo módulo+grupo.</div></div>
+      <div class="form-group"><label class="form-label">Sesiones semanales previstas</label><input class="form-input" type="number" value="2" style="width:70px;"></div>
       <div class="form-group">
-        <label class="form-label">Docente <span>*</span></label>
+        <label class="form-label">Seleccionar docente <span>*</span></label>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-          <span style="font-size:12px;color:var(--text-muted);">Mostrando docentes con especialidad habilitante</span>
-          <div class="toggle-filter" onclick="toggleFiltroDocente(this)">
-            <div class="toggle-switch on" id="toggle-esp"></div>
+          <span style="font-size:12px;color:var(--text-muted);">Filtrando por especialidad habilitante</span>
+          <div class="toggle-wrap" onclick="toggleFiltro(this)">
+            <div class="toggle-sw on" id="toggle-esp"></div>
             <span style="font-size:11.5px;" id="toggle-label">Solo habilitados</span>
           </div>
         </div>
-        <select class="form-select" id="select-docente" size="4" style="height:auto;border-radius:var(--radius-sm);">
+        <select class="form-select" id="select-docente" size="4" style="height:auto;">
           <option>García Moreno, Ana · PT Proc. Sanitarios ✓</option>
           <option>Romero Vega, Isabel · PT Proc. Sanitarios ✓</option>
           <option>Sánchez Torres, Rafael · PT Proc. Sanitarios ✓</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="form-label">Observaciones</label>
-        <input class="form-input" placeholder="Sustitución, interinidad, media jornada…">
-      </div>
+      <div class="form-group"><label class="form-label">Observaciones</label><input class="form-input" placeholder="Sustitución, interinidad, media jornada…"></div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-secondary" onclick="closeModal('modal-asignar-docente')">Cancelar</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-asignar-docente')">Guardar asignación</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-asignar-docente')">Añadir docente</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: Promoción de alumnos -->
+<!-- MODAL: Promoción -->
 <div class="modal-overlay" id="modal-promocion">
-  <div class="modal" style="width:620px;">
+  <div class="modal" style="width:640px;">
     <div class="modal-head">
-      <div><div class="modal-title">Promover alumnos a 2.º curso</div><div class="modal-subtitle">TES · CIFP Salud Jerez · Fin de curso 2023–2024</div></div>
+      <div><div class="modal-title">Promover alumnos al curso siguiente</div><div class="modal-subtitle">TES · CIFP Salud Jerez · Fin de 2023–2024</div></div>
       <button class="modal-close" onclick="closeModal('modal-promocion')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>El sistema ha detectado alumnos que completaron 1.er curso. Selecciona los que promocionan y asígnales el grupo de 2.º curso correspondiente.</div></div>
+      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>Selecciona los alumnos que promocionan y asígnales el grupo de destino. Los alumnos con módulos pendientes no pueden promocionar hasta regularizar su situación.</div></div>
 
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">1.er curso · Grupo A (22 alumnos)</div>
-        <label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--brand);"> Seleccionar todos</label>
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">1.er curso · Grupo A · 22 alumnos</div>
+        <label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--brand);"> Todos aprobados</label>
       </div>
-
       <div style="border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:12px;">
-        <div class="promocion-row">
-          <input type="checkbox" class="prom-check" checked>
-          <span class="prom-estado pe-ok">✓ Todo aprobado</span>
-          <span style="flex:1;font-size:12.5px;">García Moreno, Ana</span>
-          <select class="form-select" style="font-size:11.5px;width:160px;"><option selected>2.º curso · Grupo A</option></select>
-        </div>
-        <div class="promocion-row">
-          <input type="checkbox" class="prom-check" checked>
-          <span class="prom-estado pe-ok">✓ Todo aprobado</span>
-          <span style="flex:1;font-size:12.5px;">Pérez Ruiz, Carlos</span>
-          <select class="form-select" style="font-size:11.5px;width:160px;"><option selected>2.º curso · Grupo A</option></select>
-        </div>
-        <div class="promocion-row">
-          <input type="checkbox" class="prom-check">
-          <span class="prom-estado pe-pend">⚠ Módulos pendientes</span>
-          <span style="flex:1;font-size:12.5px;">Romero Vega, Isabel</span>
-          <select class="form-select" style="font-size:11.5px;width:160px;" disabled><option>— No promociona —</option></select>
-        </div>
+        <div class="prom-row"><input type="checkbox" class="prom-check" checked><span class="prom-estado pe-ok">✓ Todo aprobado</span><span style="flex:1;font-size:12.5px;">García Moreno, Ana</span><select class="form-select" style="font-size:11.5px;width:160px;"><option>2.º curso · Grupo A</option></select></div>
+        <div class="prom-row"><input type="checkbox" class="prom-check" checked><span class="prom-estado pe-ok">✓ Todo aprobado</span><span style="flex:1;font-size:12.5px;">Pérez Ruiz, Carlos</span><select class="form-select" style="font-size:11.5px;width:160px;"><option>2.º curso · Grupo A</option></select></div>
+        <div class="prom-row"><input type="checkbox" class="prom-check" disabled><span class="prom-estado pe-pend">⚠ Módulos pendientes</span><span style="flex:1;font-size:12.5px;color:var(--text-muted);">Romero Vega, Isabel</span><select class="form-select" style="font-size:11.5px;width:160px;" disabled><option>— No promociona —</option></select></div>
+        <div style="padding:8px 14px;font-size:11.5px;color:var(--text-muted);font-style:italic;border-top:1px solid var(--border);">+ 19 alumnos más</div>
       </div>
 
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">1.er curso · Grupo B (18 alumnos)</div>
-        <label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--brand);"> Seleccionar todos</label>
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">1.er curso · Grupo B · 18 alumnos</div>
+        <label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--brand);"> Todos aprobados</label>
       </div>
-
-      <div style="border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:4px;">
-        <div class="promocion-row">
-          <input type="checkbox" class="prom-check" checked>
-          <span class="prom-estado pe-ok">✓ Todo aprobado</span>
-          <span style="flex:1;font-size:12.5px;">Martínez López, Luis</span>
-          <select class="form-select" style="font-size:11.5px;width:160px;"><option selected>2.º curso · Grupo A</option></select>
-        </div>
-        <div class="promocion-row">
-          <input type="checkbox" class="prom-check" checked>
-          <span class="prom-estado pe-ok">✓ Todo aprobado</span>
-          <span style="flex:1;font-size:12.5px;">Sánchez Torres, María</span>
-          <select class="form-select" style="font-size:11.5px;width:160px;"><option selected>2.º curso · Grupo A</option></select>
-        </div>
-        <div style="padding:8px 14px;font-size:11.5px;color:var(--text-muted);font-style:italic;border-top:1px solid var(--border);">+ 14 alumnos más con resultado aprobado</div>
+      <div style="border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
+        <div class="prom-row"><input type="checkbox" class="prom-check" checked><span class="prom-estado pe-ok">✓ Todo aprobado</span><span style="flex:1;font-size:12.5px;">Martínez López, Luis</span><select class="form-select" style="font-size:11.5px;width:160px;"><option>2.º curso · Grupo A</option></select></div>
+        <div style="padding:8px 14px;font-size:11.5px;color:var(--text-muted);font-style:italic;border-top:1px solid var(--border);">+ 17 alumnos más</div>
       </div>
-
     </div>
     <div class="modal-foot">
       <button class="btn btn-secondary" onclick="closeModal('modal-promocion')">Cancelar</button>
@@ -1081,63 +954,42 @@
 </div>
 
 <script>
-// ── NAVEGACIÓN ──
 function mostrarCentro(){
   document.getElementById('vista-centros').style.display='none';
   document.getElementById('vista-centro').style.display='block';
-  document.getElementById('topbar-sub').textContent='CIFP Salud Jerez · TES 2024–2025 · Superadministrador';
+  document.getElementById('topbar-sub').textContent='CIFP Salud Jerez · 2024–2025 · Superadministrador';
 }
 function volverCentros(){
   document.getElementById('vista-centro').style.display='none';
   document.getElementById('vista-centros').style.display='block';
   document.getElementById('topbar-sub').textContent='Vista global del sistema · Superadministrador';
 }
-
-// ── TABS ──
 function switchTab(id,el){
   document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(id).classList.add('active');
 }
-
-// ── GRUPOS ──
 function toggleGrupo(id){
   document.getElementById(id).classList.toggle('open');
 }
-
-// ── MODALES ──
 function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 document.querySelectorAll('.modal-overlay').forEach(o=>{
   o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); });
 });
-
-// ── TOGGLE FILTRO DOCENTES ──
-function toggleFiltroDocente(el){
-  const sw = document.getElementById('toggle-esp');
-  const lbl = document.getElementById('toggle-label');
-  const sel = document.getElementById('select-docente');
+function toggleFiltro(el){
+  const sw=document.getElementById('toggle-esp');
+  const lbl=document.getElementById('toggle-label');
+  const sel=document.getElementById('select-docente');
   sw.classList.toggle('on');
   if(sw.classList.contains('on')){
     lbl.textContent='Solo habilitados';
-    sel.innerHTML=`<option>García Moreno, Ana · PT Proc. Sanitarios ✓</option>
-      <option>Romero Vega, Isabel · PT Proc. Sanitarios ✓</option>
-      <option>Sánchez Torres, Rafael · PT Proc. Sanitarios ✓</option>`;
+    sel.innerHTML='<option>García Moreno, Ana · PT Proc. Sanitarios ✓</option><option>Romero Vega, Isabel · PT Proc. Sanitarios ✓</option><option>Sánchez Torres, Rafael · PT Proc. Sanitarios ✓</option>';
   } else {
     lbl.textContent='Todos los docentes';
-    sel.innerHTML=`<option>García Moreno, Ana · PT Proc. Sanitarios ✓</option>
-      <option>Romero Vega, Isabel · PT Proc. Sanitarios ✓</option>
-      <option>Sánchez Torres, Rafael · PT Proc. Sanitarios ✓</option>
-      <option>Pérez Ruiz, Carlos · Ens. Secundaria — Enfermería ⚠</option>
-      <option>Martínez López, Sergio · Proc. Sanitarios ✓</option>
-      <option>Navarro Gil, Marta · Economía</option>`;
+    sel.innerHTML='<option>García Moreno, Ana · PT Proc. Sanitarios ✓</option><option>Romero Vega, Isabel · PT Proc. Sanitarios ✓</option><option>Sánchez Torres, Rafael · PT Proc. Sanitarios ✓</option><option>Pérez Ruiz, Carlos · Ens. Secundaria — Enfermería ⚠</option><option>Martínez López, Sergio · Proc. Sanitarios ✓</option><option>Navarro Gil, Marta · Economía</option>';
   }
-}
-
-// ── FILTRO CURSO ──
-function filtrarCurso(val){
-  console.log('Filtro curso:', val);
 }
 </script>
 </body>
