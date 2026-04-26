@@ -94,6 +94,20 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 .kpi-box.accent .kpi-val{color:var(--garnet);}
 .kpi-label{font-size:11px;color:var(--text-soft);margin-top:4px;}
 
+/* ── ACNEAE ── */
+.acneae-block{border:1px solid #DDD6FE;border-radius:var(--radius-sm);background:#FAFAFF;margin-top:12px;overflow:hidden;}
+.acneae-header{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;user-select:none;}
+.acneae-header:hover{background:#F3F0FF;}
+.acneae-chevron{font-size:10px;color:#7C3AED;transition:transform 0.2s;flex-shrink:0;}
+.acneae-block.open .acneae-chevron{transform:rotate(90deg);}
+.acneae-label{font-size:11.5px;font-weight:700;color:#7C3AED;flex:1;}
+.acneae-badge{font-size:10px;padding:2px 7px;border-radius:3px;background:#EDE9FE;color:#7C3AED;border:1px solid #DDD6FE;}
+.acneae-body{display:none;border-top:1px solid #DDD6FE;padding:12px 14px;}
+.acneae-block.open .acneae-body{display:block;}
+.acneae-check-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
+.acneae-check{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-mid);cursor:pointer;}
+.acneae-check input{accent-color:#7C3AED;width:14px;height:14px;cursor:pointer;}
+
 /* MAIN TABS */
 .main-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:24px;}
 .main-tab{padding:10px 18px;font-size:13px;font-weight:500;color:var(--text-soft);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;}
@@ -1232,6 +1246,32 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
                       </tbody>
                     </table>
                   </div>
+
+                  <!-- ACNEAE -->
+                  <div class="acneae-block" id="acneae-sa-0056-01">
+                    <div class="acneae-header" onclick="toggleACNEAE('acneae-sa-0056-01')">
+                      <div class="acneae-chevron">▶</div>
+                      <span class="acneae-label">♿ Adaptaciones para ACNEAE</span>
+                      <span class="acneae-badge">Planificación base</span>
+                    </div>
+                    <div class="acneae-body">
+                      <div style="font-size:11.5px;color:var(--text-soft);margin-bottom:10px;line-height:1.5;">Define las medidas de atención a la diversidad previstas para esta SA. La aplicación individual a cada alumno se gestiona en <strong>Gestión de cursos → Expediente del alumno</strong>.</div>
+                      <div style="font-size:11px;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Medidas metodológicas previstas</div>
+                      <div class="acneae-check-grid">
+                        <label class="acneae-check"><input type="checkbox" checked> Ampliación de tiempo en actividades</label>
+                        <label class="acneae-check"><input type="checkbox" checked> Formato oral alternativo al escrito</label>
+                        <label class="acneae-check"><input type="checkbox"> Material adaptado / lectura fácil</label>
+                        <label class="acneae-check"><input type="checkbox"> Apoyo de recursos TIC específicos</label>
+                        <label class="acneae-check"><input type="checkbox"> Trabajo individual en lugar de grupal</label>
+                        <label class="acneae-check"><input type="checkbox"> Adaptación del entorno o espacio</label>
+                      </div>
+                      <div style="font-size:11px;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Observaciones del responsable de programación</div>
+                      <textarea style="width:100%;border:1px solid #DDD6FE;border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;color:var(--text-mid);background:var(--white);resize:vertical;font-family:Inter,sans-serif;box-sizing:border-box;" rows="2" placeholder="Indicaciones específicas para la adaptación de esta SA: materiales alternativos, recursos de apoyo, consideraciones para el docente…">Esta SA incluye simulaciones de SVA que requieren coordinación motora. Para alumnado con limitaciones físicas se prevé rol de coordinador del equipo y evaluación mediante presentación oral del protocolo.</textarea>
+                      <div style="display:flex;justify-content:flex-end;margin-top:10px;">
+                        <button class="btn btn-secondary btn-sm">Guardar adaptaciones</button>
+                      </div>
+                    </div>
+                  </div><!-- /acneae -->
 
                 </div>
               </div><!-- /SA-01 -->
@@ -4352,6 +4392,12 @@ function toggleUTTes(id){
 }
 
 /* ── Subpestañas módulo ── */
+
+
+function toggleACNEAE(id){
+  const b=document.getElementById(id);
+  if(b) b.classList.toggle('open');
+}
 
 function switchIntermodularTab(tipo,el){
   const container=document.getElementById('modtabs-intermodular');
