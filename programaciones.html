@@ -303,72 +303,98 @@
   .pe-ok{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
   .pe-pend{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
 
-  /* CICLO SECTION */
-  .ciclo-section{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow-sm)}
-  .ciclo-section-header{display:flex;align-items:center;padding:12px 16px;background:var(--bg);border-bottom:1px solid var(--border);gap:10px}
-  .ciclo-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:var(--brand-light);color:var(--brand);border:1px solid #FECACA}
   /* CENTROS */
   .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
   .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.2s}
   .centro-card:hover{box-shadow:var(--shadow);transform:translateY(-1px);border-color:var(--border-dark)}
   .centro-avatar{width:40px;height:40px;border-radius:10px;background:var(--brand-light);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--brand);flex-shrink:0}
-  /* SELECTOR */
-  .selector-bar{display:flex;align-items:center;gap:10px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 16px;margin-bottom:20px;flex-wrap:wrap}
-  .selector-label{font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap}
   /* BREADCRUMB */
   .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
   .view-back{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-sub);cursor:pointer;padding:5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-white)}
   .view-back:hover{background:var(--bg)}
-  /* TABLA */
-  .tabla{width:100%;border-collapse:collapse}
-  .tabla th{padding:7px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--bg)}
-  .tabla td{padding:8px 10px;font-size:12.5px;border-bottom:1px solid var(--border);color:var(--text-main)}
-  .tabla tr:last-child td{border-bottom:none}
-  .tabla tr:hover td{background:#FAFAF9}
-  /* PROG CARDS */
-  .prog-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);margin-bottom:12px;overflow:hidden;transition:all 0.2s}
-  .prog-card:hover{box-shadow:var(--shadow);border-color:var(--border-dark)}
-  .prog-card-header{display:flex;align-items:center;padding:14px 16px;gap:12px;cursor:pointer;user-select:none}
-  .prog-card-header:hover{background:#FAFAF9}
-  .prog-chevron{font-size:10px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
-  .prog-card.open .prog-chevron{transform:rotate(90deg)}
-  .prog-card-body{display:none;border-top:1px solid var(--border)}
-  .prog-card.open .prog-card-body{display:block}
-  /* MÓDULO ROW */
-  .mod-row{display:flex;align-items:center;padding:11px 16px;border-bottom:1px solid var(--border);gap:12px;cursor:pointer;transition:background 0.1s}
-  .mod-row:last-child{border-bottom:none}
-  .mod-row:hover{background:#FAFAF9}
-  .mod-code-sm{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:3px;background:var(--bg);border:1px solid var(--border);color:var(--text-sub);font-family:monospace;flex-shrink:0}
-  .mod-name-sm{font-size:13px;font-weight:500;color:var(--text-main);flex:1}
-  .mod-horas-sm{font-size:11.5px;color:var(--text-muted);white-space:nowrap}
-  /* PROG STATUS */
+  /* SELECTOR */
+  .selector-bar{display:flex;align-items:center;gap:10px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 16px;margin-bottom:20px;flex-wrap:wrap}
+  .selector-label{font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap}
+  /* SECCIÓN TEMPORAL */
+  .prog-seccion{margin-bottom:28px}
+  .prog-seccion-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;padding-left:2px;display:flex;align-items:center;gap:8px}
+  .prog-seccion-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  /* PROG LIST CARD */
+  .prog-list-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:8px;cursor:pointer;transition:all 0.2s}
+  .prog-list-card:hover{box-shadow:var(--shadow);border-color:var(--border-dark)}
+  .prog-ciclo-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:var(--brand-light);color:var(--brand);border:1px solid #FECACA;flex-shrink:0}
+  .prog-info{flex:1}
+  .prog-title{font-size:13px;font-weight:700;color:var(--text-main)}
+  .prog-meta{font-size:11.5px;color:var(--text-muted);margin-top:3px}
+  .prog-barra-wrap{display:flex;align-items:center;gap:8px;min-width:160px}
+  .barra-bg{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+  .barra-fill{height:100%;border-radius:3px}
+  .bf-green{background:var(--green)}
+  .bf-amber{background:var(--amber)}
+  .bf-red{background:var(--brand)}
+  .barra-pct{font-size:11px;font-weight:700;color:var(--text-sub);white-space:nowrap;min-width:32px}
   .prog-status{font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600;flex-shrink:0;white-space:nowrap}
   .ps-ok{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
   .ps-parcial{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
   .ps-pendiente{background:var(--brand-light);color:var(--brand);border:1px solid #FECACA}
-  /* PROG BARRA */
-  .prog-barra{display:flex;align-items:center;gap:8px;min-width:140px}
-  .barra-bg{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
-  .barra-fill{height:100%;border-radius:3px;transition:width 0.3s}
-  .bf-green{background:var(--green)}
-  .bf-amber{background:var(--amber)}
-  .bf-red{background:var(--brand)}
-  .barra-pct{font-size:11px;font-weight:700;color:var(--text-sub);white-space:nowrap;min-width:30px}
-  /* SA lista */
-  .sa-mini{display:flex;align-items:center;padding:8px 16px;border-bottom:1px solid var(--border);gap:10px;font-size:12px;}
-  .sa-mini:last-child{border-bottom:none}
-  .sa-mini:hover{background:#FAFAF9}
-  .sa-num-sm{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border);flex-shrink:0;font-family:monospace}
-  .sa-name-sm{flex:1;font-weight:500;color:var(--text-main)}
-  .sa-sesiones{font-size:11px;color:var(--text-muted);white-space:nowrap}
-  .sa-semana{font-size:11px;font-weight:600;color:var(--blue);white-space:nowrap}
-  /* TABS */
-  .main-tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px}
-  .main-tab{padding:9px 18px;font-size:12.5px;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.15s;white-space:nowrap}
-  .main-tab:hover{color:var(--text-main)}
-  .main-tab.active{color:var(--brand);border-bottom-color:var(--brand);font-weight:600}
-  .tab-panel{display:none}
-  .tab-panel.active{display:block}
+  .ps-historico{background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
+  /* VISTA TOGGLE */
+  .vista-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px}
+  .vista-btn{padding:5px 12px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-sub);display:flex;align-items:center;gap:5px;transition:all 0.15s}
+  .vista-btn.active{background:var(--bg-white);color:var(--text-main);box-shadow:var(--shadow-sm);font-weight:600}
+  /* GRUPO FILTER */
+  .grupo-filter{display:flex;gap:6px;flex-wrap:wrap}
+  .gf-btn{padding:4px 12px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--bg-white);color:var(--text-sub);transition:all 0.15s}
+  .gf-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .gf-btn.g1{border-left:3px solid #1D4ED8}
+  .gf-btn.g2{border-left:3px solid #15803D}
+  /* GANTT */
+  .gantt-wrap{overflow-x:auto;margin-bottom:20px}
+  .gantt-table{border-collapse:collapse;min-width:900px;width:100%}
+  .gantt-table th{padding:5px 6px;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;border-bottom:2px solid var(--border);background:var(--bg);white-space:nowrap;text-align:center}
+  .gantt-table th.mod-col{text-align:left;min-width:180px;position:sticky;left:0;background:var(--bg);z-index:2}
+  .gantt-table td{padding:4px 3px;border-bottom:1px solid var(--border);vertical-align:middle}
+  .gantt-table td.mod-cell{padding:6px 10px;position:sticky;left:0;background:var(--bg-white);z-index:1;border-right:2px solid var(--border)}
+  .gantt-table tr:hover td{background:#FAFAF9}
+  .gantt-table tr:hover td.mod-cell{background:#F5F4F2}
+  .gantt-mod-code{font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px;background:var(--bg);border:1px solid var(--border);color:var(--text-sub);font-family:monospace;margin-bottom:2px;display:inline-block}
+  .gantt-mod-name{font-size:11.5px;font-weight:600;color:var(--text-main)}
+  .gantt-mod-doc{font-size:10.5px;color:var(--text-muted)}
+  /* SA BLOQUES EN GANTT */
+  .sa-bloque{border-radius:4px;padding:3px 6px;font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity 0.15s;display:block;margin:1px 2px}
+  .sa-bloque:hover{opacity:0.85}
+  .sb-completo{background:#DCFCE7;color:#15803D;border:1px solid #BBF7D0}
+  .sb-activo{background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE}
+  .sb-pendiente{background:#FEE2E2;color:#991B1B;border:1px dashed #FECACA}
+  .sb-readonly{background:#F4F4F5;color:#71717A;border:1px solid #E4E4E7;cursor:default}
+  .sa-celda-vacia{background:var(--bg);border-radius:3px;height:26px;display:block;margin:1px 2px;cursor:pointer;border:1px dashed transparent;transition:all 0.15s}
+  .sa-celda-vacia:hover{border-color:var(--blue-border);background:var(--blue-light)}
+  /* LEYENDA */
+  .gantt-leyenda{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  .gl-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text-sub)}
+  .gl-dot{width:14px;height:8px;border-radius:2px;flex-shrink:0}
+  /* CALENDARIO MENSUAL */
+  .cal-prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+  .cal-prog-month{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .cal-prog-month-title{padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--border);font-size:12px;font-weight:700;color:var(--text-main);text-align:center;text-transform:uppercase;letter-spacing:0.05em}
+  .cal-prog-days-header{display:grid;grid-template-columns:repeat(7,1fr);padding:4px 6px 0}
+  .cal-prog-day-name{text-align:center;font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;padding:2px 0}
+  .cal-prog-days{display:grid;grid-template-columns:repeat(7,1fr);padding:2px 4px 6px;gap:2px}
+  .cal-prog-day{text-align:center;font-size:10.5px;padding:3px 1px;border-radius:3px;min-height:22px;display:flex;align-items:center;justify-content:center;cursor:default;position:relative}
+  .cal-prog-day.empty{color:transparent}
+  .cal-prog-day.weekend{color:var(--text-muted);background:#FAFAF9}
+  .cal-prog-day.festivo{background:#DBEAFE;color:#1D4ED8;font-weight:700}
+  .cal-prog-day.sa-0056{background:#DCFCE7;color:#15803D;font-weight:600}
+  .cal-prog-day.sa-0057{background:#DBEAFE;color:#1D4ED8;font-weight:600}
+  .cal-prog-day.sa-0060{background:#F5F3FF;color:#7C3AED;font-weight:600}
+  .cal-prog-day.sa-0061{background:#FEF3C7;color:#92400E;font-weight:600}
+  .cal-prog-day.sa-pendiente{background:#FEE2E2;color:#991B1B;font-weight:600;border:1px dashed #FECACA}
+  .cal-leyenda-prog{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .clp-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-sub)}
+  .clp-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+  /* SEMANA MARCADOR */
+  .semana-actual{background:rgba(155,28,28,0.08);position:relative}
+  .semana-actual::after{content:'HOY';position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:700;color:var(--brand);background:var(--brand-light);padding:1px 4px;border-radius:2px;white-space:nowrap}
 
 </style>
 </head>
@@ -407,7 +433,7 @@
     <div class="nav-group">
       <div class="nav-group-label">Gestión de cursos</div>
       <a class="nav-item" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
-      <a class="nav-item active" href="programaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
       <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
       <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
       <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
@@ -448,14 +474,16 @@
 
     <!-- ══ VISTA 1: CENTROS ══ -->
     <div id="vista-centros">
-      <div style="margin-bottom:1.5rem;">
-        <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;">Programaciones</div>
-        <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px;">Distribución de SA en el calendario real del curso por grupo y módulo. Cada docente temporaliza sus SA sobre el calendario del año académico.</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;">Programaciones</div>
+          <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px;">Distribución de SA en el calendario real del curso por grupo, módulo y docente.</div>
+        </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
-        <div class="kpi-card k-blue"><div class="kpi-label">Centros con programaciones</div><div class="kpi-value">2</div><div class="kpi-sub">De 3 centros activos</div></div>
-        <div class="kpi-card k-green"><div class="kpi-label">Módulos programados</div><div class="kpi-value">7</div><div class="kpi-sub">De 11 en el TES 2024–25</div></div>
-        <div class="kpi-card k-amber"><div class="kpi-label">Programaciones parciales</div><div class="kpi-value">3</div><div class="kpi-sub">SA sin temporalizar</div></div>
+        <div class="kpi-card k-blue"><div class="kpi-label">Programaciones activas</div><div class="kpi-value">3</div><div class="kpi-sub">Curso 2024–25</div></div>
+        <div class="kpi-card k-green"><div class="kpi-label">SA temporalizadas</div><div class="kpi-value">22</div><div class="kpi-sub">De 34 totales</div></div>
+        <div class="kpi-card k-amber"><div class="kpi-label">SA pendientes</div><div class="kpi-value">12</div><div class="kpi-sub">Sin semana asignada</div></div>
         <div class="kpi-card k-red"><div class="kpi-label">Sin iniciar</div><div class="kpi-value">4</div><div class="kpi-sub">Módulos sin programar</div></div>
       </div>
       <div class="centros-grid">
@@ -468,9 +496,9 @@
             <div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber);"></div><span style="font-size:11px;color:var(--amber);font-weight:600;">En curso</span></div>
           </div>
           <div style="display:flex;gap:14px;padding-top:10px;border-top:1px solid var(--border);">
-            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">2</div><div style="font-size:10px;color:var(--text-muted);">Ciclos</div></div>
-            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">3</div><div style="font-size:10px;color:var(--text-muted);">Grupos</div></div>
-            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">64%</div><div style="font-size:10px;color:var(--text-muted);">Programado</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">3</div><div style="font-size:10px;color:var(--text-muted);">Prog. activas</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">64%</div><div style="font-size:10px;color:var(--text-muted);">Completadas</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">12</div><div style="font-size:10px;color:var(--text-muted);">SA pendientes</div></div>
           </div>
         </div>
         <div class="centro-card" style="opacity:0.7;cursor:default;">
@@ -482,15 +510,15 @@
             <div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);"></div><span style="font-size:11px;color:var(--green);font-weight:600;">Completo</span></div>
           </div>
           <div style="display:flex;gap:14px;padding-top:10px;border-top:1px solid var(--border);">
-            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">1</div><div style="font-size:10px;color:var(--text-muted);">Ciclo</div></div>
-            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">1</div><div style="font-size:10px;color:var(--text-muted);">Grupo</div></div>
-            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">100%</div><div style="font-size:10px;color:var(--text-muted);">Programado</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">1</div><div style="font-size:10px;color:var(--text-muted);">Prog. activa</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">100%</div><div style="font-size:10px;color:var(--text-muted);">Completadas</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">0</div><div style="font-size:10px;color:var(--text-muted);">SA pendientes</div></div>
           </div>
         </div>
       </div>
     </div><!-- /vista-centros -->
 
-    <!-- ══ VISTA 2: CENTRO ══ -->
+    <!-- ══ VISTA 2: CENTRO — LISTADO PROGRAMACIONES ══ -->
     <div id="vista-centro" style="display:none;">
       <div class="breadcrumb">
         <button class="view-back" onclick="volverCentros()"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>Centros</button>
@@ -498,273 +526,449 @@
         <span style="font-size:12.5px;font-weight:600;color:var(--text-main);">CIFP Salud Jerez</span>
       </div>
 
-      <div class="selector-bar">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="selector-label">Año académico</span>
-          <select class="form-select"><option selected>2024–2025</option><option>2025–2026</option></select>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;">Programaciones · CIFP Salud Jerez</div>
+        <button class="btn btn-primary" onclick="openModal('modal-nueva-prog')">+ Nueva programación</button>
+      </div>
+
+      <!-- ACTUALES -->
+      <div class="prog-seccion">
+        <div class="prog-seccion-title"><div class="prog-seccion-dot" style="background:var(--green);"></div>Actuales · Curso 2024–2025</div>
+
+        <div class="prog-list-card" onclick="mostrarDetalle('prog-tes-1a')">
+          <span class="prog-ciclo-badge">TES</span>
+          <div class="prog-info">
+            <div class="prog-title">TES · 1.er curso · Grupo A · 2024–25</div>
+            <div class="prog-meta">Planificación base: TES 2024 v1 · Mañana · 6 ses/día · García M., Pérez R., Martínez L.</div>
+          </div>
+          <div class="prog-barra-wrap">
+            <div class="barra-bg"><div class="barra-fill bf-amber" style="width:60%;"></div></div>
+            <span class="barra-pct">60%</span>
+          </div>
+          <span class="prog-status ps-parcial">⚠ Parcial</span>
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);flex-shrink:0;"><path d="M9 5l7 7-7 7"/></svg>
         </div>
-        <div style="width:1px;height:24px;background:var(--border);margin:0 4px;"></div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="selector-label">Ciclo</span>
-          <select class="form-select"><option selected>TES · Técnico en Emergencias Sanitarias</option><option>TCAE</option></select>
+
+        <div class="prog-list-card" onclick="mostrarDetalle('prog-tes-1b')">
+          <span class="prog-ciclo-badge">TES</span>
+          <div class="prog-info">
+            <div class="prog-title">TES · 1.er curso · Grupo B · 2024–25</div>
+            <div class="prog-meta">Planificación base: TES 2024 v1 · Tarde · 3 ses/día · Romero V., Martínez L.</div>
+          </div>
+          <div class="prog-barra-wrap">
+            <div class="barra-bg"><div class="barra-fill bf-amber" style="width:45%;"></div></div>
+            <span class="barra-pct">45%</span>
+          </div>
+          <span class="prog-status ps-parcial">⚠ Parcial</span>
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);flex-shrink:0;"><path d="M9 5l7 7-7 7"/></svg>
         </div>
-        <div style="width:1px;height:24px;background:var(--border);margin:0 4px;"></div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="selector-label">Planificación base</span>
-          <select class="form-select"><option selected>TES 2024 · v1 (activa)</option><option>TES 2023 · v1 (archivada)</option></select>
+
+        <div class="prog-list-card" onclick="mostrarDetalle('prog-tes-2a')">
+          <span class="prog-ciclo-badge">TES</span>
+          <div class="prog-info">
+            <div class="prog-title">TES · 2.º curso · Grupo A · 2024–25</div>
+            <div class="prog-meta">Planificación base: TES 2024 v1 · Mañana · 6 ses/día · Sánchez T., García M., Romero V.</div>
+          </div>
+          <div class="prog-barra-wrap">
+            <div class="barra-bg"><div class="barra-fill bf-green" style="width:100%;"></div></div>
+            <span class="barra-pct">100%</span>
+          </div>
+          <span class="prog-status ps-ok">✓ Completo</span>
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);flex-shrink:0;"><path d="M9 5l7 7-7 7"/></svg>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.25rem;">
-        <div class="kpi-card k-blue"><div class="kpi-label">Grupos activos TES</div><div class="kpi-value">3</div><div class="kpi-sub">1ºA · 1ºB · 2ºA</div></div>
-        <div class="kpi-card k-green"><div class="kpi-label">SA totales a programar</div><div class="kpi-value">34</div><div class="kpi-sub">En todos los módulos</div></div>
-        <div class="kpi-card k-amber"><div class="kpi-label">SA temporalizadas</div><div class="kpi-value">22</div><div class="kpi-sub">64% del total</div></div>
-        <div class="kpi-card k-red"><div class="kpi-label">SA pendientes</div><div class="kpi-value">12</div><div class="kpi-sub">Sin semana asignada</div></div>
+      <!-- FUTURAS -->
+      <div class="prog-seccion">
+        <div class="prog-seccion-title"><div class="prog-seccion-dot" style="background:var(--blue);"></div>Futuras · Curso 2025–2026</div>
+        <div style="background:var(--bg-white);border:1px dashed var(--border-dark);border-radius:var(--radius-lg);padding:16px 20px;text-align:center;color:var(--text-muted);font-size:12.5px;">
+          No hay programaciones futuras configuradas. <button class="btn btn-secondary btn-sm" style="margin-left:10px;" onclick="openModal('modal-nueva-prog')">+ Crear programación futura</button>
+        </div>
       </div>
 
-      <!-- TABS por grupo -->
-      <div class="main-tabs">
-        <div class="main-tab active" onclick="switchTab('tab-1a',this)">1.er curso · Grupo A <span style="font-size:10.5px;background:var(--amber-light);color:var(--amber);padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:700;">⚠ 4</span></div>
-        <div class="main-tab" onclick="switchTab('tab-1b',this)">1.er curso · Grupo B <span style="font-size:10.5px;background:var(--amber-light);color:var(--amber);padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:700;">⚠ 5</span></div>
-        <div class="main-tab" onclick="switchTab('tab-2a',this)">2.º curso · Grupo A <span style="font-size:10.5px;background:var(--green-light);color:var(--green);padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:700;">✓</span></div>
+      <!-- PASADAS -->
+      <div class="prog-seccion">
+        <div class="prog-seccion-title"><div class="prog-seccion-dot" style="background:var(--text-muted);"></div>Pasadas · Curso 2023–2024</div>
+        <div class="prog-list-card" style="opacity:0.7;" onclick="mostrarDetalle('prog-tes-1a')">
+          <span class="prog-ciclo-badge" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);">TES</span>
+          <div class="prog-info">
+            <div class="prog-title" style="color:var(--text-sub);">TES · 1.er curso · Grupo A · 2023–24</div>
+            <div class="prog-meta">Planificación base: TES 2023 v1 · Archivada · Solo lectura</div>
+          </div>
+          <span class="prog-status ps-historico">Archivada</span>
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);flex-shrink:0;"><path d="M9 5l7 7-7 7"/></svg>
+        </div>
       </div>
-
-      <!-- ── TAB 1ºA ── -->
-      <div id="tab-1a" class="tab-panel active">
-
-        <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>Las SA de cada módulo se distribuyen en semanas del calendario del curso. El docente asignado al módulo decide cuándo se imparte cada SA. Las sesiones diarias disponibles se calculan automáticamente según el horario del grupo (Grupo A · Mañana · 6 sesiones/día).</div></div>
-
-        <!-- Módulo 0056 — completo -->
-        <div class="prog-card open" id="prog-0056-1a">
-          <div class="prog-card-header" onclick="toggleProg('prog-0056-1a')">
-            <div class="prog-chevron">▶</div>
-            <span class="mod-code-sm">0056</span>
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:600;color:var(--text-main);">Atención sanitaria especial en situaciones de emergencia</div>
-              <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Docente: García Moreno, Ana · 202 h · 6 ses/sem · 1.er trimestre</div>
-            </div>
-            <div class="prog-barra">
-              <div class="barra-bg"><div class="barra-fill bf-green" style="width:100%"></div></div>
-              <span class="barra-pct">100%</span>
-            </div>
-            <span class="prog-status ps-ok">✓ Programado</span>
-          </div>
-          <div class="prog-card-body">
-            <div style="padding:10px 16px;border-bottom:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:space-between;">
-              <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">SA del módulo · distribución en el calendario</div>
-              <div style="font-size:11.5px;color:var(--text-muted);">Sem 1–18 del 1.er trimestre · Sem 1 = 9 sep 2024</div>
-            </div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·01</span><span class="sa-name-sm">Soporte vital avanzado. Material de emergencias</span><span class="sa-sesiones">18 sesiones</span><span class="sa-semana">Sem 1–3</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·02</span><span class="sa-name-sm">Atención al parto extrahospitalario</span><span class="sa-sesiones">12 sesiones</span><span class="sa-semana">Sem 4–5</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·03</span><span class="sa-name-sm">Técnicas de inmovilización y traslado</span><span class="sa-sesiones">24 sesiones</span><span class="sa-semana">Sem 6–9</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·04</span><span class="sa-name-sm">Atención a urgencias obstétricas y ginecológicas</span><span class="sa-sesiones">18 sesiones</span><span class="sa-semana">Sem 10–12</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-          </div>
-        </div>
-
-        <!-- Módulo 0057 — parcial -->
-        <div class="prog-card open" id="prog-0057-1a">
-          <div class="prog-card-header" onclick="toggleProg('prog-0057-1a')">
-            <div class="prog-chevron">▶</div>
-            <span class="mod-code-sm">0057</span>
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:600;color:var(--text-main);">Atención sanitaria inicial a múltiples víctimas</div>
-              <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Docente: Pérez Ruiz, Carlos · García M., Ana · 192 h · 5 ses/sem · 1.er–2.º trimestre</div>
-            </div>
-            <div class="prog-barra">
-              <div class="barra-bg"><div class="barra-fill bf-amber" style="width:60%"></div></div>
-              <span class="barra-pct">60%</span>
-            </div>
-            <span class="prog-status ps-parcial">⚠ Parcial</span>
-          </div>
-          <div class="prog-card-body">
-            <div style="padding:10px 16px;border-bottom:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:space-between;">
-              <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">SA del módulo · distribución en el calendario</div>
-              <button class="btn btn-primary btn-sm" onclick="openModal('modal-nueva-sa-prog')">+ Temporalizar SA pendiente</button>
-            </div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·01</span><span class="sa-name-sm">Triaje en emergencias con múltiples víctimas</span><span class="sa-sesiones">20 sesiones</span><span class="sa-semana">Sem 13–16</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·02</span><span class="sa-name-sm">Organización del área de intervención</span><span class="sa-sesiones">15 sesiones</span><span class="sa-semana">Sem 17–19</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-            <div class="sa-mini" style="background:#FEF9F9;">
-              <span class="sa-num-sm" style="background:#FEF2F2;color:var(--brand);border-color:#FECACA;">SA·03</span>
-              <span class="sa-name-sm" style="color:var(--text-muted);font-style:italic;">Coordinación con otros servicios de emergencia</span>
-              <span class="sa-sesiones">18 sesiones</span>
-              <span style="font-size:11px;color:var(--brand);font-weight:600;">Sin temporalizar</span>
-              <button class="btn btn-secondary btn-sm" onclick="openModal('modal-nueva-sa-prog')">Asignar semanas</button>
-            </div>
-            <div class="sa-mini" style="background:#FEF9F9;">
-              <span class="sa-num-sm" style="background:#FEF2F2;color:var(--brand);border-color:#FECACA;">SA·04</span>
-              <span class="sa-name-sm" style="color:var(--text-muted);font-style:italic;">Documentación y registro sanitario</span>
-              <span class="sa-sesiones">12 sesiones</span>
-              <span style="font-size:11px;color:var(--brand);font-weight:600;">Sin temporalizar</span>
-              <button class="btn btn-secondary btn-sm" onclick="openModal('modal-nueva-sa-prog')">Asignar semanas</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Módulo 0060 — pendiente -->
-        <div class="prog-card" id="prog-0060-1a">
-          <div class="prog-card-header" onclick="toggleProg('prog-0060-1a')">
-            <div class="prog-chevron">▶</div>
-            <span class="mod-code-sm">0060</span>
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:600;color:var(--text-main);">Anatomofisiología y patología básicas en emergencias</div>
-              <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Docente: Martínez López, Sergio · 128 h · 4 ses/sem · Sin trimestre asignado</div>
-            </div>
-            <div class="prog-barra">
-              <div class="barra-bg"><div class="barra-fill bf-red" style="width:0%"></div></div>
-              <span class="barra-pct">0%</span>
-            </div>
-            <span class="prog-status ps-pendiente">⏳ Sin iniciar</span>
-          </div>
-          <div class="prog-card-body">
-            <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:12.5px;">
-              <div style="margin-bottom:10px;">El docente aún no ha iniciado la programación de este módulo.</div>
-              <button class="btn btn-primary" onclick="openModal('modal-nueva-sa-prog')">Iniciar programación del módulo</button>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /tab-1a -->
-
-      <!-- ── TAB 1ºB ── -->
-      <div id="tab-1b" class="tab-panel">
-        <div class="alert alert-warning"><span class="alert-icon">⚠</span><div>El Grupo B tiene horario de tarde (3 sesiones/día). La distribución de SA puede diferir del Grupo A aunque compartan la misma planificación base.</div></div>
-
-        <div class="prog-card" id="prog-0056-1b">
-          <div class="prog-card-header" onclick="toggleProg('prog-0056-1b')">
-            <div class="prog-chevron">▶</div>
-            <span class="mod-code-sm">0056</span>
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:600;color:var(--text-main);">Atención sanitaria especial en situaciones de emergencia</div>
-              <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Docente: Romero Vega, Isabel · 202 h · 4 ses/sem · 1.er–2.º trimestre</div>
-            </div>
-            <div class="prog-barra">
-              <div class="barra-bg"><div class="barra-fill bf-amber" style="width:50%"></div></div>
-              <span class="barra-pct">50%</span>
-            </div>
-            <span class="prog-status ps-parcial">⚠ Parcial</span>
-          </div>
-          <div class="prog-card-body">
-            <div style="padding:10px 16px;border-bottom:1px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:space-between;">
-              <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">SA del módulo · distribución en el calendario</div>
-              <button class="btn btn-primary btn-sm" onclick="openModal('modal-nueva-sa-prog')">+ Temporalizar SA pendiente</button>
-            </div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·01</span><span class="sa-name-sm">Soporte vital avanzado. Material de emergencias</span><span class="sa-sesiones">18 sesiones</span><span class="sa-semana">Sem 1–5</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·02</span><span class="sa-name-sm">Atención al parto extrahospitalario</span><span class="sa-sesiones">12 sesiones</span><span class="sa-semana">Sem 6–9</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-            <div class="sa-mini" style="background:#FEF9F9;"><span class="sa-num-sm" style="background:#FEF2F2;color:var(--brand);border-color:#FECACA;">SA·03</span><span class="sa-name-sm" style="color:var(--text-muted);font-style:italic;">Técnicas de inmovilización y traslado</span><span class="sa-sesiones">24 sesiones</span><span style="font-size:11px;color:var(--brand);font-weight:600;">Sin temporalizar</span><button class="btn btn-secondary btn-sm" onclick="openModal('modal-nueva-sa-prog')">Asignar semanas</button></div>
-          </div>
-        </div>
-
-      </div><!-- /tab-1b -->
-
-      <!-- ── TAB 2ºA ── -->
-      <div id="tab-2a" class="tab-panel">
-        <div class="alert alert-success" style="background:var(--green-light);border:1px solid var(--green-border);color:#14532d;"><span class="alert-icon">✓</span><div>Todas las SA del 2.º curso están temporalizadas. La programación del Grupo A 2.º curso está completa.</div></div>
-
-        <div class="prog-card open" id="prog-0061-2a">
-          <div class="prog-card-header" onclick="toggleProg('prog-0061-2a')">
-            <div class="prog-chevron">▶</div>
-            <span class="mod-code-sm">0061</span>
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:600;color:var(--text-main);">Logística sanitaria en emergencias</div>
-              <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Docente: Sánchez Torres, Rafael · 96 h · 3 ses/sem · 1.er trimestre</div>
-            </div>
-            <div class="prog-barra">
-              <div class="barra-bg"><div class="barra-fill bf-green" style="width:100%"></div></div>
-              <span class="barra-pct">100%</span>
-            </div>
-            <span class="prog-status ps-ok">✓ Programado</span>
-          </div>
-          <div class="prog-card-body">
-            <div style="padding:10px 16px;border-bottom:1px solid var(--border);background:var(--bg);">
-              <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">SA del módulo · distribución en el calendario</div>
-            </div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·01</span><span class="sa-name-sm">Gestión del material y equipamiento sanitario</span><span class="sa-sesiones">15 sesiones</span><span class="sa-semana">Sem 1–5</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-            <div class="sa-mini"><span class="sa-num-sm">SA·02</span><span class="sa-name-sm">Mantenimiento y control de la dotación</span><span class="sa-sesiones">15 sesiones</span><span class="sa-semana">Sem 6–10</span><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-editar-sa-prog')">✎</button></div>
-          </div>
-        </div>
-
-      </div><!-- /tab-2a -->
 
     </div><!-- /vista-centro -->
+
+    <!-- ══ VISTA 3: DETALLE PROGRAMACIÓN ══ -->
+    <div id="vista-detalle" style="display:none;">
+
+      <div class="breadcrumb">
+        <button class="view-back" onclick="volverLista()"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>Centros</button>
+        <span style="color:var(--text-muted);font-size:12px;">›</span>
+        <span class="view-back" style="border:none;background:none;padding:0;" onclick="mostrarCentro()">CIFP Salud Jerez</span>
+        <span style="color:var(--text-muted);font-size:12px;">›</span>
+        <span style="font-size:12.5px;font-weight:600;color:var(--text-main);">TES · 1.er curso · Grupo A · 2024–25</span>
+      </div>
+
+      <!-- Cabecera -->
+      <div style="background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;margin-bottom:16px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <span class="prog-ciclo-badge" style="font-size:12px;padding:4px 12px;">TES</span>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;">1.er curso · Grupo A · 2024–2025</div>
+          <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Planificación base: TES 2024 v1 · Mañana · 6 ses/día · 30 ses/semana</div>
+        </div>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <div class="vista-toggle">
+            <button class="vista-btn active" id="btn-gantt" onclick="switchVista('gantt')">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+              Gantt semanal
+            </button>
+            <button class="vista-btn" id="btn-cal" onclick="switchVista('cal')">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              Calendario mensual
+            </button>
+          </div>
+          <button class="btn btn-warning btn-sm" onclick="openModal('modal-generar-horario')">⚡ Generar horario</button>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.25rem;">
+        <div class="kpi-card k-blue"><div class="kpi-label">SA totales</div><div class="kpi-value">14</div><div class="kpi-sub">En todos los módulos</div></div>
+        <div class="kpi-card k-green"><div class="kpi-label">SA temporalizadas</div><div class="kpi-value">8</div><div class="kpi-sub">57% del total</div></div>
+        <div class="kpi-card k-amber"><div class="kpi-label">SA pendientes</div><div class="kpi-value">6</div><div class="kpi-sub">Sin semana asignada</div></div>
+        <div class="kpi-card k-purple"><div class="kpi-label">Semanas del curso</div><div class="kpi-value">38</div><div class="kpi-sub">Sep 2024 – Jun 2025</div></div>
+      </div>
+
+      <!-- ── VISTA GANTT ── -->
+      <div id="panel-gantt">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
+          <div class="gantt-leyenda">
+            <div class="gl-item"><div class="gl-dot" style="background:#DCFCE7;border:1px solid #BBF7D0;"></div>SA completada</div>
+            <div class="gl-item"><div class="gl-dot" style="background:#DBEAFE;border:1px solid #BFDBFE;"></div>SA en curso</div>
+            <div class="gl-item"><div class="gl-dot" style="background:#FEE2E2;border:1px dashed #FECACA;"></div>SA pendiente</div>
+            <div class="gl-item"><div class="gl-dot" style="background:#F4F4F5;border:1px solid #E4E4E7;"></div>Otro docente (solo lectura)</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--text-muted);">Semana actual: <strong style="color:var(--brand);">Sem 19 (20 ene 2025)</strong></div>
+        </div>
+
+        <div class="gantt-wrap">
+          <table class="gantt-table">
+            <thead>
+              <tr>
+                <th class="mod-col">Módulo / Docente</th>
+                <th>S1<br><span style="font-weight:400;font-size:9px;">9 sep</span></th>
+                <th>S2<br><span style="font-weight:400;font-size:9px;">16 sep</span></th>
+                <th>S3<br><span style="font-weight:400;font-size:9px;">23 sep</span></th>
+                <th>S4<br><span style="font-weight:400;font-size:9px;">30 sep</span></th>
+                <th>S5<br><span style="font-weight:400;font-size:9px;">7 oct</span></th>
+                <th>S6<br><span style="font-weight:400;font-size:9px;">14 oct</span></th>
+                <th>S7<br><span style="font-weight:400;font-size:9px;">21 oct</span></th>
+                <th>S8<br><span style="font-weight:400;font-size:9px;">28 oct</span></th>
+                <th>S9<br><span style="font-weight:400;font-size:9px;">4 nov</span></th>
+                <th>S10<br><span style="font-weight:400;font-size:9px;">11 nov</span></th>
+                <th>S11<br><span style="font-weight:400;font-size:9px;">18 nov</span></th>
+                <th>S12<br><span style="font-weight:400;font-size:9px;">25 nov</span></th>
+                <th>S13<br><span style="font-weight:400;font-size:9px;">2 dic</span></th>
+                <th>S14<br><span style="font-weight:400;font-size:9px;">9 dic</span></th>
+                <th>S15<br><span style="font-weight:400;font-size:9px;">16 dic</span></th>
+                <th class="semana-actual">S19<br><span style="font-weight:400;font-size:9px;">20 ene</span></th>
+                <th>S20<br><span style="font-weight:400;font-size:9px;">27 ene</span></th>
+                <th>S21<br><span style="font-weight:400;font-size:9px;">3 feb</span></th>
+                <th>S22<br><span style="font-weight:400;font-size:9px;">10 feb</span></th>
+                <th>S23<br><span style="font-weight:400;font-size:9px;">17 feb</span></th>
+                <th>S24<br><span style="font-weight:400;font-size:9px;">24 feb</span></th>
+                <th>S25<br><span style="font-weight:400;font-size:9px;">3 mar</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 0056 — docente propio: editable -->
+              <tr>
+                <td class="mod-cell">
+                  <div class="gantt-mod-code">0056</div>
+                  <div class="gantt-mod-name">Atención sanitaria especial</div>
+                  <div class="gantt-mod-doc">García M., Ana · 6 ses/sem</div>
+                </td>
+                <!-- SA·01 ocupa S1-S3 -->
+                <td colspan="3"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')" title="SA·01 · 18 sesiones · S1-S3">SA·01 Soporte vital</span></td>
+                <!-- SA·02 ocupa S4-S5 -->
+                <td colspan="2"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')" title="SA·02 · 12 sesiones">SA·02 Parto extrahospitalario</span></td>
+                <!-- SA·03 ocupa S6-S9 -->
+                <td colspan="4"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')" title="SA·03 · 24 sesiones">SA·03 Inmovilización y traslado</span></td>
+                <!-- SA·04 ocupa S10-S12 -->
+                <td colspan="3"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')" title="SA·04 · 18 sesiones">SA·04 Urgencias obstétricas</span></td>
+                <!-- vacío -->
+                <td colspan="7"><span class="sa-celda-vacia" onclick="openModal('modal-nueva-sa-gantt')"></span></td>
+              </tr>
+
+              <!-- 0057 — docente propio: editable parcial -->
+              <tr>
+                <td class="mod-cell">
+                  <div class="gantt-mod-code">0057</div>
+                  <div class="gantt-mod-name">Atención inicial múltiples víctimas</div>
+                  <div class="gantt-mod-doc">Pérez R. · García M. · 5 ses/sem</div>
+                </td>
+                <td colspan="4"></td>
+                <!-- SA·01 S5-S8 -->
+                <td colspan="4"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')">SA·01 Triaje EMVI</span></td>
+                <!-- SA·02 S9-S11 -->
+                <td colspan="3"><span class="sa-bloque sb-activo" onclick="openModal('modal-editar-sa-gantt')">SA·02 Área de intervención</span></td>
+                <td colspan="3"></td>
+                <!-- SA·03 pendiente — clic para temporalizar -->
+                <td colspan="3"><span class="sa-bloque sb-pendiente" onclick="openModal('modal-nueva-sa-gantt')">SA·03 — Asignar</span></td>
+                <td colspan="3"></td>
+              </tr>
+
+              <!-- 0060 — docente propio: editable, sin iniciar -->
+              <tr>
+                <td class="mod-cell">
+                  <div class="gantt-mod-code">0060</div>
+                  <div class="gantt-mod-name">Anatomofisiología básica</div>
+                  <div class="gantt-mod-doc">Martínez L., Sergio · 4 ses/sem</div>
+                </td>
+                <td colspan="22"><span class="sa-celda-vacia" style="height:28px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);" onclick="openModal('modal-nueva-sa-gantt')">+ Iniciar programación de este módulo</span></td>
+              </tr>
+
+              <!-- 0059 — otro docente: solo lectura -->
+              <tr>
+                <td class="mod-cell" style="background:#FAFAF9;">
+                  <div class="gantt-mod-code" style="opacity:0.6;">0059</div>
+                  <div class="gantt-mod-name" style="color:var(--text-muted);">Urgencias psiquiátricas</div>
+                  <div class="gantt-mod-doc" style="color:var(--text-muted);font-style:italic;">Sin docente asignado</div>
+                </td>
+                <td colspan="22" style="background:#FAFAF9;"><span style="font-size:11px;color:var(--text-muted);padding:4px 8px;display:block;">Sin programar · Sin docente asignado</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div><!-- /panel-gantt -->
+
+      <!-- ── VISTA CALENDARIO MENSUAL ── -->
+      <div id="panel-cal" style="display:none;">
+
+        <div class="cal-leyenda-prog">
+          <div class="clp-item"><div class="clp-dot" style="background:#DCFCE7;border:1px solid #BBF7D0;"></div>0056 Atención especial</div>
+          <div class="clp-item"><div class="clp-dot" style="background:#DBEAFE;border:1px solid #BFDBFE;"></div>0057 Múltiples víctimas</div>
+          <div class="clp-item"><div class="clp-dot" style="background:#F5F3FF;border:1px solid #DDD6FE;"></div>0060 Anatomofisiología</div>
+          <div class="clp-item"><div class="clp-dot" style="background:#FEF3C7;border:1px solid #FDE68A;"></div>0061 Logística sanitaria</div>
+          <div class="clp-item"><div class="clp-dot" style="background:#FEE2E2;border:1px dashed #FECACA;"></div>SA pendiente de temporalizar</div>
+          <div class="clp-item"><div class="clp-dot" style="background:#DBEAFE;border:1px solid #BFDBFE;"></div>Festivo</div>
+        </div>
+
+        <div class="cal-prog-grid">
+
+          <!-- Septiembre 2024 -->
+          <div class="cal-prog-month">
+            <div class="cal-prog-month-title">Septiembre 2024</div>
+            <div class="cal-prog-days-header">
+              <div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div>
+            </div>
+            <div class="cal-prog-days">
+              <div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day weekend">1</div>
+              <div class="cal-prog-day weekend">2</div><div class="cal-prog-day weekend">3</div><div class="cal-prog-day weekend">4</div><div class="cal-prog-day weekend">5</div><div class="cal-prog-day weekend">6</div><div class="cal-prog-day weekend">7</div><div class="cal-prog-day weekend">8</div>
+              <div class="cal-prog-day sa-0056" title="SA·01 Soporte vital" onclick="openModal('modal-editar-sa-gantt')">9</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">10</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">11</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">12</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">13</div>
+              <div class="cal-prog-day weekend">14</div><div class="cal-prog-day weekend">15</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">16</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">17</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">18</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">19</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">20</div>
+              <div class="cal-prog-day weekend">21</div><div class="cal-prog-day weekend">22</div>
+              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">23</div>
+              <div class="cal-prog-day festivo" title="Patrona de Jerez">24</div>
+              <div class="cal-prog-day festivo" title="Feria del Caballo">25</div>
+              <div class="cal-prog-day sa-0056" title="SA·02 Parto extrahospitalario" onclick="openModal('modal-editar-sa-gantt')">26</div>
+              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">27</div>
+              <div class="cal-prog-day weekend">28</div><div class="cal-prog-day weekend">29</div>
+              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">30</div>
+            </div>
+          </div>
+
+          <!-- Octubre 2024 -->
+          <div class="cal-prog-month">
+            <div class="cal-prog-month-title">Octubre 2024</div>
+            <div class="cal-prog-days-header">
+              <div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div>
+            </div>
+            <div class="cal-prog-days">
+              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">1</div>
+              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">2</div>
+              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">3</div>
+              <div class="cal-prog-day festivo" title="Jornada formación">4</div>
+              <div class="cal-prog-day sa-0057" title="SA·01 Triaje EMVI" onclick="openModal('modal-editar-sa-gantt')">5</div>
+              <div class="cal-prog-day weekend">6</div><div class="cal-prog-day weekend">7</div>
+              <div class="cal-prog-day sa-0056" title="SA·03 Inmovilización" onclick="openModal('modal-editar-sa-gantt')">8</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">9</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">10</div>
+              <div class="cal-prog-day sa-0057" title="SA·01 Triaje" onclick="openModal('modal-editar-sa-gantt')">11</div>
+              <div class="cal-prog-day festivo" title="Fiesta Nacional">12</div>
+              <div class="cal-prog-day weekend">13</div><div class="cal-prog-day weekend">14</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">15</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">16</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">17</div>
+              <div class="cal-prog-day sa-0057" title="SA·01 Triaje" onclick="openModal('modal-editar-sa-gantt')">18</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">19</div>
+              <div class="cal-prog-day weekend">20</div><div class="cal-prog-day weekend">21</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">22</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">23</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">24</div>
+              <div class="cal-prog-day sa-0057" title="SA·01 Triaje" onclick="openModal('modal-editar-sa-gantt')">25</div>
+              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">26</div>
+              <div class="cal-prog-day weekend">27</div><div class="cal-prog-day weekend">28</div>
+              <div class="cal-prog-day sa-0056" title="SA·04 Urgencias obstétricas" onclick="openModal('modal-editar-sa-gantt')">29</div>
+              <div class="cal-prog-day festivo" title="Traslado festivo">30</div>
+              <div class="cal-prog-day sa-0057" title="SA·02 Área intervención" onclick="openModal('modal-editar-sa-gantt')">31</div>
+            </div>
+          </div>
+
+          <!-- Noviembre 2024 -->
+          <div class="cal-prog-month">
+            <div class="cal-prog-month-title">Noviembre 2024</div>
+            <div class="cal-prog-days-header">
+              <div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div>
+            </div>
+            <div class="cal-prog-days">
+              <div class="cal-prog-day festivo" title="Todos los Santos">1</div>
+              <div class="cal-prog-day weekend">2</div><div class="cal-prog-day weekend">3</div>
+              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">4</div>
+              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">5</div>
+              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">6</div>
+              <div class="cal-prog-day sa-0057" title="SA·02 Área intervención" onclick="openModal('modal-editar-sa-gantt')">7</div>
+              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">8</div>
+              <div class="cal-prog-day weekend">9</div><div class="cal-prog-day weekend">10</div>
+              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">11</div>
+              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">12</div>
+              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">13</div>
+              <div class="cal-prog-day sa-0057" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">14</div>
+              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">15</div>
+              <div class="cal-prog-day weekend">16</div><div class="cal-prog-day weekend">17</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente - clic para temporalizar" onclick="openModal('modal-nueva-sa-gantt')">18</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">19</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">20</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">21</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">22</div>
+              <div class="cal-prog-day weekend">23</div><div class="cal-prog-day weekend">24</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">25</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">26</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">27</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">28</div>
+              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">29</div>
+              <div class="cal-prog-day weekend">30</div>
+            </div>
+          </div>
+
+        </div><!-- /cal-prog-grid -->
+      </div><!-- /panel-cal -->
+
+    </div><!-- /vista-detalle -->
+
   </div><!-- /content -->
 </div><!-- /app-main -->
 
-<!-- MODAL: Temporalizar SA -->
-<div class="modal-overlay" id="modal-nueva-sa-prog">
+<!-- MODAL: Nueva programación -->
+<div class="modal-overlay" id="modal-nueva-prog">
   <div class="modal">
     <div class="modal-head">
-      <div><div class="modal-title">Temporalizar SA</div><div class="modal-subtitle">Módulo 0057 · SA·03 · 1.er curso Grupo A · TES 2024–25</div></div>
-      <button class="modal-close" onclick="closeModal('modal-nueva-sa-prog')">✕</button>
+      <div><div class="modal-title">Nueva programación</div><div class="modal-subtitle">CIFP Salud Jerez</div></div>
+      <button class="modal-close" onclick="closeModal('modal-nueva-prog')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div><strong>SA·03 — Coordinación con otros servicios de emergencia</strong><br>18 sesiones previstas · 6 ses/día disponibles en Grupo A (Mañana)</div></div>
-      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--text-muted);">
-        Sesiones ya ocupadas en el calendario: <strong style="color:var(--text-main);">Sem 1–19 parcialmente ocupadas.</strong> Próxima semana disponible: <strong style="color:var(--green);">Semana 20 (3 feb 2025)</strong>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-        <div class="form-group">
-          <label class="form-label">Semana de inicio <span>*</span></label>
-          <select class="form-select">
-            <option selected>Semana 20 · 3 feb 2025</option>
-            <option>Semana 21 · 10 feb 2025</option>
-            <option>Semana 22 · 17 feb 2025</option>
-            <option>Semana 23 · 24 feb 2025</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Semana de fin estimada</label>
-          <div style="padding:7px 10px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--text-muted);">Semana 22 · 17 feb 2025 <span style="font-size:11px;">(calculado)</span></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Sesiones por semana</label>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <input class="form-input" type="number" value="6" style="width:70px;">
-          <span style="font-size:12px;color:var(--text-muted);">de 6 disponibles en este grupo · Total: 18 sesiones en 3 semanas</span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Observaciones</label>
-        <input class="form-input" placeholder="Notas sobre esta temporalización…">
-      </div>
+      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>La programación distribuye las SA de la planificación base en el calendario real del curso para un grupo concreto.</div></div>
+      <div class="form-group"><label class="form-label">Año académico <span>*</span></label><select class="form-select"><option selected>2024–2025 (activo)</option><option>2025–2026 (futuro)</option></select></div>
+      <div class="form-group"><label class="form-label">Ciclo <span>*</span></label><select class="form-select"><option selected>TES · Técnico en Emergencias Sanitarias</option><option>TCAE</option></select></div>
+      <div class="form-group"><label class="form-label">Planificación base <span>*</span></label><select class="form-select"><option selected>TES 2024 · v1 (activa)</option><option>TES 2023 · v1 (archivada)</option></select></div>
+      <div class="form-group"><label class="form-label">Grupo <span>*</span></label><select class="form-select"><option selected>1.er curso · Grupo A · Mañana</option><option>1.er curso · Grupo B · Tarde</option><option>2.º curso · Grupo A · Mañana</option></select></div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-sa-prog')">Cancelar</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-nueva-sa-prog')">Guardar temporalización</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-prog')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-prog')">Crear programación</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Temporalizar SA (Gantt / Calendario) -->
+<div class="modal-overlay" id="modal-nueva-sa-gantt">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Temporalizar SA</div><div class="modal-subtitle">Módulo 0057 · SA·03 · Grupo A · 2024–25</div></div>
+      <button class="modal-close" onclick="closeModal('modal-nueva-sa-gantt')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div><strong>SA·03 — Coordinación con otros servicios de emergencia</strong><br>18 sesiones · 5 ses/sem en este módulo → duración estimada: <strong>3–4 semanas</strong></div></div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--text-muted);">Próxima semana disponible para este módulo: <strong style="color:var(--green);">Semana 20 · 20 ene 2025</strong></div>
+      <div class="form-group">
+        <label class="form-label">Fecha de inicio <span>*</span></label>
+        <input class="form-input" type="date" value="2025-01-20">
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Fecha fin estimada: <strong>7 feb 2025</strong> (calculado automáticamente)</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Sesiones por semana <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(por defecto: 5 asignadas al módulo)</span></label>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <input class="form-input" type="number" value="5" style="width:70px;">
+          <span style="font-size:12px;color:var(--text-muted);">→ Total 18 sesiones en <strong style="color:var(--text-main);">4 semanas</strong></span>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Observaciones</label><input class="form-input" placeholder="Notas, ajustes por festivos, actividades complementarias…"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-sa-gantt')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-nueva-sa-gantt')">Guardar temporalización</button>
     </div>
   </div>
 </div>
 
 <!-- MODAL: Editar SA temporalizada -->
-<div class="modal-overlay" id="modal-editar-sa-prog">
+<div class="modal-overlay" id="modal-editar-sa-gantt">
   <div class="modal">
     <div class="modal-head">
-      <div><div class="modal-title">Editar temporalización</div><div class="modal-subtitle">Módulo 0056 · SA·01 · 1.er curso Grupo A · TES 2024–25</div></div>
-      <button class="modal-close" onclick="closeModal('modal-editar-sa-prog')">✕</button>
+      <div><div class="modal-title">Editar temporalización</div><div class="modal-subtitle">Módulo 0056 · SA·01 · Soporte vital avanzado · Grupo A</div></div>
+      <button class="modal-close" onclick="closeModal('modal-editar-sa-gantt')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div><strong>SA·01 — Soporte vital avanzado. Material de emergencias</strong><br>18 sesiones · Temporalizada en Sem 1–3</div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-        <div class="form-group">
-          <label class="form-label">Semana de inicio <span>*</span></label>
-          <select class="form-select"><option selected>Semana 1 · 9 sep 2024</option><option>Semana 2 · 16 sep 2024</option></select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Sesiones por semana</label>
-          <input class="form-input" type="number" value="6" style="width:70px;">
-        </div>
-      </div>
+      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>18 sesiones totales · Temporalizada en S1–S3 (9–27 sep 2024). El número total de sesiones viene de la Planificación y no se puede modificar aquí.</div></div>
+      <div class="form-group"><label class="form-label">Fecha de inicio <span>*</span></label><input class="form-input" type="date" value="2024-09-09"></div>
       <div class="form-group">
-        <label class="form-label">Observaciones</label>
-        <input class="form-input" placeholder="Notas sobre esta temporalización…">
+        <label class="form-label">Sesiones por semana</label>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <input class="form-input" type="number" value="6" style="width:70px;">
+          <span style="font-size:12px;color:var(--text-muted);">→ 18 sesiones en <strong>3 semanas</strong></span>
+        </div>
       </div>
+      <div class="form-group"><label class="form-label">Observaciones</label><input class="form-input" placeholder="Notas sobre esta temporalización…"></div>
       <div style="padding-top:8px;border-top:1px solid var(--border);margin-top:4px;">
         <button class="btn btn-danger btn-sm">✕ Quitar temporalización</button>
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-secondary" onclick="closeModal('modal-editar-sa-prog')">Cancelar</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-editar-sa-prog')">Guardar cambios</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-editar-sa-gantt')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-editar-sa-gantt')">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Generar horario -->
+<div class="modal-overlay" id="modal-generar-horario">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Generar horario automático</div><div class="modal-subtitle">TES · 1.er curso Grupo A · 2024–25</div></div>
+      <button class="modal-close" onclick="closeModal('modal-generar-horario')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-warning"><span class="alert-icon">⚠</span><div>Para generar el horario es necesario que <strong>todas las SA estén temporalizadas</strong>. Actualmente hay <strong>6 SA sin temporalizar</strong> en este grupo. ¿Deseas continuar igualmente con las SA disponibles?</div></div>
+      <div style="font-size:13px;color:var(--text-sub);line-height:1.6;">El sistema cruzará las SA temporalizadas con el horario del grupo (Mañana · 6 ses/día) para generar el cuadro horario semanal en <strong>Horarios</strong>. Este proceso puede editarse posteriormente.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-generar-horario')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-generar-horario')">Generar horario parcial</button>
     </div>
   </div>
 </div>
@@ -772,22 +976,31 @@
 <script>
 function mostrarCentro(){
   document.getElementById('vista-centros').style.display='none';
+  document.getElementById('vista-detalle').style.display='none';
   document.getElementById('vista-centro').style.display='block';
-  document.getElementById('topbar-sub').textContent='CIFP Salud Jerez · TES 2024–2025 · Superadministrador';
+  document.getElementById('topbar-sub').textContent='CIFP Salud Jerez · Superadministrador';
 }
 function volverCentros(){
   document.getElementById('vista-centro').style.display='none';
+  document.getElementById('vista-detalle').style.display='none';
   document.getElementById('vista-centros').style.display='block';
   document.getElementById('topbar-sub').textContent='Vista global del sistema · Superadministrador';
 }
-function switchTab(id,el){
-  document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(id).classList.add('active');
+function volverLista(){
+  document.getElementById('vista-detalle').style.display='none';
+  document.getElementById('vista-centro').style.display='block';
+  document.getElementById('topbar-sub').textContent='CIFP Salud Jerez · Superadministrador';
 }
-function toggleProg(id){
-  document.getElementById(id).classList.toggle('open');
+function mostrarDetalle(id){
+  document.getElementById('vista-centro').style.display='none';
+  document.getElementById('vista-detalle').style.display='block';
+  document.getElementById('topbar-sub').textContent='TES · 1.er curso Grupo A · 2024–25 · Superadministrador';
+}
+function switchVista(v){
+  document.getElementById('btn-gantt').classList.toggle('active',v==='gantt');
+  document.getElementById('btn-cal').classList.toggle('active',v==='cal');
+  document.getElementById('panel-gantt').style.display=v==='gantt'?'block':'none';
+  document.getElementById('panel-cal').style.display=v==='cal'?'block':'none';
 }
 function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
