@@ -312,27 +312,19 @@
   .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
   .view-back{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-sub);cursor:pointer;padding:5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-white)}
   .view-back:hover{background:var(--bg)}
-  /* SELECTOR */
-  .selector-bar{display:flex;align-items:center;gap:10px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 16px;margin-bottom:20px;flex-wrap:wrap}
-  .selector-label{font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap}
-  /* SECCIÓN TEMPORAL */
-  .prog-seccion{margin-bottom:28px}
+  /* PROG LIST */
+  .prog-seccion{margin-bottom:24px}
   .prog-seccion-title{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;padding-left:2px;display:flex;align-items:center;gap:8px}
   .prog-seccion-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-  /* PROG LIST CARD */
   .prog-list-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:8px;cursor:pointer;transition:all 0.2s}
   .prog-list-card:hover{box-shadow:var(--shadow);border-color:var(--border-dark)}
   .prog-ciclo-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:var(--brand-light);color:var(--brand);border:1px solid #FECACA;flex-shrink:0}
-  .prog-info{flex:1}
-  .prog-title{font-size:13px;font-weight:700;color:var(--text-main)}
-  .prog-meta{font-size:11.5px;color:var(--text-muted);margin-top:3px}
   .prog-barra-wrap{display:flex;align-items:center;gap:8px;min-width:160px}
   .barra-bg{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
   .barra-fill{height:100%;border-radius:3px}
   .bf-green{background:var(--green)}
   .bf-amber{background:var(--amber)}
   .bf-red{background:var(--brand)}
-  .barra-pct{font-size:11px;font-weight:700;color:var(--text-sub);white-space:nowrap;min-width:32px}
   .prog-status{font-size:11px;padding:3px 9px;border-radius:4px;font-weight:600;flex-shrink:0;white-space:nowrap}
   .ps-ok{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
   .ps-parcial{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
@@ -342,37 +334,48 @@
   .vista-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px}
   .vista-btn{padding:5px 12px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-sub);display:flex;align-items:center;gap:5px;transition:all 0.15s}
   .vista-btn.active{background:var(--bg-white);color:var(--text-main);box-shadow:var(--shadow-sm);font-weight:600}
-  /* GRUPO FILTER */
-  .grupo-filter{display:flex;gap:6px;flex-wrap:wrap}
-  .gf-btn{padding:4px 12px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--bg-white);color:var(--text-sub);transition:all 0.15s}
-  .gf-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
-  .gf-btn.g1{border-left:3px solid #1D4ED8}
-  .gf-btn.g2{border-left:3px solid #15803D}
-  /* GANTT */
-  .gantt-wrap{overflow-x:auto;margin-bottom:20px}
-  .gantt-table{border-collapse:collapse;min-width:900px;width:100%}
-  .gantt-table th{padding:5px 6px;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;border-bottom:2px solid var(--border);background:var(--bg);white-space:nowrap;text-align:center}
-  .gantt-table th.mod-col{text-align:left;min-width:180px;position:sticky;left:0;background:var(--bg);z-index:2}
-  .gantt-table td{padding:4px 3px;border-bottom:1px solid var(--border);vertical-align:middle}
-  .gantt-table td.mod-cell{padding:6px 10px;position:sticky;left:0;background:var(--bg-white);z-index:1;border-right:2px solid var(--border)}
-  .gantt-table tr:hover td{background:#FAFAF9}
-  .gantt-table tr:hover td.mod-cell{background:#F5F4F2}
-  .gantt-mod-code{font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px;background:var(--bg);border:1px solid var(--border);color:var(--text-sub);font-family:monospace;margin-bottom:2px;display:inline-block}
-  .gantt-mod-name{font-size:11.5px;font-weight:600;color:var(--text-main)}
-  .gantt-mod-doc{font-size:10.5px;color:var(--text-muted)}
-  /* SA BLOQUES EN GANTT */
-  .sa-bloque{border-radius:4px;padding:3px 6px;font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity 0.15s;display:block;margin:1px 2px}
-  .sa-bloque:hover{opacity:0.85}
-  .sb-completo{background:#DCFCE7;color:#15803D;border:1px solid #BBF7D0}
-  .sb-activo{background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE}
-  .sb-pendiente{background:#FEE2E2;color:#991B1B;border:1px dashed #FECACA}
-  .sb-readonly{background:#F4F4F5;color:#71717A;border:1px solid #E4E4E7;cursor:default}
-  .sa-celda-vacia{background:var(--bg);border-radius:3px;height:26px;display:block;margin:1px 2px;cursor:pointer;border:1px dashed transparent;transition:all 0.15s}
-  .sa-celda-vacia:hover{border-color:var(--blue-border);background:var(--blue-light)}
-  /* LEYENDA */
-  .gantt-leyenda{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
-  .gl-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text-sub)}
-  .gl-dot{width:14px;height:8px;border-radius:2px;flex-shrink:0}
+  /* MÓDULO BLOQUE */
+  .mod-bloque{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+  .mod-bloque-header{display:flex;align-items:center;padding:12px 16px;gap:10px;cursor:pointer;user-select:none;background:var(--bg)}
+  .mod-bloque-header:hover{background:#F0EFED}
+  .mod-chevron{font-size:10px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
+  .mod-bloque.open .mod-chevron{transform:rotate(90deg)}
+  .mod-code-tag{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:3px;background:var(--bg-white);border:1px solid var(--border);color:var(--text-sub);font-family:monospace;flex-shrink:0}
+  .mod-bloque-title{font-size:13px;font-weight:700;color:var(--text-main);flex:1}
+  .mod-bloque-meta{font-size:11.5px;color:var(--text-muted);white-space:nowrap}
+  .mod-bloque-body{display:none;border-top:1px solid var(--border)}
+  .mod-bloque.open .mod-bloque-body{display:block}
+  .mod-prog-status{font-size:11px;padding:2px 8px;border-radius:3px;font-weight:600}
+  /* DÍAS SEMANA FILTER */
+  .dias-filter{display:flex;gap:4px}
+  .dia-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:var(--bg-white);font-size:11px;font-weight:600;cursor:pointer;display:grid;place-items:center;color:var(--text-muted);transition:all 0.15s}
+  .dia-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  /* SA ROW */
+  .sa-row{border-bottom:1px solid var(--border);padding:10px 16px}
+  .sa-row:last-child{border-bottom:none}
+  .sa-row-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .sa-num-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border);font-family:monospace;flex-shrink:0}
+  .sa-nombre{font-size:12.5px;font-weight:600;color:var(--text-main);flex:1}
+  .sa-sesiones-total{font-size:11.5px;color:var(--text-muted);white-space:nowrap}
+  /* SA SESIONES TABLA */
+  .sa-sesiones-tabla{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+  .sa-sesiones-tabla th{padding:5px 8px;text-align:left;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--bg)}
+  .sa-sesiones-tabla td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+  .sa-sesiones-tabla tr:last-child td{border-bottom:none}
+  .sa-sesiones-tabla tr:hover td{background:#FAFAF9}
+  .ses-num{font-size:11px;font-weight:700;color:var(--purple);font-family:monospace;white-space:nowrap}
+  .ses-tipo{font-size:10.5px;padding:2px 6px;border-radius:3px;font-weight:600;white-space:nowrap}
+  .st-simbl{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+  .st-abp{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0}
+  .st-dem{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A}
+  .st-coop{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)}
+  .ses-fecha{font-size:12px;font-weight:600;color:var(--text-main);white-space:nowrap}
+  .ses-fecha-input{padding:4px 7px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:'Inter',sans-serif;width:120px;outline:none}
+  .ses-fecha-input:focus{border-color:var(--brand)}
+  .ses-dia{font-size:10.5px;color:var(--text-muted)}
+  /* ESTADO SESIÓN */
+  .ses-ok{color:var(--green);font-size:11px;font-weight:600}
+  .ses-pend{color:var(--brand);font-size:11px;font-weight:600}
   /* CALENDARIO MENSUAL */
   .cal-prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
   .cal-prog-month{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
@@ -380,21 +383,23 @@
   .cal-prog-days-header{display:grid;grid-template-columns:repeat(7,1fr);padding:4px 6px 0}
   .cal-prog-day-name{text-align:center;font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;padding:2px 0}
   .cal-prog-days{display:grid;grid-template-columns:repeat(7,1fr);padding:2px 4px 6px;gap:2px}
-  .cal-prog-day{text-align:center;font-size:10.5px;padding:3px 1px;border-radius:3px;min-height:22px;display:flex;align-items:center;justify-content:center;cursor:default;position:relative}
-  .cal-prog-day.empty{color:transparent}
-  .cal-prog-day.weekend{color:var(--text-muted);background:#FAFAF9}
-  .cal-prog-day.festivo{background:#DBEAFE;color:#1D4ED8;font-weight:700}
-  .cal-prog-day.sa-0056{background:#DCFCE7;color:#15803D;font-weight:600}
-  .cal-prog-day.sa-0057{background:#DBEAFE;color:#1D4ED8;font-weight:600}
-  .cal-prog-day.sa-0060{background:#F5F3FF;color:#7C3AED;font-weight:600}
-  .cal-prog-day.sa-0061{background:#FEF3C7;color:#92400E;font-weight:600}
-  .cal-prog-day.sa-pendiente{background:#FEE2E2;color:#991B1B;font-weight:600;border:1px dashed #FECACA}
+  .cal-day-cell{text-align:center;font-size:10.5px;padding:3px 1px;border-radius:4px;min-height:28px;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default;position:relative;line-height:1.2}
+  .cal-day-cell.empty{color:transparent}
+  .cal-day-cell.weekend{color:var(--text-muted);background:#FAFAF9}
+  .cal-day-cell.festivo{background:#DBEAFE;color:#1D4ED8;font-weight:700}
+  .cal-day-cell.con-sesiones{cursor:pointer;border:1px solid transparent}
+  .cal-day-cell.con-sesiones:hover{border-color:var(--brand);background:var(--brand-light)}
+  .cal-day-num{font-size:11px;font-weight:600;line-height:1}
+  .cal-day-dots{display:flex;gap:2px;justify-content:center;margin-top:2px;flex-wrap:wrap}
+  .cal-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+  .cd-0056{background:#15803D}
+  .cd-0057{background:#1D4ED8}
+  .cd-0060{background:#7C3AED}
+  .cd-0061{background:#B45309}
+  /* LEYENDA */
   .cal-leyenda-prog{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
   .clp-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-sub)}
-  .clp-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0}
-  /* SEMANA MARCADOR */
-  .semana-actual{background:rgba(155,28,28,0.08);position:relative}
-  .semana-actual::after{content:'HOY';position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:700;color:var(--brand);background:var(--brand-light);padding:1px 4px;border-radius:2px;white-space:nowrap}
+  .clp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
 </style>
 </head>
@@ -483,7 +488,7 @@
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
         <div class="kpi-card k-blue"><div class="kpi-label">Programaciones activas</div><div class="kpi-value">3</div><div class="kpi-sub">Curso 2024–25</div></div>
         <div class="kpi-card k-green"><div class="kpi-label">SA temporalizadas</div><div class="kpi-value">22</div><div class="kpi-sub">De 34 totales</div></div>
-        <div class="kpi-card k-amber"><div class="kpi-label">SA pendientes</div><div class="kpi-value">12</div><div class="kpi-sub">Sin semana asignada</div></div>
+        <div class="kpi-card k-amber"><div class="kpi-label">SA pendientes</div><div class="kpi-value">12</div><div class="kpi-sub">Sin fecha asignada</div></div>
         <div class="kpi-card k-red"><div class="kpi-label">Sin iniciar</div><div class="kpi-value">4</div><div class="kpi-sub">Módulos sin programar</div></div>
       </div>
       <div class="centros-grid">
@@ -491,7 +496,7 @@
           <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
             <div style="display:flex;align-items:center;gap:10px;">
               <div class="centro-avatar">CS</div>
-              <div><div style="font-size:13px;font-weight:700;">CIFP Salud Jerez</div><div style="font-size:11.5px;color:var(--text-muted);">Jerez de la Frontera · Cádiz · Andalucía</div></div>
+              <div><div style="font-size:13px;font-weight:700;">CIFP Salud Jerez</div><div style="font-size:11.5px;color:var(--text-muted);">Jerez de la Frontera · Cádiz</div></div>
             </div>
             <div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber);"></div><span style="font-size:11px;color:var(--amber);font-weight:600;">En curso</span></div>
           </div>
@@ -518,99 +523,68 @@
       </div>
     </div><!-- /vista-centros -->
 
-    <!-- ══ VISTA 2: CENTRO — LISTADO PROGRAMACIONES ══ -->
+    <!-- ══ VISTA 2: LISTADO PROGRAMACIONES CENTRO ══ -->
     <div id="vista-centro" style="display:none;">
       <div class="breadcrumb">
         <button class="view-back" onclick="volverCentros()"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>Centros</button>
         <span style="color:var(--text-muted);font-size:12px;">›</span>
-        <span style="font-size:12.5px;font-weight:600;color:var(--text-main);">CIFP Salud Jerez</span>
+        <span style="font-size:12.5px;font-weight:600;">CIFP Salud Jerez</span>
       </div>
-
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px;">
         <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;">Programaciones · CIFP Salud Jerez</div>
         <button class="btn btn-primary" onclick="openModal('modal-nueva-prog')">+ Nueva programación</button>
       </div>
 
-      <!-- ACTUALES -->
       <div class="prog-seccion">
         <div class="prog-seccion-title"><div class="prog-seccion-dot" style="background:var(--green);"></div>Actuales · Curso 2024–2025</div>
-
-        <div class="prog-list-card" onclick="mostrarDetalle('prog-tes-1a')">
+        <div class="prog-list-card" onclick="mostrarDetalle()">
           <span class="prog-ciclo-badge">TES</span>
-          <div class="prog-info">
-            <div class="prog-title">TES · 1.er curso · Grupo A · 2024–25</div>
-            <div class="prog-meta">Planificación base: TES 2024 v1 · Mañana · 6 ses/día · García M., Pérez R., Martínez L.</div>
-          </div>
-          <div class="prog-barra-wrap">
-            <div class="barra-bg"><div class="barra-fill bf-amber" style="width:60%;"></div></div>
-            <span class="barra-pct">60%</span>
-          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">TES · 1.er curso · Grupo A · 2024–25</div><div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Planificación: TES 2024 v1 · Mañana · 6 ses/día · García M., Pérez R., Martínez L.</div></div>
+          <div class="prog-barra-wrap"><div class="barra-bg"><div class="barra-fill bf-amber" style="width:60%;"></div></div><span style="font-size:11px;font-weight:700;color:var(--text-sub);">60%</span></div>
           <span class="prog-status ps-parcial">⚠ Parcial</span>
           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);flex-shrink:0;"><path d="M9 5l7 7-7 7"/></svg>
         </div>
-
-        <div class="prog-list-card" onclick="mostrarDetalle('prog-tes-1b')">
+        <div class="prog-list-card" onclick="mostrarDetalle()">
           <span class="prog-ciclo-badge">TES</span>
-          <div class="prog-info">
-            <div class="prog-title">TES · 1.er curso · Grupo B · 2024–25</div>
-            <div class="prog-meta">Planificación base: TES 2024 v1 · Tarde · 3 ses/día · Romero V., Martínez L.</div>
-          </div>
-          <div class="prog-barra-wrap">
-            <div class="barra-bg"><div class="barra-fill bf-amber" style="width:45%;"></div></div>
-            <span class="barra-pct">45%</span>
-          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">TES · 1.er curso · Grupo B · 2024–25</div><div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Planificación: TES 2024 v1 · Tarde · 3 ses/día · Romero V., Martínez L.</div></div>
+          <div class="prog-barra-wrap"><div class="barra-bg"><div class="barra-fill bf-amber" style="width:45%;"></div></div><span style="font-size:11px;font-weight:700;color:var(--text-sub);">45%</span></div>
           <span class="prog-status ps-parcial">⚠ Parcial</span>
           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);flex-shrink:0;"><path d="M9 5l7 7-7 7"/></svg>
         </div>
-
-        <div class="prog-list-card" onclick="mostrarDetalle('prog-tes-2a')">
+        <div class="prog-list-card" onclick="mostrarDetalle()">
           <span class="prog-ciclo-badge">TES</span>
-          <div class="prog-info">
-            <div class="prog-title">TES · 2.º curso · Grupo A · 2024–25</div>
-            <div class="prog-meta">Planificación base: TES 2024 v1 · Mañana · 6 ses/día · Sánchez T., García M., Romero V.</div>
-          </div>
-          <div class="prog-barra-wrap">
-            <div class="barra-bg"><div class="barra-fill bf-green" style="width:100%;"></div></div>
-            <span class="barra-pct">100%</span>
-          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;">TES · 2.º curso · Grupo A · 2024–25</div><div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Planificación: TES 2024 v1 · Mañana · 6 ses/día · Sánchez T., García M.</div></div>
+          <div class="prog-barra-wrap"><div class="barra-bg"><div class="barra-fill bf-green" style="width:100%;"></div></div><span style="font-size:11px;font-weight:700;color:var(--text-sub);">100%</span></div>
           <span class="prog-status ps-ok">✓ Completo</span>
           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);flex-shrink:0;"><path d="M9 5l7 7-7 7"/></svg>
         </div>
       </div>
 
-      <!-- FUTURAS -->
       <div class="prog-seccion">
         <div class="prog-seccion-title"><div class="prog-seccion-dot" style="background:var(--blue);"></div>Futuras · Curso 2025–2026</div>
-        <div style="background:var(--bg-white);border:1px dashed var(--border-dark);border-radius:var(--radius-lg);padding:16px 20px;text-align:center;color:var(--text-muted);font-size:12.5px;">
-          No hay programaciones futuras configuradas. <button class="btn btn-secondary btn-sm" style="margin-left:10px;" onclick="openModal('modal-nueva-prog')">+ Crear programación futura</button>
-        </div>
+        <div style="background:var(--bg-white);border:1px dashed var(--border-dark);border-radius:var(--radius-lg);padding:16px 20px;text-align:center;color:var(--text-muted);font-size:12.5px;">No hay programaciones futuras. <button class="btn btn-secondary btn-sm" style="margin-left:10px;" onclick="openModal('modal-nueva-prog')">+ Crear programación futura</button></div>
       </div>
 
-      <!-- PASADAS -->
       <div class="prog-seccion">
         <div class="prog-seccion-title"><div class="prog-seccion-dot" style="background:var(--text-muted);"></div>Pasadas · Curso 2023–2024</div>
-        <div class="prog-list-card" style="opacity:0.7;" onclick="mostrarDetalle('prog-tes-1a')">
+        <div class="prog-list-card" style="opacity:0.7;">
           <span class="prog-ciclo-badge" style="background:var(--bg);color:var(--text-muted);border-color:var(--border);">TES</span>
-          <div class="prog-info">
-            <div class="prog-title" style="color:var(--text-sub);">TES · 1.er curso · Grupo A · 2023–24</div>
-            <div class="prog-meta">Planificación base: TES 2023 v1 · Archivada · Solo lectura</div>
-          </div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:var(--text-sub);">TES · 1.er curso · Grupo A · 2023–24</div><div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Planificación: TES 2023 v1 · Archivada · Solo lectura</div></div>
           <span class="prog-status ps-historico">Archivada</span>
           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--text-muted);flex-shrink:0;"><path d="M9 5l7 7-7 7"/></svg>
         </div>
       </div>
-
     </div><!-- /vista-centro -->
 
     <!-- ══ VISTA 3: DETALLE PROGRAMACIÓN ══ -->
     <div id="vista-detalle" style="display:none;">
 
       <div class="breadcrumb">
-        <button class="view-back" onclick="volverLista()"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>Centros</button>
+        <button class="view-back" onclick="volverCentros()"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>Centros</button>
         <span style="color:var(--text-muted);font-size:12px;">›</span>
-        <span class="view-back" style="border:none;background:none;padding:0;" onclick="mostrarCentro()">CIFP Salud Jerez</span>
+        <button class="view-back" style="border:none;background:none;padding:0;" onclick="volverLista()">CIFP Salud Jerez</button>
         <span style="color:var(--text-muted);font-size:12px;">›</span>
-        <span style="font-size:12.5px;font-weight:600;color:var(--text-main);">TES · 1.er curso · Grupo A · 2024–25</span>
+        <span style="font-size:12.5px;font-weight:600;">TES · 1.er curso · Grupo A · 2024–25</span>
       </div>
 
       <!-- Cabecera -->
@@ -618,17 +592,17 @@
         <span class="prog-ciclo-badge" style="font-size:12px;padding:4px 12px;">TES</span>
         <div>
           <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;">1.er curso · Grupo A · 2024–2025</div>
-          <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Planificación base: TES 2024 v1 · Mañana · 6 ses/día · 30 ses/semana</div>
+          <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Planificación: TES 2024 v1 · Mañana · 6 ses/día · L–V</div>
         </div>
         <div style="margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
           <div class="vista-toggle">
-            <button class="vista-btn active" id="btn-gantt" onclick="switchVista('gantt')">
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
-              Gantt semanal
+            <button class="vista-btn active" id="btn-semanas" onclick="switchVista('semanas')">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+              Vista semanas
             </button>
-            <button class="vista-btn" id="btn-cal" onclick="switchVista('cal')">
+            <button class="vista-btn" id="btn-mensual" onclick="switchVista('mensual')">
               <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              Calendario mensual
+              Vista mensual
             </button>
           </div>
           <button class="btn btn-warning btn-sm" onclick="openModal('modal-generar-horario')">⚡ Generar horario</button>
@@ -638,126 +612,165 @@
       <!-- KPIs -->
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.25rem;">
         <div class="kpi-card k-blue"><div class="kpi-label">SA totales</div><div class="kpi-value">14</div><div class="kpi-sub">En todos los módulos</div></div>
-        <div class="kpi-card k-green"><div class="kpi-label">SA temporalizadas</div><div class="kpi-value">8</div><div class="kpi-sub">57% del total</div></div>
-        <div class="kpi-card k-amber"><div class="kpi-label">SA pendientes</div><div class="kpi-value">6</div><div class="kpi-sub">Sin semana asignada</div></div>
-        <div class="kpi-card k-purple"><div class="kpi-label">Semanas del curso</div><div class="kpi-value">38</div><div class="kpi-sub">Sep 2024 – Jun 2025</div></div>
+        <div class="kpi-card k-green"><div class="kpi-label">Sesiones programadas</div><div class="kpi-value">72</div><div class="kpi-sub">De 126 totales</div></div>
+        <div class="kpi-card k-amber"><div class="kpi-label">SA pendientes</div><div class="kpi-value">6</div><div class="kpi-sub">Sin fecha de inicio</div></div>
+        <div class="kpi-card k-purple"><div class="kpi-label">Semana actual</div><div class="kpi-value">S·19</div><div class="kpi-sub">20 ene 2025</div></div>
       </div>
 
-      <!-- ── VISTA GANTT ── -->
-      <div id="panel-gantt">
+      <!-- ── VISTA SEMANAS ── -->
+      <div id="panel-semanas">
 
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
-          <div class="gantt-leyenda">
-            <div class="gl-item"><div class="gl-dot" style="background:#DCFCE7;border:1px solid #BBF7D0;"></div>SA completada</div>
-            <div class="gl-item"><div class="gl-dot" style="background:#DBEAFE;border:1px solid #BFDBFE;"></div>SA en curso</div>
-            <div class="gl-item"><div class="gl-dot" style="background:#FEE2E2;border:1px dashed #FECACA;"></div>SA pendiente</div>
-            <div class="gl-item"><div class="gl-dot" style="background:#F4F4F5;border:1px solid #E4E4E7;"></div>Otro docente (solo lectura)</div>
+        <div class="alert alert-info" style="margin-bottom:14px;">
+          <span class="alert-icon">ℹ</span>
+          <div>Indica la <strong>fecha de inicio</strong> de cada SA. El sistema asignará automáticamente las sesiones a los días lectivos consecutivos del grupo, respetando festivos y fines de semana. Usa <strong>"Programar por sesiones"</strong> para asignar cada sesión individualmente.</div>
+        </div>
+
+        <!-- MÓDULO 0056 — desplegado, docente propio -->
+        <div class="mod-bloque open" id="mb-0056">
+          <div class="mod-bloque-header" onclick="toggleMod('mb-0056')">
+            <div class="mod-chevron">▶</div>
+            <span class="mod-code-tag">0056</span>
+            <span class="mod-bloque-title">Atención sanitaria especial en situaciones de emergencia</span>
+            <span class="mod-bloque-meta">García M., Ana · 6 ses/sem · 202 h</span>
+            <span class="mod-prog-status" style="background:var(--green-light);color:var(--green);border:1px solid var(--green-border);margin-left:8px;">✓ 4/4 SA programadas</span>
           </div>
-          <div style="font-size:11.5px;color:var(--text-muted);">Semana actual: <strong style="color:var(--brand);">Sem 19 (20 ene 2025)</strong></div>
+          <div class="mod-bloque-body">
+            <!-- Config días -->
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:#FAFAF9;border-bottom:1px solid var(--border);flex-wrap:wrap;">
+              <span style="font-size:11.5px;font-weight:600;color:var(--text-muted);">Días de impartición:</span>
+              <div class="dias-filter">
+                <button class="dia-btn active" onclick="toggleDia(this)">L</button>
+                <button class="dia-btn active" onclick="toggleDia(this)">M</button>
+                <button class="dia-btn active" onclick="toggleDia(this)">X</button>
+                <button class="dia-btn active" onclick="toggleDia(this)">J</button>
+                <button class="dia-btn active" onclick="toggleDia(this)">V</button>
+              </div>
+              <span style="font-size:11px;color:var(--text-muted);">· 6 sesiones/semana · Duración sesión: 55 min</span>
+            </div>
+
+            <!-- SA·01 -->
+            <div class="sa-row">
+              <div class="sa-row-head">
+                <span class="sa-num-badge">SA·01</span>
+                <span class="sa-nombre">Soporte vital avanzado. Material de emergencias sanitarias</span>
+                <span class="sa-sesiones-total">18 sesiones · 3 semanas</span>
+                <div style="display:flex;align-items:center;gap:6px;margin-left:8px;">
+                  <span style="font-size:11.5px;color:var(--text-muted);">Inicio:</span>
+                  <input type="date" class="ses-fecha-input" value="2024-09-09" onchange="recalcularSA(this,'sa01-sesiones')">
+                  <span style="font-size:11px;color:var(--green);font-weight:600;">→ Fin: 27 sep 2024</span>
+                  <button class="btn btn-secondary btn-sm" onclick="openModal('modal-sesiones-sa')" style="font-size:11px;">📋 Programar por sesiones</button>
+                </div>
+              </div>
+              <table class="sa-sesiones-tabla" id="sa01-sesiones">
+                <thead><tr><th>Sesión</th><th>Tipo actividad</th><th>Espacio</th><th>Agrupamiento</th><th>Descripción</th><th>Fecha asignada</th><th>Día</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td class="ses-num">S·01</td><td><span class="ses-tipo st-dem">Demostrativa</span></td><td style="font-size:11.5px;">Aula simulación</td><td style="font-size:11.5px;">Gran grupo</td><td style="font-size:11.5px;color:var(--text-muted);max-width:180px;">Presentación SVA. Equipo de emergencias. Protocolos básicos</td><td class="ses-fecha">9 sep 2024</td><td class="ses-dia">Lunes</td><td><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-mover-sesion')">↕ Mover</button></td></tr>
+                  <tr><td class="ses-num">S·02</td><td><span class="ses-tipo st-simbl">SimBL</span></td><td style="font-size:11.5px;">Sala práctica</td><td style="font-size:11.5px;">Parejas</td><td style="font-size:11.5px;color:var(--text-muted);max-width:180px;">Práctica RCP básica con maniquí. Desfibrilador DEA</td><td class="ses-fecha">10 sep 2024</td><td class="ses-dia">Martes</td><td><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-mover-sesion')">↕ Mover</button></td></tr>
+                  <tr><td class="ses-num">S·03</td><td><span class="ses-tipo st-simbl">SimBL</span></td><td style="font-size:11.5px;">Sala práctica</td><td style="font-size:11.5px;">Grupos 4</td><td style="font-size:11.5px;color:var(--text-muted);max-width:180px;">Práctica RCP avanzada. Vía aérea. Intubación</td><td class="ses-fecha">11 sep 2024</td><td class="ses-dia">Miércoles</td><td><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-mover-sesion')">↕ Mover</button></td></tr>
+                  <tr><td class="ses-num">S·04</td><td><span class="ses-tipo st-abp">ABP</span></td><td style="font-size:11.5px;">Aula</td><td style="font-size:11.5px;">Grupos 4</td><td style="font-size:11.5px;color:var(--text-muted);max-width:180px;">Caso clínico: PCR en vía pública. Análisis y resolución</td><td class="ses-fecha">12 sep 2024</td><td class="ses-dia">Jueves</td><td><button class="btn-ghost" style="font-size:11px;" onclick="openModal('modal-mover-sesion')">↕ Mover</button></td></tr>
+                  <tr style="background:#FAFAF9;"><td colspan="8" style="text-align:center;padding:6px;font-size:11.5px;color:var(--text-muted);">+ 14 sesiones más (S·05–S·18) · <button class="btn-ghost" style="font-size:11.5px;color:var(--blue);">Ver todas</button></td></tr>
+                </tbody>
+              </table>
+            </div><!-- /SA·01 -->
+
+            <!-- SA·02 -->
+            <div class="sa-row">
+              <div class="sa-row-head">
+                <span class="sa-num-badge">SA·02</span>
+                <span class="sa-nombre">Atención al parto extrahospitalario</span>
+                <span class="sa-sesiones-total">12 sesiones · 2 semanas</span>
+                <div style="display:flex;align-items:center;gap:6px;margin-left:8px;">
+                  <span style="font-size:11.5px;color:var(--text-muted);">Inicio:</span>
+                  <input type="date" class="ses-fecha-input" value="2024-09-30" onchange="recalcularSA(this,'sa02-sesiones')">
+                  <span style="font-size:11px;color:var(--green);font-weight:600;">→ Fin: 11 oct 2024</span>
+                  <button class="btn btn-secondary btn-sm" onclick="openModal('modal-sesiones-sa')" style="font-size:11px;">📋 Programar por sesiones</button>
+                </div>
+              </div>
+              <div style="padding:8px 0 4px;font-size:11.5px;color:var(--text-muted);font-style:italic;padding-left:4px;">12 sesiones auto-asignadas desde el 30 sep · <button class="btn-ghost" style="font-size:11.5px;color:var(--blue);">Ver detalle</button></div>
+            </div>
+
+          </div>
+        </div><!-- /mod-0056 -->
+
+        <!-- MÓDULO 0057 — parcial -->
+        <div class="mod-bloque open" id="mb-0057">
+          <div class="mod-bloque-header" onclick="toggleMod('mb-0057')">
+            <div class="mod-chevron">▶</div>
+            <span class="mod-code-tag">0057</span>
+            <span class="mod-bloque-title">Atención sanitaria inicial a múltiples víctimas</span>
+            <span class="mod-bloque-meta">Pérez R. · García M. · 5 ses/sem · 192 h</span>
+            <span class="mod-prog-status" style="background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border);margin-left:8px;">⚠ 2/4 SA programadas</span>
+          </div>
+          <div class="mod-bloque-body">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:#FAFAF9;border-bottom:1px solid var(--border);flex-wrap:wrap;">
+              <span style="font-size:11.5px;font-weight:600;color:var(--text-muted);">Días de impartición:</span>
+              <div class="dias-filter">
+                <button class="dia-btn active" onclick="toggleDia(this)">L</button>
+                <button class="dia-btn" onclick="toggleDia(this)">M</button>
+                <button class="dia-btn active" onclick="toggleDia(this)">X</button>
+                <button class="dia-btn" onclick="toggleDia(this)">J</button>
+                <button class="dia-btn active" onclick="toggleDia(this)">V</button>
+              </div>
+              <span style="font-size:11px;color:var(--text-muted);">· 3 días/sem (L,X,V) · 5 sesiones/semana</span>
+            </div>
+            <!-- SA·01 programada -->
+            <div class="sa-row">
+              <div class="sa-row-head">
+                <span class="sa-num-badge">SA·01</span>
+                <span class="sa-nombre">Triaje en emergencias con múltiples víctimas</span>
+                <span class="sa-sesiones-total">20 sesiones · 4 semanas</span>
+                <div style="display:flex;align-items:center;gap:6px;margin-left:8px;">
+                  <span style="font-size:11.5px;color:var(--text-muted);">Inicio:</span>
+                  <input type="date" class="ses-fecha-input" value="2024-10-07">
+                  <span style="font-size:11px;color:var(--green);font-weight:600;">→ Fin: 1 nov 2024</span>
+                  <button class="btn btn-secondary btn-sm" onclick="openModal('modal-sesiones-sa')" style="font-size:11px;">📋 Programar por sesiones</button>
+                </div>
+              </div>
+              <div style="padding:8px 0 4px;font-size:11.5px;color:var(--text-muted);font-style:italic;padding-left:4px;">20 sesiones auto-asignadas · <button class="btn-ghost" style="font-size:11.5px;color:var(--blue);">Ver detalle</button></div>
+            </div>
+            <!-- SA·03 pendiente -->
+            <div class="sa-row" style="background:#FEF9F9;">
+              <div class="sa-row-head">
+                <span class="sa-num-badge" style="background:#FEF2F2;color:var(--brand);border-color:#FECACA;">SA·03</span>
+                <span class="sa-nombre">Coordinación con otros servicios de emergencia</span>
+                <span class="sa-sesiones-total">18 sesiones · ~4 semanas</span>
+                <div style="display:flex;align-items:center;gap:6px;margin-left:8px;">
+                  <span style="font-size:11.5px;color:var(--text-muted);">Inicio:</span>
+                  <input type="date" class="ses-fecha-input" placeholder="Seleccionar fecha" onchange="recalcularSA(this,'')">
+                  <span style="font-size:11px;color:var(--brand);font-weight:600;">Pendiente de programar</span>
+                  <button class="btn btn-secondary btn-sm" onclick="openModal('modal-sesiones-sa')" style="font-size:11px;">📋 Programar por sesiones</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /mod-0057 -->
+
+        <!-- MÓDULO 0060 — otro docente: readonly -->
+        <div class="mod-bloque" id="mb-0060" style="opacity:0.8;">
+          <div class="mod-bloque-header" onclick="toggleMod('mb-0060')" style="background:#F5F5F4;">
+            <div class="mod-chevron">▶</div>
+            <span class="mod-code-tag" style="opacity:0.7;">0060</span>
+            <span class="mod-bloque-title" style="color:var(--text-muted);">Anatomofisiología y patología básicas en emergencias</span>
+            <span class="mod-bloque-meta">Martínez L., Sergio · 4 ses/sem · 128 h</span>
+            <span class="mod-prog-status" style="background:var(--brand-light);color:var(--brand);border:1px solid #FECACA;margin-left:8px;">⏳ Sin iniciar</span>
+            <span style="font-size:10.5px;background:var(--bg);color:var(--text-muted);border:1px solid var(--border);padding:2px 8px;border-radius:3px;margin-left:6px;">Solo lectura · No es tu módulo</span>
+          </div>
+          <div class="mod-bloque-body">
+            <div style="padding:16px;text-align:center;color:var(--text-muted);font-size:12.5px;">El docente Martínez López, Sergio aún no ha iniciado la programación de este módulo.</div>
+          </div>
         </div>
 
-        <div class="gantt-wrap">
-          <table class="gantt-table">
-            <thead>
-              <tr>
-                <th class="mod-col">Módulo / Docente</th>
-                <th>S1<br><span style="font-weight:400;font-size:9px;">9 sep</span></th>
-                <th>S2<br><span style="font-weight:400;font-size:9px;">16 sep</span></th>
-                <th>S3<br><span style="font-weight:400;font-size:9px;">23 sep</span></th>
-                <th>S4<br><span style="font-weight:400;font-size:9px;">30 sep</span></th>
-                <th>S5<br><span style="font-weight:400;font-size:9px;">7 oct</span></th>
-                <th>S6<br><span style="font-weight:400;font-size:9px;">14 oct</span></th>
-                <th>S7<br><span style="font-weight:400;font-size:9px;">21 oct</span></th>
-                <th>S8<br><span style="font-weight:400;font-size:9px;">28 oct</span></th>
-                <th>S9<br><span style="font-weight:400;font-size:9px;">4 nov</span></th>
-                <th>S10<br><span style="font-weight:400;font-size:9px;">11 nov</span></th>
-                <th>S11<br><span style="font-weight:400;font-size:9px;">18 nov</span></th>
-                <th>S12<br><span style="font-weight:400;font-size:9px;">25 nov</span></th>
-                <th>S13<br><span style="font-weight:400;font-size:9px;">2 dic</span></th>
-                <th>S14<br><span style="font-weight:400;font-size:9px;">9 dic</span></th>
-                <th>S15<br><span style="font-weight:400;font-size:9px;">16 dic</span></th>
-                <th class="semana-actual">S19<br><span style="font-weight:400;font-size:9px;">20 ene</span></th>
-                <th>S20<br><span style="font-weight:400;font-size:9px;">27 ene</span></th>
-                <th>S21<br><span style="font-weight:400;font-size:9px;">3 feb</span></th>
-                <th>S22<br><span style="font-weight:400;font-size:9px;">10 feb</span></th>
-                <th>S23<br><span style="font-weight:400;font-size:9px;">17 feb</span></th>
-                <th>S24<br><span style="font-weight:400;font-size:9px;">24 feb</span></th>
-                <th>S25<br><span style="font-weight:400;font-size:9px;">3 mar</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- 0056 — docente propio: editable -->
-              <tr>
-                <td class="mod-cell">
-                  <div class="gantt-mod-code">0056</div>
-                  <div class="gantt-mod-name">Atención sanitaria especial</div>
-                  <div class="gantt-mod-doc">García M., Ana · 6 ses/sem</div>
-                </td>
-                <!-- SA·01 ocupa S1-S3 -->
-                <td colspan="3"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')" title="SA·01 · 18 sesiones · S1-S3">SA·01 Soporte vital</span></td>
-                <!-- SA·02 ocupa S4-S5 -->
-                <td colspan="2"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')" title="SA·02 · 12 sesiones">SA·02 Parto extrahospitalario</span></td>
-                <!-- SA·03 ocupa S6-S9 -->
-                <td colspan="4"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')" title="SA·03 · 24 sesiones">SA·03 Inmovilización y traslado</span></td>
-                <!-- SA·04 ocupa S10-S12 -->
-                <td colspan="3"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')" title="SA·04 · 18 sesiones">SA·04 Urgencias obstétricas</span></td>
-                <!-- vacío -->
-                <td colspan="7"><span class="sa-celda-vacia" onclick="openModal('modal-nueva-sa-gantt')"></span></td>
-              </tr>
+      </div><!-- /panel-semanas -->
 
-              <!-- 0057 — docente propio: editable parcial -->
-              <tr>
-                <td class="mod-cell">
-                  <div class="gantt-mod-code">0057</div>
-                  <div class="gantt-mod-name">Atención inicial múltiples víctimas</div>
-                  <div class="gantt-mod-doc">Pérez R. · García M. · 5 ses/sem</div>
-                </td>
-                <td colspan="4"></td>
-                <!-- SA·01 S5-S8 -->
-                <td colspan="4"><span class="sa-bloque sb-completo" onclick="openModal('modal-editar-sa-gantt')">SA·01 Triaje EMVI</span></td>
-                <!-- SA·02 S9-S11 -->
-                <td colspan="3"><span class="sa-bloque sb-activo" onclick="openModal('modal-editar-sa-gantt')">SA·02 Área de intervención</span></td>
-                <td colspan="3"></td>
-                <!-- SA·03 pendiente — clic para temporalizar -->
-                <td colspan="3"><span class="sa-bloque sb-pendiente" onclick="openModal('modal-nueva-sa-gantt')">SA·03 — Asignar</span></td>
-                <td colspan="3"></td>
-              </tr>
-
-              <!-- 0060 — docente propio: editable, sin iniciar -->
-              <tr>
-                <td class="mod-cell">
-                  <div class="gantt-mod-code">0060</div>
-                  <div class="gantt-mod-name">Anatomofisiología básica</div>
-                  <div class="gantt-mod-doc">Martínez L., Sergio · 4 ses/sem</div>
-                </td>
-                <td colspan="22"><span class="sa-celda-vacia" style="height:28px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);" onclick="openModal('modal-nueva-sa-gantt')">+ Iniciar programación de este módulo</span></td>
-              </tr>
-
-              <!-- 0059 — otro docente: solo lectura -->
-              <tr>
-                <td class="mod-cell" style="background:#FAFAF9;">
-                  <div class="gantt-mod-code" style="opacity:0.6;">0059</div>
-                  <div class="gantt-mod-name" style="color:var(--text-muted);">Urgencias psiquiátricas</div>
-                  <div class="gantt-mod-doc" style="color:var(--text-muted);font-style:italic;">Sin docente asignado</div>
-                </td>
-                <td colspan="22" style="background:#FAFAF9;"><span style="font-size:11px;color:var(--text-muted);padding:4px 8px;display:block;">Sin programar · Sin docente asignado</span></td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
-      </div><!-- /panel-gantt -->
-
-      <!-- ── VISTA CALENDARIO MENSUAL ── -->
-      <div id="panel-cal" style="display:none;">
+      <!-- ── VISTA MENSUAL ── -->
+      <div id="panel-mensual" style="display:none;">
 
         <div class="cal-leyenda-prog">
-          <div class="clp-item"><div class="clp-dot" style="background:#DCFCE7;border:1px solid #BBF7D0;"></div>0056 Atención especial</div>
-          <div class="clp-item"><div class="clp-dot" style="background:#DBEAFE;border:1px solid #BFDBFE;"></div>0057 Múltiples víctimas</div>
-          <div class="clp-item"><div class="clp-dot" style="background:#F5F3FF;border:1px solid #DDD6FE;"></div>0060 Anatomofisiología</div>
-          <div class="clp-item"><div class="clp-dot" style="background:#FEF3C7;border:1px solid #FDE68A;"></div>0061 Logística sanitaria</div>
-          <div class="clp-item"><div class="clp-dot" style="background:#FEE2E2;border:1px dashed #FECACA;"></div>SA pendiente de temporalizar</div>
-          <div class="clp-item"><div class="clp-dot" style="background:#DBEAFE;border:1px solid #BFDBFE;"></div>Festivo</div>
+          <div class="clp-item"><div class="clp-dot cd-0056"></div>0056 Atención especial</div>
+          <div class="clp-item"><div class="clp-dot cd-0057"></div>0057 Múltiples víctimas</div>
+          <div class="clp-item"><div class="clp-dot cd-0060"></div>0060 Anatomofisiología</div>
+          <div class="clp-item"><div class="clp-dot" style="background:#DBEAFE;border:1px solid #BFDBFE;width:14px;height:14px;border-radius:3px;"></div>Festivo</div>
+          <div style="margin-left:auto;font-size:11.5px;color:var(--text-muted);">Clic en cualquier día lectivo para ver las sesiones planificadas</div>
         </div>
 
         <div class="cal-prog-grid">
@@ -765,112 +778,105 @@
           <!-- Septiembre 2024 -->
           <div class="cal-prog-month">
             <div class="cal-prog-month-title">Septiembre 2024</div>
-            <div class="cal-prog-days-header">
-              <div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div>
-            </div>
+            <div class="cal-prog-days-header"><div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div></div>
             <div class="cal-prog-days">
-              <div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day empty"></div><div class="cal-prog-day weekend">1</div>
-              <div class="cal-prog-day weekend">2</div><div class="cal-prog-day weekend">3</div><div class="cal-prog-day weekend">4</div><div class="cal-prog-day weekend">5</div><div class="cal-prog-day weekend">6</div><div class="cal-prog-day weekend">7</div><div class="cal-prog-day weekend">8</div>
-              <div class="cal-prog-day sa-0056" title="SA·01 Soporte vital" onclick="openModal('modal-editar-sa-gantt')">9</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">10</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">11</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">12</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">13</div>
-              <div class="cal-prog-day weekend">14</div><div class="cal-prog-day weekend">15</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">16</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">17</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">18</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">19</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">20</div>
-              <div class="cal-prog-day weekend">21</div><div class="cal-prog-day weekend">22</div>
-              <div class="cal-prog-day sa-0056" title="SA·01" onclick="openModal('modal-editar-sa-gantt')">23</div>
-              <div class="cal-prog-day festivo" title="Patrona de Jerez">24</div>
-              <div class="cal-prog-day festivo" title="Feria del Caballo">25</div>
-              <div class="cal-prog-day sa-0056" title="SA·02 Parto extrahospitalario" onclick="openModal('modal-editar-sa-gantt')">26</div>
-              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">27</div>
-              <div class="cal-prog-day weekend">28</div><div class="cal-prog-day weekend">29</div>
-              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">30</div>
+              <div class="cal-day-cell empty"></div><div class="cal-day-cell empty"></div><div class="cal-day-cell empty"></div><div class="cal-day-cell empty"></div><div class="cal-day-cell empty"></div><div class="cal-day-cell empty"></div><div class="cal-day-cell weekend">1</div>
+              <div class="cal-day-cell weekend">2</div><div class="cal-day-cell weekend">3</div><div class="cal-day-cell weekend">4</div><div class="cal-day-cell weekend">5</div><div class="cal-day-cell weekend">6</div><div class="cal-day-cell weekend">7</div><div class="cal-day-cell weekend">8</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">9</div><div class="cal-day-dots"><div class="cal-dot cd-0056" title="0056 S·01"></div><div class="cal-dot cd-0057" title="0057 S·01"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">10</div><div class="cal-day-dots"><div class="cal-dot cd-0056" title="0056 S·02"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">11</div><div class="cal-day-dots"><div class="cal-dot cd-0056" title="0056 S·03"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">12</div><div class="cal-day-dots"><div class="cal-dot cd-0056" title="0056 S·04"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">13</div><div class="cal-day-dots"><div class="cal-dot cd-0056" title="0056 S·05"></div><div class="cal-dot cd-0057" title="0057 S·02"></div></div></div>
+              <div class="cal-day-cell weekend">14</div><div class="cal-day-cell weekend">15</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">16</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">17</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">18</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">19</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">20</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell weekend">21</div><div class="cal-day-cell weekend">22</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">23</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell festivo">24</div>
+              <div class="cal-day-cell festivo">25</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">26</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">27</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell weekend">28</div><div class="cal-day-cell weekend">29</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">30</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
             </div>
           </div>
 
           <!-- Octubre 2024 -->
           <div class="cal-prog-month">
             <div class="cal-prog-month-title">Octubre 2024</div>
-            <div class="cal-prog-days-header">
-              <div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div>
-            </div>
+            <div class="cal-prog-days-header"><div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div></div>
             <div class="cal-prog-days">
-              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">1</div>
-              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">2</div>
-              <div class="cal-prog-day sa-0056" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">3</div>
-              <div class="cal-prog-day festivo" title="Jornada formación">4</div>
-              <div class="cal-prog-day sa-0057" title="SA·01 Triaje EMVI" onclick="openModal('modal-editar-sa-gantt')">5</div>
-              <div class="cal-prog-day weekend">6</div><div class="cal-prog-day weekend">7</div>
-              <div class="cal-prog-day sa-0056" title="SA·03 Inmovilización" onclick="openModal('modal-editar-sa-gantt')">8</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">9</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">10</div>
-              <div class="cal-prog-day sa-0057" title="SA·01 Triaje" onclick="openModal('modal-editar-sa-gantt')">11</div>
-              <div class="cal-prog-day festivo" title="Fiesta Nacional">12</div>
-              <div class="cal-prog-day weekend">13</div><div class="cal-prog-day weekend">14</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">15</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">16</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">17</div>
-              <div class="cal-prog-day sa-0057" title="SA·01 Triaje" onclick="openModal('modal-editar-sa-gantt')">18</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">19</div>
-              <div class="cal-prog-day weekend">20</div><div class="cal-prog-day weekend">21</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">22</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">23</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">24</div>
-              <div class="cal-prog-day sa-0057" title="SA·01 Triaje" onclick="openModal('modal-editar-sa-gantt')">25</div>
-              <div class="cal-prog-day sa-0056" title="SA·03" onclick="openModal('modal-editar-sa-gantt')">26</div>
-              <div class="cal-prog-day weekend">27</div><div class="cal-prog-day weekend">28</div>
-              <div class="cal-prog-day sa-0056" title="SA·04 Urgencias obstétricas" onclick="openModal('modal-editar-sa-gantt')">29</div>
-              <div class="cal-prog-day festivo" title="Traslado festivo">30</div>
-              <div class="cal-prog-day sa-0057" title="SA·02 Área intervención" onclick="openModal('modal-editar-sa-gantt')">31</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">1</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">2</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">3</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell festivo">4</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">5</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell weekend">6</div><div class="cal-day-cell weekend">7</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">8</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">9</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">10</div><div class="cal-day-dots"><div class="cal-dot cd-0056"></div><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">11</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell festivo">12</div>
+              <div class="cal-day-cell weekend">13</div><div class="cal-day-cell weekend">14</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">15</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">16</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">17</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">18</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">19</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell weekend">20</div><div class="cal-day-cell weekend">21</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">22</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">23</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">24</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">25</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">26</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell weekend">27</div><div class="cal-day-cell weekend">28</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">29</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell festivo">30</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">31</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
             </div>
           </div>
 
           <!-- Noviembre 2024 -->
           <div class="cal-prog-month">
             <div class="cal-prog-month-title">Noviembre 2024</div>
-            <div class="cal-prog-days-header">
-              <div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div>
-            </div>
+            <div class="cal-prog-days-header"><div class="cal-prog-day-name">L</div><div class="cal-prog-day-name">M</div><div class="cal-prog-day-name">X</div><div class="cal-prog-day-name">J</div><div class="cal-prog-day-name">V</div><div class="cal-prog-day-name">S</div><div class="cal-prog-day-name">D</div></div>
             <div class="cal-prog-days">
-              <div class="cal-prog-day festivo" title="Todos los Santos">1</div>
-              <div class="cal-prog-day weekend">2</div><div class="cal-prog-day weekend">3</div>
-              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">4</div>
-              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">5</div>
-              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">6</div>
-              <div class="cal-prog-day sa-0057" title="SA·02 Área intervención" onclick="openModal('modal-editar-sa-gantt')">7</div>
-              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">8</div>
-              <div class="cal-prog-day weekend">9</div><div class="cal-prog-day weekend">10</div>
-              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">11</div>
-              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">12</div>
-              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">13</div>
-              <div class="cal-prog-day sa-0057" title="SA·02" onclick="openModal('modal-editar-sa-gantt')">14</div>
-              <div class="cal-prog-day sa-0056" title="SA·04" onclick="openModal('modal-editar-sa-gantt')">15</div>
-              <div class="cal-prog-day weekend">16</div><div class="cal-prog-day weekend">17</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente - clic para temporalizar" onclick="openModal('modal-nueva-sa-gantt')">18</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">19</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">20</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">21</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">22</div>
-              <div class="cal-prog-day weekend">23</div><div class="cal-prog-day weekend">24</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">25</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">26</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">27</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">28</div>
-              <div class="cal-prog-day sa-pendiente" title="SA·03 pendiente" onclick="openModal('modal-nueva-sa-gantt')">29</div>
-              <div class="cal-prog-day weekend">30</div>
+              <div class="cal-day-cell festivo">1</div>
+              <div class="cal-day-cell weekend">2</div><div class="cal-day-cell weekend">3</div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">4</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">5</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">6</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">7</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell con-sesiones" onclick="openModal('modal-dia-detalle')"><div class="cal-day-num">8</div><div class="cal-day-dots"><div class="cal-dot cd-0057"></div></div></div>
+              <div class="cal-day-cell weekend">9</div><div class="cal-day-cell weekend">10</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);">11</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);">12</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);">13</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);">14</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);">15</div>
+              <div class="cal-day-cell weekend">16</div><div class="cal-day-cell weekend">17</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-style:italic;font-size:9px;" title="SA·03 pendiente">18<br>?</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">19</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">20</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">21</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">22</div>
+              <div class="cal-day-cell weekend">23</div><div class="cal-day-cell weekend">24</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">25</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">26</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">27</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">28</div>
+              <div class="cal-day-cell" style="color:var(--text-muted);font-size:9px;">29</div>
+              <div class="cal-day-cell weekend">30</div>
             </div>
           </div>
 
         </div><!-- /cal-prog-grid -->
-      </div><!-- /panel-cal -->
+      </div><!-- /panel-mensual -->
 
     </div><!-- /vista-detalle -->
-
   </div><!-- /content -->
 </div><!-- /app-main -->
 
@@ -895,62 +901,109 @@
   </div>
 </div>
 
-<!-- MODAL: Temporalizar SA (Gantt / Calendario) -->
-<div class="modal-overlay" id="modal-nueva-sa-gantt">
-  <div class="modal">
+<!-- MODAL: Programar SA sesión a sesión -->
+<div class="modal-overlay" id="modal-sesiones-sa">
+  <div class="modal" style="width:700px;">
     <div class="modal-head">
-      <div><div class="modal-title">Temporalizar SA</div><div class="modal-subtitle">Módulo 0057 · SA·03 · Grupo A · 2024–25</div></div>
-      <button class="modal-close" onclick="closeModal('modal-nueva-sa-gantt')">✕</button>
+      <div><div class="modal-title">Programar por sesiones</div><div class="modal-subtitle">SA·01 — Soporte vital avanzado · Módulo 0056 · Grupo A</div></div>
+      <button class="modal-close" onclick="closeModal('modal-sesiones-sa')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div><strong>SA·03 — Coordinación con otros servicios de emergencia</strong><br>18 sesiones · 5 ses/sem en este módulo → duración estimada: <strong>3–4 semanas</strong></div></div>
-      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--text-muted);">Próxima semana disponible para este módulo: <strong style="color:var(--green);">Semana 20 · 20 ene 2025</strong></div>
-      <div class="form-group">
-        <label class="form-label">Fecha de inicio <span>*</span></label>
-        <input class="form-input" type="date" value="2025-01-20">
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Fecha fin estimada: <strong>7 feb 2025</strong> (calculado automáticamente)</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Sesiones por semana <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(por defecto: 5 asignadas al módulo)</span></label>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <input class="form-input" type="number" value="5" style="width:70px;">
-          <span style="font-size:12px;color:var(--text-muted);">→ Total 18 sesiones en <strong style="color:var(--text-main);">4 semanas</strong></span>
-        </div>
-      </div>
-      <div class="form-group"><label class="form-label">Observaciones</label><input class="form-input" placeholder="Notas, ajustes por festivos, actividades complementarias…"></div>
+      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>Asigna una fecha concreta a cada sesión. Los datos de tipo, espacio y agrupamiento provienen de la Planificación base (TES 2024 v1) y son de solo lectura aquí.</div></div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <thead><tr style="background:var(--bg);">
+          <th style="padding:7px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Sesión</th>
+          <th style="padding:7px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Tipo</th>
+          <th style="padding:7px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Espacio</th>
+          <th style="padding:7px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Agrupamiento</th>
+          <th style="padding:7px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Fecha <span style="color:var(--brand);">*</span></th>
+          <th style="padding:7px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);border-bottom:2px solid var(--border);">Día</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-num">S·01</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-tipo st-dem">Demostrativa</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Aula simulación</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Gran grupo</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><input type="date" class="ses-fecha-input" value="2024-09-09"></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11px;color:var(--green);font-weight:600;">Lunes ✓</td></tr>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-num">S·02</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-tipo st-simbl">SimBL</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Sala práctica</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Parejas</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><input type="date" class="ses-fecha-input" value="2024-09-10"></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11px;color:var(--green);font-weight:600;">Martes ✓</td></tr>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-num">S·03</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-tipo st-simbl">SimBL</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Sala práctica</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Grupos 4</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><input type="date" class="ses-fecha-input" value="2024-09-11"></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11px;color:var(--green);font-weight:600;">Miércoles ✓</td></tr>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-num">S·04</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-tipo st-abp">ABP</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Aula</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Grupos 4</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><input type="date" class="ses-fecha-input" value="2024-09-12"></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11px;color:var(--green);font-weight:600;">Jueves ✓</td></tr>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-num">S·05</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-tipo st-coop">Cooperativo</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Aula</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Grupos 4</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><input type="date" class="ses-fecha-input" value="2024-09-13"></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11px;color:var(--green);font-weight:600;">Viernes ✓</td></tr>
+          <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-num">S·06</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><span class="ses-tipo st-simbl">SimBL</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Sala práctica</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11.5px;">Parejas</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);"><input type="date" class="ses-fecha-input" value="2024-09-16"></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-size:11px;color:var(--green);font-weight:600;">Lunes ✓</td></tr>
+          <tr><td style="padding:8px 10px;text-align:center;" colspan="6"><span style="font-size:11.5px;color:var(--text-muted);">+ 12 sesiones más (S·07–S·18)</span></td></tr>
+        </tbody>
+      </table>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-secondary" onclick="closeModal('modal-nueva-sa-gantt')">Cancelar</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-nueva-sa-gantt')">Guardar temporalización</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-sesiones-sa')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-sesiones-sa')">Guardar programación</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: Editar SA temporalizada -->
-<div class="modal-overlay" id="modal-editar-sa-gantt">
+<!-- MODAL: Mover sesión -->
+<div class="modal-overlay" id="modal-mover-sesion">
   <div class="modal">
     <div class="modal-head">
-      <div><div class="modal-title">Editar temporalización</div><div class="modal-subtitle">Módulo 0056 · SA·01 · Soporte vital avanzado · Grupo A</div></div>
-      <button class="modal-close" onclick="closeModal('modal-editar-sa-gantt')">✕</button>
+      <div><div class="modal-title">Mover sesión</div><div class="modal-subtitle">SA·01 · S·01 · Módulo 0056 · Soporte vital avanzado</div></div>
+      <button class="modal-close" onclick="closeModal('modal-mover-sesion')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>18 sesiones totales · Temporalizada en S1–S3 (9–27 sep 2024). El número total de sesiones viene de la Planificación y no se puede modificar aquí.</div></div>
-      <div class="form-group"><label class="form-label">Fecha de inicio <span>*</span></label><input class="form-input" type="date" value="2024-09-09"></div>
-      <div class="form-group">
-        <label class="form-label">Sesiones por semana</label>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <input class="form-input" type="number" value="6" style="width:70px;">
-          <span style="font-size:12px;color:var(--text-muted);">→ 18 sesiones en <strong>3 semanas</strong></span>
+      <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>Cambia la fecha de esta sesión concreta sin afectar al resto. Si la nueva fecha ya tiene otras sesiones del mismo grupo, el sistema lo indicará.</div></div>
+      <div class="form-group"><label class="form-label">Fecha actual</label><div style="padding:7px 10px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--text-muted);">Lunes 9 sep 2024</div></div>
+      <div class="form-group"><label class="form-label">Nueva fecha <span>*</span></label><input class="form-input" type="date" value="2024-09-09"></div>
+      <div style="background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:var(--green);">✓ Martes 10 sep 2024 — Día lectivo disponible. No hay conflicto con otras sesiones de este módulo.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-mover-sesion')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-mover-sesion')">Confirmar cambio</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Detalle del día -->
+<div class="modal-overlay" id="modal-dia-detalle">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Sesiones del día</div><div class="modal-subtitle">Lunes 9 de septiembre de 2024 · Grupo A · 1.er curso TES</div></div>
+      <button class="modal-close" onclick="closeModal('modal-dia-detalle')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+
+        <div style="background:var(--bg-white);border:1px solid var(--green-border);border-radius:var(--radius-sm);padding:10px 14px;border-left:3px solid var(--green);">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="ses-num">S·01 de 18</span>
+            <span class="ses-tipo st-dem">Demostrativa</span>
+            <span style="font-size:10.5px;background:var(--brand-light);color:var(--brand);padding:1px 6px;border-radius:3px;border:1px solid #FECACA;font-weight:600;">0056</span>
+          </div>
+          <div style="font-size:12.5px;font-weight:600;color:var(--text-main);">SA·01 — Soporte vital avanzado. Material de emergencias</div>
+          <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap;">
+            <span style="font-size:11.5px;color:var(--text-muted);">📍 Aula de simulación</span>
+            <span style="font-size:11.5px;color:var(--text-muted);">👥 Gran grupo</span>
+            <span style="font-size:11.5px;color:var(--text-muted);">⏱ 55 min</span>
+            <span style="font-size:11.5px;color:var(--text-muted);">👨‍🏫 García Moreno, Ana</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--text-muted);margin-top:4px;font-style:italic;">Presentación SVA. Equipo de emergencias. Protocolos básicos de actuación</div>
         </div>
-      </div>
-      <div class="form-group"><label class="form-label">Observaciones</label><input class="form-input" placeholder="Notas sobre esta temporalización…"></div>
-      <div style="padding-top:8px;border-top:1px solid var(--border);margin-top:4px;">
-        <button class="btn btn-danger btn-sm">✕ Quitar temporalización</button>
+
+        <div style="background:var(--bg-white);border:1px solid var(--blue-border);border-radius:var(--radius-sm);padding:10px 14px;border-left:3px solid var(--blue);">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="ses-num">S·01 de 20</span>
+            <span class="ses-tipo st-dem">Demostrativa</span>
+            <span style="font-size:10.5px;background:#EFF6FF;color:#1D4ED8;padding:1px 6px;border-radius:3px;border:1px solid #BFDBFE;font-weight:600;">0057</span>
+          </div>
+          <div style="font-size:12.5px;font-weight:600;color:var(--text-main);">SA·01 — Triaje en emergencias con múltiples víctimas</div>
+          <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap;">
+            <span style="font-size:11.5px;color:var(--text-muted);">📍 Aula teórica</span>
+            <span style="font-size:11.5px;color:var(--text-muted);">👥 Gran grupo</span>
+            <span style="font-size:11.5px;color:var(--text-muted);">⏱ 55 min</span>
+            <span style="font-size:11.5px;color:var(--text-muted);">👨‍🏫 Pérez Ruiz, Carlos</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--text-muted);margin-top:4px;font-style:italic;">Introducción al triaje START. Categorías y prioridades. Materiales</div>
+        </div>
+
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-secondary" onclick="closeModal('modal-editar-sa-gantt')">Cancelar</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-editar-sa-gantt')">Guardar cambios</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-dia-detalle')">Cerrar</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-dia-detalle');openModal('modal-mover-sesion')">↕ Mover una sesión</button>
     </div>
   </div>
 </div>
@@ -963,8 +1016,8 @@
       <button class="modal-close" onclick="closeModal('modal-generar-horario')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-warning"><span class="alert-icon">⚠</span><div>Para generar el horario es necesario que <strong>todas las SA estén temporalizadas</strong>. Actualmente hay <strong>6 SA sin temporalizar</strong> en este grupo. ¿Deseas continuar igualmente con las SA disponibles?</div></div>
-      <div style="font-size:13px;color:var(--text-sub);line-height:1.6;">El sistema cruzará las SA temporalizadas con el horario del grupo (Mañana · 6 ses/día) para generar el cuadro horario semanal en <strong>Horarios</strong>. Este proceso puede editarse posteriormente.</div>
+      <div class="alert alert-warning"><span class="alert-icon">⚠</span><div>Hay <strong>6 SA sin programar</strong> en este grupo. Se generará el horario solo con las SA ya temporalizadas. Podrás completarlo cuando las SA restantes estén programadas.</div></div>
+      <div style="font-size:13px;color:var(--text-sub);line-height:1.6;">El sistema cruzará las sesiones programadas con el horario del grupo (Mañana · 6 ses/día) para generar el cuadro horario semanal en <strong>Horarios</strong>. Este proceso puede editarse posteriormente.</div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-secondary" onclick="closeModal('modal-generar-horario')">Cancelar</button>
@@ -991,16 +1044,26 @@ function volverLista(){
   document.getElementById('vista-centro').style.display='block';
   document.getElementById('topbar-sub').textContent='CIFP Salud Jerez · Superadministrador';
 }
-function mostrarDetalle(id){
+function mostrarDetalle(){
   document.getElementById('vista-centro').style.display='none';
   document.getElementById('vista-detalle').style.display='block';
   document.getElementById('topbar-sub').textContent='TES · 1.er curso Grupo A · 2024–25 · Superadministrador';
 }
 function switchVista(v){
-  document.getElementById('btn-gantt').classList.toggle('active',v==='gantt');
-  document.getElementById('btn-cal').classList.toggle('active',v==='cal');
-  document.getElementById('panel-gantt').style.display=v==='gantt'?'block':'none';
-  document.getElementById('panel-cal').style.display=v==='cal'?'block':'none';
+  document.getElementById('btn-semanas').classList.toggle('active',v==='semanas');
+  document.getElementById('btn-mensual').classList.toggle('active',v==='mensual');
+  document.getElementById('panel-semanas').style.display=v==='semanas'?'block':'none';
+  document.getElementById('panel-mensual').style.display=v==='mensual'?'block':'none';
+}
+function toggleMod(id){
+  document.getElementById(id).classList.toggle('open');
+}
+function toggleDia(el){
+  el.classList.toggle('active');
+}
+function recalcularSA(input, tablaId){
+  // En producción recalcularía las fechas de las sesiones
+  console.log('Recalculando desde:', input.value);
 }
 function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
