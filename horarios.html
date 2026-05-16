@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CurriculaFP — Horarios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html,body{font-size:14px !important}
+  :root{
+    --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+    --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+    --text-main:#1C1917;--text-sub:#57534E;--text-muted:#A8A29E;
+    --border:#E7E5E0;--border-dark:#D4D0CA;
+    --green:#15803D;--green-light:#F0FDF4;--green-border:#BBF7D0;
+    --amber:#B45309;--amber-light:#FFFBEB;--amber-border:#FDE68A;
+    --blue:#1D4ED8;--blue-light:#EFF6FF;--blue-border:#BFDBFE;
+    --purple:#7C3AED;--purple-light:#EDE9FE;--purple-border:#DDD6FE;
+    --radius:8px;--radius-lg:12px;--radius-sm:6px;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+    --shadow:0 4px 12px rgba(0,0,0,0.08);
+    --sidebar-w:232px;--topbar-h:52px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;font-size:14px}
+  a{text-decoration:none;color:inherit}
+
+  /* SIDEBAR */
+  .sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+  .sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+  .sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+  .sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+  .sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+  .sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+  .sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .nav-group{padding:0 0.625rem 0.25rem}
+  .nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+  .nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+  .nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+  .nav-item.active{background:var(--brand);color:#fff}
+  .nav-item.active .ni{opacity:1}
+  .nav-badge{margin-left:auto;background:rgba(255,255,255,0.15);color:#fff;font-size:0.62rem;font-weight:700;padding:0.08rem 0.42rem;border-radius:999px}
+  .nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+  .nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
+  .sb-bottom{margin-top:auto;padding:0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+  .user-tile{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:7px;background:rgba(255,255,255,0.05);cursor:pointer}
+  .user-tile:hover{background:rgba(255,255,255,0.09)}
+  .user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-weight:700;font-size:0.69rem;color:#fff;flex-shrink:0}
+  .user-name{font-size:0.775rem;font-weight:600;color:#F7F4F0}
+  .user-role{font-size:0.63rem;color:rgba(255,255,255,0.3);margin-top:1px}
+  .ni{width:16px;height:16px;flex-shrink:0;opacity:0.6}
+
+  /* MAIN */
+  .app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+  .topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:0.625rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm)}
+  .topbar-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-main)}
+  .topbar-sub{font-size:0.75rem;color:var(--text-muted);margin-left:0.5rem}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:0.5rem}
+  .content{padding:1.75rem 2rem;max-width:1200px}
+
+  /* BOTONES */
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-sm);font-size:12.5px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-dark)}
+  .btn-secondary{background:var(--bg-white);color:var(--text-main);border:1px solid var(--border)}
+  .btn-secondary:hover{background:var(--bg);border-color:var(--border-dark)}
+  .btn-sm{padding:5px 10px;font-size:11.5px}
+  .btn-ghost{background:none;border:none;color:var(--text-sub);cursor:pointer;font-size:12px;padding:3px 6px;border-radius:4px}
+  .btn-ghost:hover{background:var(--bg);color:var(--text-main)}
+  .btn-danger{background:#FEF2F2;color:var(--brand);border:1px solid #FECACA}
+  .btn-danger:hover{background:#FEE2E2}
+
+  /* CARDS */
+  .card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden}
+  .card-header{padding:1rem 1.375rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+  .card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main)}
+  .card-body{padding:1.375rem}
+
+  /* KPI */
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+  .kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+  .kpi-card::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+  .k-red::after{background:var(--brand)}
+  .k-green::after{background:var(--green)}
+  .k-amber::after{background:var(--amber)}
+  .k-blue::after{background:var(--blue)}
+  .kpi-label{font-size:0.7rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem}
+  .kpi-value{font-size:1.75rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);line-height:1}
+  .kpi-sub{font-size:0.7rem;color:var(--text-sub);margin-top:0.3rem}
+
+  /* CENTROS GRID */
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.2s}
+  .centro-card:hover{box-shadow:var(--shadow);transform:translateY(-1px);border-color:var(--border-dark)}
+  .centro-card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+  .centro-avatar{width:40px;height:40px;border-radius:10px;background:var(--brand-light);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--brand);flex-shrink:0}
+  .centro-name{font-size:13px;font-weight:700;color:var(--text-main);margin-bottom:2px}
+  .centro-loc{font-size:11.5px;color:var(--text-muted)}
+  .centro-stats{display:flex;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+  .centro-stat{text-align:center}
+  .centro-stat-val{font-size:15px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)}
+  .centro-stat-label{font-size:10px;color:var(--text-muted)}
+  .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .sd-green{background:var(--green)}
+  .sd-amber{background:var(--amber)}
+
+  /* VISTA DETALLE */
+  .view-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+  .view-back{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-sub);cursor:pointer;padding:5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-white)}
+  .view-back:hover{background:var(--bg)}
+  .view-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--text-main)}
+  .view-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+  /* SELECTOR AÑO */
+  .anio-selector{display:flex;align-items:center;gap:8px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 12px;font-size:12.5px}
+  .anio-selector select{border:none;background:none;font-size:12.5px;font-family:'Inter',sans-serif;color:var(--text-main);font-weight:600;cursor:pointer;outline:none}
+
+  /* TOGGLE VISTA */
+  .vista-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px}
+  .vista-btn{padding:5px 12px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-sub);display:flex;align-items:center;gap:5px;transition:all 0.15s}
+  .vista-btn.active{background:var(--bg-white);color:var(--text-main);box-shadow:var(--shadow-sm);font-weight:600}
+
+  /* BADGES ORIGEN */
+  .badge-origen{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:4px}
+  .bo-nacional{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+  .bo-autonomico{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0}
+  .bo-local{background:#FFFBEB;color:#B45309;border:1px solid #FDE68A}
+  .bo-centro{background:#F7F4F0;color:#78716C;border:1px solid #D4CEC7}
+
+  /* TABLA FESTIVOS */
+  .festivos-table{width:100%;border-collapse:collapse}
+  .festivos-table th{padding:8px 12px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--bg)}
+  .festivos-table td{padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--border);color:var(--text-main)}
+  .festivos-table tr:last-child td{border-bottom:none}
+  .festivos-table tr:hover td{background:#FAFAF9}
+  .festivo-fecha{font-family:'Playfair Display',serif;font-weight:700;font-size:13px;white-space:nowrap}
+  .festivo-dia{font-size:10.5px;color:var(--text-muted);margin-top:1px}
+  .festivo-heredad{font-size:11px;color:var(--text-muted);font-style:italic}
+
+  /* BLOQUE COLAPSABLE */
+  .festivo-group{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+  .festivo-group-header{display:flex;align-items:center;padding:12px 16px;cursor:pointer;user-select:none;gap:10px}
+  .festivo-group-header:hover{background:#FAFAF9}
+  .fg-chevron{font-size:10px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
+  .festivo-group.open .fg-chevron{transform:rotate(90deg)}
+  .fg-title{font-size:13px;font-weight:700;color:var(--text-main);flex:1}
+  .fg-count{font-size:11.5px;font-weight:600;color:var(--text-sub)}
+  .festivo-group-body{display:none;border-top:1px solid var(--border)}
+  .festivo-group.open .festivo-group-body{display:block}
+
+  /* CALENDARIO */
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .cal-nav-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text-main)}
+  .cal-grid-anual{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.trimestre-filter{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px}
+.trim-btn{padding:5px 11px;border-radius:4px;font-size:11.5px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-sub);transition:all 0.15s;white-space:nowrap}
+.trim-btn.active{background:var(--bg-white);color:var(--text-main);box-shadow:var(--shadow-sm);font-weight:600}
+.cal-month-hidden{display:none !important}
+  .cal-month{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .cal-month-title{padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--border);font-size:12px;font-weight:700;color:var(--text-main);text-align:center;text-transform:uppercase;letter-spacing:0.05em}
+  .cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);padding:4px 6px 0}
+  .cal-day-name{text-align:center;font-size:9.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;padding:3px 0}
+  .cal-days{display:grid;grid-template-columns:repeat(7,1fr);padding:0 6px 6px;gap:2px}
+  .cal-day{text-align:center;font-size:11px;padding:4px 2px;border-radius:4px;cursor:default;position:relative;min-height:28px;display:flex;align-items:center;justify-content:center}
+  .cal-day.empty{color:transparent}
+  .cal-day.festivo-nacional{background:#DBEAFE;color:#1D4ED8;font-weight:700}
+  .cal-day.festivo-autonomico{background:#DCFCE7;color:#15803D;font-weight:700}
+  .cal-day.festivo-local{background:#FEF3C7;color:#92400E;font-weight:700}
+  .cal-day.festivo-centro{background:#F5F3FF;color:#6D28D9;font-weight:700}
+  .cal-day.weekend{color:var(--text-muted)}
+  .cal-day.today{outline:2px solid var(--brand);outline-offset:1px}
+  .cal-leyenda{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .ley-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text-sub)}
+  .ley-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+  /* ALERTS */
+  .alert{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:14px;font-size:12.5px;line-height:1.5}
+  .alert-info{background:var(--blue-light);border:1px solid var(--blue-border);color:#1e3a5f}
+  .alert-warning{background:var(--amber-light);border:1px solid var(--amber-border);color:#78350f}
+  .alert-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+
+  /* FORM */
+  .form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+  .form-label{font-size:12px;font-weight:600;color:var(--text-sub)}
+  .form-label span{color:var(--brand)}
+  .form-input{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);outline:none;transition:border-color 0.15s}
+  .form-input:focus{border-color:var(--brand)}
+  .form-select{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);outline:none;cursor:pointer}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;padding:20px}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--bg-white);border-radius:var(--radius-lg);box-shadow:0 20px 60px rgba(0,0,0,0.2);width:520px;max-width:100%;max-height:90vh;overflow-y:auto;animation:modalIn 0.2s ease}
+  @keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg-white);z-index:1}
+  .modal-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text-main)}
+  .modal-subtitle{font-size:11px;color:var(--text-muted);margin-top:2px}
+  .modal-close{width:28px;height:28px;border-radius:5px;border:none;background:var(--bg);cursor:pointer;display:grid;place-items:center;color:var(--text-muted);font-size:16px}
+  .modal-close:hover{background:var(--border)}
+  .modal-body{padding:20px;display:flex;flex-direction:column;gap:4px}
+  .modal-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;background:var(--bg);position:sticky;bottom:0}
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.2s}
+  .centro-card:hover{box-shadow:var(--shadow);transform:translateY(-1px);border-color:var(--border-dark)}
+  .centro-avatar{width:40px;height:40px;border-radius:10px;background:var(--brand-light);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:var(--brand);flex-shrink:0}
+  .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
+  .view-back{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text-sub);cursor:pointer;padding:5px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-white)}
+  .view-back:hover{background:var(--bg)}
+  .selector-bar{display:flex;align-items:center;gap:10px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 16px;margin-bottom:16px;flex-wrap:wrap}
+  .selector-label{font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap}
+  .vista-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px}
+  .vista-btn{padding:5px 12px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-sub);display:flex;align-items:center;gap:5px;transition:all 0.15s}
+  .vista-btn.active{background:var(--bg-white);color:var(--text-main);box-shadow:var(--shadow-sm);font-weight:600}
+  .grupo-tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .grupo-tab{padding:5px 14px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--bg-white);color:var(--text-sub);transition:all 0.15s}
+  .grupo-tab:hover{background:var(--bg)}
+  .grupo-tab.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  /* HORARIO SEMANAL */
+  .horario-wrap{overflow-x:auto}
+  .horario-table{width:100%;border-collapse:collapse;min-width:700px}
+  .horario-table th{padding:8px 6px;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border);background:var(--bg);text-align:center}
+  .horario-table th.hora-col{text-align:right;min-width:70px;padding-right:10px}
+  .horario-table td{padding:2px 3px;border:1px solid var(--border);vertical-align:top;min-width:130px;height:52px}
+  .horario-table td.hora-cell{padding:4px 10px 4px 4px;text-align:right;background:var(--bg);border-right:2px solid var(--border-dark);vertical-align:middle;min-width:70px}
+  .hora-label{font-size:11px;font-weight:700;color:var(--text-sub);white-space:nowrap}
+  .hora-fin{font-size:10px;color:var(--text-muted)}
+  .ses-card{border-radius:5px;padding:5px 7px;height:100%;cursor:pointer;transition:opacity 0.15s;overflow:hidden;display:flex;flex-direction:column;gap:1px}
+  .ses-card:hover{opacity:0.85}
+  .sc-mod{font-size:9.5px;font-weight:700;opacity:0.7;text-transform:uppercase;letter-spacing:0.04em}
+  .sc-sa{font-size:11px;font-weight:600;line-height:1.2;flex:1}
+  .sc-doc{font-size:10px;opacity:0.75}
+  .sc-espacio{font-size:10px;opacity:0.65}
+  .mod-0056{background:#DCFCE7;color:#15803D;border:1px solid #BBF7D0}
+  .mod-0057{background:#DBEAFE;color:#1D4ED8;border:1px solid #BFDBFE}
+  .mod-0058{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A}
+  .mod-0059{background:#F5F3FF;color:#7C3AED;border:1px solid #DDD6FE}
+  .mod-0060{background:#FCE7F3;color:#9D174D;border:1px solid #FBCFE8}
+  .mod-fol{background:#F8FAFC;color:#475569;border:1px solid #CBD5E1}
+  .recreo-row td{height:28px;background:#FAFAF9}
+  .recreo-label{font-size:10px;color:var(--text-muted);text-align:center;font-style:italic;padding:4px}
+  .hor-leyenda{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .hl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-sub)}
+  .hl-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+  /* VISTA DÍA */
+  .dia-nav{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .dia-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;flex:1;text-align:center}
+  .dia-sesion-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow-sm);display:flex;gap:14px;align-items:flex-start}
+  .dia-hora{text-align:center;min-width:60px;flex-shrink:0}
+  .dia-hora-ini{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text-main)}
+  .dia-hora-fin{font-size:10.5px;color:var(--text-muted)}
+  .dia-ses-body{flex:1}
+  .dia-mod-badge{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:3px;margin-bottom:4px;display:inline-block}
+
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-mark">C</div>
+    <div class="sb-logo-text">CurriculaFP<small>Superadministrador</small></div>
+  </div>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 activo</div>
+  <nav style="flex:1;padding-top:0.5rem">
+    <div class="nav-group">
+      <div class="nav-group-label">General</div>
+      <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Configuración</div>
+      <a class="nav-item" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+      <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+      <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas</a>
+      <a class="nav-item" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Años académicos</a>
+      <a class="nav-item" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Catálogo de ciclos</a>
+      <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Catálogo normativo</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditoría del sistema</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Planificación</div>
+      <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Planificación de ciclos</a>
+      <a class="nav-item" href="festivos.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Festivos del centro</a>
+      <a class="nav-item" href="calendario.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Calendario del año</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Gestión de cursos</div>
+      <a class="nav-item" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
+      <a class="nav-item" href="programaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
+      <a class="nav-item active" href="horarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Formación en empresa</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Gestión académica</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluación</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Boletín de notas</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Comunicación</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Informes</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y analítica</a>
+    </div>
+  </nav>
+  <div class="sb-bottom">
+    <div class="user-tile">
+      <div class="user-av">SA</div>
+      <div><div class="user-name">Superadmin</div><div class="user-role">Administrador global</div></div>
+    </div>
+  </div>
+</aside>
+
+<div class="app-main">
+  <div class="topbar">
+    <span class="topbar-title">Horarios</span>
+    <span class="topbar-sub" id="topbar-sub">Vista global del sistema · Superadministrador</span>
+  </div>
+  <div class="content" style="max-width:1400px;">
+
+    <!-- VISTA 1: CENTROS -->
+    <div id="vista-centros">
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;">Horarios</div>
+        <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px;">Cuadros horarios generados a partir de las programaciones. Selecciona un centro para explorar.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+        <div class="kpi-card k-blue"><div class="kpi-label">Horarios generados</div><div class="kpi-value">3</div><div class="kpi-sub">Grupos con horario activo</div></div>
+        <div class="kpi-card k-green"><div class="kpi-label">Sin conflictos</div><div class="kpi-value">3</div><div class="kpi-sub">Docentes y espacios</div></div>
+        <div class="kpi-card k-amber"><div class="kpi-label">Parciales</div><div class="kpi-value">2</div><div class="kpi-sub">Programación incompleta</div></div>
+        <div class="kpi-card k-red"><div class="kpi-label">Sin generar</div><div class="kpi-value">1</div><div class="kpi-sub">Pendiente de programar</div></div>
+      </div>
+      <div class="centros-grid">
+        <div class="centro-card" onclick="mostrarCentro()">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="centro-avatar">CS</div>
+              <div><div style="font-size:13px;font-weight:700;">CIFP Salud Jerez</div><div style="font-size:11.5px;color:var(--text-muted);">Jerez de la Frontera · Cádiz</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);"></div><span style="font-size:11px;color:var(--green);font-weight:600;">Activo</span></div>
+          </div>
+          <div style="display:flex;gap:14px;padding-top:10px;border-top:1px solid var(--border);">
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">3</div><div style="font-size:10px;color:var(--text-muted);">Grupos</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">2</div><div style="font-size:10px;color:var(--text-muted);">Ciclos</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">0</div><div style="font-size:10px;color:var(--text-muted);">Conflictos</div></div>
+          </div>
+        </div>
+        <div class="centro-card" style="opacity:0.7;cursor:default;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="centro-avatar">IC</div>
+              <div><div style="font-size:13px;font-weight:700;">IES La Cartuja</div><div style="font-size:11.5px;color:var(--text-muted);">Granada · Andalucía</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);"></div><span style="font-size:11px;color:var(--green);font-weight:600;">Activo</span></div>
+          </div>
+          <div style="display:flex;gap:14px;padding-top:10px;border-top:1px solid var(--border);">
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">1</div><div style="font-size:10px;color:var(--text-muted);">Grupo</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">1</div><div style="font-size:10px;color:var(--text-muted);">Ciclo</div></div>
+            <div style="text-align:center;"><div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;">0</div><div style="font-size:10px;color:var(--text-muted);">Conflictos</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 2: HORARIO DETALLE -->
+    <div id="vista-horario" style="display:none;">
+
+      <div class="breadcrumb">
+        <button class="view-back" onclick="volverCentros()"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>Centros</button>
+        <span style="color:var(--text-muted);font-size:12px;">›</span>
+        <span style="font-size:12.5px;font-weight:600;">CIFP Salud Jerez</span>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="selector-bar">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="selector-label">Año</span>
+          <select class="form-select"><option selected>2024–2025</option></select>
+        </div>
+        <div style="width:1px;height:24px;background:var(--border);"></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="selector-label">Ciclo</span>
+          <select class="form-select"><option selected>TES · Emergencias Sanitarias</option><option>TCAE</option></select>
+        </div>
+        <div style="width:1px;height:24px;background:var(--border);"></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="selector-label">Grupo</span>
+          <div class="grupo-tabs">
+            <button class="grupo-tab active" onclick="filtrarGrupo(this)">1.er curso · A</button>
+            <button class="grupo-tab" onclick="filtrarGrupo(this)">1.er curso · B</button>
+            <button class="grupo-tab" onclick="filtrarGrupo(this)">2.º curso · A</button>
+          </div>
+        </div>
+        <div style="width:1px;height:24px;background:var(--border);"></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="selector-label">Filtrar por</span>
+          <select class="form-select" onchange="aplicarFiltro(this.value)">
+            <option value="todos" selected>Todos los módulos</option>
+            <option value="docente">Por docente</option>
+            <option value="espacio">Por espacio</option>
+          </select>
+          <select class="form-select" id="select-filtro-val" style="display:none;">
+            <option>García Moreno, Ana</option>
+            <option>Pérez Ruiz, Carlos</option>
+            <option>Romero Vega, Isabel</option>
+            <option>Martínez López, Sergio</option>
+          </select>
+        </div>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+          <div class="vista-toggle">
+            <button class="vista-btn active" id="btn-semana" onclick="switchVista('semana')">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+              Semana
+            </button>
+            <button class="vista-btn" id="btn-dia" onclick="switchVista('dia')">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              Día
+            </button>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="openModal('modal-imprimir')">🖨 Imprimir</button>
+        </div>
+      </div>
+
+      <!-- Info grupo + nav semana -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;">TES · 1.er curso · Grupo A</span>
+          <span style="font-size:11.5px;color:var(--text-muted);">Mañana · 08:00–14:00 · 55 min/sesión · 6 ses/día</span>
+          <span style="font-size:11px;padding:2px 8px;border-radius:3px;background:var(--green-light);color:var(--green);border:1px solid var(--green-border);font-weight:600;">✓ Sin conflictos</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:11.5px;color:var(--text-muted);">Semana del</span>
+          <input type="date" class="form-input" value="2024-09-09" style="width:140px;font-size:12px;">
+          <button class="btn btn-secondary btn-sm">◀</button>
+          <button class="btn btn-secondary btn-sm">▶</button>
+          <button class="btn btn-secondary btn-sm">Hoy</button>
+        </div>
+      </div>
+
+      <!-- VISTA SEMANA -->
+      <div id="panel-semana">
+        <div class="hor-leyenda">
+          <div class="hl-item"><div class="hl-dot mod-0056"></div>0056 At. Sanitaria Especial</div>
+          <div class="hl-item"><div class="hl-dot mod-0057"></div>0057 Múltiples Víctimas</div>
+          <div class="hl-item"><div class="hl-dot mod-0058"></div>0058 Dotación Sanitaria</div>
+          <div class="hl-item"><div class="hl-dot mod-0060"></div>0060 Anatomofisiología</div>
+          <div class="hl-item"><div class="hl-dot mod-fol"></div>FOL</div>
+        </div>
+        <div class="horario-wrap">
+          <table class="horario-table">
+            <thead>
+              <tr>
+                <th class="hora-col">Hora</th>
+                <th>Lunes<br><span style="font-weight:400;font-size:10px;color:#93C5FD;">9 sep</span></th><th>Martes<br><span style="font-weight:400;font-size:10px;color:#93C5FD;">10 sep</span></th><th>Miércoles<br><span style="font-weight:400;font-size:10px;color:#93C5FD;">11 sep</span></th><th>Jueves<br><span style="font-weight:400;font-size:10px;color:#93C5FD;">12 sep</span></th><th>Viernes<br><span style="font-weight:400;font-size:10px;color:#93C5FD;">13 sep</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="hora-cell"><span class="hora-label">08:00</span><br><span class="hora-fin">08:55</span></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·1</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Aula simulación</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+          <div class="sc-sa">SA·01 S·1</div>
+          <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·2</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0060 · Anatomofisiología</div>
+          <div class="sc-sa">SA·01 S·1</div>
+          <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+          <div class="sc-sa">SA·02 S·1</div>
+          <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td></tr>
+<tr><td class="hora-cell"><span class="hora-label">08:55</span><br><span class="hora-fin">09:50</span></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·2</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+          <div class="sc-sa">SA·01 S·2</div>
+          <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·3</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0060 · Anatomofisiología</div>
+          <div class="sc-sa">SA·01 S·2</div>
+          <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+          <div class="sc-sa">SA·02 S·2</div>
+          <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td></tr>
+<tr><td class="hora-cell"><span class="hora-label">09:50</span><br><span class="hora-fin">10:45</span></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+          <div class="sc-sa">SA·01 S·1</div>
+          <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
+          <div class="sc-espacio">📍 Almacén material</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0060 · Anatomofisiología</div>
+          <div class="sc-sa">SA·01 S·3</div>
+          <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+          <div class="sc-sa">SA·01 S·2</div>
+          <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
+          <div class="sc-espacio">📍 Almacén material</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·3</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0060 · Anatomofisiología</div>
+          <div class="sc-sa">SA·01 S·4</div>
+          <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td></tr>
+<tr class="recreo-row"><td class="hora-cell"><span class="hora-label">10:45</span><br><span class="hora-fin">11:05</span></td><td><div class="recreo-label">— Recreo —</div></td><td><div class="recreo-label">— Recreo —</div></td><td><div class="recreo-label">— Recreo —</div></td><td><div class="recreo-label">— Recreo —</div></td><td><div class="recreo-label">— Recreo —</div></td></tr>
+<tr><td class="hora-cell"><span class="hora-label">11:05</span><br><span class="hora-fin">12:00</span></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·3</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+          <div class="sc-sa">SA·01 S·3</div>
+          <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
+          <div class="sc-espacio">📍 Almacén material</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+          <div class="sc-sa">SA·01 S·3</div>
+          <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+          <div class="sc-sa">SA·01 S·4</div>
+          <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
+          <div class="sc-espacio">📍 Almacén material</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·4</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td></tr>
+<tr><td class="hora-cell"><span class="hora-label">12:00</span><br><span class="hora-fin">12:55</span></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·4</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+          <div class="sc-sa">SA·01 S·4</div>
+          <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0060 · Anatomofisiología</div>
+          <div class="sc-sa">SA·01 S·5</div>
+          <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+          <div class="sc-sa">SA·01 S·5</div>
+          <div class="sc-doc">👨‍🏫 García M., Ana</div>
+          <div class="sc-espacio">📍 Sala práctica</div>
+        </div></td><td><div class="ses-card mod-fol" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">fol · FOL</div>
+          <div class="sc-sa">SA·01 S·1</div>
+          <div class="sc-doc">👨‍🏫 Navarro G., Marta</div>
+          <div class="sc-espacio">📍 Aula</div>
+        </div></td></tr>
+<tr><td class="hora-cell"><span class="hora-label">12:55</span><br><span class="hora-fin">13:50</span></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+          <div class="sc-sa">SA·01 S·3</div>
+          <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0060 · Anatomofisiología</div>
+          <div class="sc-sa">SA·01 S·2</div>
+          <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+          <div class="sc-sa">SA·01 S·5</div>
+          <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
+          <div class="sc-espacio">📍 Aula teórica</div>
+        </div></td><td><div class="ses-card mod-fol" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">fol · FOL</div>
+          <div class="sc-sa">SA·01 S·2</div>
+          <div class="sc-doc">👨‍🏫 Navarro G., Marta</div>
+          <div class="sc-espacio">📍 Aula</div>
+        </div></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
+          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+          <div class="sc-sa">SA·01 S·5</div>
+          <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
+          <div class="sc-espacio">📍 Almacén material</div>
+        </div></td></tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VISTA DÍA -->
+      <div id="panel-dia" style="display:none;">
+        <div class="dia-nav">
+          <button class="btn btn-secondary btn-sm">◀</button>
+          <div class="dia-title">Lunes 9 de septiembre de 2024</div>
+          <button class="btn btn-secondary btn-sm">▶</button>
+        </div>
+        <div class="dia-sesion-card">
+          <div class="dia-hora"><div class="dia-hora-ini">08:00</div><div class="dia-hora-fin">08:55</div></div>
+          <div style="width:4px;border-radius:2px;background:#15803D;flex-shrink:0;align-self:stretch;"></div>
+          <div class="dia-ses-body">
+            <span class="dia-mod-badge mod-0056">0056 · At. Sanitaria Especial</span>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">SA·01 — Soporte vital avanzado · Sesión 1 de 18</div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);">
+              <span>👨‍🏫 García Moreno, Ana</span><span>📍 Aula de simulación</span><span>👥 Gran grupo</span><span>⏱ 55 min</span>
+              <span style="font-size:10.5px;background:#EFF6FF;color:#1D4ED8;padding:1px 6px;border-radius:3px;border:1px solid #BFDBFE;">Demostrativa</span>
+            </div>
+          </div>
+        </div>
+        <div class="dia-sesion-card">
+          <div class="dia-hora"><div class="dia-hora-ini">08:55</div><div class="dia-hora-fin">09:50</div></div>
+          <div style="width:4px;border-radius:2px;background:#15803D;flex-shrink:0;align-self:stretch;"></div>
+          <div class="dia-ses-body">
+            <span class="dia-mod-badge mod-0056">0056 · At. Sanitaria Especial</span>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">SA·01 — Soporte vital avanzado · Sesión 2 de 18</div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);">
+              <span>👨‍🏫 García Moreno, Ana</span><span>📍 Sala práctica</span><span>👥 Parejas</span><span>⏱ 55 min</span>
+              <span style="font-size:10.5px;background:#DBEAFE;color:#1D4ED8;padding:1px 6px;border-radius:3px;border:1px solid #BFDBFE;">SimBL</span>
+            </div>
+          </div>
+        </div>
+        <div class="dia-sesion-card">
+          <div class="dia-hora"><div class="dia-hora-ini">09:50</div><div class="dia-hora-fin">10:45</div></div>
+          <div style="width:4px;border-radius:2px;background:#92400E;flex-shrink:0;align-self:stretch;"></div>
+          <div class="dia-ses-body">
+            <span class="dia-mod-badge mod-0058">0058 · Dotación Sanitaria</span>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">SA·01 — Equipamiento del vehículo · Sesión 1 de 12</div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);">
+              <span>👨‍🏫 Romero Vega, Isabel</span><span>📍 Almacén material</span><span>👥 Grupos 4</span><span>⏱ 55 min</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:8px 16px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:10px;border:1px solid var(--border);">
+          <div class="dia-hora" style="opacity:0.5;"><div class="dia-hora-ini" style="font-size:0.95rem;">10:45</div><div class="dia-hora-fin">11:05</div></div>
+          <div style="font-size:12px;color:var(--text-muted);font-style:italic;">— Recreo · 20 minutos —</div>
+        </div>
+        <div class="dia-sesion-card">
+          <div class="dia-hora"><div class="dia-hora-ini">11:05</div><div class="dia-hora-fin">12:00</div></div>
+          <div style="width:4px;border-radius:2px;background:#15803D;flex-shrink:0;align-self:stretch;"></div>
+          <div class="dia-ses-body">
+            <span class="dia-mod-badge mod-0056">0056 · At. Sanitaria Especial</span>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">SA·01 — Soporte vital avanzado · Sesión 3 de 18</div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);">
+              <span>👨‍🏫 García Moreno, Ana</span><span>📍 Sala práctica</span><span>👥 Grupos 4</span><span>⏱ 55 min</span>
+              <span style="font-size:10.5px;background:#DCFCE7;color:#15803D;padding:1px 6px;border-radius:3px;border:1px solid #BBF7D0;">SimBL</span>
+            </div>
+          </div>
+        </div>
+        <div class="dia-sesion-card">
+          <div class="dia-hora"><div class="dia-hora-ini">12:00</div><div class="dia-hora-fin">12:55</div></div>
+          <div style="width:4px;border-radius:2px;background:#15803D;flex-shrink:0;align-self:stretch;"></div>
+          <div class="dia-ses-body">
+            <span class="dia-mod-badge mod-0056">0056 · At. Sanitaria Especial</span>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">SA·01 — Soporte vital avanzado · Sesión 4 de 18</div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);">
+              <span>👨‍🏫 García Moreno, Ana</span><span>📍 Sala práctica</span><span>👥 Grupos 4</span><span>⏱ 55 min</span>
+              <span style="font-size:10.5px;background:#EDE9FE;color:#7C3AED;padding:1px 6px;border-radius:3px;border:1px solid #DDD6FE;">ABP</span>
+            </div>
+          </div>
+        </div>
+        <div class="dia-sesion-card">
+          <div class="dia-hora"><div class="dia-hora-ini">12:55</div><div class="dia-hora-fin">13:50</div></div>
+          <div style="width:4px;border-radius:2px;background:#1D4ED8;flex-shrink:0;align-self:stretch;"></div>
+          <div class="dia-ses-body">
+            <span class="dia-mod-badge mod-0057">0057 · Múltiples Víctimas</span>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">SA·01 — Triaje EMVI · Sesión 1 de 20</div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);">
+              <span>👨‍🏫 Pérez Ruiz, Carlos</span><span>📍 Aula teórica</span><span>👥 Gran grupo</span><span>⏱ 55 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Detalle sesión -->
+<div class="modal-overlay" id="modal-ses-detalle">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Detalle de sesión</div><div class="modal-subtitle">Lunes 9 sep 2024 · 08:00–08:55 · Grupo A</div></div>
+      <button class="modal-close" onclick="closeModal('modal-ses-detalle')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">0056 · Atención sanitaria especial en situaciones de emergencia</div>
+        <div style="font-size:14px;font-weight:700;color:var(--text-main);">SA·01 — Soporte vital avanzado</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Sesión 1 de 18 · Tipo: Demostrativa</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12.5px;">
+        <div><span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:2px;">DOCENTE</span>García Moreno, Ana<br><span style="font-size:11px;color:var(--text-muted);">PT Proc. Sanitarios y Asistenciales</span></div>
+        <div><span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:2px;">ESPACIO</span>Aula de simulación</div>
+        <div><span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:2px;">AGRUPAMIENTO</span>Gran grupo</div>
+        <div><span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:2px;">DURACIÓN</span>55 minutos</div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">DESCRIPCIÓN</div>
+        <div style="font-size:12.5px;color:var(--text-sub);line-height:1.5;">Presentación SVA. Equipo de emergencias. Protocolos básicos de actuación. Demostración con maniquí adulto y DEA.</div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-ses-detalle')">Cerrar</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-ses-detalle')">↕ Mover sesión</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Imprimir -->
+<div class="modal-overlay" id="modal-imprimir">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Imprimir / Exportar horario</div><div class="modal-subtitle">TES · 1.er curso Grupo A · 2024–25</div></div>
+      <button class="modal-close" onclick="closeModal('modal-imprimir')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">Formato</label>
+        <select class="form-select"><option selected>Horario semanal completo (PDF)</option><option>Horario por docente (PDF)</option><option>Exportar a Excel</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Período</label>
+        <select class="form-select"><option selected>Semana actual</option><option>1.er trimestre completo</option><option>Curso completo</option></select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeModal('modal-imprimir')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modal-imprimir')">Generar documento</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function mostrarCentro(){
+  document.getElementById('vista-centros').style.display='none';
+  document.getElementById('vista-horario').style.display='block';
+  document.getElementById('topbar-sub').textContent='CIFP Salud Jerez · TES 2024–2025 · Superadministrador';
+}
+function volverCentros(){
+  document.getElementById('vista-horario').style.display='none';
+  document.getElementById('vista-centros').style.display='block';
+  document.getElementById('topbar-sub').textContent='Vista global del sistema · Superadministrador';
+}
+function switchVista(v){
+  document.getElementById('btn-semana').classList.toggle('active',v==='semana');
+  document.getElementById('btn-dia').classList.toggle('active',v==='dia');
+  document.getElementById('panel-semana').style.display=v==='semana'?'block':'none';
+  document.getElementById('panel-dia').style.display=v==='dia'?'block':'none';
+}
+function filtrarGrupo(el){
+  document.querySelectorAll('.grupo-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+function aplicarFiltro(v){
+  const sel=document.getElementById('select-filtro-val');
+  sel.style.display=(v==='docente'||v==='espacio')?'block':'none';
+  if(v==='espacio') sel.innerHTML='<option>Aula de simulación</option><option>Sala práctica</option><option>Almacén material</option><option>Aula teórica</option>';
+  else sel.innerHTML='<option>García Moreno, Ana</option><option>Pérez Ruiz, Carlos</option><option>Romero Vega, Isabel</option><option>Martínez López, Sergio</option>';
+}
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); });
+});
+</script>
+</body>
+</html>
