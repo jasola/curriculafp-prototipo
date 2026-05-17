@@ -3007,6 +3007,12 @@ a{text-decoration:none;color:inherit}
         .csb-label{font-size:12px;color:var(--text-soft);}
         .csb-val{font-size:14px;font-weight:700;color:var(--text-dark);}
         .csb-sep{width:1px;height:30px;background:var(--border);}
+        /* CNCP badges */
+        .cncp-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
+        .cncp-uc{background:#EEF2FF;color:#3730A3;border:1px solid #C7D2FE;}
+        .cncp-cual{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;}
+        .cncp-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;}
+
       </style>
 
       <!-- Resumen global de cobertura -->
@@ -3029,7 +3035,8 @@ a{text-decoration:none;color:inherit}
         <div style="flex:1;"></div>
         <div style="font-size:12px;color:var(--text-soft);text-align:right;line-height:1.6;">
           La cobertura se calcula a partir de las SA/UD definidas en la planificación.<br>
-          El grado de adquisición real por alumno se registra en Gestión de cursos.
+          El grado de adquisición real por alumno se registra en Gestión de cursos.<br>
+          <span style="color:var(--text-xsoft)">UC: Unidad de Competencia del CNCP · Cualificación: referencia normativa del RD 1397/2007</span>
         </div>
       </div>
 
@@ -3040,6 +3047,8 @@ a{text-decoration:none;color:inherit}
           <div class="comp-left">
             <div class="comp-title-row">
               <span class="comp-code-badge">CP a</span>
+              <span class="cncp-badge cncp-uc">UC0071_2</span>
+              <span class="cncp-badge cncp-cual">SAN025_2</span>
               <span class="comp-desc">Evacuar al paciente utilizando técnicas de movilización e inmovilización para realizar un traslado seguro.</span>
             </div>
             <div class="comp-indicators">
@@ -3088,6 +3097,8 @@ a{text-decoration:none;color:inherit}
           <div class="comp-left">
             <div class="comp-title-row">
               <span class="comp-code-badge">CP b</span>
+              <span class="cncp-badge cncp-uc">UC0070_2</span>
+              <span class="cncp-badge cncp-cual">SAN025_2</span>
               <span class="comp-desc">Aplicar técnicas de soporte vital básico ventilatorio y circulatorio en situación de compromiso.</span>
             </div>
             <div class="comp-indicators">
@@ -3168,6 +3179,8 @@ a{text-decoration:none;color:inherit}
           <div class="comp-left">
             <div class="comp-title-row">
               <span class="comp-code-badge">CP c</span>
+              <span class="cncp-badge cncp-uc">UC0070_2</span>
+              <span class="cncp-badge cncp-cual">SAN025_2</span>
               <span class="comp-desc">Colaborar en la clasificación de víctimas en todo tipo de emergencias y catástrofes.</span>
             </div>
             <div class="comp-indicators">
@@ -3200,6 +3213,8 @@ a{text-decoration:none;color:inherit}
           <div class="comp-left">
             <div class="comp-title-row">
               <span class="comp-code-badge">CP d</span>
+              <span class="cncp-badge cncp-uc">UC0071_2</span>
+              <span class="cncp-badge cncp-cual">SAN025_2</span>
               <span class="comp-desc">Ayudar al personal médico y de enfermería en la prestación del soporte vital avanzado.</span>
             </div>
             <div class="comp-indicators">
@@ -3251,7 +3266,9 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-e&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP e</span><span class="comp-desc">Prestar apoyo psicológico básico al paciente, familiares y afectados en situaciones de crisis.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP e</span>
+              <span class="cncp-badge cncp-uc">UC0072_2</span>
+              <span class="cncp-badge cncp-cual">SAN025_2</span><span class="comp-desc">Prestar apoyo psicológico básico al paciente, familiares y afectados en situaciones de crisis.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-empty" style="width:0%"></div></div><span class="ci-stat"><strong>0</strong> / 2 RA con SA programadas</span><span class="ci-sep">·</span><span class="ci-stat"><strong>6%</strong> peso en el ciclo</span><span class="ci-sep">·</span><span class="ci-stat">Módulos: <strong>0055</strong></span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-empty">Sin programación</span></div>
@@ -3263,7 +3280,9 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-f&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP f</span><span class="comp-desc">Actuar en situaciones de emergencias colectivas y catástrofes colaborando con las estructuras de coordinación.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP f</span>
+              <span class="cncp-badge cncp-uc">UC0360_2</span>
+              <span class="cncp-badge cncp-cual">SAN122_2</span><span class="comp-desc">Actuar en situaciones de emergencias colectivas y catástrofes colaborando con las estructuras de coordinación.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-empty" style="width:0%"></div></div><span class="ci-stat"><strong>0</strong> / 2 RA con SA programadas</span><span class="ci-sep">·</span><span class="ci-stat"><strong>7%</strong> peso en el ciclo</span><span class="ci-sep">·</span><span class="ci-stat">Módulos: <strong>0053, 0059</strong></span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-empty">Sin programación</span></div>
@@ -3275,7 +3294,9 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-g&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP g</span><span class="comp-desc">Realizar la teleasistencia sanitaria aplicando técnicas de comunicación en situaciones de emergencia.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP g</span>
+              <span class="cncp-badge cncp-uc">UC0071_2</span>
+              <span class="cncp-badge cncp-cual">SAN025_2</span><span class="comp-desc">Realizar la teleasistencia sanitaria aplicando técnicas de comunicación en situaciones de emergencia.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-empty" style="width:0%"></div></div><span class="ci-stat"><strong>0</strong> / 2 RA con SA programadas</span><span class="ci-sep">·</span><span class="ci-stat"><strong>5%</strong> peso en el ciclo</span><span class="ci-sep">·</span><span class="ci-stat">Módulos: <strong>0060</strong></span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-empty">Sin programación</span></div>
@@ -3287,7 +3308,9 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-h&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP h</span><span class="comp-desc">Mantener el vehículo de transporte sanitario en condiciones de uso aplicando los protocolos de mantenimiento.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP h</span>
+              <span class="cncp-badge cncp-uc">UC0069_1</span>
+              <span class="cncp-badge cncp-cual">SAN025_2</span><span class="comp-desc">Mantener el vehículo de transporte sanitario en condiciones de uso aplicando los protocolos de mantenimiento.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-empty" style="width:0%"></div></div><span class="ci-stat"><strong>0</strong> / 2 RA con SA programadas</span><span class="ci-sep">·</span><span class="ci-stat"><strong>9%</strong> peso en el ciclo</span><span class="ci-sep">·</span><span class="ci-stat">Módulos: <strong>0052, 0054</strong></span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-empty">Sin programación</span></div>
@@ -3299,7 +3322,9 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-i&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP i</span><span class="comp-desc">Colaborar en la organización y desarrollo de planes de emergencias y dispositivos de riesgo previsibles.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP i</span>
+              <span class="cncp-badge cncp-uc">UC0360_2</span>
+              <span class="cncp-badge cncp-cual">SAN122_2</span><span class="comp-desc">Colaborar en la organización y desarrollo de planes de emergencias y dispositivos de riesgo previsibles.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-empty" style="width:0%"></div></div><span class="ci-stat"><strong>0</strong> / 1 RA con SA programadas</span><span class="ci-sep">·</span><span class="ci-stat"><strong>4%</strong> peso en el ciclo</span><span class="ci-sep">·</span><span class="ci-stat">Módulos: <strong>0059</strong></span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-empty">Sin programación</span></div>
@@ -3312,7 +3337,8 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-j&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP j</span><span class="comp-desc">Adaptarse a las nuevas situaciones laborales manteniendo actualizados los conocimientos del entorno profesional.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP j</span>
+              <span class="cncp-badge" style="background:#F9FAFB;color:#6B7280;border:1px solid #E5E7EB">Competencia transversal</span><span class="comp-desc">Adaptarse a las nuevas situaciones laborales manteniendo actualizados los conocimientos del entorno profesional.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-partial" style="width:50%"></div></div><span class="ci-stat"><strong>Transversal</strong> — trabajada en múltiples módulos</span><span class="ci-sep">·</span><span class="ci-stat"><strong>4%</strong> peso</span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-partial">Transversal</span></div>
@@ -3324,7 +3350,8 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-k&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP k</span><span class="comp-desc">Resolver situaciones y problemas con iniciativa y autonomía en el ámbito de su competencia.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP k</span>
+              <span class="cncp-badge" style="background:#F9FAFB;color:#6B7280;border:1px solid #E5E7EB">Competencia transversal</span><span class="comp-desc">Resolver situaciones y problemas con iniciativa y autonomía en el ámbito de su competencia.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-partial" style="width:50%"></div></div><span class="ci-stat"><strong>Transversal</strong> — trabajada en múltiples módulos</span><span class="ci-sep">·</span><span class="ci-stat"><strong>4%</strong> peso</span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-partial">Transversal</span></div>
@@ -3336,7 +3363,8 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-l&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP l</span><span class="comp-desc">Organizar y coordinar equipos de trabajo con responsabilidad asumiendo el liderazgo cuando sea necesario.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP l</span>
+              <span class="cncp-badge" style="background:#F9FAFB;color:#6B7280;border:1px solid #E5E7EB">Competencia transversal</span><span class="comp-desc">Organizar y coordinar equipos de trabajo con responsabilidad asumiendo el liderazgo cuando sea necesario.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-partial" style="width:50%"></div></div><span class="ci-stat"><strong>Transversal</strong> — trabajada en múltiples módulos</span><span class="ci-sep">·</span><span class="ci-stat"><strong>4%</strong> peso</span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-partial">Transversal</span></div>
@@ -3348,7 +3376,8 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-m&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP m</span><span class="comp-desc">Comunicarse con iguales, superiores y personas bajo su responsabilidad utilizando vías eficaces de comunicación.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP m</span>
+              <span class="cncp-badge" style="background:#F9FAFB;color:#6B7280;border:1px solid #E5E7EB">Competencia transversal</span><span class="comp-desc">Comunicarse con iguales, superiores y personas bajo su responsabilidad utilizando vías eficaces de comunicación.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-partial" style="width:50%"></div></div><span class="ci-stat"><strong>Transversal</strong> — trabajada en múltiples módulos</span><span class="ci-sep">·</span><span class="ci-stat"><strong>4%</strong> peso</span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-partial">Transversal</span></div>
@@ -3360,7 +3389,8 @@ a{text-decoration:none;color:inherit}
         <div class="comp-header" onclick="toggleComp(&#39;cp-n&#39;)">
           <div class="comp-chevron">▶</div>
           <div class="comp-left">
-            <div class="comp-title-row"><span class="comp-code-badge">CP n</span><span class="comp-desc">Generar entornos seguros supervisando y aplicando los procedimientos de prevención de riesgos laborales.</span></div>
+            <div class="comp-title-row"><span class="comp-code-badge">CP n</span>
+              <span class="cncp-badge" style="background:#F9FAFB;color:#6B7280;border:1px solid #E5E7EB">Competencia transversal</span><span class="comp-desc">Generar entornos seguros supervisando y aplicando los procedimientos de prevención de riesgos laborales.</span></div>
             <div class="comp-indicators"><div class="ci-bar-wrap"><div class="ci-bar-fill ci-bar-partial" style="width:50%"></div></div><span class="ci-stat"><strong>Transversal</strong> — trabajada en múltiples módulos</span><span class="ci-sep">·</span><span class="ci-stat"><strong>4%</strong> peso</span></div>
           </div>
           <div class="comp-status"><span class="cs-pill cs-partial">Transversal</span></div>
