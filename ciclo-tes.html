@@ -727,7 +727,7 @@ a{text-decoration:none;color:inherit}
       <div class="main-tab" onclick="switchMainTab(&#39;generales&#39;,this)">Datos generales</div>
       <div class="main-tab" onclick="switchMainTab(&#39;modulos&#39;,this)">Módulos <span class="tc">11</span></div>
       <div class="main-tab active" onclick="switchMainTab(&#39;competencias&#39;,this)">Competencias <span class="tc">14</span></div>
-      <div class="main-tab" onclick="switchMainTab(&#39;fct&#39;,this)">FCT</div>
+      <div class="main-tab" onclick="switchMainTab(&#39;fct&#39;,this)">Formación en empresa</div>
       <div class="main-tab" onclick="switchMainTab(&#39;intermodular&#39;,this)">Proyecto Intermodular</div>
       <div class="main-tab" onclick="switchMainTab(&#39;espacios&#39;,this)">Espacios y especialidades</div>
     </div>
@@ -815,66 +815,325 @@ a{text-decoration:none;color:inherit}
           <div id="norm-0056" class="mod-tab-panel active">
             <div class="norm-zone">
 
-              <div class="ra-block" id="ra-0056-1">
+              <div class="alert info" style="font-size:12px;margin-bottom:12px">
+                <span class="alert-icon">ℹ</span>
+                <span>Para cada criterio de evaluación puedes indicar si se evalúa <strong>solo en el centro</strong> o de forma <strong>conjunta centro-empresa</strong>. Los CE marcados como conjuntos aparecerán automáticamente en la subpestaña de evaluación de <strong>Formación en empresa</strong> con el reparto de pesos definido aquí.</span>
+              </div>
+
+              <!-- RA 1 -->
+              <div class="ra-block open" id="ra-0056-1">
                 <div class="ra-header" onclick="toggleRA(&#39;ra-0056-1&#39;)">
                   <div class="ra-chevron">▶</div>
-                  <div class="ra-num">1</div>
+                  <div class="ra-num" style="width:32px;font-size:10px">RA 1</div>
                   <div class="ra-text">Realiza operaciones de apoyo al equipo de salud en el soporte vital avanzado relacionándolas con las patologías de emergencia.</div>
                   <span class="origen-badge ob-rd">RD Estatal</span>
                   <div class="ra-peso">Peso: <input value="40" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
                   <div class="ce-zone">
-                    <div class="zone-label">Criterios de evaluación</div>
-                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Se ha identificado el material de emergencias.</div><div class="ce-peso"><input value="8"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Se ha descrito la utilidad, funcionamiento y el manejo de los equipos electromédicos.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Se han clasificado los equipos y el material según las diferentes situaciones de emergencia.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">d</div><div class="ce-text">Se ha seleccionado y preparado el material y equipos de monitorización.</div><div class="ce-peso"><input value="12"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">e</div><div class="ce-text">Se ha colaborado en el aislamiento de la vía aérea.</div><div class="ce-peso"><input value="12"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">f</div><div class="ce-text">Se ha seleccionado el material necesario para la ventilación mecánica.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">g</div><div class="ce-text">Se ha determinado la saturación de oxígeno del paciente por pulsioximetría.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">h</div><div class="ce-text">Se ha colaborado en la canalización de la vía venosa.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">i</div><div class="ce-text">Se ha seleccionado y preparado el material para el registro electrocardiográfico.</div><div class="ce-peso"><input value="10"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">j</div><div class="ce-text">Se ha apoyado al médico o enfermero en las técnicas de SVA en pediatría.</div><div class="ce-peso"><input value="8"><span>%</span></div></div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:4px 0 6px;border-bottom:1px solid var(--border);margin-bottom:4px">
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft)">CE</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft)">Criterio de evaluación</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft);text-align:center">Peso</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft);text-align:center">Evaluación en empresa</div>
+                    </div>
+
+                    <!-- CE a — Solo centro -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">a</div>
+                      <div class="ce-text">Se ha identificado el material de emergencias.</div>
+                      <div class="ce-peso"><input value="8"><span>%</span></div>
+                      <div>
+                        <select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)" onchange="toggleEmpresaFields(this,'ce-empresa-a-1')">
+                          <option value="centro" selected>Solo centro</option>
+                          <option value="conjunta">Conjunta</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- CE b — Conjunta (ejemplo preconfigurado) -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">b</div>
+                      <div>
+                        <div class="ce-text">Se ha descrito la utilidad, funcionamiento y el manejo de los equipos electromédicos.</div>
+                        <div id="ce-empresa-b-1" style="margin-top:6px;padding:6px 8px;background:rgba(155,28,28,0.04);border-radius:5px;border:1px solid rgba(155,28,28,0.15)">
+                          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                            <span style="font-size:11px;color:var(--text-soft)">Centro</span>
+                            <input type="number" value="60" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">% · Empresa</span>
+                            <input type="number" value="40" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">%</span>
+                          </div>
+                          <div style="display:flex;align-items:center;gap:6px">
+                            <span style="font-size:11px;color:var(--text-soft)">Nivel dominio:</span>
+                            <select style="font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;background:var(--white);flex:1">
+                              <option>— Sin especificar —</option>
+                              <optgroup label="Cognitiva (Bloom)"><option>Recordar</option><option>Comprender</option><option>Aplicar</option><option selected>Analizar</option><option>Evaluar</option><option>Crear</option></optgroup>
+                              <optgroup label="Procedimental (FP)"><option>Observación</option><option>Ejecución supervisada</option><option>Ejecución autónoma</option><option>Transferencia</option></optgroup>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ce-peso"><input value="10"><span>%</span></div>
+                      <div>
+                        <select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--garnet);font-weight:600" onchange="toggleEmpresaFields(this,'ce-empresa-b-1')">
+                          <option value="centro">Solo centro</option>
+                          <option value="conjunta" selected>Conjunta</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- CE c — Solo centro -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">c</div>
+                      <div class="ce-text">Se han clasificado los equipos y el material según las diferentes situaciones de emergencia.</div>
+                      <div class="ce-peso"><input value="10"><span>%</span></div>
+                      <div>
+                        <select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)" onchange="toggleEmpresaFields(this,'ce-empresa-c-1')">
+                          <option value="centro" selected>Solo centro</option>
+                          <option value="conjunta">Conjunta</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- CE d — Solo centro -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">d</div>
+                      <div class="ce-text">Se ha seleccionado y preparado el material y equipos de monitorización.</div>
+                      <div class="ce-peso"><input value="12"><span>%</span></div>
+                      <div>
+                        <select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)" onchange="toggleEmpresaFields(this,'ce-empresa-d-1')">
+                          <option value="centro" selected>Solo centro</option>
+                          <option value="conjunta">Conjunta</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- CE e — Conjunta (ejemplo preconfigurado) -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">e</div>
+                      <div>
+                        <div class="ce-text">Se ha colaborado en el aislamiento de la vía aérea.</div>
+                        <div id="ce-empresa-e-1" style="margin-top:6px;padding:6px 8px;background:rgba(155,28,28,0.04);border-radius:5px;border:1px solid rgba(155,28,28,0.15)">
+                          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                            <span style="font-size:11px;color:var(--text-soft)">Centro</span>
+                            <input type="number" value="50" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">% · Empresa</span>
+                            <input type="number" value="50" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">%</span>
+                          </div>
+                          <div style="display:flex;align-items:center;gap:6px">
+                            <span style="font-size:11px;color:var(--text-soft)">Nivel dominio:</span>
+                            <select style="font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;background:var(--white);flex:1">
+                              <option>— Sin especificar —</option>
+                              <optgroup label="Cognitiva (Bloom)"><option>Recordar</option><option>Comprender</option><option>Aplicar</option><option>Analizar</option><option>Evaluar</option><option>Crear</option></optgroup>
+                              <optgroup label="Procedimental (FP)"><option>Observación</option><option>Ejecución supervisada</option><option selected>Ejecución autónoma</option><option>Transferencia</option></optgroup>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ce-peso"><input value="12"><span>%</span></div>
+                      <div>
+                        <select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--garnet);font-weight:600" onchange="toggleEmpresaFields(this,'ce-empresa-e-1')">
+                          <option value="centro">Solo centro</option>
+                          <option value="conjunta" selected>Conjunta</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- CE f, g, h, i, j — Solo centro -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">f</div>
+                      <div class="ce-text">Se ha seleccionado el material necesario para la ventilación mecánica.</div>
+                      <div class="ce-peso"><input value="10"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">g</div>
+                      <div class="ce-text">Se ha determinado la saturación de oxígeno del paciente por pulsioximetría.</div>
+                      <div class="ce-peso"><input value="10"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">h</div>
+                      <div class="ce-text">Se ha colaborado en la canalización de la vía venosa.</div>
+                      <div class="ce-peso"><input value="10"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">i</div>
+                      <div class="ce-text">Se ha seleccionado y preparado el material para el registro electrocardiográfico.</div>
+                      <div class="ce-peso"><input value="10"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;align-items:start">
+                      <div class="ce-letra">j</div>
+                      <div class="ce-text">Se ha apoyado al médico o enfermero en las técnicas de SVA en pediatría.</div>
+                      <div class="ce-peso"><input value="8"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
+
                     <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-ce-im')">+ Añadir criterio de evaluación</button></div>
                   </div>
                 </div>
               </div>
 
+              <!-- RA 2 -->
               <div class="ra-block" id="ra-0056-2">
                 <div class="ra-header" onclick="toggleRA(&#39;ra-0056-2&#39;)">
                   <div class="ra-chevron">▶</div>
-                  <div class="ra-num">2</div>
+                  <div class="ra-num" style="width:32px;font-size:10px">RA 2</div>
                   <div class="ra-text">Atiende el parto inminente extrahospitalario aplicando los protocolos de actuación establecidos.</div>
                   <span class="origen-badge ob-rd">RD Estatal</span>
                   <div class="ra-peso">Peso: <input value="30" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
                   <div class="ce-zone">
-                    <div class="zone-label">Criterios de evaluación</div>
-                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Se han descrito las fases del parto y las complicaciones más frecuentes.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Se ha preparado el material necesario para la atención del parto.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Se ha aplicado el protocolo de atención al recién nacido.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">d</div><div class="ce-text">Se ha gestionado el traslado materno-neonatal al centro hospitalario.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:4px 0 6px;border-bottom:1px solid var(--border);margin-bottom:4px">
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft)">CE</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft)">Criterio de evaluación</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft);text-align:center">Peso</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft);text-align:center">Evaluación en empresa</div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">a</div>
+                      <div class="ce-text">Se han descrito las fases del parto y las complicaciones más frecuentes.</div>
+                      <div class="ce-peso"><input value="25"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">b</div>
+                      <div class="ce-text">Se ha preparado el material necesario para la atención del parto.</div>
+                      <div class="ce-peso"><input value="25"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
+                    <!-- CE c — Conjunta RA2 -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">c</div>
+                      <div>
+                        <div class="ce-text">Se ha aplicado el protocolo de atención al recién nacido.</div>
+                        <div id="ce-empresa-c-2" style="margin-top:6px;padding:6px 8px;background:rgba(155,28,28,0.04);border-radius:5px;border:1px solid rgba(155,28,28,0.15)">
+                          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                            <span style="font-size:11px;color:var(--text-soft)">Centro</span>
+                            <input type="number" value="40" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">% · Empresa</span>
+                            <input type="number" value="60" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">%</span>
+                          </div>
+                          <div style="display:flex;align-items:center;gap:6px">
+                            <span style="font-size:11px;color:var(--text-soft)">Nivel dominio:</span>
+                            <select style="font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;background:var(--white);flex:1">
+                              <option>— Sin especificar —</option>
+                              <optgroup label="Cognitiva (Bloom)"><option>Recordar</option><option>Comprender</option><option>Aplicar</option><option>Analizar</option><option>Evaluar</option><option>Crear</option></optgroup>
+                              <optgroup label="Procedimental (FP)"><option>Observación</option><option>Ejecución supervisada</option><option>Ejecución autónoma</option><option selected>Transferencia</option></optgroup>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ce-peso"><input value="25"><span>%</span></div>
+                      <div>
+                        <select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--garnet);font-weight:600" onchange="toggleEmpresaFields(this,'ce-empresa-c-2')">
+                          <option value="centro">Solo centro</option>
+                          <option value="conjunta" selected>Conjunta</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;align-items:start">
+                      <div class="ce-letra">d</div>
+                      <div class="ce-text">Se ha gestionado el traslado materno-neonatal al centro hospitalario.</div>
+                      <div class="ce-peso"><input value="25"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
                     <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-ce-im')">+ Añadir criterio de evaluación</button></div>
                   </div>
                 </div>
               </div>
 
+              <!-- RA 3 -->
               <div class="ra-block" id="ra-0056-3">
                 <div class="ra-header" onclick="toggleRA(&#39;ra-0056-3&#39;)">
                   <div class="ra-chevron">▶</div>
-                  <div class="ra-num">3</div>
+                  <div class="ra-num" style="width:32px;font-size:10px">RA 3</div>
                   <div class="ra-text">Aplica técnicas de inmovilización y traslado a pacientes con lesiones traumáticas especiales adaptando el protocolo a la situación.</div>
                   <span class="origen-badge ob-ca">CA Andalucía</span>
                   <div class="ra-peso">Peso: <input value="30" onclick="event.stopPropagation()"> %</div>
                 </div>
                 <div class="ra-body">
                   <div class="ce-zone">
-                    <div class="zone-label">Criterios de evaluación</div>
-                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Se han identificado las lesiones traumáticas que requieren atención especial.</div><div class="ce-peso"><input value="25"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Se han aplicado técnicas de inmovilización adaptadas al tipo de lesión.</div><div class="ce-peso"><input value="35"><span>%</span></div></div>
-                    <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Se ha realizado el traslado respetando los protocolos de seguridad del paciente.</div><div class="ce-peso"><input value="40"><span>%</span></div></div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:4px 0 6px;border-bottom:1px solid var(--border);margin-bottom:4px">
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft)">CE</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft)">Criterio de evaluación</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft);text-align:center">Peso</div>
+                      <div style="font-size:10px;font-weight:600;color:var(--text-soft);text-align:center">Evaluación en empresa</div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra">a</div>
+                      <div class="ce-text">Se han identificado las lesiones traumáticas que requieren atención especial.</div>
+                      <div class="ce-peso"><input value="25"><span>%</span></div>
+                      <div><select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--text-dark)"><option value="centro" selected>Solo centro</option><option value="conjunta">Conjunta</option></select></div>
+                    </div>
+                    <!-- CE b — Conjunta RA3 -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);align-items:start">
+                      <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">b</div>
+                      <div>
+                        <div class="ce-text">Se han aplicado técnicas de inmovilización adaptadas al tipo de lesión.</div>
+                        <div id="ce-empresa-b-3" style="margin-top:6px;padding:6px 8px;background:rgba(155,28,28,0.04);border-radius:5px;border:1px solid rgba(155,28,28,0.15)">
+                          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                            <span style="font-size:11px;color:var(--text-soft)">Centro</span>
+                            <input type="number" value="50" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">% · Empresa</span>
+                            <input type="number" value="50" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">%</span>
+                          </div>
+                          <div style="display:flex;align-items:center;gap:6px">
+                            <span style="font-size:11px;color:var(--text-soft)">Nivel dominio:</span>
+                            <select style="font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;background:var(--white);flex:1">
+                              <option>— Sin especificar —</option>
+                              <optgroup label="Cognitiva (Bloom)"><option>Recordar</option><option>Comprender</option><option>Aplicar</option><option>Analizar</option><option>Evaluar</option><option>Crear</option></optgroup>
+                              <optgroup label="Procedimental (FP)"><option>Observación</option><option>Ejecución supervisada</option><option selected>Ejecución autónoma</option><option>Transferencia</option></optgroup>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ce-peso"><input value="35"><span>%</span></div>
+                      <div>
+                        <select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--garnet);font-weight:600" onchange="toggleEmpresaFields(this,'ce-empresa-b-3')">
+                          <option value="centro">Solo centro</option>
+                          <option value="conjunta" selected>Conjunta</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- CE c — Conjunta RA3 -->
+                    <div style="display:grid;grid-template-columns:20px 1fr 60px 160px;gap:6px;padding:6px 0;align-items:start">
+                      <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet)">c</div>
+                      <div>
+                        <div class="ce-text">Se ha realizado el traslado respetando los protocolos de seguridad del paciente.</div>
+                        <div id="ce-empresa-c-3" style="margin-top:6px;padding:6px 8px;background:rgba(155,28,28,0.04);border-radius:5px;border:1px solid rgba(155,28,28,0.15)">
+                          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                            <span style="font-size:11px;color:var(--text-soft)">Centro</span>
+                            <input type="number" value="40" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">% · Empresa</span>
+                            <input type="number" value="60" style="width:36px;font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;text-align:center">
+                            <span style="font-size:11px;color:var(--text-soft)">%</span>
+                          </div>
+                          <div style="display:flex;align-items:center;gap:6px">
+                            <span style="font-size:11px;color:var(--text-soft)">Nivel dominio:</span>
+                            <select style="font-size:11px;border:1px solid var(--border);border-radius:3px;padding:2px 4px;background:var(--white);flex:1">
+                              <option>— Sin especificar —</option>
+                              <optgroup label="Cognitiva (Bloom)"><option>Recordar</option><option>Comprender</option><option>Aplicar</option><option>Analizar</option><option>Evaluar</option><option>Crear</option></optgroup>
+                              <optgroup label="Procedimental (FP)"><option>Observación</option><option>Ejecución supervisada</option><option>Ejecución autónoma</option><option selected>Transferencia</option></optgroup>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ce-peso"><input value="40"><span>%</span></div>
+                      <div>
+                        <select class="ce-empresa-select" style="font-size:11px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;width:100%;background:var(--white);color:var(--garnet);font-weight:600" onchange="toggleEmpresaFields(this,'ce-empresa-c-3')">
+                          <option value="centro">Solo centro</option>
+                          <option value="conjunta" selected>Conjunta</option>
+                        </select>
+                      </div>
+                    </div>
                     <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-ce-im')">+ Añadir criterio de evaluación</button></div>
                   </div>
                 </div>
@@ -1758,159 +2017,183 @@ a{text-decoration:none;color:inherit}
           <!-- COMPETENCIAS A VERIFICAR EN EMPRESA -->
           <div id="cee-fct" class="mod-tab-panel">
             <div class="norm-zone">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-                <div>
-                  <div style="font-size:13px;font-weight:600;color:var(--text-dark)">Competencias a verificar en empresa (CEE)</div>
-                  <div style="font-size:11px;color:var(--text-soft);margin-top:2px">Derivan de las competencias profesionales del título. El tutor de empresa las observa y valora durante la Formación en empresa.</div>
-                </div>
-                <button class="btn btn-secondary" style="font-size:12px" onclick="openModal('modal-nueva-cee')">+ Añadir competencia</button>
+              <div class="alert info" style="font-size:12px;margin-bottom:14px">
+                <span class="alert-icon">ℹ</span>
+                <div>Vista calculada de los criterios de evaluación marcados como <strong>Conjunta centro-empresa</strong> en la Estructura normativa de cada módulo. Para cada CE conjunto se define el instrumento de evaluación que usará el tutor de empresa y los indicadores observables en el entorno productivo real.</div>
               </div>
 
-              <!-- CEE 1 -->
-              <div class="ra-block" id="cee-1">
-                <div class="ra-header" onclick="toggleRA('cee-1')">
-                  <div class="ra-chevron">▶</div>
-                  <div class="ra-num" style="background:var(--garnet-pale);color:var(--garnet)">CEE1</div>
-                  <div class="ra-text">Realiza maniobras de soporte vital básico y avanzado siguiendo los protocolos del servicio de emergencias de la empresa.</div>
-                  <span class="origen-badge ob-rd">RD Estatal</span>
-                  <div class="ra-peso" style="min-width:80px">Peso: <input value="25" onclick="event.stopPropagation()"> %</div>
+              <!-- RA 1 — CE conjuntos -->
+              <div style="margin-bottom:12px">
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--garnet-pale);border-radius:6px;margin-bottom:8px">
+                  <div class="ra-num" style="width:32px;font-size:10px;background:var(--garnet);color:white">RA 1</div>
+                  <div style="font-size:12.5px;font-weight:600;color:var(--garnet);flex:1">Realiza operaciones de apoyo al equipo de salud en el SVA</div>
+                  <span style="font-size:11px;color:var(--garnet)">Peso módulo: 40%</span>
                 </div>
-                <div class="ra-body">
-                  <div class="ce-zone">
-                    <div class="zone-label">Vinculación con competencias profesionales del título</div>
-                    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
-                      <span class="origen-badge ob-rd">CP1 · Atender a múltiples víctimas</span>
-                      <span class="origen-badge ob-rd">CP2 · SVB y SVA</span>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;padding:7px 10px;background:var(--bg);border-radius:6px;border:1px solid var(--border)">
-                      <div style="font-size:11.5px;color:var(--text-soft);flex:1">
-                        <span style="font-weight:600;color:var(--text-dark)">Nivel de dominio esperado</span>
-                        <span style="margin-left:4px;color:var(--text-soft)">(orientativo · opcional)</span>
+
+                <!-- CE b conjunto RA1 -->
+                <div class="ra-block open" id="cee-ra1-b" style="margin-left:16px;margin-bottom:6px">
+                  <div class="ra-header" onclick="toggleRA('cee-ra1-b')">
+                    <div class="ra-chevron">▶</div>
+                    <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet);margin:0 8px">b</div>
+                    <div class="ra-text">Se ha descrito la utilidad, funcionamiento y el manejo de los equipos electromédicos.</div>
+                    <span style="font-size:11px;color:var(--text-soft);white-space:nowrap;margin-right:8px">Centro 60% · Empresa 40%</span>
+                    <span class="origen-badge" style="background:#EEF2FF;color:#4338CA;border-color:#C7D2FE;white-space:nowrap">Analizar</span>
+                    <div class="ra-peso" style="min-width:60px">CE: <strong>10%</strong></div>
+                  </div>
+                  <div class="ra-body">
+                    <div class="ce-zone">
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                        <div class="zone-label" style="margin-bottom:0">Instrumento de evaluación en empresa</div>
+                        <select style="font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white)">
+                          <option selected>Rúbrica de observación directa</option>
+                          <option>Lista de cotejo</option>
+                          <option>Informe del tutor de empresa</option>
+                          <option>Autoevaluación del alumno</option>
+                        </select>
                       </div>
-                      <select style="font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white);color:var(--text-dark)" onclick="event.stopPropagation()">
-                        <option value="">— Sin especificar —</option>
-                        <optgroup label="Dimensión cognitiva (Bloom)">
-                          <option>Recordar</option>
-                          <option>Comprender</option>
-                          <option>Aplicar</option>
-                          <option selected>Analizar</option>
-                          <option>Evaluar</option>
-                          <option>Crear</option>
-                        </optgroup>
-                        <optgroup label="Dimensión procedimental (FP)">
-                          <option>Observación</option>
-                          <option>Ejecución supervisada</option>
-                          <option>Ejecución autónoma</option>
-                          <option>Transferencia a situaciones nuevas</option>
-                        </optgroup>
-                      </select>
+                      <div class="zone-label">Indicadores observables en empresa</div>
+                      <div class="ce-row"><div class="ce-letra">1</div><div class="ce-text">Identifica y maneja correctamente el desfibrilador en intervención real o simulada.</div></div>
+                      <div class="ce-row"><div class="ce-letra">2</div><div class="ce-text">Prepara y comprueba el material electromédico antes de cada intervención.</div></div>
+                      <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
                     </div>
-                    <div class="zone-label">Indicadores de verificación</div>
-                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Identifica correctamente los signos de parada cardiorrespiratoria.</div></div>
-                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Aplica las maniobras de RCP con calidad técnica suficiente en situación real.</div></div>
-                    <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Maneja el DEA/DESA de forma autónoma y segura.</div></div>
-                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
+                  </div>
+                </div>
+
+                <!-- CE e conjunto RA1 -->
+                <div class="ra-block" id="cee-ra1-e" style="margin-left:16px">
+                  <div class="ra-header" onclick="toggleRA('cee-ra1-e')">
+                    <div class="ra-chevron">▶</div>
+                    <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet);margin:0 8px">e</div>
+                    <div class="ra-text">Se ha colaborado en el aislamiento de la vía aérea.</div>
+                    <span style="font-size:11px;color:var(--text-soft);white-space:nowrap;margin-right:8px">Centro 50% · Empresa 50%</span>
+                    <span class="origen-badge" style="background:#F0FDF4;color:#166534;border-color:#BBF7D0;white-space:nowrap">Ejecución autónoma</span>
+                    <div class="ra-peso" style="min-width:60px">CE: <strong>12%</strong></div>
+                  </div>
+                  <div class="ra-body">
+                    <div class="ce-zone">
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                        <div class="zone-label" style="margin-bottom:0">Instrumento de evaluación en empresa</div>
+                        <select style="font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white)">
+                          <option>Rúbrica de observación directa</option>
+                          <option selected>Lista de cotejo</option>
+                          <option>Informe del tutor de empresa</option>
+                        </select>
+                      </div>
+                      <div class="zone-label">Indicadores observables en empresa</div>
+                      <div class="ce-row"><div class="ce-letra">1</div><div class="ce-text">Colabora eficazmente en la colocación de dispositivos de aislamiento de vía aérea.</div></div>
+                      <div class="ce-row"><div class="ce-letra">2</div><div class="ce-text">Actúa con autonomía y seguridad en la asistencia respiratoria al paciente.</div></div>
+                      <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <!-- CEE 2 -->
-              <div class="ra-block" id="cee-2">
-                <div class="ra-header" onclick="toggleRA('cee-2')">
-                  <div class="ra-chevron">▶</div>
-                  <div class="ra-num" style="background:var(--garnet-pale);color:var(--garnet)">CEE2</div>
-                  <div class="ra-text">Conduce el vehículo de transporte sanitario con seguridad y aplica los protocolos de movilización y traslado del paciente.</div>
-                  <span class="origen-badge ob-rd">RD Estatal</span>
-                  <div class="ra-peso" style="min-width:80px">Peso: <input value="25" onclick="event.stopPropagation()"> %</div>
+              <!-- RA 2 — CE conjuntos -->
+              <div style="margin-bottom:12px">
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--garnet-pale);border-radius:6px;margin-bottom:8px">
+                  <div class="ra-num" style="width:32px;font-size:10px;background:var(--garnet);color:white">RA 2</div>
+                  <div style="font-size:12.5px;font-weight:600;color:var(--garnet);flex:1">Atiende el parto inminente extrahospitalario</div>
+                  <span style="font-size:11px;color:var(--garnet)">Peso módulo: 30%</span>
                 </div>
-                <div class="ra-body">
-                  <div class="ce-zone">
-                    <div class="zone-label">Vinculación con competencias profesionales del título</div>
-                    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
-                      <span class="origen-badge ob-rd">CP4 · Conducción vehículo sanitario</span>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;padding:7px 10px;background:var(--bg);border-radius:6px;border:1px solid var(--border)">
-                      <div style="font-size:11.5px;color:var(--text-soft);flex:1">
-                        <span style="font-weight:600;color:var(--text-dark)">Nivel de dominio esperado</span>
-                        <span style="margin-left:4px;color:var(--text-soft)">(orientativo · opcional)</span>
+
+                <!-- CE c conjunto RA2 -->
+                <div class="ra-block" id="cee-ra2-c" style="margin-left:16px">
+                  <div class="ra-header" onclick="toggleRA('cee-ra2-c')">
+                    <div class="ra-chevron">▶</div>
+                    <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet);margin:0 8px">c</div>
+                    <div class="ra-text">Se ha aplicado el protocolo de atención al recién nacido.</div>
+                    <span style="font-size:11px;color:var(--text-soft);white-space:nowrap;margin-right:8px">Centro 40% · Empresa 60%</span>
+                    <span class="origen-badge" style="background:#F0FDF4;color:#166534;border-color:#BBF7D0;white-space:nowrap">Transferencia</span>
+                    <div class="ra-peso" style="min-width:60px">CE: <strong>25%</strong></div>
+                  </div>
+                  <div class="ra-body">
+                    <div class="ce-zone">
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                        <div class="zone-label" style="margin-bottom:0">Instrumento de evaluación en empresa</div>
+                        <select style="font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white)">
+                          <option selected>Rúbrica de observación directa</option>
+                          <option>Lista de cotejo</option>
+                          <option>Informe del tutor de empresa</option>
+                        </select>
                       </div>
-                      <select style="font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white);color:var(--text-dark)" onclick="event.stopPropagation()">
-                        <option value="">— Sin especificar —</option>
-                        <optgroup label="Dimensión cognitiva (Bloom)">
-                          <option>Recordar</option>
-                          <option>Comprender</option>
-                          <option>Aplicar</option>
-                          <option>Analizar</option>
-                          <option>Evaluar</option>
-                          <option>Crear</option>
-                        </optgroup>
-                        <optgroup label="Dimensión procedimental (FP)">
-                          <option>Observación</option>
-                          <option>Ejecución supervisada</option>
-                          <option selected>Ejecución autónoma</option>
-                          <option>Transferencia a situaciones nuevas</option>
-                        </optgroup>
-                      </select>
+                      <div class="zone-label">Indicadores observables en empresa</div>
+                      <div class="ce-row"><div class="ce-letra">1</div><div class="ce-text">Aplica el protocolo neonatal adaptándolo a las condiciones reales del entorno extrahospitalario.</div></div>
+                      <div class="ce-row"><div class="ce-letra">2</div><div class="ce-text">Actúa con calma y eficacia ante situaciones de urgencia neonatal.</div></div>
+                      <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
                     </div>
-                    <div class="zone-label">Indicadores de verificación</div>
-                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Conduce el vehículo respetando las normas de circulación y los protocolos del servicio.</div></div>
-                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Realiza la movilización del paciente con las técnicas adecuadas y sin riesgo.</div></div>
-                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
                   </div>
                 </div>
               </div>
 
-              <!-- CEE 3 -->
-              <div class="ra-block" id="cee-3">
-                <div class="ra-header" onclick="toggleRA('cee-3')">
-                  <div class="ra-chevron">▶</div>
-                  <div class="ra-num" style="background:var(--garnet-pale);color:var(--garnet)">CEE3</div>
-                  <div class="ra-text">Se integra en el equipo de trabajo del servicio de emergencias actuando con profesionalidad, iniciativa y responsabilidad.</div>
-                  <span class="origen-badge ob-rd">RD Estatal</span>
-                  <div class="ra-peso" style="min-width:80px">Peso: <input value="20" onclick="event.stopPropagation()"> %</div>
+              <!-- RA 3 — CE conjuntos -->
+              <div style="margin-bottom:12px">
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--garnet-pale);border-radius:6px;margin-bottom:8px">
+                  <div class="ra-num" style="width:32px;font-size:10px;background:var(--garnet);color:white">RA 3</div>
+                  <div style="font-size:12.5px;font-weight:600;color:var(--garnet);flex:1">Aplica técnicas de inmovilización y traslado</div>
+                  <span style="font-size:11px;color:var(--garnet)">Peso módulo: 30%</span>
                 </div>
-                <div class="ra-body">
-                  <div class="ce-zone">
-                    <div class="zone-label">Vinculación con competencias profesionales del título</div>
-                    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
-                      <span class="origen-badge ob-rd">CP5 · Coordinación con servicios de emergencia</span>
-                      <span class="origen-badge ob-rd">CP6 · Logística sanitaria</span>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;padding:7px 10px;background:var(--bg);border-radius:6px;border:1px solid var(--border)">
-                      <div style="font-size:11.5px;color:var(--text-soft);flex:1">
-                        <span style="font-weight:600;color:var(--text-dark)">Nivel de dominio esperado</span>
-                        <span style="margin-left:4px;color:var(--text-soft)">(orientativo · opcional)</span>
+
+                <!-- CE b conjunto RA3 -->
+                <div class="ra-block" id="cee-ra3-b" style="margin-left:16px;margin-bottom:6px">
+                  <div class="ra-header" onclick="toggleRA('cee-ra3-b')">
+                    <div class="ra-chevron">▶</div>
+                    <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet);margin:0 8px">b</div>
+                    <div class="ra-text">Se han aplicado técnicas de inmovilización adaptadas al tipo de lesión.</div>
+                    <span style="font-size:11px;color:var(--text-soft);white-space:nowrap;margin-right:8px">Centro 50% · Empresa 50%</span>
+                    <span class="origen-badge" style="background:#F0FDF4;color:#166534;border-color:#BBF7D0;white-space:nowrap">Ejecución autónoma</span>
+                    <div class="ra-peso" style="min-width:60px">CE: <strong>35%</strong></div>
+                  </div>
+                  <div class="ra-body">
+                    <div class="ce-zone">
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                        <div class="zone-label" style="margin-bottom:0">Instrumento de evaluación en empresa</div>
+                        <select style="font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white)">
+                          <option selected>Lista de cotejo</option>
+                          <option>Rúbrica de observación directa</option>
+                          <option>Informe del tutor de empresa</option>
+                        </select>
                       </div>
-                      <select style="font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white);color:var(--text-dark)" onclick="event.stopPropagation()">
-                        <option value="">— Sin especificar —</option>
-                        <optgroup label="Dimensión cognitiva (Bloom)">
-                          <option>Recordar</option>
-                          <option>Comprender</option>
-                          <option>Aplicar</option>
-                          <option>Analizar</option>
-                          <option selected>Evaluar</option>
-                          <option>Crear</option>
-                        </optgroup>
-                        <optgroup label="Dimensión procedimental (FP)">
-                          <option>Observación</option>
-                          <option>Ejecución supervisada</option>
-                          <option>Ejecución autónoma</option>
-                          <option>Transferencia a situaciones nuevas</option>
-                        </optgroup>
-                      </select>
+                      <div class="zone-label">Indicadores observables en empresa</div>
+                      <div class="ce-row"><div class="ce-letra">1</div><div class="ce-text">Selecciona y aplica el dispositivo de inmovilización adecuado a cada tipo de lesión en intervención real.</div></div>
+                      <div class="ce-row"><div class="ce-letra">2</div><div class="ce-text">Ejecuta la técnica con seguridad y sin riesgo para el paciente.</div></div>
+                      <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
                     </div>
-                    <div class="zone-label">Indicadores de verificación</div>
-                    <div class="ce-row"><div class="ce-letra">a</div><div class="ce-text">Muestra puntualidad, responsabilidad y actitud positiva ante el trabajo.</div></div>
-                    <div class="ce-row"><div class="ce-letra">b</div><div class="ce-text">Se comunica con el equipo de forma clara y respeta la jerarquía del servicio.</div></div>
-                    <div class="ce-row"><div class="ce-letra">c</div><div class="ce-text">Mantiene correctamente el material y el vehículo asignado.</div></div>
-                    <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
+                  </div>
+                </div>
+
+                <!-- CE c conjunto RA3 -->
+                <div class="ra-block" id="cee-ra3-c" style="margin-left:16px">
+                  <div class="ra-header" onclick="toggleRA('cee-ra3-c')">
+                    <div class="ra-chevron">▶</div>
+                    <div class="ce-letra" style="background:var(--garnet-pale);color:var(--garnet);margin:0 8px">c</div>
+                    <div class="ra-text">Se ha realizado el traslado respetando los protocolos de seguridad del paciente.</div>
+                    <span style="font-size:11px;color:var(--text-soft);white-space:nowrap;margin-right:8px">Centro 40% · Empresa 60%</span>
+                    <span class="origen-badge" style="background:#F0FDF4;color:#166534;border-color:#BBF7D0;white-space:nowrap">Transferencia</span>
+                    <div class="ra-peso" style="min-width:60px">CE: <strong>40%</strong></div>
+                  </div>
+                  <div class="ra-body">
+                    <div class="ce-zone">
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                        <div class="zone-label" style="margin-bottom:0">Instrumento de evaluación en empresa</div>
+                        <select style="font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--white)">
+                          <option selected>Rúbrica de observación directa</option>
+                          <option>Lista de cotejo</option>
+                          <option>Informe del tutor de empresa</option>
+                        </select>
+                      </div>
+                      <div class="zone-label">Indicadores observables en empresa</div>
+                      <div class="ce-row"><div class="ce-letra">1</div><div class="ce-text">Realiza el traslado aplicando los protocolos de seguridad en condiciones reales de emergencia.</div></div>
+                      <div class="ce-row"><div class="ce-letra">2</div><div class="ce-text">Comunica al equipo receptor el estado del paciente con precisión y claridad.</div></div>
+                      <div style="padding:6px 0 2px"><button class="btn-ghost" style="font-size:11.5px;color:var(--garnet)" onclick="openModal('modal-nuevo-indicador')">+ Añadir indicador</button></div>
+                    </div>
                   </div>
                 </div>
               </div>
 
+              <!-- Resumen CE conjuntos -->
               <div style="margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:6px;font-size:11.5px;color:var(--text-soft);display:flex;justify-content:space-between;align-items:center">
-                <span>3 competencias · Suma de pesos: <strong style="color:var(--text-dark)">70%</strong> — <span style="color:#F59E0B">pendiente asignar 30% restante</span></span>
-                <button class="btn-add-inline" onclick="openModal('modal-nueva-cee')">+ Añadir competencia</button>
+                <span>5 CE conjuntos en 3 RA · Los CE conjuntos heredan automáticamente sus pesos de la estructura normativa del módulo</span>
+                <span style="color:var(--garnet);font-weight:600">Vista calculada · Solo editable desde Estructura normativa</span>
               </div>
             </div>
           </div><!-- /cee-fct -->
@@ -4552,6 +4835,20 @@ document.addEventListener('keydown',function(e){
     document.querySelectorAll('.modal-overlay.open').forEach(o=>closeModal(o.id));
   }
 });
+
+function toggleEmpresaFields(select, panelId) {
+  var panel = document.getElementById(panelId);
+  if (!panel) return;
+  if (select.value === 'conjunta') {
+    panel.style.display = 'block';
+    select.style.color = 'var(--garnet)';
+    select.style.fontWeight = '600';
+  } else {
+    panel.style.display = 'none';
+    select.style.color = 'var(--text-dark)';
+    select.style.fontWeight = '400';
+  }
+}
 </script>
 
 </body></html>
