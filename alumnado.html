@@ -24,7 +24,7 @@
     --sidebar-w:232px;--topbar-h:52px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;font-size:14px}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh}
   a{text-decoration:none;color:inherit}
 
   /* SIDEBAR */
@@ -58,9 +58,15 @@
   .topbar-sub{font-size:0.75rem;color:var(--text-muted);margin-left:auto}
   .page-body{padding:1.5rem;flex:1}
 
+  /* BREADCRUMB */
+  .breadcrumb{display:flex;align-items:center;gap:6px;margin-bottom:1.25rem;font-size:12px}
+  .bc-item{color:var(--text-muted);cursor:pointer;transition:color 0.12s}
+  .bc-item:hover{color:var(--brand)}
+  .bc-item.active{color:var(--text-main);font-weight:600;cursor:default}
+  .bc-sep{color:var(--border-dark)}
+
   /* CARDS Y LAYOUT */
   .card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm)}
-  .card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main);margin-bottom:0.75rem}
   .btn{display:inline-flex;align-items:center;gap:0.35rem;padding:0.45rem 0.875rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
   .btn-primary{background:var(--brand);color:#fff}
   .btn-primary:hover{background:var(--brand-dark)}
@@ -69,6 +75,8 @@
   .btn-sm{padding:0.3rem 0.65rem;font-size:0.75rem}
   .btn-ghost{background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:0.78rem;font-weight:500;padding:0.25rem 0.5rem;border-radius:4px}
   .btn-ghost:hover{background:var(--bg);color:var(--text-main)}
+  .btn-icon{background:none;border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.5rem;cursor:pointer;color:var(--text-muted);display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:500}
+  .btn-icon:hover{border-color:var(--border-dark);color:var(--text-main)}
 
   /* PILLS Y BADGES */
   .pill{display:inline-flex;align-items:center;font-size:0.7rem;font-weight:600;padding:0.2rem 0.55rem;border-radius:999px;white-space:nowrap}
@@ -78,23 +86,42 @@
   .pill-purple{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)}
   .pill-gray{background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
   .pill-red{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
-  .badge{font-size:0.68rem;font-weight:600;padding:0.15rem 0.5rem;border-radius:3px;white-space:nowrap}
-  .badge-uc{background:#EEF2FF;color:#3730A3;border:1px solid #C7D2FE}
-  .badge-cual{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
-  .badge-cert{background:#FFF7ED;color:#9A3412;border:1px solid #FED7AA}
 
-  /* LISTADO ALUMNOS */
-  .alumno-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s}
+  /* VISTA NIVEL 1: CUADRÍCULA CENTROS */
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+  .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden}
+  .centro-card:hover{border-color:var(--brand);box-shadow:0 4px 16px rgba(155,28,28,0.12);transform:translateY(-1px)}
+  .centro-card-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+  .centro-icon{width:40px;height:40px;border-radius:10px;background:var(--brand-light);border:1px solid rgba(155,28,28,0.15);display:grid;place-items:center;flex-shrink:0;font-size:18px}
+  .centro-nombre{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700;color:var(--text-main);line-height:1.3}
+  .centro-ciudad{font-size:11.5px;color:var(--text-muted);margin-top:2px}
+  .centro-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:12px;border-top:1px solid var(--border)}
+  .ckpi{text-align:center}
+  .ckpi-val{font-size:17px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)}
+  .ckpi-label{font-size:10px;color:var(--text-muted);margin-top:1px}
+  .centro-card-arrow{position:absolute;top:1.25rem;right:1.25rem;color:var(--text-muted);font-size:16px;transition:transform 0.15s}
+  .centro-card:hover .centro-card-arrow{transform:translateX(3px);color:var(--brand)}
+
+  /* VISTA NIVEL 2: LISTADO ALUMNOS */
+  .listado-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:12px}
+  .search-box{display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--bg-white);border:1px solid var(--border);border-radius:6px;width:280px}
+  .search-box input{border:none;background:none;outline:none;font-size:13px;color:var(--text-main);width:100%}
+  .filter-select{font-size:12px;border:1px solid var(--border);border-radius:5px;padding:5px 8px;background:var(--bg-white);color:var(--text-sub);cursor:pointer}
+  .alumnos-table{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .table-head{display:grid;grid-template-columns:2fr 1.2fr 1fr 0.8fr 0.8fr 80px;gap:8px;padding:8px 16px;border-bottom:1px solid var(--border);background:var(--bg);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em}
+  .alumno-row{display:grid;grid-template-columns:2fr 1.2fr 1fr 0.8fr 0.8fr 80px;gap:8px;padding:10px 16px;border-bottom:1px solid var(--border);align-items:center;cursor:pointer;transition:background 0.12s}
   .alumno-row:hover{background:#FAFAF9}
-  .alumno-row.selected{background:var(--brand-light);border-left:3px solid var(--brand)}
   .alumno-row:last-child{border-bottom:none}
-  .alumno-av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0}
+  .alumno-id{display:flex;align-items:center;gap:10px}
+  .alumno-av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:11px;color:#fff;flex-shrink:0}
   .alumno-name{font-size:13px;font-weight:600;color:var(--text-main)}
-  .alumno-meta{font-size:11px;color:var(--text-muted);margin-top:1px}
-  .alumno-status{margin-left:auto;display:flex;align-items:center;gap:6px}
+  .alumno-dni{font-size:11px;color:var(--text-muted);margin-top:1px;font-family:monospace}
+  .cell-text{font-size:12.5px;color:var(--text-sub)}
+  .cell-text-sm{font-size:11.5px;color:var(--text-muted)}
+  .row-actions{display:flex;align-items:center;gap:4px;justify-content:flex-end}
 
-  /* FICHA ALUMNO */
-  .ficha-header{display:flex;align-items:center;gap:16px;padding:16px;border-bottom:1px solid var(--border);background:var(--bg-white)}
+  /* VISTA NIVEL 3: FICHA ALUMNO */
+  .ficha-header{display:flex;align-items:center;gap:16px;padding:16px;border-bottom:1px solid var(--border);background:var(--bg-white);border-radius:var(--radius-lg) var(--radius-lg) 0 0;border:1px solid var(--border);border-bottom:none}
   .ficha-av{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:#fff;flex-shrink:0}
   .ficha-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text-main)}
   .ficha-meta{font-size:11.5px;color:var(--text-muted);margin-top:3px}
@@ -103,16 +130,15 @@
   .fkpi:first-child{border-left:none}
   .fkpi-val{font-size:18px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)}
   .fkpi-label{font-size:10px;color:var(--text-muted);margin-top:1px}
-
-  /* TABS FICHA */
-  .ficha-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg-white)}
+  .ficha-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg-white);border-left:1px solid var(--border);border-right:1px solid var(--border)}
   .ficha-tab{padding:10px 20px;font-size:12.5px;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s}
   .ficha-tab.active{color:var(--brand);border-bottom-color:var(--brand)}
   .ficha-tab:hover{color:var(--text-main)}
-  .ficha-panel{display:none;padding:16px}
+  .ficha-panel{display:none;padding:16px;background:var(--bg-white);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg)}
   .ficha-panel.active{display:block}
+  .ficha-actions{display:flex;gap:8px;margin-left:auto}
 
-  /* ÁRBOL RA/CE/SA/INSTRUMENTOS */
+  /* ÁRBOL RA/CE */
   .mod-bloque{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;background:var(--bg-white)}
   .mod-bloque-header{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;background:var(--bg-white);transition:background 0.12s}
   .mod-bloque-header:hover{background:#FAFAF9}
@@ -120,9 +146,7 @@
   .mod-chev{font-size:10px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
   .mod-bloque-body{display:none;border-top:1px solid var(--border)}
   .mod-bloque.open .mod-bloque-body{display:block}
-  .mod-nota-global{font-size:15px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main);margin-left:auto}
-
-  /* RA dentro del módulo */
+  .mod-nota-global{font-size:15px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)}
   .ra-bloque{border-bottom:1px solid rgba(0,0,0,0.05);background:#FAFAF9}
   .ra-bloque:last-child{border-bottom:none}
   .ra-bloque-header{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 28px;cursor:pointer}
@@ -134,8 +158,6 @@
   .ra-nota{font-size:13px;font-weight:700;color:var(--text-main)}
   .ra-bloque-body{display:none;padding:4px 0}
   .ra-bloque.open .ra-bloque-body{display:block}
-
-  /* CE dentro del RA */
   .ce-fila{display:grid;grid-template-columns:28px 1fr auto auto;gap:6px;align-items:start;padding:6px 14px 6px 44px;border-bottom:1px solid rgba(0,0,0,0.03)}
   .ce-fila:last-child{border-bottom:none}
   .ce-letra{width:20px;height:20px;border-radius:3px;background:var(--border);color:var(--text-sub);font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
@@ -144,20 +166,24 @@
   .ce-texto{font-size:11.5px;color:var(--text-sub);line-height:1.4}
   .ce-nota{font-size:12px;font-weight:600;color:var(--text-main);white-space:nowrap}
   .ce-tipo{font-size:10px;color:var(--text-muted);white-space:nowrap}
-
-  /* SA dentro de CE */
   .sa-fila{display:flex;align-items:flex-start;gap:8px;padding:5px 14px 5px 60px;background:rgba(0,0,0,0.015);border-top:1px solid rgba(0,0,0,0.03)}
   .sa-tag{font-size:10px;font-weight:700;color:var(--brand);background:var(--brand-light);padding:1px 5px;border-radius:3px;flex-shrink:0;margin-top:2px;font-family:monospace}
   .sa-nombre{flex:1;font-size:11px;color:var(--text-sub)}
-
-  /* Instrumento dentro de SA */
-  .instr-fila{display:flex;align-items:center;gap:8px;padding:4px 14px 4px 76px;border-top:1px solid rgba(0,0,0,0.02)}
+  .instr-fila{display:flex;align-items:center;gap:8px;padding:4px 0;margin-top:3px}
   .instr-tipo{font-size:10px;font-weight:600;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:1px 5px;flex-shrink:0}
   .instr-peso{font-size:10px;color:var(--text-muted);white-space:nowrap}
   .instr-nota{font-size:11px;font-weight:700;color:var(--text-main);margin-left:auto;white-space:nowrap}
   .instr-empresa{font-size:10px;color:var(--purple);background:var(--purple-light);border:1px solid var(--purple-border);border-radius:3px;padding:1px 5px;flex-shrink:0}
 
-  /* PERFIL COMPETENCIAS */
+  /* HISTÓRICO */
+  .hist-curso{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden}
+  .hist-curso-header{display:flex;align-items:center;gap:10px;padding:8px 14px;background:var(--bg);cursor:pointer}
+  .hist-curso.open .hist-chev{transform:rotate(90deg)}
+  .hist-chev{font-size:10px;color:var(--text-muted);transition:transform 0.2s}
+  .hist-curso-body{display:none;border-top:1px solid var(--border)}
+  .hist-curso.open .hist-curso-body{display:block}
+
+  /* PERFIL COMPETENCIAL */
   .cual-bloque{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;background:var(--bg-white)}
   .cual-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--border)}
   .cual-code{font-size:11px;font-weight:700;padding:3px 8px;border-radius:3px;background:var(--green-light);color:var(--green);border:1px solid var(--green-border);font-family:monospace}
@@ -167,50 +193,64 @@
   .uc-code{font-size:10.5px;font-weight:700;font-family:monospace;color:#3730A3;background:#EEF2FF;border:1px solid #C7D2FE;padding:2px 6px;border-radius:3px;flex-shrink:0}
   .uc-desc{flex:1;font-size:12px;color:var(--text-sub);line-height:1.4}
   .uc-mod{font-size:10.5px;color:var(--text-muted);white-space:nowrap}
-
-  /* CERTIFICADOS */
   .cert-card{border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;background:var(--bg-white)}
-  .cert-icon{width:36px;height:36px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;font-size:16px}
-  .cert-name{font-size:13px;font-weight:600;color:var(--text-main)}
-  .cert-meta{font-size:11px;color:var(--text-muted);margin-top:2px}
   .cert-prog{height:6px;background:var(--border);border-radius:3px;margin-top:6px;overflow:hidden}
   .cert-prog-fill{height:100%;border-radius:3px}
-
-  /* BARRA PROGRESO */
-  .prog-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;width:80px;flex-shrink:0}
-  .prog-fill{height:100%;border-radius:3px;background:var(--green)}
   .prog-fill-amber{background:var(--amber)}
+
+  /* DATOS PERSONALES TAB */
+  .form-section{margin-bottom:1.25rem}
+  .form-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+  .form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .form-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .form-field label{display:block;font-size:11px;font-weight:600;color:var(--text-sub);margin-bottom:4px}
+  .form-field input,.form-field select{width:100%;border:1px solid var(--border);border-radius:5px;padding:6px 10px;font-size:12.5px;color:var(--text-main);background:var(--bg-white);font-family:'Inter',sans-serif}
+  .form-field input:focus,.form-field select:focus{outline:none;border-color:var(--brand)}
+  .field-value{font-size:13px;color:var(--text-main);padding:5px 0}
 
   /* MODAL */
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;align-items:center;justify-content:center}
   .modal-overlay.open{display:flex}
-  .modal{background:var(--bg-white);border-radius:var(--radius-lg);width:480px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+  .modal{background:var(--bg-white);border-radius:var(--radius-lg);width:560px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+  .modal-wide{width:680px}
   .modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
   .modal-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700}
   .modal-close{background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;line-height:1}
   .modal-body{padding:20px}
   .modal-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
 
-  /* SEARCH */
-  .search-box{display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;flex:1;max-width:280px}
-  .search-box input{border:none;background:none;outline:none;font-size:13px;color:var(--text-main);width:100%}
+  /* STEPPER ALTA */
+  .stepper{display:flex;align-items:center;gap:0;margin-bottom:20px}
+  .step{display:flex;align-items:center;gap:8px;flex:1}
+  .step-num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all 0.2s}
+  .step-num.done{background:var(--green);color:#fff}
+  .step-num.active{background:var(--brand);color:#fff}
+  .step-num.pending{background:var(--border);color:var(--text-muted)}
+  .step-label{font-size:11.5px;font-weight:600;color:var(--text-muted)}
+  .step-label.active{color:var(--text-main)}
+  .step-line{flex:1;height:1px;background:var(--border);margin:0 8px}
+  .step-line.done{background:var(--green)}
 
-  /* LAYOUT DOS COLUMNAS */
-  .two-col{display:grid;grid-template-columns:280px 1fr;gap:16px;align-items:start}
-  .list-panel{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
-  .ficha-panel-wrap{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  /* DNI BÚSQUEDA */
+  .dni-search-wrap{display:flex;gap:10px;align-items:flex-end;margin-bottom:16px}
+  .dni-result{padding:12px 16px;border-radius:var(--radius);border:1px solid var(--green-border);background:var(--green-light);display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .dni-result-notfound{border-color:var(--amber-border);background:var(--amber-light)}
 
-  /* FILTROS */
-  .filter-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-  .filter-select{font-size:12px;border:1px solid var(--border);border-radius:5px;padding:4px 8px;background:var(--bg-white);color:var(--text-sub);cursor:pointer}
+  /* MÓDULOS MATRÍCULA */
+  .modulo-item{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px;overflow:hidden}
+  .modulo-item-header{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg);cursor:pointer}
+  .modulo-item.open .mod-chev{transform:rotate(90deg)}
+  .modulo-item-body{display:none;padding:8px 12px;border-top:1px solid var(--border)}
+  .modulo-item.open .modulo-item-body{display:block}
+  .ra-check-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;color:var(--text-sub)}
+  .ra-check-item:last-child{border-bottom:none}
 
-  /* HISTÓRICO */
-  .hist-curso{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden}
-  .hist-curso-header{display:flex;align-items:center;gap:10px;padding:8px 14px;background:var(--bg);cursor:pointer}
-  .hist-curso.open .hist-chev{transform:rotate(90deg)}
-  .hist-chev{font-size:10px;color:var(--text-muted);transition:transform 0.2s}
-  .hist-curso-body{display:none;border-top:1px solid var(--border)}
-  .hist-curso.open .hist-curso-body{display:block}
+  /* CREDENCIALES GENERADAS */
+  .cred-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+  .cred-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+  .cred-row:last-child{border-bottom:none}
+  .cred-label{color:var(--text-muted);font-weight:500}
+  .cred-val{font-family:monospace;font-weight:700;color:var(--text-main)}
 </style>
 </head>
 <body>
@@ -218,7 +258,7 @@
 <aside class="sidebar">
   <div class="sb-logo">
     <div class="sb-logo-mark">C</div>
-    <div class="sb-logo-text">CurriculaFP<small>Administrador · CIFP Salud Jerez</small></div>
+    <div class="sb-logo-text">CurriculaFP<small>Superadmin</small></div>
   </div>
   <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 activo</div>
   <nav style="flex:1;padding-top:0.5rem">
@@ -271,8 +311,8 @@
   </nav>
   <div class="sb-bottom">
     <div class="user-tile">
-      <div class="user-av">MC</div>
-      <div><div class="user-name">Mª Carmen Ruiz</div><div class="user-role">Administradora · CIFP Salud Jerez</div></div>
+      <div class="user-av">SA</div>
+      <div><div class="user-name">Superadministrador</div><div class="user-role">Acceso global al sistema</div></div>
     </div>
   </div>
 </aside>
@@ -280,868 +320,937 @@
 <!-- MAIN -->
 <div class="app-main">
   <div class="topbar">
-    <span class="topbar-title">Alumnado</span>
-    <span class="topbar-sub">TES · Grado Medio · CIFP Salud Jerez · 2024–25</span>
+    <span class="topbar-title" id="topbar-title">Alumnado</span>
+    <div id="topbar-breadcrumb" style="display:flex;align-items:center;gap:6px;font-size:12px;margin-left:1rem"></div>
+    <span class="topbar-sub" id="topbar-sub">Vista global · Todos los centros</span>
   </div>
 
   <div class="page-body">
-    <div class="two-col">
 
-      <!-- PANEL IZQUIERDO: LISTADO -->
-      <div>
-        <div class="list-panel">
-          <div class="filter-bar">
-            <div class="search-box">
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="color:var(--text-muted);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-              <input type="text" placeholder="Buscar alumno o DNI...">
+    <!-- ===================== VISTA NIVEL 1: CENTROS ===================== -->
+    <div id="vista-centros">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem">
+        <div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--text-main)">Alumnado por centro</h2>
+          <p style="font-size:12px;color:var(--text-muted);margin-top:3px">Selecciona un centro para gestionar su alumnado</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:12px;color:var(--text-muted)">2024–2025 · 3 centros activos</span>
+        </div>
+      </div>
+
+      <!-- KPIs globales -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem">
+        <div class="card" style="padding:1rem;text-align:center">
+          <div style="font-size:26px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-main)">412</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Alumnos activos</div>
+        </div>
+        <div class="card" style="padding:1rem;text-align:center">
+          <div style="font-size:26px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">87%</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Tasa superación</div>
+        </div>
+        <div class="card" style="padding:1rem;text-align:center">
+          <div style="font-size:26px;font-weight:700;font-family:'Playfair Display',serif;color:var(--blue)">38</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">En formación empresa</div>
+        </div>
+        <div class="card" style="padding:1rem;text-align:center">
+          <div style="font-size:26px;font-weight:700;font-family:'Playfair Display',serif;color:var(--amber)">12</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Con convalidaciones</div>
+        </div>
+      </div>
+
+      <div class="centros-grid">
+        <!-- Centro 1 -->
+        <div class="centro-card" onclick="irACentro('cifp-salud-jerez','CIFP Salud Jerez','Jerez de la Frontera, Cádiz')">
+          <span class="centro-card-arrow">›</span>
+          <div class="centro-card-header">
+            <div class="centro-icon">🏥</div>
+            <div>
+              <div class="centro-nombre">CIFP Salud Jerez</div>
+              <div class="centro-ciudad">Jerez de la Frontera, Cádiz · Andalucía</div>
+              <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap">
+                <span class="pill pill-blue" style="font-size:10px">TES · GM</span>
+                <span class="pill pill-amber" style="font-size:10px">TCAE · GM</span>
+              </div>
             </div>
-            <select class="filter-select">
-              <option>Todos los grupos</option>
-              <option>1º A</option>
-              <option>1º B</option>
-              <option selected>2º A</option>
-            </select>
           </div>
-
-          <div style="padding:8px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
-            <span style="font-size:11.5px;font-weight:600;color:var(--text-sub)">2.º curso · Grupo A</span>
-            <span style="font-size:11px;color:var(--text-muted)">18 alumnos</span>
+          <div class="centro-kpis">
+            <div class="ckpi">
+              <div class="ckpi-val">148</div>
+              <div class="ckpi-label">Alumnos</div>
+            </div>
+            <div class="ckpi">
+              <div class="ckpi-val" style="color:var(--green)">89%</div>
+              <div class="ckpi-label">Superación</div>
+            </div>
+            <div class="ckpi">
+              <div class="ckpi-val" style="color:var(--blue)">14</div>
+              <div class="ckpi-label">En empresa</div>
+            </div>
           </div>
+        </div>
 
-          <!-- Alumno 1 — seleccionado -->
-          <div class="alumno-row selected" onclick="seleccionarAlumno(this)">
+        <!-- Centro 2 -->
+        <div class="centro-card" onclick="irACentro('ies-mar-aragon','IES Mar de Aragón','Caspe, Zaragoza')">
+          <span class="centro-card-arrow">›</span>
+          <div class="centro-card-header">
+            <div class="centro-icon">🏫</div>
+            <div>
+              <div class="centro-nombre">IES Mar de Aragón</div>
+              <div class="centro-ciudad">Caspe, Zaragoza · Aragón</div>
+              <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap">
+                <span class="pill pill-blue" style="font-size:10px">TES · GM</span>
+              </div>
+            </div>
+          </div>
+          <div class="centro-kpis">
+            <div class="ckpi">
+              <div class="ckpi-val">96</div>
+              <div class="ckpi-label">Alumnos</div>
+            </div>
+            <div class="ckpi">
+              <div class="ckpi-val" style="color:var(--green)">85%</div>
+              <div class="ckpi-label">Superación</div>
+            </div>
+            <div class="ckpi">
+              <div class="ckpi-val" style="color:var(--blue)">8</div>
+              <div class="ckpi-label">En empresa</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Centro 3 -->
+        <div class="centro-card" onclick="irACentro('cifp-sanitario-madrid','CIFP Sanitario Norte','Alcobendas, Madrid')">
+          <span class="centro-card-arrow">›</span>
+          <div class="centro-card-header">
+            <div class="centro-icon">🏨</div>
+            <div>
+              <div class="centro-nombre">CIFP Sanitario Norte</div>
+              <div class="centro-ciudad">Alcobendas, Madrid · Comunidad de Madrid</div>
+              <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap">
+                <span class="pill pill-blue" style="font-size:10px">TES · GM</span>
+                <span class="pill pill-green" style="font-size:10px">FPGS Emergencias</span>
+              </div>
+            </div>
+          </div>
+          <div class="centro-kpis">
+            <div class="ckpi">
+              <div class="ckpi-val">168</div>
+              <div class="ckpi-label">Alumnos</div>
+            </div>
+            <div class="ckpi">
+              <div class="ckpi-val" style="color:var(--green)">91%</div>
+              <div class="ckpi-label">Superación</div>
+            </div>
+            <div class="ckpi">
+              <div class="ckpi-val" style="color:var(--blue)">16</div>
+              <div class="ckpi-label">En empresa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /vista-centros -->
+
+    <!-- ===================== VISTA NIVEL 2: LISTADO ===================== -->
+    <div id="vista-listado" style="display:none">
+      <div class="breadcrumb">
+        <span class="bc-item" onclick="volverACentros()">Alumnado</span>
+        <span class="bc-sep">›</span>
+        <span class="bc-item active" id="bc-centro-nombre">CIFP Salud Jerez</span>
+      </div>
+
+      <div class="listado-header">
+        <div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700" id="listado-titulo">CIFP Salud Jerez</h2>
+          <p style="font-size:12px;color:var(--text-muted);margin-top:2px" id="listado-subtitulo">148 alumnos · 2024–2025</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+          <div class="search-box">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="color:var(--text-muted);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" placeholder="Buscar alumno o DNI...">
+          </div>
+          <select class="filter-select">
+            <option>Todos los ciclos</option>
+            <option selected>TES · GM</option>
+            <option>TCAE · GM</option>
+          </select>
+          <select class="filter-select">
+            <option>Todos los grupos</option>
+            <option>1º A</option>
+            <option>1º B</option>
+            <option selected>2º A</option>
+          </select>
+          <button class="btn btn-primary btn-sm" onclick="abrirModalAlta()">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 4v16m8-8H4"/></svg>
+            Nuevo alumno
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats rápidas -->
+      <div style="display:flex;gap:8px;margin-bottom:1rem">
+        <div style="background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px;display:flex;align-items:center;gap:8px">
+          <span style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif">18</span>
+          <span style="font-size:11px;color:var(--text-muted)">Total alumnos · 2º A TES</span>
+        </div>
+        <div style="background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius-sm);padding:8px 14px;display:flex;align-items:center;gap:8px">
+          <span style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">14</span>
+          <span style="font-size:11px;color:var(--green)">En buen ritmo</span>
+        </div>
+        <div style="background:var(--amber-light);border:1px solid var(--amber-border);border-radius:var(--radius-sm);padding:8px 14px;display:flex;align-items:center;gap:8px">
+          <span style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;color:var(--amber)">3</span>
+          <span style="font-size:11px;color:var(--amber)">Módulos en riesgo</span>
+        </div>
+        <div style="background:var(--red-light);border:1px solid var(--red-border);border-radius:var(--radius-sm);padding:8px 14px;display:flex;align-items:center;gap:8px">
+          <span style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif;color:var(--red)">1</span>
+          <span style="font-size:11px;color:var(--red)">Abandono detectado</span>
+        </div>
+      </div>
+
+      <!-- Tabla de alumnos -->
+      <div class="alumnos-table">
+        <div class="table-head">
+          <div>Alumno</div>
+          <div>Ciclo · Grupo</div>
+          <div>Matrícula</div>
+          <div>Módulos</div>
+          <div>Nota media</div>
+          <div></div>
+        </div>
+
+        <div class="alumno-row" onclick="irAFicha('juan-lopez','Juan López Moreno','55.123.456-T','#9B1C1C','JL')">
+          <div class="alumno-id">
             <div class="alumno-av" style="background:#9B1C1C">JL</div>
             <div>
               <div class="alumno-name">López Moreno, Juan</div>
-              <div class="alumno-meta">55.123.456-T · 2º A</div>
-            </div>
-            <div class="alumno-status">
-              <span class="pill pill-green">7,4</span>
+              <div class="alumno-dni">55.123.456-T</div>
             </div>
           </div>
+          <div><div class="cell-text">TES · GM</div><div class="cell-text-sm">2º Grupo A</div></div>
+          <div><span class="pill pill-gray">Ordinaria</span></div>
+          <div class="cell-text">6/11 sup.</div>
+          <div><span class="pill pill-green">7,4</span></div>
+          <div class="row-actions">
+            <button class="btn-icon" onclick="event.stopPropagation();irAFicha('juan-lopez','Juan López Moreno','55.123.456-T','#9B1C1C','JL')">Ver ficha</button>
+          </div>
+        </div>
 
-          <!-- Alumno 2 -->
-          <div class="alumno-row" onclick="seleccionarAlumno(this)">
+        <div class="alumno-row" onclick="irAFicha('ana-martinez','Ana Martínez García','62.345.678-A','#1D4ED8','AM')">
+          <div class="alumno-id">
             <div class="alumno-av" style="background:#1D4ED8">AM</div>
             <div>
               <div class="alumno-name">Martínez García, Ana</div>
-              <div class="alumno-meta">62.345.678-A · 2º A</div>
-            </div>
-            <div class="alumno-status">
-              <span class="pill pill-green">8,1</span>
+              <div class="alumno-dni">62.345.678-A</div>
             </div>
           </div>
+          <div><div class="cell-text">TES · GM</div><div class="cell-text-sm">2º Grupo A</div></div>
+          <div><span class="pill pill-gray">Ordinaria</span></div>
+          <div class="cell-text">8/11 sup.</div>
+          <div><span class="pill pill-green">8,1</span></div>
+          <div class="row-actions">
+            <button class="btn-icon" onclick="event.stopPropagation();irAFicha('ana-martinez','Ana Martínez García','62.345.678-A','#1D4ED8','AM')">Ver ficha</button>
+          </div>
+        </div>
 
-          <!-- Alumno 3 -->
-          <div class="alumno-row" onclick="seleccionarAlumno(this)">
+        <div class="alumno-row" onclick="irAFicha('pedro-ruiz','Pedro Ruiz Fernández','71.234.567-B','#15803D','PR')">
+          <div class="alumno-id">
             <div class="alumno-av" style="background:#15803D">PR</div>
             <div>
               <div class="alumno-name">Ruiz Fernández, Pedro</div>
-              <div class="alumno-meta">71.234.567-B · 2º A</div>
-            </div>
-            <div class="alumno-status">
-              <span class="pill pill-amber">5,2</span>
+              <div class="alumno-dni">71.234.567-B</div>
             </div>
           </div>
+          <div><div class="cell-text">TES · GM</div><div class="cell-text-sm">2º Grupo A</div></div>
+          <div><span class="pill pill-amber">Repetidor</span></div>
+          <div class="cell-text">3/11 sup.</div>
+          <div><span class="pill pill-amber">5,2</span></div>
+          <div class="row-actions">
+            <button class="btn-icon" onclick="event.stopPropagation();irAFicha('pedro-ruiz','Pedro Ruiz Fernández','71.234.567-B','#15803D','PR')">Ver ficha</button>
+          </div>
+        </div>
 
-          <!-- Alumno 4 -->
-          <div class="alumno-row" onclick="seleccionarAlumno(this)">
+        <div class="alumno-row" onclick="irAFicha('sara-vega','Sara Vega Castillo','43.567.890-C','#7C3AED','SV')">
+          <div class="alumno-id">
             <div class="alumno-av" style="background:#7C3AED">SV</div>
             <div>
               <div class="alumno-name">Vega Castillo, Sara</div>
-              <div class="alumno-meta">43.567.890-C · 2º A</div>
-            </div>
-            <div class="alumno-status">
-              <span class="pill pill-green">9,0</span>
+              <div class="alumno-dni">43.567.890-C</div>
             </div>
           </div>
+          <div><div class="cell-text">TES · GM</div><div class="cell-text-sm">2º Grupo A</div></div>
+          <div><span class="pill pill-gray">Ordinaria</span></div>
+          <div class="cell-text">10/11 sup.</div>
+          <div><span class="pill pill-green">9,0</span></div>
+          <div class="row-actions">
+            <button class="btn-icon" onclick="event.stopPropagation();irAFicha('sara-vega','Sara Vega Castillo','43.567.890-C','#7C3AED','SV')">Ver ficha</button>
+          </div>
+        </div>
 
-          <!-- Alumno 5 -->
-          <div class="alumno-row" onclick="seleccionarAlumno(this)">
+        <div class="alumno-row" onclick="irAFicha('miguel-navarro','Miguel Navarro Torres','88.901.234-D','#B45309','MN')">
+          <div class="alumno-id">
             <div class="alumno-av" style="background:#B45309">MN</div>
             <div>
               <div class="alumno-name">Navarro Torres, Miguel</div>
-              <div class="alumno-meta">88.901.234-D · 2º A</div>
-            </div>
-            <div class="alumno-status">
-              <span class="pill pill-red">3,8</span>
+              <div class="alumno-dni">88.901.234-D</div>
             </div>
           </div>
+          <div><div class="cell-text">TES · GM</div><div class="cell-text-sm">2º Grupo A</div></div>
+          <div><span class="pill pill-gray">Ordinaria</span></div>
+          <div class="cell-text">2/11 sup.</div>
+          <div><span class="pill pill-red">3,8</span></div>
+          <div class="row-actions">
+            <button class="btn-icon" onclick="event.stopPropagation();irAFicha('miguel-navarro','Miguel Navarro Torres','88.901.234-D','#B45309','MN')">Ver ficha</button>
+          </div>
+        </div>
 
-          <div style="padding:8px 16px;text-align:center">
-            <button class="btn-ghost" style="font-size:11px">Ver los 13 alumnos restantes</button>
+        <div style="padding:10px 16px;text-align:center;border-top:1px solid var(--border)">
+          <button class="btn-ghost" style="font-size:11.5px">Ver los 13 alumnos restantes del grupo · 130 más en otros grupos</button>
+        </div>
+      </div>
+    </div><!-- /vista-listado -->
+
+    <!-- ===================== VISTA NIVEL 3: FICHA ===================== -->
+    <div id="vista-ficha" style="display:none">
+      <div class="breadcrumb">
+        <span class="bc-item" onclick="volverACentros()">Alumnado</span>
+        <span class="bc-sep">›</span>
+        <span class="bc-item" onclick="volverAListado()" id="bc-centro-ficha">CIFP Salud Jerez</span>
+        <span class="bc-sep">›</span>
+        <span class="bc-item active" id="bc-alumno-nombre">Juan López Moreno</span>
+      </div>
+
+      <!-- CABECERA FICHA -->
+      <div class="ficha-header">
+        <div class="ficha-av" id="ficha-av" style="background:#9B1C1C">JL</div>
+        <div>
+          <div class="ficha-name" id="ficha-nombre">Juan López Moreno</div>
+          <div class="ficha-meta" id="ficha-meta">DNI 55.123.456-T · TES Grado Medio · 2º Curso · Grupo A · CIFP Salud Jerez</div>
+          <div style="display:flex;gap:6px;margin-top:5px;flex-wrap:wrap">
+            <span class="pill pill-green">Activo</span>
+            <span class="pill pill-blue">2024–25</span>
+            <span class="pill pill-gray">Matrícula ordinaria</span>
+          </div>
+        </div>
+        <div class="ficha-actions">
+          <button class="btn btn-secondary btn-sm">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+            Editar datos
+          </button>
+          <button class="btn btn-secondary btn-sm">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Imprimir boletín
+          </button>
+        </div>
+        <div class="ficha-kpis">
+          <div class="fkpi">
+            <div class="fkpi-val" style="color:var(--green)">7,4</div>
+            <div class="fkpi-label">Nota media</div>
+          </div>
+          <div class="fkpi">
+            <div class="fkpi-val">6/11</div>
+            <div class="fkpi-label">Módulos sup.</div>
+          </div>
+          <div class="fkpi">
+            <div class="fkpi-val">3/5</div>
+            <div class="fkpi-label">UC acreditadas</div>
+          </div>
+          <div class="fkpi">
+            <div class="fkpi-val" style="color:var(--amber)">1/2</div>
+            <div class="fkpi-label">Cualificaciones</div>
           </div>
         </div>
       </div>
 
-      <!-- PANEL DERECHO: FICHA ALUMNO -->
-      <div class="ficha-panel-wrap">
+      <!-- TABS -->
+      <div class="ficha-tabs">
+        <div class="ficha-tab active" onclick="switchFichaTab('tab-datos',this)">Datos personales</div>
+        <div class="ficha-tab" onclick="switchFichaTab('tab-actual',this)">Curso actual</div>
+        <div class="ficha-tab" onclick="switchFichaTab('tab-historico',this)">Histórico</div>
+        <div class="ficha-tab" onclick="switchFichaTab('tab-competencias',this)">Perfil competencial</div>
+      </div>
 
-        <!-- CABECERA FICHA -->
-        <div class="ficha-header">
-          <div class="ficha-av" style="background:#9B1C1C">JL</div>
-          <div>
-            <div class="ficha-name">Juan López Moreno</div>
-            <div class="ficha-meta">DNI 55.123.456-T · TES Grado Medio · 2º Curso · Grupo A · CIFP Salud Jerez</div>
-            <div style="display:flex;gap:6px;margin-top:5px;flex-wrap:wrap">
-              <span class="pill pill-green">Activo</span>
-              <span class="pill pill-blue">2024–25</span>
-              <span class="pill pill-gray">Matrícula ordinaria</span>
+      <!-- TAB: DATOS PERSONALES -->
+      <div id="tab-datos" class="ficha-panel active">
+        <div class="form-section">
+          <div class="form-section-title">Datos personales</div>
+          <div class="form-grid">
+            <div class="form-field"><label>Apellidos, Nombre</label><div class="field-value">López Moreno, Juan</div></div>
+            <div class="form-field"><label>DNI / NIE</label><div class="field-value" style="font-family:monospace">55.123.456-T</div></div>
+            <div class="form-field"><label>Fecha de nacimiento</label><div class="field-value">14/03/1998</div></div>
+            <div class="form-field"><label>Sexo</label><div class="field-value">Masculino</div></div>
+            <div class="form-field"><label>Nacionalidad</label><div class="field-value">Española</div></div>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="form-section-title">Contacto</div>
+          <div class="form-grid">
+            <div class="form-field"><label>Email</label><div class="field-value">juan.lopez@cifpsaludjerez.es</div></div>
+            <div class="form-field"><label>Teléfono</label><div class="field-value">+34 622 345 678</div></div>
+            <div class="form-field"><label>Dirección</label><div class="field-value">C/ Corredera, 12, 2º B · 11401 Jerez de la Frontera</div></div>
+          </div>
+          <div style="margin-top:10px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border)">
+            <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:6px">Contacto de emergencia</div>
+            <div class="form-grid">
+              <div class="form-field"><label>Nombre</label><div class="field-value">María López Pérez</div></div>
+              <div class="form-field"><label>Relación</label><div class="field-value">Madre</div></div>
+              <div class="form-field"><label>Teléfono</label><div class="field-value">+34 611 234 567</div></div>
             </div>
           </div>
-          <div class="ficha-kpis">
-            <div class="fkpi">
-              <div class="fkpi-val" style="color:var(--green)">7,4</div>
-              <div class="fkpi-label">Nota media</div>
+        </div>
+        <div class="form-section">
+          <div class="form-section-title">Matrícula · Curso 2024–25</div>
+          <div class="form-grid">
+            <div class="form-field"><label>Centro</label><div class="field-value">CIFP Salud Jerez</div></div>
+            <div class="form-field"><label>Ciclo</label><div class="field-value">TES · Grado Medio</div></div>
+            <div class="form-field"><label>Grupo · Turno</label><div class="field-value">2º A · Mañana</div></div>
+            <div class="form-field"><label>Tipo matrícula</label><div class="field-value">Ordinaria</div></div>
+            <div class="form-field"><label>Estado</label><div class="field-value"><span class="pill pill-green">Activo</span></div></div>
+            <div class="form-field"><label>Fecha matrícula</label><div class="field-value">18/09/2024</div></div>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="form-section-title">Acceso al sistema</div>
+          <div class="form-grid">
+            <div class="form-field"><label>Usuario</label><div class="field-value" style="font-family:monospace">j.lopez.55123456T</div></div>
+            <div class="form-field"><label>Rol</label><div class="field-value"><span class="pill pill-blue">Alumno</span></div></div>
+            <div class="form-field"><label>Estado cuenta</label><div class="field-value"><span class="pill pill-green">Activa</span></div></div>
+          </div>
+          <div style="margin-top:8px;padding:8px 12px;background:var(--blue-light);border:1px solid var(--blue-border);border-radius:var(--radius-sm);font-size:11.5px;color:var(--blue)">
+            <strong>Nota:</strong> El historial académico se identifica vía DNI 55.123.456-T e incluye módulos cursados en IES Mar de Aragón (2023–24).
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: CURSO ACTUAL -->
+      <div id="tab-actual" class="ficha-panel">
+        <div style="margin-bottom:12px;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Vista calculada — el profesor introduce datos en Calificaciones. Se actualiza al cerrar cada evaluación.
+        </div>
+
+        <!-- MÓDULO 0056 -->
+        <div class="mod-bloque open" id="mb-0056">
+          <div class="mod-bloque-header" onclick="toggleMod('mb-0056')">
+            <span class="mod-chev">▶</span>
+            <span style="font-size:10.5px;font-weight:700;color:var(--text-muted);font-family:monospace;background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px">0056</span>
+            <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Atención sanitaria especial en situaciones de emergencia</span>
+            <span class="pill pill-green" style="margin-right:8px">Superado</span>
+            <span class="mod-nota-global">7,8</span>
+          </div>
+          <div class="mod-bloque-body">
+            <div class="ra-bloque open" id="ra-0056-1">
+              <div class="ra-bloque-header" onclick="toggleRA('ra-0056-1')">
+                <span class="ra-chev">▶</span>
+                <span class="ra-badge">RA 1</span>
+                <span class="ra-texto">Realiza operaciones de apoyo al equipo de salud en el SVA relacionándolas con las patologías de emergencia.</span>
+                <span style="font-size:10px;color:var(--text-muted);margin-right:8px">Peso 40%</span>
+                <span class="pill pill-green" style="margin-right:8px;font-size:10px">Sup.</span>
+                <span class="ra-nota">8,2</span>
+              </div>
+              <div class="ra-bloque-body">
+                <div class="ce-fila ce-ok">
+                  <div class="ce-letra">a</div>
+                  <div>
+                    <div class="ce-texto">Se ha identificado el material de emergencias.</div>
+                    <div class="sa-fila" style="padding-left:0;margin-top:4px">
+                      <span class="sa-tag">SA-01</span>
+                      <div class="sa-nombre">Soporte Vital Avanzado en emergencia
+                        <div class="instr-fila"><span class="instr-tipo">Prueba escrita</span><span class="instr-peso">Peso 30%</span><span class="instr-nota" style="color:var(--green)">8,0</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ce-tipo">Solo centro</div>
+                  <div class="ce-nota" style="color:var(--green)">8,0</div>
+                </div>
+                <div class="ce-fila ce-ok">
+                  <div class="ce-letra" style="background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)">b</div>
+                  <div>
+                    <div class="ce-texto">Se ha descrito la utilidad, funcionamiento y el manejo de los equipos electromédicos.</div>
+                    <div class="sa-fila" style="padding-left:0;margin-top:4px">
+                      <span class="sa-tag">SA-01</span>
+                      <div class="sa-nombre">Soporte Vital Avanzado en emergencia
+                        <div class="instr-fila"><span class="instr-tipo">Rúbrica simulación</span><span class="instr-peso">Centro 60%</span><span class="instr-nota" style="color:var(--green)">8,5</span></div>
+                        <div class="instr-fila"><span class="instr-empresa">Observación empresa</span><span class="instr-peso">Empresa 40%</span><span class="instr-nota" style="color:var(--green)">9,0</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ce-tipo" style="color:var(--purple)">Conjunta</div>
+                  <div class="ce-nota" style="color:var(--green)">8,7</div>
+                </div>
+                <div style="padding:4px 14px 6px;font-size:11px;color:var(--text-muted);text-align:right">CE restantes (c–j): todos superados · <span style="color:var(--purple)">■ CE conjuntos con empresa</span></div>
+              </div>
             </div>
-            <div class="fkpi">
-              <div class="fkpi-val">6/11</div>
-              <div class="fkpi-label">Módulos sup.</div>
+            <div class="ra-bloque" id="ra-0056-2">
+              <div class="ra-bloque-header" onclick="toggleRA('ra-0056-2')">
+                <span class="ra-chev">▶</span><span class="ra-badge">RA 2</span>
+                <span class="ra-texto">Atiende el parto inminente extrahospitalario aplicando los protocolos de actuación establecidos.</span>
+                <span style="font-size:10px;color:var(--text-muted);margin-right:8px">Peso 30%</span>
+                <span class="pill pill-green" style="margin-right:8px;font-size:10px">Sup.</span>
+                <span class="ra-nota">7,0</span>
+              </div>
+              <div class="ra-bloque-body">
+                <div class="ce-fila ce-ok"><div class="ce-letra">a</div><div class="ce-texto">Se han descrito las fases del parto y las complicaciones más frecuentes.</div><div class="ce-tipo">Solo centro</div><div class="ce-nota" style="color:var(--green)">7,0</div></div>
+                <div class="ce-fila ce-ok"><div class="ce-letra" style="background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)">c</div><div class="ce-texto">Se ha aplicado el protocolo de atención al recién nacido.</div><div class="ce-tipo" style="color:var(--purple)">Conjunta</div><div class="ce-nota" style="color:var(--green)">7,5</div></div>
+              </div>
             </div>
-            <div class="fkpi">
-              <div class="fkpi-val">3/5</div>
-              <div class="fkpi-label">UC acreditadas</div>
-            </div>
-            <div class="fkpi">
-              <div class="fkpi-val" style="color:var(--amber)">1/2</div>
-              <div class="fkpi-label">Cualificaciones</div>
+            <div class="ra-bloque" id="ra-0056-3">
+              <div class="ra-bloque-header" onclick="toggleRA('ra-0056-3')">
+                <span class="ra-chev">▶</span><span class="ra-badge">RA 3</span>
+                <span class="ra-texto">Aplica técnicas de inmovilización y traslado a pacientes con lesiones traumáticas especiales.</span>
+                <span style="font-size:10px;color:var(--text-muted);margin-right:8px">Peso 30%</span>
+                <span class="pill pill-amber" style="margin-right:8px;font-size:10px">En curso</span>
+                <span class="ra-nota" style="color:var(--amber)">—</span>
+              </div>
+              <div class="ra-bloque-body">
+                <div class="ce-fila ce-ok"><div class="ce-letra">a</div><div class="ce-texto">Se han identificado las lesiones traumáticas que requieren atención especial.</div><div class="ce-tipo">Solo centro</div><div class="ce-nota" style="color:var(--green)">6,5</div></div>
+                <div class="ce-fila ce-parcial"><div class="ce-letra" style="background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)">b</div><div class="ce-texto">Se han aplicado técnicas de inmovilización adaptadas al tipo de lesión.</div><div class="ce-tipo" style="color:var(--purple)">Conjunta</div><div class="ce-nota" style="color:var(--amber)">Pte. empresa</div></div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- TABS -->
-        <div class="ficha-tabs">
-          <div class="ficha-tab" onclick="switchFichaTab('tab-datos',this)">Datos personales</div>
-          <div class="ficha-tab active" onclick="switchFichaTab('tab-actual',this)">Curso actual</div>
-          <div class="ficha-tab" onclick="switchFichaTab('tab-historico',this)">Histórico</div>
-          <div class="ficha-tab" onclick="switchFichaTab('tab-competencias',this)">Perfil competencial</div>
+        <!-- Resto de módulos resumidos -->
+        <div class="mod-bloque" id="mb-0055">
+          <div class="mod-bloque-header" onclick="toggleMod('mb-0055')">
+            <span class="mod-chev">▶</span>
+            <span style="font-size:10.5px;font-weight:700;color:var(--text-muted);font-family:monospace;background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px">0055</span>
+            <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Soporte vital básico y desfibrilación semiautomática externa</span>
+            <span class="pill pill-green" style="margin-right:8px">Superado</span>
+            <span class="mod-nota-global">7,1</span>
+          </div>
+          <div class="mod-bloque-body"><div style="padding:12px 16px;font-size:12px;color:var(--text-muted)">3 RA · 12 CE · Todos superados</div></div>
         </div>
 
-        <!-- TAB: DATOS PERSONALES -->
-        <div id="tab-datos" class="ficha-panel">
+        <div class="mod-bloque" id="mb-0061">
+          <div class="mod-bloque-header" onclick="toggleMod('mb-0061')">
+            <span class="mod-chev">▶</span>
+            <span style="font-size:10.5px;font-weight:700;color:var(--text-muted);font-family:monospace;background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px">0061</span>
+            <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Apoyo psicológico en situaciones de emergencia</span>
+            <span class="pill pill-amber" style="margin-right:8px">En curso</span>
+            <span class="mod-nota-global" style="color:var(--amber)">—</span>
+          </div>
+          <div class="mod-bloque-body"><div style="padding:12px 16px;font-size:12px;color:var(--text-muted)">3 RA · RA 1 superado · RA 2 y RA 3 en evaluación</div></div>
+        </div>
 
-          <!-- DATOS PERSONALES -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-            <div class="card" style="padding:14px">
-              <div style="font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">Datos personales</div>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <div style="display:flex;gap:8px">
-                  <span style="font-size:11.5px;color:var(--text-muted);width:130px;flex-shrink:0">Nombre completo</span>
-                  <span style="font-size:11.5px;color:var(--text-main);font-weight:500">López Moreno, Juan</span>
-                </div>
-                <div style="display:flex;gap:8px">
-                  <span style="font-size:11.5px;color:var(--text-muted);width:130px;flex-shrink:0">DNI</span>
-                  <span style="font-size:11.5px;color:var(--text-main);font-weight:500;font-family:monospace">55.123.456-T</span>
-                </div>
-                <div style="display:flex;gap:8px">
-                  <span style="font-size:11.5px;color:var(--text-muted);width:130px;flex-shrink:0">Fecha de nacimiento</span>
-                  <span style="font-size:11.5px;color:var(--text-main)">14/03/2004</span>
-                </div>
-                <div style="display:flex;gap:8px">
-                  <span style="font-size:11.5px;color:var(--text-muted);width:130px;flex-shrink:0">Sexo</span>
-                  <span style="font-size:11.5px;color:var(--text-main)">Masculino</span>
-                </div>
-                <div style="display:flex;gap:8px">
-                  <span style="font-size:11.5px;color:var(--text-muted);width:130px;flex-shrink:0">Nacionalidad</span>
-                  <span style="font-size:11.5px;color:var(--text-main)">Española</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="padding:14px">
-              <div style="font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">Contacto</div>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <div style="display:flex;gap:8px">
-                  <span style="font-size:11.5px;color:var(--text-muted);width:130px;flex-shrink:0">Email</span>
-                  <span style="font-size:11.5px;color:var(--text-main)">juan.lopez@correo.es</span>
-                </div>
-                <div style="display:flex;gap:8px">
-                  <span style="font-size:11.5px;color:var(--text-muted);width:130px;flex-shrink:0">Teléfono</span>
-                  <span style="font-size:11.5px;color:var(--text-main)">655 234 567</span>
-                </div>
-                <div style="display:flex;gap:8px;align-items:flex-start">
-                  <span style="font-size:11.5px;color:var(--text-muted);width:130px;flex-shrink:0">Dirección</span>
-                  <span style="font-size:11.5px;color:var(--text-main);line-height:1.5">C/ Larga, 45, 2º B<br>11402 Jerez de la Frontera (Cádiz)</span>
-                </div>
-              </div>
+        <div class="mod-bloque" id="mb-fct">
+          <div class="mod-bloque-header" onclick="toggleMod('mb-fct')">
+            <span class="mod-chev">▶</span>
+            <span style="font-size:10.5px;font-weight:700;color:var(--brand);font-family:monospace;background:var(--brand-light);border:1px solid rgba(155,28,28,0.2);padding:2px 6px;border-radius:3px">FE</span>
+            <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Formación en empresa</span>
+            <span class="pill pill-blue" style="margin-right:8px">En curso · Empresa asignada</span>
+            <span class="mod-nota-global" style="color:var(--text-muted)">—</span>
+          </div>
+          <div class="mod-bloque-body">
+            <div style="padding:12px 16px">
+              <div style="font-size:12px;color:var(--text-sub);margin-bottom:6px">Empresa: <strong>EPES 061 Andalucía · Jerez de la Frontera</strong> · Tutor empresa: Pedro Romero Gil</div>
+              <div style="font-size:12px;color:var(--text-muted)">5 CE conjuntos pendientes de evaluación por tutor de empresa</div>
             </div>
           </div>
+        </div>
 
-          <!-- CONTACTO EMERGENCIA -->
-          <div class="card" style="padding:14px;margin-bottom:16px">
-            <div style="font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">Contacto de emergencia</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Nombre</div>
-                <div style="font-size:12px;color:var(--text-main);font-weight:500">María Moreno García</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Relación</div>
-                <div style="font-size:12px;color:var(--text-main)">Madre</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Teléfono</div>
-                <div style="font-size:12px;color:var(--text-main)">622 345 678</div>
-              </div>
+        <div style="margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);font-size:11px;color:var(--text-muted);display:flex;gap:16px;flex-wrap:wrap">
+          <span><span style="display:inline-block;width:12px;height:12px;background:var(--purple-light);border:1px solid var(--purple-border);border-radius:2px;vertical-align:middle;margin-right:4px"></span>CE evaluado conjuntamente centro y empresa</span>
+          <span><span class="pill pill-green" style="font-size:10px">Sup.</span> Superado</span>
+          <span><span class="pill pill-amber" style="font-size:10px">En curso</span> Evaluación en progreso</span>
+        </div>
+      </div>
+
+      <!-- TAB: HISTÓRICO -->
+      <div id="tab-historico" class="ficha-panel">
+        <div style="margin-bottom:12px;padding:10px 14px;background:var(--blue-light);border:1px solid var(--blue-border);border-radius:var(--radius);font-size:12px;color:var(--blue);display:flex;align-items:center;gap:8px">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Historial académico acumulable vía DNI 55.123.456-T. Incluye módulos cursados en otros centros.
+        </div>
+        <div class="hist-curso open" id="hc-2324">
+          <div class="hist-curso-header" onclick="toggleHist('hc-2324')">
+            <span class="hist-chev">▶</span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--text-main)">2023–24</span>
+            <span style="font-size:11.5px;color:var(--text-muted);margin-left:8px">IES Mar de Aragón · Zaragoza</span>
+            <span class="pill pill-green" style="margin-left:auto">5 módulos superados</span>
+          </div>
+          <div class="hist-curso-body">
+            <div style="padding:8px 0">
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:6px 14px;border-bottom:1px solid var(--border);font-size:10px;font-weight:600;color:var(--text-muted)"><div>Código</div><div>Módulo</div><div>Nota</div><div>Estado</div></div>
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center"><span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0058</span><span style="color:var(--text-sub)">Mantenimiento del vehículo sanitario</span><span style="font-weight:600">8,5</span><span class="pill pill-green">Superado</span></div>
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center"><span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0059</span><span style="color:var(--text-sub)">Logística sanitaria en situaciones de emergencia</span><span style="font-weight:600">7,0</span><span class="pill pill-green">Superado</span></div>
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center"><span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0063</span><span style="color:var(--text-sub)">Teleasistencia sanitaria</span><span style="font-weight:600">6,2</span><span class="pill pill-green">Superado</span></div>
             </div>
           </div>
-
-          <!-- ACCESO Y MATRÍCULA CURSO ACTUAL -->
-          <div class="card" style="padding:14px;margin-bottom:16px">
-            <div style="font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">Matrícula curso actual — 2024–25</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px">
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Ciclo</div>
-                <div style="font-size:12px;color:var(--text-main);font-weight:500">TES · Técnico en Emergencias Sanitarias</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Centro</div>
-                <div style="font-size:12px;color:var(--text-main)">CIFP Salud Jerez · Jerez de la Frontera</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Grupo · Turno</div>
-                <div style="font-size:12px;color:var(--text-main)">2.º A · Mañana</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Fecha de matrícula</div>
-                <div style="font-size:12px;color:var(--text-main)">15/09/2024</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Tipo de matrícula</div>
-                <div style="font-size:12px;color:var(--text-main)">Ordinaria</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Estado</div>
-                <span class="pill pill-green">Activo</span>
-              </div>
-            </div>
-
-            <div style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px">
-              <div style="font-size:11.5px;font-weight:600;color:var(--text-sub);margin-bottom:8px">Módulos matriculados</div>
-              <div style="display:flex;flex-direction:column;gap:4px">
-                <div style="display:grid;grid-template-columns:60px 1fr auto;gap:8px;padding:5px 8px;background:var(--bg);border-radius:5px;font-size:11.5px;align-items:center">
-                  <span style="font-family:monospace;color:var(--text-muted)">0055</span>
-                  <span style="color:var(--text-sub)">Soporte vital básico y desfibrilación semiautomática externa</span>
-                  <span class="pill pill-green" style="font-size:10px">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:60px 1fr auto;gap:8px;padding:5px 8px;background:var(--bg);border-radius:5px;font-size:11.5px;align-items:center">
-                  <span style="font-family:monospace;color:var(--text-muted)">0056</span>
-                  <span style="color:var(--text-sub)">Atención sanitaria especial en situaciones de emergencia</span>
-                  <span class="pill pill-green" style="font-size:10px">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:60px 1fr auto;gap:8px;padding:5px 8px;background:var(--bg);border-radius:5px;font-size:11.5px;align-items:center">
-                  <span style="font-family:monospace;color:var(--text-muted)">0057</span>
-                  <span style="color:var(--text-sub)">Técnicas de inmovilización y movilización de pacientes</span>
-                  <span class="pill pill-green" style="font-size:10px">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:60px 1fr auto;gap:8px;padding:5px 8px;background:var(--bg);border-radius:5px;font-size:11.5px;align-items:center">
-                  <span style="font-family:monospace;color:var(--text-muted)">0061</span>
-                  <span style="color:var(--text-sub)">Apoyo psicológico en situaciones de emergencia</span>
-                  <span class="pill pill-amber" style="font-size:10px">En curso</span>
-                </div>
-                <div style="display:grid;grid-template-columns:60px 1fr auto;gap:8px;padding:5px 8px;background:var(--bg);border-radius:5px;font-size:11.5px;align-items:center">
-                  <span style="font-family:monospace;color:var(--text-muted)">FE</span>
-                  <span style="color:var(--text-sub)">Formación en empresa</span>
-                  <span class="pill pill-blue" style="font-size:10px">En empresa</span>
-                </div>
-              </div>
-            </div>
-
-            <div style="border-top:1px solid var(--border);padding-top:12px;margin-top:8px">
-              <div style="font-size:11.5px;font-weight:600;color:var(--text-sub);margin-bottom:8px">Convalidaciones y exenciones</div>
-              <div style="font-size:11.5px;color:var(--text-muted);font-style:italic">Sin convalidaciones ni exenciones registradas en este curso.</div>
+        </div>
+        <div class="hist-curso open" id="hc-2425">
+          <div class="hist-curso-header" onclick="toggleHist('hc-2425')">
+            <span class="hist-chev">▶</span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--text-main)">2024–25</span>
+            <span style="font-size:11.5px;color:var(--text-muted);margin-left:8px">CIFP Salud Jerez · En curso</span>
+            <span class="pill pill-amber" style="margin-left:auto">3 sup. · 2 en curso · 1 pendiente</span>
+          </div>
+          <div class="hist-curso-body">
+            <div style="padding:8px 0">
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:6px 14px;border-bottom:1px solid var(--border);font-size:10px;font-weight:600;color:var(--text-muted)"><div>Código</div><div>Módulo</div><div>Nota</div><div>Estado</div></div>
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center"><span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0055</span><span style="color:var(--text-sub)">Soporte vital básico y DESA</span><span style="font-weight:600">7,1</span><span class="pill pill-green">Superado</span></div>
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center"><span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0056</span><span style="color:var(--text-sub)">Atención sanitaria especial</span><span style="font-weight:600">7,8</span><span class="pill pill-green">Superado</span></div>
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center"><span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0061</span><span style="color:var(--text-sub)">Apoyo psicológico en emergencia</span><span style="font-weight:600;color:var(--amber)">—</span><span class="pill pill-amber">En curso</span></div>
+              <div style="display:grid;grid-template-columns:80px 1fr auto auto;gap:8px;padding:7px 14px;font-size:12px;align-items:center"><span style="font-family:monospace;font-size:11px;color:var(--text-muted)">FE</span><span style="color:var(--text-sub)">Formación en empresa</span><span style="font-weight:600;color:var(--text-muted)">—</span><span class="pill pill-blue">En empresa</span></div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- TITULACIÓN DE ACCESO -->
-          <div class="card" style="padding:14px">
-            <div style="font-size:12px;font-weight:700;color:var(--text-sub);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em">Acceso al ciclo</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Vía de acceso</div>
-                <div style="font-size:12px;color:var(--text-main)">Título de Graduado en ESO</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Centro de procedencia</div>
-                <div style="font-size:12px;color:var(--text-main)">IES Asta Regia · Jerez de la Frontera</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Año de acceso al ciclo</div>
-                <div style="font-size:12px;color:var(--text-main)">2023–24 (inicio en IES Mar de Aragón)</div>
-              </div>
-              <div>
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Traslado de expediente</div>
-                <span class="pill pill-blue" style="font-size:10px">Sí · desde IES Mar de Aragón (Zaragoza)</span>
-              </div>
-            </div>
-            <div style="margin-top:10px;padding:8px 10px;background:var(--blue-light);border-radius:6px;font-size:11.5px;color:var(--blue);display:flex;align-items:center;gap:6px">
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-              Expediente recuperado automáticamente por DNI al matricularse en CIFP Salud Jerez. Historial de módulos e IES Mar de Aragón vinculado correctamente.
-            </div>
+      <!-- TAB: PERFIL COMPETENCIAL -->
+      <div id="tab-competencias" class="ficha-panel">
+        <div style="margin-bottom:16px;padding:10px 14px;background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius);font-size:12px;color:var(--green)">
+          Calculado automáticamente a partir de los módulos superados en el historial completo del alumno.
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+          <div class="card" style="text-align:center;padding:12px"><div style="font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">3/5</div><div style="font-size:10.5px;color:var(--text-muted);margin-top:3px">UC acreditadas</div></div>
+          <div class="card" style="text-align:center;padding:12px"><div style="font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--amber)">1/2</div><div style="font-size:10.5px;color:var(--text-muted);margin-top:3px">Cualificaciones</div></div>
+          <div class="card" style="text-align:center;padding:12px"><div style="font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--amber)">0/2</div><div style="font-size:10.5px;color:var(--text-muted);margin-top:3px">Certificados prof.</div></div>
+          <div class="card" style="text-align:center;padding:12px"><div style="font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">9/14</div><div style="font-size:10.5px;color:var(--text-muted);margin-top:3px">CP acreditadas</div></div>
+        </div>
+        <div class="cual-bloque">
+          <div class="cual-header"><span class="cual-code">SAN025_2</span><span class="cual-name">Transporte sanitario</span><span class="pill pill-green">Completa ✓</span></div>
+          <div class="uc-fila"><span class="uc-code">UC0069_1</span><span class="uc-desc">Mantener preventivamente el vehículo sanitario.</span><span class="uc-mod">Mód. 0058 · 2023–24</span><span class="pill pill-green" style="margin-left:8px;font-size:10px">Acreditada ✓</span></div>
+          <div class="uc-fila"><span class="uc-code">UC0070_2</span><span class="uc-desc">Prestar al paciente soporte vital básico y apoyo al SVA.</span><span class="uc-mod">Mód. 0055 + 0056</span><span class="pill pill-green" style="margin-left:8px;font-size:10px">Acreditada ✓</span></div>
+          <div class="uc-fila"><span class="uc-code">UC0072_2</span><span class="uc-desc">Aplicar técnicas de apoyo psicológico y social en situaciones de crisis.</span><span class="uc-mod">Mód. 0061 · en curso</span><span class="pill pill-amber" style="margin-left:8px;font-size:10px">Pendiente</span></div>
+        </div>
+        <div style="margin-top:12px">
+          <div style="font-size:12px;font-weight:600;color:var(--text-sub);margin-bottom:8px">Competencias profesionales del título TES</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="pill pill-green">CP a ✓</span><span class="pill pill-green">CP b ✓</span><span class="pill pill-green">CP c ✓</span>
+            <span class="pill pill-green">CP d ✓</span><span class="pill pill-amber">CP e ·</span><span class="pill pill-green">CP f ✓</span>
+            <span class="pill pill-green">CP g ✓</span><span class="pill pill-green">CP h ✓</span><span class="pill pill-green">CP i ✓</span>
+            <span class="pill pill-green">CP j ✓</span><span class="pill pill-green">CP k ✓</span><span class="pill pill-gray">CP l ·</span>
+            <span class="pill pill-gray">CP m ·</span><span class="pill pill-gray">CP n ·</span>
           </div>
+        </div>
+      </div>
 
-        </div><!-- /tab-datos -->
+    </div><!-- /vista-ficha -->
 
-        <!-- TAB: CURSO ACTUAL -->
-        <div id="tab-actual" class="ficha-panel active">
-
-          <!-- MÓDULO 0056 — completo con árbol -->
-          <div class="mod-bloque open" id="mb-0056">
-            <div class="mod-bloque-header" onclick="toggleModBloque('mb-0056')">
-              <span class="mod-chev">▶</span>
-              <span style="font-size:10.5px;font-weight:700;color:var(--text-muted);font-family:monospace;background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px">0056</span>
-              <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Atención sanitaria especial en situaciones de emergencia</span>
-              <span class="pill pill-green" style="margin-right:8px">Superado</span>
-              <span class="mod-nota-global">7,8</span>
-            </div>
-            <div class="mod-bloque-body">
-
-              <!-- RA 1 -->
-              <div class="ra-bloque open" id="ra-mb-1">
-                <div class="ra-bloque-header" onclick="toggleRABloque('ra-mb-1')">
-                  <span class="ra-chev">▶</span>
-                  <span class="ra-badge">RA 1</span>
-                  <span class="ra-texto">Realiza operaciones de apoyo al equipo de salud en el SVA relacionándolas con las patologías de emergencia.</span>
-                  <span style="font-size:10px;color:var(--text-muted);margin-right:8px">Peso 40%</span>
-                  <span class="pill pill-green" style="margin-right:8px;font-size:10px">Sup.</span>
-                  <span class="ra-nota">8,2</span>
-                </div>
-                <div class="ra-bloque-body">
-
-                  <!-- CE a — Solo centro -->
-                  <div class="ce-fila ce-ok">
-                    <div class="ce-letra">a</div>
-                    <div>
-                      <div class="ce-texto">Se ha identificado el material de emergencias.</div>
-                      <!-- SA + Instrumento -->
-                      <div class="sa-fila" style="padding-left:0;margin-top:4px">
-                        <span class="sa-tag">SA-01</span>
-                        <div class="sa-nombre">Soporte Vital Avanzado en emergencia
-                          <div class="instr-fila" style="padding-left:0;margin-top:3px">
-                            <span class="instr-tipo">Prueba escrita</span>
-                            <span class="instr-peso">Peso 30%</span>
-                            <span class="instr-nota" style="color:var(--green)">8,0</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ce-tipo">Solo centro</div>
-                    <div class="ce-nota" style="color:var(--green)">8,0</div>
-                  </div>
-
-                  <!-- CE b — Conjunta -->
-                  <div class="ce-fila ce-ok">
-                    <div class="ce-letra" style="background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)">b</div>
-                    <div>
-                      <div class="ce-texto">Se ha descrito la utilidad, funcionamiento y el manejo de los equipos electromédicos.</div>
-                      <div class="sa-fila" style="padding-left:0;margin-top:4px">
-                        <span class="sa-tag">SA-01</span>
-                        <div class="sa-nombre">Soporte Vital Avanzado en emergencia
-                          <div class="instr-fila" style="padding-left:0;margin-top:3px">
-                            <span class="instr-tipo">Rúbrica simulación</span>
-                            <span class="instr-peso">Centro 60%</span>
-                            <span class="instr-nota" style="color:var(--green)">8,5</span>
-                          </div>
-                          <div class="instr-fila" style="padding-left:0;margin-top:2px">
-                            <span class="instr-empresa">Observación directa empresa</span>
-                            <span class="instr-peso">Empresa 40%</span>
-                            <span class="instr-nota" style="color:var(--green)">9,0</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ce-tipo" style="color:var(--purple)">Conjunta</div>
-                    <div class="ce-nota" style="color:var(--green)">8,7</div>
-                  </div>
-
-                  <!-- CE c -->
-                  <div class="ce-fila ce-ok">
-                    <div class="ce-letra">c</div>
-                    <div>
-                      <div class="ce-texto">Se han clasificado los equipos y el material según las diferentes situaciones de emergencia.</div>
-                      <div class="sa-fila" style="padding-left:0;margin-top:4px">
-                        <span class="sa-tag">SA-01</span>
-                        <div class="sa-nombre">Soporte Vital Avanzado
-                          <div class="instr-fila" style="padding-left:0;margin-top:3px">
-                            <span class="instr-tipo">Dossier técnico</span>
-                            <span class="instr-peso">Peso 15%</span>
-                            <span class="instr-nota" style="color:var(--green)">7,5</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ce-tipo">Solo centro</div>
-                    <div class="ce-nota" style="color:var(--green)">7,5</div>
-                  </div>
-
-                  <!-- CE e — Conjunta -->
-                  <div class="ce-fila ce-ok">
-                    <div class="ce-letra" style="background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)">e</div>
-                    <div>
-                      <div class="ce-texto">Se ha colaborado en el aislamiento de la vía aérea.</div>
-                      <div class="sa-fila" style="padding-left:0;margin-top:4px">
-                        <span class="sa-tag">SA-01</span>
-                        <div class="sa-nombre">Soporte Vital Avanzado
-                          <div class="instr-fila" style="padding-left:0;margin-top:3px">
-                            <span class="instr-tipo">Lista de cotejo</span>
-                            <span class="instr-peso">Centro 50%</span>
-                            <span class="instr-nota" style="color:var(--green)">8,0</span>
-                          </div>
-                          <div class="instr-fila" style="padding-left:0;margin-top:2px">
-                            <span class="instr-empresa">Lista de cotejo empresa</span>
-                            <span class="instr-peso">Empresa 50%</span>
-                            <span class="instr-nota" style="color:var(--green)">9,0</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="ce-tipo" style="color:var(--purple)">Conjunta</div>
-                    <div class="ce-nota" style="color:var(--green)">8,5</div>
-                  </div>
-
-                  <div style="padding:4px 14px 6px 14px;font-size:11px;color:var(--text-muted);text-align:right">
-                    CE restantes (d, f, g, h, i, j): todos superados · <span style="color:var(--purple)">■ CE conjuntos con empresa</span>
-                  </div>
-
-                </div>
-              </div><!-- /RA 1 -->
-
-              <!-- RA 2 -->
-              <div class="ra-bloque" id="ra-mb-2">
-                <div class="ra-bloque-header" onclick="toggleRABloque('ra-mb-2')">
-                  <span class="ra-chev">▶</span>
-                  <span class="ra-badge">RA 2</span>
-                  <span class="ra-texto">Atiende el parto inminente extrahospitalario aplicando los protocolos de actuación establecidos.</span>
-                  <span style="font-size:10px;color:var(--text-muted);margin-right:8px">Peso 30%</span>
-                  <span class="pill pill-green" style="margin-right:8px;font-size:10px">Sup.</span>
-                  <span class="ra-nota">7,0</span>
-                </div>
-                <div class="ra-bloque-body">
-                  <div class="ce-fila ce-ok"><div class="ce-letra">a</div><div class="ce-texto">Se han descrito las fases del parto y las complicaciones más frecuentes.</div><div class="ce-tipo">Solo centro</div><div class="ce-nota" style="color:var(--green)">7,0</div></div>
-                  <div class="ce-fila ce-ok"><div class="ce-letra">b</div><div class="ce-texto">Se ha preparado el material necesario para la atención del parto.</div><div class="ce-tipo">Solo centro</div><div class="ce-nota" style="color:var(--green)">6,5</div></div>
-                  <div class="ce-fila ce-ok">
-                    <div class="ce-letra" style="background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)">c</div>
-                    <div class="ce-texto">Se ha aplicado el protocolo de atención al recién nacido.</div>
-                    <div class="ce-tipo" style="color:var(--purple)">Conjunta</div>
-                    <div class="ce-nota" style="color:var(--green)">7,5</div>
-                  </div>
-                  <div class="ce-fila ce-ok"><div class="ce-letra">d</div><div class="ce-texto">Se ha gestionado el traslado materno-neonatal al centro hospitalario.</div><div class="ce-tipo">Solo centro</div><div class="ce-nota" style="color:var(--green)">7,0</div></div>
-                </div>
-              </div><!-- /RA 2 -->
-
-              <!-- RA 3 — En curso -->
-              <div class="ra-bloque" id="ra-mb-3">
-                <div class="ra-bloque-header" onclick="toggleRABloque('ra-mb-3')">
-                  <span class="ra-chev">▶</span>
-                  <span class="ra-badge">RA 3</span>
-                  <span class="ra-texto">Aplica técnicas de inmovilización y traslado a pacientes con lesiones traumáticas especiales.</span>
-                  <span style="font-size:10px;color:var(--text-muted);margin-right:8px">Peso 30%</span>
-                  <span class="pill pill-amber" style="margin-right:8px;font-size:10px">En curso</span>
-                  <span class="ra-nota" style="color:var(--amber)">—</span>
-                </div>
-                <div class="ra-bloque-body">
-                  <div class="ce-fila ce-ok"><div class="ce-letra">a</div><div class="ce-texto">Se han identificado las lesiones traumáticas que requieren atención especial.</div><div class="ce-tipo">Solo centro</div><div class="ce-nota" style="color:var(--green)">6,5</div></div>
-                  <div class="ce-fila ce-parcial">
-                    <div class="ce-letra" style="background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)">b</div>
-                    <div class="ce-texto">Se han aplicado técnicas de inmovilización adaptadas al tipo de lesión.</div>
-                    <div class="ce-tipo" style="color:var(--purple)">Conjunta</div>
-                    <div class="ce-nota" style="color:var(--amber)">Pendiente empresa</div>
-                  </div>
-                  <div class="ce-fila">
-                    <div class="ce-letra" style="background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)">c</div>
-                    <div class="ce-texto">Se ha realizado el traslado respetando los protocolos de seguridad del paciente.</div>
-                    <div class="ce-tipo" style="color:var(--purple)">Conjunta</div>
-                    <div class="ce-nota" style="color:var(--text-muted)">Sin evaluar</div>
-                  </div>
-                </div>
-              </div><!-- /RA 3 -->
-
-            </div>
-          </div><!-- /módulo 0056 -->
-
-          <!-- MÓDULO 0055 — superado, colapsado -->
-          <div class="mod-bloque" id="mb-0055">
-            <div class="mod-bloque-header" onclick="toggleModBloque('mb-0055')">
-              <span class="mod-chev">▶</span>
-              <span style="font-size:10.5px;font-weight:700;color:var(--text-muted);font-family:monospace;background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px">0055</span>
-              <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Soporte vital básico y desfibrilación semiautomática externa</span>
-              <span class="pill pill-green" style="margin-right:8px">Superado</span>
-              <span class="mod-nota-global">7,1</span>
-            </div>
-            <div class="mod-bloque-body">
-              <div style="padding:12px 16px;font-size:12px;color:var(--text-muted)">3 RA · 12 CE · Todos superados · Expandir para ver detalle</div>
-            </div>
-          </div>
-
-          <!-- MÓDULO 0057 — superado -->
-          <div class="mod-bloque" id="mb-0057">
-            <div class="mod-bloque-header" onclick="toggleModBloque('mb-0057')">
-              <span class="mod-chev">▶</span>
-              <span style="font-size:10.5px;font-weight:700;color:var(--text-muted);font-family:monospace;background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px">0057</span>
-              <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Técnicas de inmovilización y movilización de pacientes</span>
-              <span class="pill pill-green" style="margin-right:8px">Superado</span>
-              <span class="mod-nota-global">8,3</span>
-            </div>
-            <div class="mod-bloque-body">
-              <div style="padding:12px 16px;font-size:12px;color:var(--text-muted)">4 RA · 16 CE · Todos superados</div>
-            </div>
-          </div>
-
-          <!-- MÓDULO 0061 — pendiente -->
-          <div class="mod-bloque" id="mb-0061">
-            <div class="mod-bloque-header" onclick="toggleModBloque('mb-0061')">
-              <span class="mod-chev">▶</span>
-              <span style="font-size:10.5px;font-weight:700;color:var(--text-muted);font-family:monospace;background:var(--bg);border:1px solid var(--border);padding:2px 6px;border-radius:3px">0061</span>
-              <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Apoyo psicológico en situaciones de emergencia</span>
-              <span class="pill pill-amber" style="margin-right:8px">En curso</span>
-              <span class="mod-nota-global" style="color:var(--amber)">—</span>
-            </div>
-            <div class="mod-bloque-body">
-              <div style="padding:12px 16px;font-size:12px;color:var(--text-muted)">3 RA · RA 1 superado · RA 2 y RA 3 en evaluación</div>
-            </div>
-          </div>
-
-          <!-- FORMACIÓN EN EMPRESA -->
-          <div class="mod-bloque" id="mb-fct">
-            <div class="mod-bloque-header" onclick="toggleModBloque('mb-fct')">
-              <span class="mod-chev">▶</span>
-              <span style="font-size:10.5px;font-weight:700;color:var(--brand);font-family:monospace;background:var(--brand-light);border:1px solid rgba(155,28,28,0.2);padding:2px 6px;border-radius:3px">FE</span>
-              <span style="font-size:13px;font-weight:600;color:var(--text-main);flex:1">Formación en empresa</span>
-              <span class="pill pill-blue" style="margin-right:8px">En curso · Empresa asignada</span>
-              <span class="mod-nota-global" style="color:var(--text-muted)">—</span>
-            </div>
-            <div class="mod-bloque-body">
-              <div style="padding:12px 16px">
-                <div style="font-size:12px;color:var(--text-sub);margin-bottom:8px">Empresa: <strong>EPES 061 Andalucía · Jerez de la Frontera</strong> · Tutor empresa: Pedro Romero Gil</div>
-                <div style="font-size:12px;color:var(--text-muted)">5 CE conjuntos pendientes de evaluación por tutor de empresa · Ver detalle en Formación en empresa</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Leyenda -->
-          <div style="margin-top:12px;padding:10px 14px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);font-size:11px;color:var(--text-muted);display:flex;gap:16px;flex-wrap:wrap">
-            <span><span style="display:inline-block;width:12px;height:12px;background:var(--purple-light);border:1px solid var(--purple-border);border-radius:2px;vertical-align:middle;margin-right:4px"></span>CE evaluado conjuntamente centro y empresa</span>
-            <span><span class="pill pill-green" style="font-size:10px">Sup.</span> Superado</span>
-            <span><span class="pill pill-amber" style="font-size:10px">En curso</span> Evaluación en progreso</span>
-          </div>
-
-        </div><!-- /tab-actual -->
-
-        <!-- TAB: HISTÓRICO -->
-        <div id="tab-historico" class="ficha-panel">
-
-          <div style="margin-bottom:12px;padding:10px 14px;background:var(--blue-light);border:1px solid var(--blue-border);border-radius:var(--radius);font-size:12px;color:var(--blue);display:flex;align-items:center;gap:8px">
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            Historial académico acumulable vía DNI 55.123.456-T. Incluye módulos cursados en otros centros. La recuperación del expediente es automática al matricularse en un nuevo centro.
-          </div>
-
-          <!-- Curso 2023-24 — IES Mar de Aragón -->
-          <div class="hist-curso open" id="hc-2324">
-            <div class="hist-curso-header" onclick="toggleHistCurso('hc-2324')">
-              <span class="hist-chev">▶</span>
-              <span style="font-size:12.5px;font-weight:600;color:var(--text-main)">2023–24</span>
-              <span style="font-size:11.5px;color:var(--text-muted);margin-left:8px">IES Mar de Aragón · Zaragoza · 1.er curso</span>
-              <span class="pill pill-green" style="margin-left:auto">5 módulos superados</span>
-            </div>
-            <div class="hist-curso-body">
-
-              <!-- Datos de matrícula -->
-              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:12px 14px;background:var(--bg);border-bottom:1px solid var(--border)">
-                <div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px">Centro</div>
-                  <div style="font-size:11.5px;font-weight:500;color:var(--text-main)">IES Mar de Aragón</div>
-                </div>
-                <div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px">Grupo · Turno</div>
-                  <div style="font-size:11.5px;color:var(--text-main)">1.º A · Mañana</div>
-                </div>
-                <div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px">Tipo de matrícula</div>
-                  <div style="font-size:11.5px;color:var(--text-main)">Ordinaria</div>
-                </div>
-                <div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px">Estado final</div>
-                  <span class="pill pill-blue" style="font-size:10px">Traslado a CIFP Salud Jerez</span>
-                </div>
-              </div>
-
-              <!-- Módulos -->
-              <div style="padding:8px 0">
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:6px 14px;border-bottom:1px solid var(--border);font-size:10px;font-weight:600;color:var(--text-muted)">
-                  <div>Código</div><div>Módulo</div><div>Nota</div><div>Estado</div>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0058</span>
-                  <span style="color:var(--text-sub)">Mantenimiento del vehículo sanitario</span>
-                  <span style="font-weight:600;color:var(--text-main)">8,5</span>
-                  <span class="pill pill-green">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0059</span>
-                  <span style="color:var(--text-sub)">Logística sanitaria en situaciones de emergencia</span>
-                  <span style="font-weight:600;color:var(--text-main)">7,0</span>
-                  <span class="pill pill-green">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0060</span>
-                  <span style="color:var(--text-sub)">Atención sanitaria a múltiples víctimas</span>
-                  <span style="font-weight:600;color:var(--text-main)">6,5</span>
-                  <span class="pill pill-green">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0062</span>
-                  <span style="color:var(--text-sub)">Planes de emergencias y dispositivos de riesgo</span>
-                  <span style="font-weight:600;color:var(--text-main)">7,8</span>
-                  <span class="pill pill-green">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0063</span>
-                  <span style="color:var(--text-sub)">Teleasistencia sanitaria</span>
-                  <span style="font-weight:600;color:var(--text-main)">6,2</span>
-                  <span class="pill pill-green">Superado</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Curso 2024-25 — CIFP Salud Jerez -->
-          <div class="hist-curso open" id="hc-2425">
-            <div class="hist-curso-header" onclick="toggleHistCurso('hc-2425')">
-              <span class="hist-chev">▶</span>
-              <span style="font-size:12.5px;font-weight:600;color:var(--text-main)">2024–25</span>
-              <span style="font-size:11.5px;color:var(--text-muted);margin-left:8px">CIFP Salud Jerez · 2.º curso · En curso</span>
-              <span class="pill pill-amber" style="margin-left:auto">3 sup. · 2 en curso</span>
-            </div>
-            <div class="hist-curso-body">
-
-              <!-- Datos de matrícula -->
-              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:12px 14px;background:var(--bg);border-bottom:1px solid var(--border)">
-                <div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px">Centro</div>
-                  <div style="font-size:11.5px;font-weight:500;color:var(--text-main)">CIFP Salud Jerez</div>
-                </div>
-                <div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px">Grupo · Turno</div>
-                  <div style="font-size:11.5px;color:var(--text-main)">2.º A · Mañana</div>
-                </div>
-                <div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px">Tipo de matrícula</div>
-                  <div style="font-size:11.5px;color:var(--text-main)">Traslado de expediente</div>
-                </div>
-                <div>
-                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px">Estado</div>
-                  <span class="pill pill-green" style="font-size:10px">Activo</span>
-                </div>
-              </div>
-
-              <!-- Módulos -->
-              <div style="padding:8px 0">
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:6px 14px;border-bottom:1px solid var(--border);font-size:10px;font-weight:600;color:var(--text-muted)">
-                  <div>Código</div><div>Módulo</div><div>Nota</div><div>Estado</div>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0055</span>
-                  <span style="color:var(--text-sub)">Soporte vital básico y desfibrilación semiautomática</span>
-                  <span style="font-weight:600;color:var(--text-main)">7,1</span>
-                  <span class="pill pill-green">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0056</span>
-                  <span style="color:var(--text-sub)">Atención sanitaria especial en situaciones de emergencia</span>
-                  <span style="font-weight:600;color:var(--text-main)">7,8</span>
-                  <span class="pill pill-green">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0057</span>
-                  <span style="color:var(--text-sub)">Técnicas de inmovilización y movilización</span>
-                  <span style="font-weight:600;color:var(--text-main)">8,3</span>
-                  <span class="pill pill-green">Superado</span>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">0061</span>
-                  <span style="color:var(--text-sub)">Apoyo psicológico en situaciones de emergencia</span>
-                  <span style="font-weight:600;color:var(--amber)">—</span>
-                  <span class="pill pill-amber">En curso</span>
-                </div>
-                <div style="display:grid;grid-template-columns:70px 1fr auto auto;gap:8px;padding:7px 14px;font-size:12px;align-items:center">
-                  <span style="font-family:monospace;font-size:11px;color:var(--text-muted)">FE</span>
-                  <span style="color:var(--text-sub)">Formación en empresa · EPES 061 Andalucía</span>
-                  <span style="font-weight:600;color:var(--text-muted)">—</span>
-                  <span class="pill pill-blue">En empresa</span>
-                </div>
-              </div>
-
-              <!-- Convalidaciones -->
-              <div style="padding:10px 14px;border-top:1px solid var(--border);background:var(--bg)">
-                <div style="font-size:11px;font-weight:600;color:var(--text-sub);margin-bottom:4px">Convalidaciones y exenciones</div>
-                <div style="font-size:11.5px;color:var(--text-muted);font-style:italic">Sin convalidaciones ni exenciones en este curso.</div>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /tab-historico -->
-
-        <!-- TAB: PERFIL COMPETENCIAL -->
-        <div id="tab-competencias" class="ficha-panel">
-
-          <div style="margin-bottom:16px;padding:10px 14px;background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius);font-size:12px;color:var(--green)">
-            Calculado automáticamente a partir de los módulos superados en el historial completo del alumno. Se actualiza al cerrar cada módulo.
-          </div>
-
-          <!-- RESUMEN GLOBAL -->
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
-            <div class="card" style="text-align:center;padding:12px">
-              <div style="font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">3/5</div>
-              <div style="font-size:10.5px;color:var(--text-muted);margin-top:3px">UC acreditadas</div>
-            </div>
-            <div class="card" style="text-align:center;padding:12px">
-              <div style="font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--amber)">1/2</div>
-              <div style="font-size:10.5px;color:var(--text-muted);margin-top:3px">Cualificaciones</div>
-            </div>
-            <div class="card" style="text-align:center;padding:12px">
-              <div style="font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--amber)">0/2</div>
-              <div style="font-size:10.5px;color:var(--text-muted);margin-top:3px">Certificados prof.</div>
-            </div>
-            <div class="card" style="text-align:center;padding:12px">
-              <div style="font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">9/14</div>
-              <div style="font-size:10.5px;color:var(--text-muted);margin-top:3px">CP acreditadas</div>
-            </div>
-          </div>
-
-          <!-- CUALIFICACIÓN 1 — COMPLETA -->
-          <div class="cual-bloque">
-            <div class="cual-header">
-              <span class="cual-code">SAN025_2</span>
-              <span class="cual-name">Transporte sanitario</span>
-              <span class="pill pill-green">Cualificación completa ✓</span>
-            </div>
-            <div class="uc-fila">
-              <span class="uc-code">UC0069_1</span>
-              <span class="uc-desc">Mantener preventivamente el vehículo sanitario y controlar la dotación material del mismo.</span>
-              <span class="uc-mod">Mód. 0058 · 2023–24</span>
-              <span class="pill pill-green" style="margin-left:8px;font-size:10px">Acreditada ✓</span>
-            </div>
-            <div class="uc-fila">
-              <span class="uc-code">UC0070_2</span>
-              <span class="uc-desc">Prestar al paciente soporte vital básico y apoyo al soporte vital avanzado.</span>
-              <span class="uc-mod">Mód. 0055 + 0056</span>
-              <span class="pill pill-green" style="margin-left:8px;font-size:10px">Acreditada ✓</span>
-            </div>
-            <div class="uc-fila">
-              <span class="uc-code">UC0071_2</span>
-              <span class="uc-desc">Trasladar al paciente al centro sanitario útil.</span>
-              <span class="uc-mod">Mód. 0057 · 2024–25</span>
-              <span class="pill pill-green" style="margin-left:8px;font-size:10px">Acreditada ✓</span>
-            </div>
-            <div class="uc-fila">
-              <span class="uc-code">UC0072_2</span>
-              <span class="uc-desc">Aplicar técnicas de apoyo psicológico y social en situaciones de crisis.</span>
-              <span class="uc-mod">Mód. 0061 · en curso</span>
-              <span class="pill pill-amber" style="margin-left:8px;font-size:10px">Pendiente</span>
-            </div>
-          </div>
-
-          <!-- CUALIFICACIÓN 2 — PARCIAL -->
-          <div class="cual-bloque">
-            <div class="cual-header">
-              <span class="cual-code">SAN122_2</span>
-              <span class="cual-name">Atención sanitaria a múltiples víctimas y catástrofes</span>
-              <span class="pill pill-amber">Parcial · 0/1 UC</span>
-            </div>
-            <div class="uc-fila">
-              <span class="uc-code">UC0360_2</span>
-              <span class="uc-desc">Colaborar en la organización y el desarrollo de la logística sanitaria en escenarios con múltiples víctimas y catástrofes.</span>
-              <span class="uc-mod">Mód. 0059 + 0060 + 0062</span>
-              <span class="pill pill-green" style="margin-left:8px;font-size:10px">Acreditada ✓</span>
-            </div>
-          </div>
-
-          <!-- CERTIFICADOS DE PROFESIONALIDAD -->
-          <div style="margin-top:16px">
-            <div style="font-size:12px;font-weight:600;color:var(--text-sub);margin-bottom:8px;display:flex;align-items:center;gap:8px">
-              Certificados de profesionalidad
-              <span style="font-size:11px;font-weight:400;color:var(--text-muted)">Calculados a partir de UC acreditadas</span>
-            </div>
-
-            <div class="cert-card">
-              <div class="cert-icon" style="background:var(--amber-light)">🏅</div>
-              <div style="flex:1">
-                <div class="cert-name">SANT0108 · Transporte Sanitario</div>
-                <div class="cert-meta">Requiere: UC0069_1 · UC0070_2 · UC0071_2 · UC0072_2</div>
-                <div class="cert-prog">
-                  <div class="cert-prog-fill prog-fill-amber" style="width:75%"></div>
-                </div>
-                <div style="font-size:10.5px;color:var(--amber);margin-top:3px">3 de 4 UC acreditadas · Pendiente UC0072_2</div>
-              </div>
-              <span class="pill pill-amber">75% · Incompleto</span>
-            </div>
-
-            <div class="cert-card">
-              <div class="cert-icon" style="background:var(--green-light)">🎖️</div>
-              <div style="flex:1">
-                <div class="cert-name">SANT0208 · Atención Sanitaria a Múltiples Víctimas</div>
-                <div class="cert-meta">Requiere: UC0360_2</div>
-                <div class="cert-prog">
-                  <div class="cert-prog-fill" style="width:100%"></div>
-                </div>
-                <div style="font-size:10.5px;color:var(--green);margin-top:3px">1 de 1 UC acreditadas · Pendiente expedición oficial</div>
-              </div>
-              <span class="pill pill-green">Completado ✓</span>
-            </div>
-          </div>
-
-          <!-- COMPETENCIAS PROFESIONALES DEL TÍTULO -->
-          <div style="margin-top:16px">
-            <div style="font-size:12px;font-weight:600;color:var(--text-sub);margin-bottom:8px">Competencias profesionales del título TES</div>
-            <div style="display:flex;flex-wrap:wrap;gap:6px">
-              <span class="pill pill-green">CP a ✓ Evacuar paciente</span>
-              <span class="pill pill-green">CP b ✓ SVB ventilatorio</span>
-              <span class="pill pill-green">CP c ✓ Colaborar SVA</span>
-              <span class="pill pill-green">CP d ✓ Conducción sanitaria</span>
-              <span class="pill pill-amber">CP e · Apoyo psicológico</span>
-              <span class="pill pill-green">CP f ✓ Múltiples víctimas</span>
-              <span class="pill pill-green">CP g ✓ Teleasistencia</span>
-              <span class="pill pill-green">CP h ✓ Mantener vehículo</span>
-              <span class="pill pill-green">CP i ✓ Planes emergencia</span>
-              <span class="pill pill-green">CP j ✓ Adaptación laboral</span>
-              <span class="pill pill-green">CP k ✓ Resolución problemas</span>
-              <span class="pill pill-gray">CP l · Liderazgo equipos</span>
-              <span class="pill pill-gray">CP m · Comunicación</span>
-              <span class="pill pill-gray">CP n · Prevención riesgos</span>
-            </div>
-          </div>
-
-        </div><!-- /tab-competencias -->
-
-      </div><!-- /ficha-panel-wrap -->
-    </div><!-- /two-col -->
   </div><!-- /page-body -->
 </div><!-- /app-main -->
 
+<!-- ===================== MODAL: ALTA NUEVO ALUMNO ===================== -->
+<div class="modal-overlay" id="modal-alta">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <span class="modal-title" id="modal-alta-titulo">Nuevo alumno — Buscar por DNI</span>
+      <button class="modal-close" onclick="cerrarModalAlta()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-alta-body">
+      <!-- PASO 1: Búsqueda DNI -->
+      <div id="paso-1">
+        <div class="stepper">
+          <div class="step">
+            <div class="step-num active">1</div>
+            <span class="step-label active">Verificar DNI</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step">
+            <div class="step-num pending">2</div>
+            <span class="step-label">Datos personales</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step">
+            <div class="step-num pending">3</div>
+            <span class="step-label">Matrícula</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step">
+            <div class="step-num pending">4</div>
+            <span class="step-label">Credenciales</span>
+          </div>
+        </div>
+        <p style="font-size:12.5px;color:var(--text-sub);margin-bottom:16px">Introduce el DNI o NIE del alumno para comprobar si ya existe en el sistema como persona registrada.</p>
+        <div class="dni-search-wrap">
+          <div class="form-field" style="flex:1">
+            <label>DNI / NIE del alumno</label>
+            <input type="text" id="dni-input" placeholder="Ej: 55.123.456-T" style="font-family:monospace">
+          </div>
+          <button class="btn btn-primary" onclick="buscarDNI()">Buscar</button>
+        </div>
+        <div id="dni-resultado" style="display:none"></div>
+      </div>
+
+      <!-- PASO 2: Datos personales -->
+      <div id="paso-2" style="display:none">
+        <div class="stepper">
+          <div class="step"><div class="step-num done">✓</div><span class="step-label">Verificar DNI</span></div>
+          <div class="step-line done"></div>
+          <div class="step"><div class="step-num active">2</div><span class="step-label active">Datos personales</span></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-num pending">3</div><span class="step-label">Matrícula</span></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-num pending">4</div><span class="step-label">Credenciales</span></div>
+        </div>
+        <div class="form-grid" style="margin-bottom:10px">
+          <div class="form-field"><label>Apellido 1 *</label><input type="text" placeholder="Primer apellido"></div>
+          <div class="form-field"><label>Apellido 2</label><input type="text" placeholder="Segundo apellido"></div>
+          <div class="form-field"><label>Nombre *</label><input type="text" placeholder="Nombre"></div>
+          <div class="form-field"><label>DNI / NIE *</label><input type="text" id="dni-confirmado" style="font-family:monospace" readonly></div>
+          <div class="form-field"><label>Fecha de nacimiento *</label><input type="date"></div>
+          <div class="form-field"><label>Sexo</label><select><option>— Seleccionar —</option><option>Femenino</option><option>Masculino</option><option>No especificado</option></select></div>
+          <div class="form-field"><label>Nacionalidad</label><input type="text" placeholder="Española"></div>
+          <div class="form-field"><label>Email personal</label><input type="email" placeholder="alumno@email.com"></div>
+          <div class="form-field"><label>Teléfono</label><input type="tel" placeholder="+34 6XX XXX XXX"></div>
+        </div>
+        <div style="padding:10px 14px;background:var(--amber-light);border:1px solid var(--amber-border);border-radius:var(--radius-sm);font-size:12px;color:var(--amber);margin-top:8px">
+          Los campos marcados con * son obligatorios. El email institucional se generará automáticamente al completar el alta.
+        </div>
+      </div>
+
+      <!-- PASO 3: Matrícula -->
+      <div id="paso-3" style="display:none">
+        <div class="stepper">
+          <div class="step"><div class="step-num done">✓</div><span class="step-label">Verificar DNI</span></div>
+          <div class="step-line done"></div>
+          <div class="step"><div class="step-num done">✓</div><span class="step-label">Datos personales</span></div>
+          <div class="step-line done"></div>
+          <div class="step"><div class="step-num active">3</div><span class="step-label active">Matrícula</span></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-num pending">4</div><span class="step-label">Credenciales</span></div>
+        </div>
+        <div class="form-grid-2" style="margin-bottom:12px">
+          <div class="form-field"><label>Centro</label><input type="text" value="CIFP Salud Jerez" readonly style="background:var(--bg)"></div>
+          <div class="form-field"><label>Año académico</label><input type="text" value="2024–2025 (activo)" readonly style="background:var(--bg)"></div>
+          <div class="form-field"><label>Ciclo formativo *</label>
+            <select>
+              <option>— Seleccionar ciclo —</option>
+              <option selected>TES — Técnico en Emergencias Sanitarias (GM)</option>
+              <option>TCAE — Técnico en Cuidados Auxiliares de Enfermería (GM)</option>
+            </select>
+          </div>
+          <div class="form-field"><label>Grupo *</label>
+            <select><option>— Seleccionar grupo —</option><option>1º A · Mañana</option><option>1º B · Tarde</option><option selected>2º A · Mañana</option></select>
+          </div>
+          <div class="form-field"><label>Tipo matrícula *</label>
+            <select><option selected>Ordinaria</option><option>Repetidor/a</option><option>Traslado</option><option>Convalidación parcial</option></select>
+          </div>
+          <div class="form-field"><label>Vía de acceso</label>
+            <select><option>Título de ESO</option><option>Prueba de acceso</option><option selected>FP de Grado Básico</option><option>Otros</option></select>
+          </div>
+        </div>
+
+        <div style="font-size:11.5px;font-weight:600;color:var(--text-sub);margin-bottom:8px">
+          Módulos matriculados · Ciclo TES — 2º curso
+          <span style="font-weight:400;color:var(--text-muted);margin-left:6px">Despliega cada módulo para ver sus RA normativos</span>
+        </div>
+
+        <!-- Módulos con RA desplegables -->
+        <div class="modulo-item open" id="mat-0056">
+          <div class="modulo-item-header" onclick="toggleModMat('mat-0056')">
+            <span class="mod-chev">▶</span>
+            <input type="checkbox" checked onclick="event.stopPropagation()" style="flex-shrink:0">
+            <span style="font-size:10.5px;font-weight:700;font-family:monospace;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:1px 5px;border-radius:3px">0056</span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--text-main);flex:1">Atención sanitaria especial en situaciones de emergencia</span>
+            <span style="font-size:11px;color:var(--text-muted)">160 h</span>
+          </div>
+          <div class="modulo-item-body">
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 1</span><span>Realiza operaciones de apoyo al equipo de salud en el SVA · Peso 40%</span></div>
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 2</span><span>Atiende el parto inminente extrahospitalario · Peso 30%</span></div>
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 3</span><span>Aplica técnicas de inmovilización y traslado en lesiones traumáticas especiales · Peso 30%</span></div>
+          </div>
+        </div>
+
+        <div class="modulo-item" id="mat-0055">
+          <div class="modulo-item-header" onclick="toggleModMat('mat-0055')">
+            <span class="mod-chev">▶</span>
+            <input type="checkbox" checked onclick="event.stopPropagation()" style="flex-shrink:0">
+            <span style="font-size:10.5px;font-weight:700;font-family:monospace;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:1px 5px;border-radius:3px">0055</span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--text-main);flex:1">Soporte vital básico y desfibrilación semiautomática externa</span>
+            <span style="font-size:11px;color:var(--text-muted)">96 h</span>
+          </div>
+          <div class="modulo-item-body">
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 1</span><span>Aplica técnicas de RCP básica identificando las situaciones que la requieren · Peso 35%</span></div>
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 2</span><span>Utiliza el DESA en situaciones de parada cardiorrespiratoria · Peso 35%</span></div>
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 3</span><span>Colabora en la aplicación de soporte vital avanzado · Peso 30%</span></div>
+          </div>
+        </div>
+
+        <div class="modulo-item" id="mat-0061">
+          <div class="modulo-item-header" onclick="toggleModMat('mat-0061')">
+            <span class="mod-chev">▶</span>
+            <input type="checkbox" checked onclick="event.stopPropagation()" style="flex-shrink:0">
+            <span style="font-size:10.5px;font-weight:700;font-family:monospace;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:1px 5px;border-radius:3px">0061</span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--text-main);flex:1">Apoyo psicológico en situaciones de emergencia</span>
+            <span style="font-size:11px;color:var(--text-muted)">96 h</span>
+          </div>
+          <div class="modulo-item-body">
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 1</span><span>Aplica técnicas de primeros auxilios psicológicos · Peso 40%</span></div>
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 2</span><span>Colabora en el apoyo emocional a víctimas y familiares · Peso 30%</span></div>
+            <div class="ra-check-item"><span class="ra-badge" style="font-size:9.5px">RA 3</span><span>Participa en la gestión del estrés del equipo de emergencias · Peso 30%</span></div>
+          </div>
+        </div>
+
+        <div class="modulo-item" id="mat-fe">
+          <div class="modulo-item-header" onclick="toggleModMat('mat-fe')">
+            <span class="mod-chev">▶</span>
+            <input type="checkbox" checked onclick="event.stopPropagation()" style="flex-shrink:0">
+            <span style="font-size:10.5px;font-weight:700;font-family:monospace;color:var(--brand);background:var(--brand-light);border:1px solid rgba(155,28,28,0.2);padding:1px 5px;border-radius:3px">FE</span>
+            <span style="font-size:12.5px;font-weight:600;color:var(--text-main);flex:1">Formación en empresa</span>
+            <span style="font-size:11px;color:var(--text-muted)">410 h</span>
+          </div>
+          <div class="modulo-item-body">
+            <div style="font-size:11.5px;color:var(--text-muted);padding:2px 0">La asignación de empresa, tutor y calificación se gestionará desde Gestión de cursos → Formación en empresa una vez iniciado el curso.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:8px;padding:8px 12px;background:var(--blue-light);border:1px solid var(--blue-border);border-radius:var(--radius-sm);font-size:11.5px;color:var(--blue)">
+          Matrícula completa del ciclo: 4 módulos · 762 h totales. Desmarca los módulos ya superados o convalidados si la matrícula es parcial.
+        </div>
+      </div>
+
+      <!-- PASO 4: Credenciales -->
+      <div id="paso-4" style="display:none">
+        <div class="stepper">
+          <div class="step"><div class="step-num done">✓</div><span class="step-label">Verificar DNI</span></div>
+          <div class="step-line done"></div>
+          <div class="step"><div class="step-num done">✓</div><span class="step-label">Datos personales</span></div>
+          <div class="step-line done"></div>
+          <div class="step"><div class="step-num done">✓</div><span class="step-label">Matrícula</span></div>
+          <div class="step-line done"></div>
+          <div class="step"><div class="step-num active">4</div><span class="step-label active">Credenciales</span></div>
+        </div>
+        <div style="margin-bottom:14px;padding:10px 14px;background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius);font-size:12.5px;color:var(--green);display:flex;align-items:center;gap:8px">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Alumno creado correctamente. Credenciales generadas automáticamente con rol Alumno.
+        </div>
+        <div class="cred-box">
+          <div class="cred-row"><span class="cred-label">Usuario</span><span class="cred-val">c.garcia.78901234X</span></div>
+          <div class="cred-row"><span class="cred-label">Email institucional</span><span class="cred-val">c.garcia@cifpsaludjerez.es</span></div>
+          <div class="cred-row"><span class="cred-label">Contraseña provisional</span><span class="cred-val">Cfp@2025#TES</span></div>
+          <div class="cred-row"><span class="cred-label">Rol asignado</span><span class="cred-val"><span class="pill pill-blue">Alumno</span></span></div>
+          <div class="cred-row"><span class="cred-label">Centro</span><span class="cred-val">CIFP Salud Jerez</span></div>
+          <div class="cred-row"><span class="cred-label">Ciclo · Grupo</span><span class="cred-val">TES GM · 2º A Mañana</span></div>
+        </div>
+        <div style="padding:10px 14px;background:var(--amber-light);border:1px solid var(--amber-border);border-radius:var(--radius-sm);font-size:12px;color:var(--amber)">
+          <strong>Importante:</strong> El alumno deberá cambiar la contraseña provisional en su primer inicio de sesión. Se ha enviado un email de bienvenida a c.garcia@cifpsaludjerez.es con las instrucciones de acceso.
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot" id="modal-alta-foot">
+      <button class="btn btn-secondary" onclick="cerrarModalAlta()">Cancelar</button>
+      <button class="btn btn-primary" id="btn-siguiente" onclick="siguientePaso()">Siguiente</button>
+    </div>
+  </div>
+</div>
+
 <script>
-function seleccionarAlumno(row) {
-  document.querySelectorAll('.alumno-row').forEach(r => r.classList.remove('selected'));
-  row.classList.add('selected');
-}
+  var pasoActual = 1;
+  var centroActual = {};
+  var alumnoActual = {};
 
-function switchFichaTab(tabId, el) {
-  document.querySelectorAll('.ficha-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.ficha-panel').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(tabId).classList.add('active');
-}
+  // ——— NAVEGACIÓN 3 NIVELES ———
+  function irACentro(id, nombre, ciudad) {
+    centroActual = {id, nombre, ciudad};
+    document.getElementById('vista-centros').style.display = 'none';
+    document.getElementById('vista-listado').style.display = 'block';
+    document.getElementById('vista-ficha').style.display = 'none';
+    document.getElementById('bc-centro-nombre').textContent = nombre;
+    document.getElementById('listado-titulo').textContent = nombre;
+    document.getElementById('listado-subtitulo').textContent = ciudad + ' · 148 alumnos · 2024–2025';
+    document.getElementById('topbar-sub').textContent = nombre + ' · 2024–2025';
+  }
 
-function toggleModBloque(id) {
-  document.getElementById(id).classList.toggle('open');
-}
+  function irAFicha(id, nombre, dni, color, iniciales) {
+    alumnoActual = {id, nombre, dni, color, iniciales};
+    document.getElementById('vista-centros').style.display = 'none';
+    document.getElementById('vista-listado').style.display = 'none';
+    document.getElementById('vista-ficha').style.display = 'block';
+    document.getElementById('bc-centro-ficha').textContent = centroActual.nombre || 'CIFP Salud Jerez';
+    document.getElementById('bc-alumno-nombre').textContent = nombre;
+    document.getElementById('ficha-av').style.background = color;
+    document.getElementById('ficha-av').textContent = iniciales;
+    document.getElementById('ficha-nombre').textContent = nombre;
+    document.getElementById('ficha-meta').textContent = 'DNI ' + dni + ' · TES Grado Medio · 2º Curso · Grupo A · ' + (centroActual.nombre || 'CIFP Salud Jerez');
+    document.getElementById('topbar-sub').textContent = nombre + ' · ' + dni;
+    switchFichaTab('tab-datos', document.querySelector('.ficha-tab'));
+  }
 
-function toggleRABloque(id) {
-  document.getElementById(id).classList.toggle('open');
-}
+  function volverACentros() {
+    document.getElementById('vista-centros').style.display = 'block';
+    document.getElementById('vista-listado').style.display = 'none';
+    document.getElementById('vista-ficha').style.display = 'none';
+    document.getElementById('topbar-sub').textContent = 'Vista global · Todos los centros';
+    centroActual = {};
+  }
 
-function toggleHistCurso(id) {
-  document.getElementById(id).classList.toggle('open');
-}
+  function volverAListado() {
+    document.getElementById('vista-centros').style.display = 'none';
+    document.getElementById('vista-listado').style.display = 'block';
+    document.getElementById('vista-ficha').style.display = 'none';
+    document.getElementById('topbar-sub').textContent = (centroActual.nombre || 'Centro') + ' · 2024–2025';
+  }
+
+  // ——— TABS FICHA ———
+  function switchFichaTab(tabId, el) {
+    document.querySelectorAll('.ficha-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.ficha-panel').forEach(p => p.classList.remove('active'));
+    if (el) el.classList.add('active');
+    var panel = document.getElementById(tabId);
+    if (panel) panel.classList.add('active');
+  }
+
+  // ——— TOGGLES ———
+  function toggleMod(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleRA(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleHist(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleModMat(id) { document.getElementById(id).classList.toggle('open'); }
+
+  // ——— MODAL ALTA ———
+  function abrirModalAlta() {
+    pasoActual = 1;
+    document.getElementById('modal-alta').classList.add('open');
+    mostrarPaso(1);
+  }
+
+  function cerrarModalAlta() {
+    document.getElementById('modal-alta').classList.remove('open');
+    pasoActual = 1;
+    document.getElementById('dni-input').value = '';
+    document.getElementById('dni-resultado').style.display = 'none';
+    document.getElementById('dni-resultado').innerHTML = '';
+  }
+
+  function mostrarPaso(n) {
+    for (var i = 1; i <= 4; i++) {
+      var el = document.getElementById('paso-' + i);
+      if (el) el.style.display = (i === n) ? 'block' : 'none';
+    }
+    var titulos = ['Nuevo alumno — Verificar DNI', 'Nuevo alumno — Datos personales', 'Nuevo alumno — Matrícula', 'Alta completada'];
+    document.getElementById('modal-alta-titulo').textContent = titulos[n-1];
+    var foot = document.getElementById('modal-alta-foot');
+    var btnSig = document.getElementById('btn-siguiente');
+    if (n === 4) {
+      foot.innerHTML = '<button class="btn btn-primary" onclick="cerrarModalAlta()">Cerrar y ver ficha del alumno</button>';
+    } else {
+      foot.innerHTML = '<button class="btn btn-secondary" onclick="cerrarModalAlta()">Cancelar</button><button class="btn btn-primary" id="btn-siguiente" onclick="siguientePaso()">Siguiente</button>';
+    }
+  }
+
+  function buscarDNI() {
+    var dni = document.getElementById('dni-input').value.trim();
+    if (!dni) { alert('Introduce un DNI o NIE para buscar.'); return; }
+    var res = document.getElementById('dni-resultado');
+    // Simular DNI no existente (demo)
+    if (dni.toUpperCase().indexOf('55') === 0) {
+      res.innerHTML = '<div class="dni-result"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--green);flex-shrink:0"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg><div><div style="font-size:13px;font-weight:600;color:var(--green)">Persona encontrada en el sistema</div><div style="font-size:12px;color:var(--text-sub);margin-top:2px">Juan López Moreno · DNI ' + dni + ' · Ya matriculado en TES 2024–25</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">Centro origen: IES Mar de Aragón · 2023–24</div></div></div>';
+    } else {
+      res.innerHTML = '<div class="dni-result dni-result-notfound"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color:var(--amber);flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg><div><div style="font-size:13px;font-weight:600;color:var(--amber)">DNI no encontrado en el sistema</div><div style="font-size:12px;color:var(--text-sub);margin-top:2px">DNI ' + dni + ' no existe como persona registrada. Se creará un nuevo registro.</div></div></div>';
+      document.getElementById('btn-siguiente') && (document.getElementById('btn-siguiente').style.display = 'inline-flex');
+    }
+    res.style.display = 'block';
+    if (document.getElementById('dni-confirmado')) {
+      document.getElementById('dni-confirmado').value = dni;
+    }
+  }
+
+  function siguientePaso() {
+    if (pasoActual < 4) {
+      pasoActual++;
+      mostrarPaso(pasoActual);
+    }
+  }
 </script>
 </body>
 </html>
