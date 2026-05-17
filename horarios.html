@@ -254,6 +254,31 @@
   .dia-ses-body{flex:1}
   .dia-mod-badge{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:3px;margin-bottom:4px;display:inline-block}
 
+
+  /* PASE DE LISTA */
+  .ses-card{position:relative}
+  .lista-badge{position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
+  .lista-ok{background:var(--green);color:#fff}
+  .lista-pte{background:#fff;color:var(--amber);border:1.5px solid var(--amber)}
+  .lista-row{display:flex;align-items:center;gap:0;padding:9px 14px;border-bottom:1px solid var(--border);transition:background 0.1s}
+  .lista-row:last-child{border-bottom:none}
+  .lista-row:hover{background:#FAFAF9}
+  .lista-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:10.5px;font-weight:700;color:#fff;flex-shrink:0;margin-right:10px}
+  .lista-nombre{flex:1;font-size:12.5px;font-weight:600;color:var(--text-main)}
+  .lista-dni{font-size:10.5px;color:var(--text-muted);font-family:monospace}
+  .lista-opciones{display:flex;gap:4px;margin-left:12px}
+  .lista-btn{width:32px;height:32px;border-radius:6px;border:1.5px solid var(--border);background:var(--bg-white);cursor:pointer;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all 0.15s;color:var(--text-muted)}
+  .lista-btn:hover{border-color:var(--border-dark)}
+  .lista-btn.sel-P{background:var(--green-light);border-color:var(--green);color:var(--green)}
+  .lista-btn.sel-A{background:var(--red-light);border-color:var(--red);color:var(--red)}
+  .lista-btn.sel-AJ{background:var(--amber-light);border-color:var(--amber);color:var(--amber)}
+  .lista-btn.sel-R{background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+  .lista-resumen{display:flex;gap:8px;padding:10px 14px;background:var(--bg);border-top:1px solid var(--border);font-size:11.5px;flex-wrap:wrap}
+  .resumen-item{display:flex;align-items:center;gap:5px;font-weight:600}
+  .modal-lista{width:580px}
+  .modal-ses-info{background:var(--bg);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;border:1px solid var(--border)}
+  .lista-acciones-rapidas{display:flex;gap:6px;padding:8px 14px;border-bottom:1px solid var(--border);background:var(--bg)}
+
 </style>
 </head>
 <body>
@@ -262,7 +287,7 @@
 <aside class="sidebar">
   <div class="sb-logo">
     <div class="sb-logo-mark">C</div>
-    <div class="sb-logo-text">CurriculaFP<small>Superadministrador</small></div>
+    <div class="sb-logo-text">CurriculaFP<small>Profesor</small></div>
   </div>
   <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 activo</div>
   <nav style="flex:1;padding-top:0.5rem">
@@ -317,7 +342,7 @@
   <div class="sb-bottom">
     <div class="user-tile">
       <div class="user-av">SA</div>
-      <div><div class="user-name">Superadmin</div><div class="user-role">Administrador global</div></div>
+      <div><div class="user-name">Ana García Moreno</div><div class="user-role">Profesora · PT Proc. Sanitarios</div></div>
     </div>
   </div>
 </aside>
@@ -325,7 +350,7 @@
 <div class="app-main">
   <div class="topbar">
     <span class="topbar-title">Horarios</span>
-    <span class="topbar-sub" id="topbar-sub">Vista global del sistema · Superadministrador</span>
+    <span class="topbar-sub" id="topbar-sub">TES · Grupo A Mañana · Semana 9–13 sep 2024</span>
   </div>
   <div class="content" style="max-width:1400px;">
 
@@ -466,159 +491,159 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td class="hora-cell"><span class="hora-label">08:00</span><br><span class="hora-fin">08:55</span></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+              <tr><td class="hora-cell"><span class="hora-label">08:00</span><br><span class="hora-fin">08:55</span></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·1</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Aula simulación</div>
-        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0057 · Múltiples Víctimas<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·1</div>
           <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·2</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0060 · Anatomofisiología</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0060 · Anatomofisiología<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·1</div>
           <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0057 · Múltiples Víctimas<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·02 S·1</div>
           <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
           <div class="sc-espacio">📍 Sala práctica</div>
         </div></td></tr>
-<tr><td class="hora-cell"><span class="hora-label">08:55</span><br><span class="hora-fin">09:50</span></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+<tr><td class="hora-cell"><span class="hora-label">08:55</span><br><span class="hora-fin">09:50</span></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·2</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0057 · Múltiples Víctimas<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·2</div>
           <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·3</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0060 · Anatomofisiología</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0060 · Anatomofisiología<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·2</div>
           <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0057 · Múltiples Víctimas<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·02 S·2</div>
           <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
           <div class="sc-espacio">📍 Sala práctica</div>
         </div></td></tr>
-<tr><td class="hora-cell"><span class="hora-label">09:50</span><br><span class="hora-fin">10:45</span></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+<tr><td class="hora-cell"><span class="hora-label">09:50</span><br><span class="hora-fin">10:45</span></td><td><div class="ses-card mod-0058" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0058 · Dotación Sanitaria<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·1</div>
           <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
           <div class="sc-espacio">📍 Almacén material</div>
-        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0060 · Anatomofisiología</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0060 · Anatomofisiología<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·3</div>
           <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+        </div></td><td><div class="ses-card mod-0058" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0058 · Dotación Sanitaria<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·2</div>
           <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
           <div class="sc-espacio">📍 Almacén material</div>
-        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·3</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0060 · Anatomofisiología</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0060 · Anatomofisiología<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·4</div>
           <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
           <div class="sc-espacio">📍 Aula teórica</div>
         </div></td></tr>
 <tr class="recreo-row"><td class="hora-cell"><span class="hora-label">10:45</span><br><span class="hora-fin">11:05</span></td><td><div class="recreo-label">— Recreo —</div></td><td><div class="recreo-label">— Recreo —</div></td><td><div class="recreo-label">— Recreo —</div></td><td><div class="recreo-label">— Recreo —</div></td><td><div class="recreo-label">— Recreo —</div></td></tr>
-<tr><td class="hora-cell"><span class="hora-label">11:05</span><br><span class="hora-fin">12:00</span></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+<tr><td class="hora-cell"><span class="hora-label">11:05</span><br><span class="hora-fin">12:00</span></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·3</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+        </div></td><td><div class="ses-card mod-0058" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0058 · Dotación Sanitaria<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·3</div>
           <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
           <div class="sc-espacio">📍 Almacén material</div>
-        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0057 · Múltiples Víctimas<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·3</div>
           <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+        </div></td><td><div class="ses-card mod-0058" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0058 · Dotación Sanitaria<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·4</div>
           <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
           <div class="sc-espacio">📍 Almacén material</div>
-        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·4</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Sala práctica</div>
         </div></td></tr>
-<tr><td class="hora-cell"><span class="hora-label">12:00</span><br><span class="hora-fin">12:55</span></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+<tr><td class="hora-cell"><span class="hora-label">12:00</span><br><span class="hora-fin">12:55</span></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·4</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0057 · Múltiples Víctimas<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·4</div>
           <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0060 · Anatomofisiología</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0060 · Anatomofisiología<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·5</div>
           <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-0056" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0056 · At. Sanitaria Especial</div>
+        </div></td><td><div class="ses-card mod-0056" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0056 · At. Sanitaria Especial<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·5</div>
           <div class="sc-doc">👨‍🏫 García M., Ana</div>
           <div class="sc-espacio">📍 Sala práctica</div>
-        </div></td><td><div class="ses-card mod-ipe" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">IPE · Itinerario Personal Empleabilidad</div>
+        </div></td><td><div class="ses-card mod-ipe" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">IPE · Itinerario Personal Empleabilidad<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·1</div>
           <div class="sc-doc">👨‍🏫 Navarro G., Marta</div>
           <div class="sc-espacio">📍 Aula</div>
         </div></td></tr>
-<tr><td class="hora-cell"><span class="hora-label">12:55</span><br><span class="hora-fin">13:50</span></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+<tr><td class="hora-cell"><span class="hora-label">12:55</span><br><span class="hora-fin">13:50</span></td><td><div class="ses-card mod-0057" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0057 · Múltiples Víctimas<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·3</div>
           <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-0060" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0060 · Anatomofisiología</div>
+        </div></td><td><div class="ses-card mod-0060" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0060 · Anatomofisiología<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·2</div>
           <div class="sc-doc">👨‍🏫 Martínez L., Sergio</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-0057" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0057 · Múltiples Víctimas</div>
+        </div></td><td><div class="ses-card mod-0057" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0057 · Múltiples Víctimas<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·5</div>
           <div class="sc-doc">👨‍🏫 Pérez R., Carlos</div>
           <div class="sc-espacio">📍 Aula teórica</div>
-        </div></td><td><div class="ses-card mod-ipe" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">IPE · Itinerario Personal Empleabilidad</div>
+        </div></td><td><div class="ses-card mod-ipe" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">IPE · Itinerario Personal Empleabilidad<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·2</div>
           <div class="sc-doc">👨‍🏫 Navarro G., Marta</div>
           <div class="sc-espacio">📍 Aula</div>
-        </div></td><td><div class="ses-card mod-0058" onclick="openModal('modal-ses-detalle')">
-          <div class="sc-mod">0058 · Dotación Sanitaria</div>
+        </div></td><td><div class="ses-card mod-0058" onclick="abrirLista('Esta semana','Franja horaria','Módulo','SA','Espacio')">
+          <div class="sc-mod">0058 · Dotación Sanitaria<div class="lista-badge lista-pte" title="Lista pendiente">!</div></div>
           <div class="sc-sa">SA·01 S·5</div>
           <div class="sc-doc">👨‍🏫 Romero V., Isabel</div>
           <div class="sc-espacio">📍 Almacén material</div>
@@ -716,33 +741,137 @@
   </div>
 </div>
 
-<!-- MODAL: Detalle sesión -->
-<div class="modal-overlay" id="modal-ses-detalle">
-  <div class="modal">
-    <div class="modal-head">
-      <div><div class="modal-title">Detalle de sesión</div><div class="modal-subtitle">Lunes 9 sep 2024 · 08:00–08:55 · Grupo A</div></div>
-      <button class="modal-close" onclick="closeModal('modal-ses-detalle')">✕</button>
+<!-- MODAL: Pase de lista -->
+<div class="modal-overlay" id="modal-lista">
+  <div class="modal modal-lista">
+    <div class="modal-head" style="position:sticky;top:0;z-index:10;background:var(--bg-white)">
+      <div>
+        <div class="modal-title">Pase de lista</div>
+        <div class="modal-subtitle" id="lista-subtitle">Lunes 9 sep · 08:00–08:55 · TES 1º A</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-lista')">✕</button>
     </div>
-    <div class="modal-body">
-      <div style="background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;">
-        <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">0056 · Atención sanitaria especial en situaciones de emergencia</div>
-        <div style="font-size:14px;font-weight:700;color:var(--text-main);">SA·01 — Soporte vital avanzado</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Sesión 1 de 18 · Tipo: Demostrativa</div>
+    <!-- Info sesión -->
+    <div class="modal-ses-info" style="margin:12px 14px 0;border-radius:var(--radius-sm)">
+      <div style="font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px" id="lista-mod-label">0056 · At. Sanitaria Especial</div>
+      <div style="font-size:13px;font-weight:700;color:var(--text-main)" id="lista-sa-label">SA·01 · Soporte Vital Avanzado · Sesión 1</div>
+      <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px" id="lista-esp-label">📍 Aula simulación</div>
+    </div>
+    <!-- Acciones rápidas -->
+    <div class="lista-acciones-rapidas" style="margin-top:10px">
+      <span style="font-size:11px;font-weight:600;color:var(--text-muted);margin-right:4px;align-self:center">Marcar todos:</span>
+      <button class="btn btn-sm" style="background:var(--green-light);color:var(--green);border:1px solid var(--green-border)" onclick="marcarTodos('P')">✓ Todos presentes</button>
+      <button class="btn btn-sm" style="background:var(--red-light);color:var(--red);border:1px solid var(--red-border)" onclick="marcarTodos('A')">✗ Todos ausentes</button>
+    </div>
+    <!-- Cabecera columnas -->
+    <div style="display:flex;align-items:center;padding:7px 14px;background:var(--bg);border-bottom:1px solid var(--border);font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;gap:0">
+      <div style="flex:1">Alumno</div>
+      <div style="width:32px;text-align:center;color:var(--green)">P</div>
+      <div style="width:36px;text-align:center;color:var(--red)">A</div>
+      <div style="width:36px;text-align:center;color:var(--amber)">AJ</div>
+      <div style="width:36px;text-align:center;color:var(--blue)">R</div>
+    </div>
+    <!-- Listado alumnos -->
+    <div style="max-height:340px;overflow-y:auto" id="lista-alumnos-body">
+      <div class="lista-row">
+        <div class="lista-av" style="background:#9B1C1C">JL</div>
+        <div style="flex:1"><div class="lista-nombre">López Moreno, Juan</div><div class="lista-dni">55.123.456-T</div></div>
+        <div class="lista-opciones">
+          <button class="lista-btn sel-P" onclick="toggleLista(this,'P')" title="Presente">P</button>
+          <button class="lista-btn" onclick="toggleLista(this,'A')" title="Ausente">A</button>
+          <button class="lista-btn" onclick="toggleLista(this,'AJ')" title="Ausencia justificada">AJ</button>
+          <button class="lista-btn" onclick="toggleLista(this,'R')" title="Retraso">R</button>
+        </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12.5px;">
-        <div><span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:2px;">DOCENTE</span>García Moreno, Ana<br><span style="font-size:11px;color:var(--text-muted);">PT Proc. Sanitarios y Asistenciales</span></div>
-        <div><span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:2px;">ESPACIO</span>Aula de simulación</div>
-        <div><span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:2px;">AGRUPAMIENTO</span>Gran grupo</div>
-        <div><span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:2px;">DURACIÓN</span>55 minutos</div>
+      <div class="lista-row">
+        <div class="lista-av" style="background:#1D4ED8">AM</div>
+        <div style="flex:1"><div class="lista-nombre">Martínez García, Ana</div><div class="lista-dni">62.345.678-A</div></div>
+        <div class="lista-opciones">
+          <button class="lista-btn sel-P" onclick="toggleLista(this,'P')" title="Presente">P</button>
+          <button class="lista-btn" onclick="toggleLista(this,'A')" title="Ausente">A</button>
+          <button class="lista-btn" onclick="toggleLista(this,'AJ')" title="Ausencia justificada">AJ</button>
+          <button class="lista-btn" onclick="toggleLista(this,'R')" title="Retraso">R</button>
+        </div>
       </div>
-      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
-        <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">DESCRIPCIÓN</div>
-        <div style="font-size:12.5px;color:var(--text-sub);line-height:1.5;">Presentación SVA. Equipo de emergencias. Protocolos básicos de actuación. Demostración con maniquí adulto y DEA.</div>
+      <div class="lista-row">
+        <div class="lista-av" style="background:#15803D">PR</div>
+        <div style="flex:1"><div class="lista-nombre">Ruiz Fernández, Pedro</div><div class="lista-dni">71.234.567-B</div></div>
+        <div class="lista-opciones">
+          <button class="lista-btn sel-A" onclick="toggleLista(this,'P')" title="Presente">P</button>
+          <button class="lista-btn" onclick="toggleLista(this,'A')" title="Ausente">A</button>
+          <button class="lista-btn" onclick="toggleLista(this,'AJ')" title="Ausencia justificada">AJ</button>
+          <button class="lista-btn" onclick="toggleLista(this,'R')" title="Retraso">R</button>
+        </div>
+      </div>
+      <div class="lista-row">
+        <div class="lista-av" style="background:#7C3AED">SV</div>
+        <div style="flex:1"><div class="lista-nombre">Vega Castillo, Sara</div><div class="lista-dni">43.567.890-C</div></div>
+        <div class="lista-opciones">
+          <button class="lista-btn sel-P" onclick="toggleLista(this,'P')" title="Presente">P</button>
+          <button class="lista-btn" onclick="toggleLista(this,'A')" title="Ausente">A</button>
+          <button class="lista-btn" onclick="toggleLista(this,'AJ')" title="Ausencia justificada">AJ</button>
+          <button class="lista-btn" onclick="toggleLista(this,'R')" title="Retraso">R</button>
+        </div>
+      </div>
+      <div class="lista-row">
+        <div class="lista-av" style="background:#B45309">MN</div>
+        <div style="flex:1"><div class="lista-nombre">Navarro Torres, Miguel</div><div class="lista-dni">88.901.234-D</div></div>
+        <div class="lista-opciones">
+          <button class="lista-btn" onclick="toggleLista(this,'P')" title="Presente">P</button>
+          <button class="lista-btn" onclick="toggleLista(this,'A')" title="Ausente">A</button>
+          <button class="lista-btn sel-AJ" onclick="toggleLista(this,'AJ')" title="Ausencia justificada">AJ</button>
+          <button class="lista-btn" onclick="toggleLista(this,'R')" title="Retraso">R</button>
+        </div>
+      </div>
+      <div class="lista-row">
+        <div class="lista-av" style="background:#0369A1">CF</div>
+        <div style="flex:1"><div class="lista-nombre">Fernández Castro, Carmen</div><div class="lista-dni">34.789.012-E</div></div>
+        <div class="lista-opciones">
+          <button class="lista-btn sel-P" onclick="toggleLista(this,'P')" title="Presente">P</button>
+          <button class="lista-btn" onclick="toggleLista(this,'A')" title="Ausente">A</button>
+          <button class="lista-btn" onclick="toggleLista(this,'AJ')" title="Ausencia justificada">AJ</button>
+          <button class="lista-btn" onclick="toggleLista(this,'R')" title="Retraso">R</button>
+        </div>
+      </div>
+      <div class="lista-row">
+        <div class="lista-av" style="background:#6D28D9">DM</div>
+        <div style="flex:1"><div class="lista-nombre">Morales Díaz, Diego</div><div class="lista-dni">45.678.901-F</div></div>
+        <div class="lista-opciones">
+          <button class="lista-btn" onclick="toggleLista(this,'P')" title="Presente">P</button>
+          <button class="lista-btn" onclick="toggleLista(this,'A')" title="Ausente">A</button>
+          <button class="lista-btn" onclick="toggleLista(this,'AJ')" title="Ausencia justificada">AJ</button>
+          <button class="lista-btn sel-R" onclick="toggleLista(this,'R')" title="Retraso">R</button>
+        </div>
+      </div>
+      <div class="lista-row">
+        <div class="lista-av" style="background:#9D174D">LG</div>
+        <div style="flex:1"><div class="lista-nombre">González Lara, Lucía</div><div class="lista-dni">56.789.012-G</div></div>
+        <div class="lista-opciones">
+          <button class="lista-btn sel-P" onclick="toggleLista(this,'P')" title="Presente">P</button>
+          <button class="lista-btn" onclick="toggleLista(this,'A')" title="Ausente">A</button>
+          <button class="lista-btn" onclick="toggleLista(this,'AJ')" title="Ausencia justificada">AJ</button>
+          <button class="lista-btn" onclick="toggleLista(this,'R')" title="Retraso">R</button>
+        </div>
       </div>
     </div>
-    <div class="modal-foot">
-      <button class="btn btn-secondary" onclick="closeModal('modal-ses-detalle')">Cerrar</button>
-      <button class="btn btn-secondary" onclick="closeModal('modal-ses-detalle')">↕ Mover sesión</button>
+    <!-- Resumen -->
+    <div class="lista-resumen" id="lista-resumen">
+      <span class="resumen-item" style="color:var(--green)"><span id="cnt-P">6</span> presentes</span>
+      <span style="color:var(--border-dark)">·</span>
+      <span class="resumen-item" style="color:var(--red)"><span id="cnt-A">0</span> ausentes</span>
+      <span style="color:var(--border-dark)">·</span>
+      <span class="resumen-item" style="color:var(--amber)"><span id="cnt-AJ">1</span> just.</span>
+      <span style="color:var(--border-dark)">·</span>
+      <span class="resumen-item" style="color:var(--blue)"><span id="cnt-R">1</span> retraso</span>
+      <span style="color:var(--border-dark)">·</span>
+      <span style="font-size:11px;color:var(--text-muted)">8 alumnos · Grupo A</span>
+    </div>
+    <div class="modal-foot" style="position:sticky;bottom:0;background:var(--bg-white)">
+      <button class="btn btn-secondary" onclick="closeModal('modal-lista')">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarLista()">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Guardar pase de lista
+      </button>
     </div>
   </div>
 </div>
@@ -778,7 +907,7 @@ function mostrarCentro(){
 function volverCentros(){
   document.getElementById('vista-horario').style.display='none';
   document.getElementById('vista-centros').style.display='block';
-  document.getElementById('topbar-sub').textContent='Vista global del sistema · Superadministrador';
+  document.getElementById('topbar-sub').textContent='TES · Grupo A Mañana · Semana 9–13 sep 2024';
 }
 function switchVista(v){
   document.getElementById('btn-semana').classList.toggle('active',v==='semana');
@@ -801,6 +930,59 @@ function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 document.querySelectorAll('.modal-overlay').forEach(o=>{
   o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); });
 });
+
+// PASE DE LISTA
+function abrirLista(dia, hora, mod, sa, espacio) {
+  document.getElementById('lista-subtitle').textContent = dia + ' · ' + hora + ' · TES 1º A';
+  document.getElementById('lista-mod-label').textContent = mod;
+  document.getElementById('lista-sa-label').textContent = sa;
+  document.getElementById('lista-esp-label').textContent = '📍 ' + espacio;
+  actualizarResumen();
+  document.getElementById('modal-lista').classList.add('open');
+}
+
+function toggleLista(btn, estado) {
+  var fila = btn.closest('.lista-opciones');
+  fila.querySelectorAll('.lista-btn').forEach(function(b) {
+    b.classList.remove('sel-P','sel-A','sel-AJ','sel-R');
+  });
+  btn.classList.add('sel-' + estado);
+  actualizarResumen();
+}
+
+function marcarTodos(estado) {
+  var labels = {P:'Presente',A:'Ausente',AJ:'Ausencia justificada',R:'Retraso'};
+  document.querySelectorAll('#lista-alumnos-body .lista-opciones').forEach(function(fila) {
+    fila.querySelectorAll('.lista-btn').forEach(function(b) {
+      b.classList.remove('sel-P','sel-A','sel-AJ','sel-R');
+    });
+    var target = fila.querySelector('[title="' + labels[estado] + '"]');
+    if (target) target.classList.add('sel-' + estado);
+  });
+  actualizarResumen();
+}
+
+function actualizarResumen() {
+  var cnt = {P:0, A:0, AJ:0, R:0};
+  document.querySelectorAll('#lista-alumnos-body .lista-opciones').forEach(function(fila) {
+    ['P','A','AJ','R'].forEach(function(e) {
+      if (fila.querySelector('.sel-' + e)) cnt[e]++;
+    });
+  });
+  document.getElementById('cnt-P').textContent = cnt.P;
+  document.getElementById('cnt-A').textContent = cnt.A;
+  document.getElementById('cnt-AJ').textContent = cnt.AJ;
+  document.getElementById('cnt-R').textContent = cnt.R;
+}
+
+function guardarLista() {
+  closeModal('modal-lista');
+  var toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#15803D;color:#fff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.15);display:flex;align-items:center;gap:8px';
+  toast.innerHTML = '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Pase de lista guardado correctamente';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+}
 </script>
 </body>
 </html>
