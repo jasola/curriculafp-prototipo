@@ -619,122 +619,54 @@ function renderBoletin(idx, conv, subtitulo, fecha, estado){
   // Tabla módulos
   let filas = '';
   modulos.forEach(m=>{
-    const n = notas[m.cod];
+    const rawNota = notas[m.cod];
+    const n = (rawNota !== undefined && rawNota !== null) ? rawNota : null;
     const nc = notaClass(n);
     const nlit = notaLiteral(n);
-    const nval = n!==null ? n.toFixed(1) : '—';
-    filas += `
-      <tr>
-        <td><span class="modulo-cod">${m.cod}</span>${m.nom}</td>
-        <td style="text-align:center;font-size:0.72rem;color:var(--text-muted)">${m.horas}h</td>
-        <td class="nota-num ${nc}">${nval}</td>
-        <td class="nota-lit">${nlit}</td>
-      </tr>`;
+    const nval = n !== null ? n.toFixed(1) : '—';
+    filas += '<tr>';
+    filas += '<td><span class="modulo-cod">' + m.cod + '</span>' + m.nom + '</td>';
+    filas += '<td style="text-align:center;font-size:0.72rem;color:var(--text-muted)">' + m.horas + 'h</td>';
+    filas += '<td class="nota-num ' + nc + '">' + nval + '</td>';
+    filas += '<td class="nota-lit">' + nlit + '</td>';
+    filas += '</tr>';
   });
 
   const estadoBadge = estado==='publicado'
-    ? `<span style="background:var(--green-light);color:var(--green);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600">Publicado</span>`
-    : `<span style="background:var(--amber-light);color:var(--amber);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600">Sin publicar</span>`;
+    ? '<span style="background:var(--green-light);color:var(--green);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600">Publicado</span>'
+    : '<span style="background:var(--amber-light);color:var(--amber);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600">Sin publicar</span>';
 
-  document.getElementById('boletin-contenido').innerHTML = `
-    <!-- Cabecera -->
-    <div class="boletin-cabecera">
-      <div class="boletin-logo-area">
-        <div class="boletin-logo-mark">C</div>
-        <div>
-          <div class="boletin-centro-nombre">CIFP Salud Jerez</div>
-          <div class="boletin-centro-sub">Jerez de la Frontera · Cádiz · Junta de Andalucía</div>
-        </div>
-      </div>
-      <div class="boletin-titulo-area">
-        <div class="boletin-titulo">Boletín de calificaciones</div>
-        <div class="boletin-subtitulo">${conv} · Curso 2024–2025 ${estadoBadge}</div>
-      </div>
-    </div>
-
-    <!-- Datos alumno -->
-    <div class="boletin-alumno">
-      <div>
-        <div class="b-field-label">Alumno/a</div>
-        <div class="b-field-val">${a.nombre}</div>
-      </div>
-      <div>
-        <div class="b-field-label">DNI</div>
-        <div class="b-field-val">${a.dni}</div>
-      </div>
-      <div>
-        <div class="b-field-label">Grupo</div>
-        <div class="b-field-val">${grupoActual} · 1º TES Mañana</div>
-      </div>
-      <div>
-        <div class="b-field-label">Ciclo formativo</div>
-        <div class="b-field-val">Técnico en Emergencias Sanitarias</div>
-      </div>
-      <div>
-        <div class="b-field-label">Familia profesional</div>
-        <div class="b-field-val">Sanidad</div>
-      </div>
-      <div>
-        <div class="b-field-label">Fecha emisión</div>
-        <div class="b-field-val">${fecha}</div>
-      </div>
-    </div>
-
-    <!-- Resumen -->
-    <div class="boletin-resumen">
-      <div>
-        <div class="b-res-val" style="color:var(--green)">${aprobados}</div>
-        <div class="b-res-label">Módulos aprobados</div>
-      </div>
-      <div>
-        <div class="b-res-val" style="color:var(--brand)">${suspensos}</div>
-        <div class="b-res-label">Módulos suspensos</div>
-      </div>
-      <div>
-        <div class="b-res-val">${media}</div>
-        <div class="b-res-label">Media ponderada</div>
-      </div>
-    </div>
-
-    <!-- Tabla módulos -->
-    <div class="boletin-table-title">Calificaciones por módulo profesional</div>
-    <table class="boletin-table">
-      <thead>
-        <tr>
-          <th>Módulo profesional</th>
-          <th style="text-align:center">Horas</th>
-          <th class="th-r">Calificación</th>
-          <th class="th-r">Mención</th>
-        </tr>
-      </thead>
-      <tbody>${filas}</tbody>
-    </table>
-
-    <!-- Observaciones tutor -->
-    <div class="boletin-obs">
-      <div class="boletin-obs-title">Observaciones del tutor/a del grupo</div>
-      <div class="boletin-obs-text">${a.obs}</div>
-    </div>
-
-    <!-- Firmas -->
-    <div class="boletin-firma">
-      <div class="firma-col">
-        <div class="firma-linea"></div>
-        <div class="firma-nombre">Dña. García Romero</div>
-        <div class="firma-cargo">Jefa de Departamento · Presidenta de la sesión</div>
-      </div>
-      <div class="firma-col">
-        <div class="firma-linea"></div>
-        <div class="firma-nombre">D. Morales López</div>
-        <div class="firma-cargo">Tutor/a del grupo · TES-M1</div>
-      </div>
-    </div>
-
-    <!-- Pie -->
-    <div class="boletin-pie">
-      Documento generado por CurriculaFP · CIFP Salud Jerez · Curso académico 2024–2025<br>
-      Este boletín tiene carácter informativo. La calificación oficial consta en el expediente académico del alumno.
-    </div>`;
+  var html = '';
+  html += '<div class="boletin-cabecera">';
+  html += '<div class="boletin-logo-area"><div class="boletin-logo-mark">C</div>';
+  html += '<div><div class="boletin-centro-nombre">CIFP Salud Jerez</div>';
+  html += '<div class="boletin-centro-sub">Jerez de la Frontera &middot; C&aacute;diz &middot; Junta de Andaluc&iacute;a</div></div></div>';
+  html += '<div class="boletin-titulo-area"><div class="boletin-titulo">Bolet&iacute;n de calificaciones</div>';
+  html += '<div class="boletin-subtitulo">' + conv + ' &middot; Curso 2024&ndash;2025 ' + estadoBadge + '</div></div></div>';
+  html += '<div class="boletin-alumno">';
+  html += '<div><div class="b-field-label">Alumno/a</div><div class="b-field-val">' + a.nombre + '</div></div>';
+  html += '<div><div class="b-field-label">DNI</div><div class="b-field-val">' + a.dni + '</div></div>';
+  html += '<div><div class="b-field-label">Grupo</div><div class="b-field-val">' + grupoActual + ' &middot; 1&ordm; TES Ma&ntilde;ana</div></div>';
+  html += '<div><div class="b-field-label">Ciclo formativo</div><div class="b-field-val">T&eacute;cnico en Emergencias Sanitarias</div></div>';
+  html += '<div><div class="b-field-label">Familia profesional</div><div class="b-field-val">Sanidad</div></div>';
+  html += '<div><div class="b-field-label">Fecha emisi&oacute;n</div><div class="b-field-val">' + fecha + '</div></div>';
+  html += '</div>';
+  html += '<div class="boletin-resumen">';
+  html += '<div><div class="b-res-val" style="color:var(--green)">' + aprobados + '</div><div class="b-res-label">M&oacute;dulos aprobados</div></div>';
+  html += '<div><div class="b-res-val" style="color:var(--brand)">' + suspensos + '</div><div class="b-res-label">M&oacute;dulos suspensos</div></div>';
+  html += '<div><div class="b-res-val">' + media + '</div><div class="b-res-label">Media ponderada</div></div>';
+  html += '</div>';
+  html += '<div class="boletin-table-title">Calificaciones por m&oacute;dulo profesional</div>';
+  html += '<table class="boletin-table"><thead><tr><th>M&oacute;dulo profesional</th><th style="text-align:center">Horas</th><th class="th-r">Calificaci&oacute;n</th><th class="th-r">Menci&oacute;n</th></tr></thead><tbody>' + filas + '</tbody></table>';
+  html += '<div class="boletin-obs"><div class="boletin-obs-title">Observaciones del tutor/a del grupo</div>';
+  html += '<div class="boletin-obs-text">' + a.obs + '</div></div>';
+  html += '<div class="boletin-firma">';
+  html += '<div class="firma-col"><div class="firma-linea"></div><div class="firma-nombre">D&ntilde;a. Garc&iacute;a Romero</div><div class="firma-cargo">Jefa de Departamento &middot; Presidenta de la sesi&oacute;n</div></div>';
+  html += '<div class="firma-col"><div class="firma-linea"></div><div class="firma-nombre">D. Morales L&oacute;pez</div><div class="firma-cargo">Tutor/a del grupo &middot; TES-M1</div></div>';
+  html += '</div>';
+  html += '<div class="boletin-pie">Documento generado por CurriculaFP &middot; CIFP Salud Jerez &middot; Curso acad&eacute;mico 2024&ndash;2025<br>';
+  html += 'Este bolet&iacute;n tiene car&aacute;cter informativo. La calificaci&oacute;n oficial consta en el expediente acad&eacute;mico del alumno.</div>';
+  document.getElementById('boletin-contenido').innerHTML = html;
   } catch(e) {
     document.getElementById('boletin-contenido').innerHTML = '<div style="padding:2rem;color:var(--brand)">Error al generar el boletín: ' + e.message + '</div>';
     console.error('renderBoletin error:', e);
