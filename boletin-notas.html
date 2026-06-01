@@ -553,8 +553,18 @@ function irConvocatoriasBack(){ irConvocatorias(grupoActual, grupoMetaActual); }
 
 function irBoletin(conv, subtitulo, fecha, estado){
   convActual=conv; convFecha=fecha; convEstado=estado;
+  // Fallback: si llegamos aquí sin pasar por N2, usar valores por defecto
+  if(!grupoActual) grupoActual='TES-M1';
+  if(!grupoMetaActual) grupoMetaActual='1º TES · Turno mañana · 18 alumnos';
+  if(!centroActual) centroActual='CIFP Salud Jerez';
+  // Sincronizar breadcrumbs
+  ['bc-centro','bc-centro2','bc-centro3'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=centroActual;});
+  ['bc-grupo','bc-grupo2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=grupoActual;});
   document.getElementById('bc-conv').textContent=conv;
+  document.getElementById('tb-centro').textContent=centroActual;
+  document.getElementById('tb-grupo').textContent=grupoActual;
   document.getElementById('tb-conv').textContent=conv;
+  document.getElementById('topbar-context').style.display='flex';
   document.getElementById('btn-publicar').style.display='block';
   document.getElementById('btn-pdf').style.display='block';
 
@@ -585,8 +595,9 @@ function irBoletin(conv, subtitulo, fecha, estado){
   });
 
   alumnoSelIdx=0;
-  renderBoletin(0, conv, subtitulo, fecha, estado);
   mostrarView('view-boletin');
+  // Pequeño timeout para asegurar que el DOM está visible antes de renderizar
+  setTimeout(()=>{ renderBoletin(0, conv, subtitulo, fecha, estado); }, 30);
 }
 
 function selAlumno(idx){
