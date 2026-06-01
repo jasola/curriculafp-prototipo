@@ -295,7 +295,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
       <a class="nav-item" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
       <a class="nav-item" href="programaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
       <a class="nav-item" href="horarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
-      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+      <a class="nav-item" href="calificaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
       <a class="nav-item" href="alumnado.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
       <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Formación en empresa</a>
     </div>
@@ -625,8 +625,7 @@ svg{display:block}a{text-decoration:none;color:inherit}
       <div class="tabs">
         <div class="tab active" onclick="switchTab('tab-u-datos',this)">Datos de acceso</div>
         <div class="tab" onclick="switchTab('tab-u-roles',this)">Roles por curso</div>
-        <div class="tab" onclick="switchTab('tab-u-permisos',this)">Matriz de permisos</div>
-        <div class="tab" onclick="switchTab('tab-u-excepciones',this)">Excepciones</div>
+        <div class="tab" onclick="switchTab('tab-u-excepciones',this)">Excepciones de permisos</div>
       </div>
 
       <!-- TAB DATOS -->
@@ -665,121 +664,6 @@ svg{display:block}a{text-decoration:none;color:inherit}
                 <tr><td>2022–2023</td><td>CIFP Salud Jerez</td><td><span class="rol-badge rb-profesor">Profesor</span></td><td style="font-size:0.75rem;color:var(--text-muted)">Francisco Morales</td><td class="t-mono">01/09/2022</td><td><span class="t-action" style="color:var(--text-muted)">Solo lectura</span></td></tr>
               </tbody>
             </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAB MATRIZ DE PERMISOS -->
-      <div id="tab-u-permisos" class="tab-content">
-        <div class="sc">
-          <div class="sc-head">
-            <span class="sc-title"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Permisos del rol Jefe de departamento</span>
-          </div>
-          <div class="sc-body">
-            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;padding:0.625rem 0.875rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;gap:8px">
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
-              Los permisos marcados con <strong style="color:var(--brand)">excepción</strong> difieren del rol base por una excepción individual aplicada a este usuario.
-            </div>
-            <table class="t" style="width:100%;font-size:0.75rem">
-              <thead>
-                <tr>
-                  <th style="width:220px">Bloque funcional</th>
-                  <th style="text-align:center">Ver</th>
-                  <th style="text-align:center">Crear</th>
-                  <th style="text-align:center">Editar</th>
-                  <th style="text-align:center">Eliminar</th>
-                  <th style="text-align:center">Exportar</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="font-weight:600">Centros educativos</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Usuarios y roles</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Personas</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Catálogo de ciclos</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Planificación del ciclo</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Gestión de cursos</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Calificaciones</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center" title="Excepción individual concedida"><span style="color:var(--brand);font-size:15px;font-weight:700">✓*</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Alumnado</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center" title="Excepción individual concedida"><span style="color:var(--brand);font-size:15px;font-weight:700">✓*</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Formación en empresa</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center" title="Excepción individual revocada"><span style="color:var(--red);font-size:15px;font-weight:700">✗*</span></td>
-                </tr>
-                <tr>
-                  <td style="font-weight:600">Informes y analítica</td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--text-muted)">—</span></td>
-                  <td style="text-align:center"><span style="color:var(--green);font-size:15px">✓</span></td>
-                </tr>
-              </tbody>
-            </table>
-            <div style="margin-top:10px;font-size:0.72rem;color:var(--text-muted);display:flex;gap:16px;flex-wrap:wrap">
-              <span><strong style="color:var(--green)">✓</strong> Permiso del rol base</span>
-              <span><strong style="color:var(--brand)">✓*</strong> Concedido por excepción individual</span>
-              <span><strong style="color:var(--red)">✗*</strong> Revocado por excepción individual</span>
-              <span><strong style="color:var(--text-muted)">—</strong> Sin permiso</span>
-            </div>
           </div>
         </div>
       </div>

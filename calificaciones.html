@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Calificaciones — CurriculaFP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+  html,body{font-size:14px !important}
+  :root{
+    --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+    --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+    --text-main:#1C1917;--text-sub:#57534E;--text-muted:#A8A29E;
+    --border:#E7E5E0;--border-dark:#D4D0CA;
+    --green:#15803D;--green-light:#F0FDF4;
+    --amber:#B45309;--amber-light:#FFFBEB;
+    --blue:#1D4ED8;--blue-light:#EFF6FF;
+    --purple:#7C3AED;--purple-light:#F5F3FF;
+    --radius:8px;--radius-lg:12px;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+    --shadow:0 4px 12px rgba(0,0,0,0.08);
+    --sidebar-w:232px;--topbar-h:52px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;font-size:14px}
+  a{text-decoration:none;color:inherit}
+
+  /* SIDEBAR */
+  .sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+  .sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+  .sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+  .sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+  .sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+  .sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+  .sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .nav-group{padding:0 0.625rem 0.25rem}
+  .nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+  .nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+  .nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+  .nav-item:hover .ni{opacity:0.85}
+  .nav-item.active{background:var(--brand);color:#fff}
+  .nav-item.active .ni{opacity:1}
+  .nav-badge{margin-left:auto;background:rgba(255,255,255,0.15);color:#fff;font-size:0.62rem;font-weight:700;padding:0.08rem 0.42rem;border-radius:999px}
+  .nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+  .nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
+  .sb-bottom{margin-top:auto;padding:0.75rem 0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+  .user-tile{display:flex;align-items:center;gap:0.6rem}
+  .user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-size:0.68rem;font-weight:700;color:#fff;flex-shrink:0}
+  .user-name{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.85)}
+  .user-role{font-size:0.65rem;color:rgba(255,255,255,0.35)}
+  .ni{width:15px;height:15px;flex-shrink:0;opacity:0.6}
+
+  /* MAIN */
+  .app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+  .topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:100}
+  .topbar-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-main)}
+  .topbar-sep{color:var(--text-muted);font-size:0.85rem}
+  .topbar-sub{font-size:0.8rem;color:var(--text-sub)}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:0.75rem}
+  .content{padding:1.5rem;flex:1}
+
+  /* BREADCRUMB */
+  .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-muted);margin-bottom:1.25rem}
+  .breadcrumb a{color:var(--brand);cursor:pointer}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb-sep{color:var(--border-dark)}
+
+  /* BTN */
+  .btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
+  .btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-dark)}
+  .btn-secondary{background:var(--bg-white);color:var(--text-main);border:1px solid var(--border)}.btn-secondary:hover{background:var(--bg)}
+  .btn-sm{padding:0.3rem 0.7rem;font-size:0.75rem}
+
+  /* BADGE */
+  .badge{display:inline-flex;align-items:center;gap:0.25rem;padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600}
+  .badge-green{background:var(--green-light);color:var(--green)}
+  .badge-amber{background:var(--amber-light);color:var(--amber)}
+  .badge-red{background:var(--brand-light);color:var(--brand)}
+  .badge-gray{background:#F5F5F4;color:#78716C}
+  .badge-blue{background:var(--blue-light);color:var(--blue)}
+  .badge-purple{background:var(--purple-light);color:var(--purple)}
+
+  /* CARDS NIVEL 1 */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+  .kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm)}
+  .kpi-label{font-size:0.72rem;color:var(--text-muted);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem}
+  .kpi-value{font-size:1.6rem;font-weight:700;color:var(--text-main);line-height:1}
+  .kpi-sub{font-size:0.72rem;color:var(--text-sub);margin-top:0.3rem}
+
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+  .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm)}
+  .centro-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+  .centro-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.875rem}
+  .centro-name{font-size:0.92rem;font-weight:700;color:var(--text-main)}
+  .centro-loc{font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem}
+  .centro-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;border-top:1px solid var(--border);padding-top:0.875rem;margin-top:0.875rem}
+  .centro-stat-val{font-size:1.1rem;font-weight:700;color:var(--text-main)}
+  .centro-stat-lbl{font-size:0.67rem;color:var(--text-muted)}
+
+  /* NIVEL 2 — GRUPOS */
+  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700}
+  .year-selector{display:flex;align-items:center;gap:0.5rem;background:var(--bg-white);border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:500;cursor:pointer}
+  .grupos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .grupo-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm)}
+  .grupo-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+  .grupo-name{font-size:1rem;font-weight:700;margin-bottom:0.2rem}
+  .grupo-meta{font-size:0.75rem;color:var(--text-sub);margin-bottom:1rem}
+  .grupo-progress-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem}
+  .progress-bar-wrap{flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden}
+  .progress-bar-fill{height:100%;border-radius:999px;background:var(--green)}
+  .progress-label{font-size:0.72rem;color:var(--text-sub);min-width:40px;text-align:right}
+  .grupo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;border-top:1px solid var(--border);padding-top:0.875rem;margin-top:0.875rem}
+
+  /* NIVEL 3 — MÓDULOS */
+  .modulos-table{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .modulos-table-header{display:grid;grid-template-columns:2.5fr 1fr 1.2fr 1fr 1fr 120px;gap:0;padding:0.65rem 1.25rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted)}
+  .modulo-row{display:grid;grid-template-columns:2.5fr 1fr 1.2fr 1fr 1fr 120px;gap:0;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);align-items:center;transition:background 0.12s}
+  .modulo-row:last-child{border-bottom:none}
+  .modulo-row:hover{background:#FAFAF9}
+  .modulo-row.clickable{cursor:pointer}
+  .modulo-code{font-size:0.72rem;font-weight:700;color:var(--text-muted);margin-bottom:0.1rem}
+  .modulo-name{font-size:0.85rem;font-weight:600;color:var(--text-main)}
+  .modulo-docente{font-size:0.72rem;color:var(--text-sub);margin-top:0.15rem}
+  .mini-progress{display:flex;align-items:center;gap:0.5rem}
+  .mini-bar{flex:1;height:5px;background:var(--border);border-radius:999px;overflow:hidden}
+  .mini-bar-fill{height:100%;border-radius:999px}
+  .fill-green{background:var(--green)}
+  .fill-amber{background:#D97706}
+  .fill-gray{background:var(--text-muted)}
+
+  /* NIVEL 4 — CALIFICACIÓN */
+  .cal-layout{display:grid;grid-template-columns:260px 1fr 280px;gap:1rem;align-items:start}
+  
+  /* Panel izquierdo — árbol */
+  .tree-panel{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden}
+  .tree-panel-header{padding:0.875rem 1rem;border-bottom:1px solid var(--border);font-size:0.8rem;font-weight:700;color:var(--text-main);background:var(--bg)}
+  .tree-body{padding:0.5rem 0}
+  .tree-ra{padding:0.3rem 0.75rem;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between;margin-top:0.25rem}
+  .tree-ra-pct{font-size:0.68rem;color:var(--text-muted);font-weight:500}
+  .tree-instr{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 0.75rem 0.4rem 1.25rem;font-size:0.78rem;color:var(--text-sub);cursor:pointer;border-radius:0;transition:background 0.12s;border-left:2px solid transparent}
+  .tree-instr:hover{background:var(--bg);color:var(--text-main)}
+  .tree-instr.active{background:var(--brand-light);color:var(--brand);border-left-color:var(--brand);font-weight:600}
+  .tree-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .dot-green{background:var(--green)}
+  .dot-amber{background:#D97706}
+  .dot-gray{background:#D4D0CA}
+  .tree-pct{margin-left:auto;font-size:0.67rem;color:var(--text-muted)}
+
+  /* Panel central — tabla alumnos */
+  .cal-panel{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden}
+  .cal-panel-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);background:var(--bg)}
+  .cal-instr-title{font-size:0.92rem;font-weight:700;color:var(--text-main)}
+  .cal-instr-meta{font-size:0.75rem;color:var(--text-sub);margin-top:0.2rem;display:flex;align-items:center;gap:0.75rem}
+  .cal-table{width:100%;border-collapse:collapse}
+  .cal-table th{padding:0.6rem 1rem;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);background:var(--bg);border-bottom:1px solid var(--border);text-align:left}
+  .cal-table th.th-nota{text-align:center;width:100px}
+  .cal-table th.th-obs{width:180px}
+  .cal-table td{padding:0.7rem 1rem;border-bottom:1px solid var(--border);font-size:0.82rem;vertical-align:middle}
+  .cal-table tr:last-child td{border-bottom:none}
+  .cal-table tr:hover td{background:#FAFAF9}
+  .alumno-avatar{width:28px;height:28px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:0.65rem;font-weight:700;display:grid;place-items:center;flex-shrink:0}
+  .alumno-info{display:flex;align-items:center;gap:0.6rem}
+  .alumno-nombre{font-weight:600;color:var(--text-main)}
+  .alumno-dni{font-size:0.7rem;color:var(--text-muted)}
+  .nota-input{width:64px;padding:0.3rem 0.4rem;border:1px solid var(--border);border-radius:5px;font-size:0.85rem;font-weight:600;text-align:center;font-family:'Inter',sans-serif;color:var(--text-main);background:var(--bg-white);transition:border-color 0.15s}
+  .nota-input:focus{outline:none;border-color:var(--brand)}
+  .nota-input.nota-ok{border-color:#86EFAC;background:#F0FDF4;color:var(--green)}
+  .nota-input.nota-warn{border-color:#FCD34D;background:#FFFBEB;color:var(--amber)}
+  .nota-input.nota-fail{border-color:#FCA5A5;background:var(--brand-light);color:var(--brand)}
+  .obs-input{width:100%;padding:0.28rem 0.5rem;border:1px solid var(--border);border-radius:5px;font-size:0.75rem;font-family:'Inter',sans-serif;color:var(--text-sub);background:var(--bg-white)}
+  .obs-input:focus{outline:none;border-color:var(--brand)}
+  .cal-footer{padding:0.75rem 1.25rem;background:var(--bg);border-top:1px solid var(--border);display:flex;align-items:center;gap:1.5rem}
+  .cal-stat{text-align:center}
+  .cal-stat-val{font-size:1rem;font-weight:700;color:var(--text-main)}
+  .cal-stat-lbl{font-size:0.67rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em}
+  .ce-conjunto-badge{display:inline-flex;align-items:center;gap:0.2rem;font-size:0.65rem;font-weight:600;color:var(--purple);background:var(--purple-light);padding:0.1rem 0.45rem;border-radius:999px;margin-left:0.4rem}
+
+  /* Panel derecho — cálculo */
+  .calc-panel{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;position:sticky;top:calc(var(--topbar-h) + 1.5rem)}
+  .calc-panel-header{padding:0.875rem 1rem;border-bottom:1px solid var(--border);font-size:0.8rem;font-weight:700;color:var(--text-main);background:var(--bg);display:flex;align-items:center;justify-content:space-between}
+  .calc-body{padding:0.875rem 1rem}
+  .calc-section{margin-bottom:1rem}
+  .calc-section-title{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.5rem}
+  .calc-row{display:flex;align-items:center;justify-content:space-between;padding:0.3rem 0;border-bottom:1px solid var(--border)}
+  .calc-row:last-child{border-bottom:none}
+  .calc-row-label{font-size:0.78rem;color:var(--text-sub);flex:1}
+  .calc-row-pct{font-size:0.7rem;color:var(--text-muted);margin:0 0.5rem}
+  .calc-row-nota{font-size:0.85rem;font-weight:700;color:var(--text-main);min-width:32px;text-align:right}
+  .calc-row-nota.pending{color:var(--text-muted);font-weight:400;font-size:0.75rem}
+  .calc-total{background:var(--brand-light);border-radius:var(--radius);padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem}
+  .calc-total-label{font-size:0.8rem;font-weight:700;color:var(--brand)}
+  .calc-total-nota{font-size:1.5rem;font-weight:800;color:var(--brand)}
+  .calc-ra-block{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem;margin-bottom:0.625rem}
+  .calc-ra-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.4rem}
+  .calc-ra-name{font-size:0.78rem;font-weight:700;color:var(--text-main)}
+  .calc-ra-nota{font-size:0.85rem;font-weight:700}
+  .nota-verde{color:var(--green)}
+  .nota-amber{color:var(--amber)}
+  .nota-roja{color:var(--brand)}
+  .nota-pending{color:var(--text-muted);font-size:0.75rem;font-weight:400}
+
+  /* Convocatoria selector */
+  .conv-selector{display:flex;gap:0.5rem;margin-bottom:1.25rem}
+  .conv-btn{padding:0.4rem 1rem;border-radius:6px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg-white);color:var(--text-sub);transition:all 0.15s}
+  .conv-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+  /* Topbar breadcrumb area */
+  .topbar-context{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-sub)}
+  .topbar-context strong{color:var(--text-main);font-weight:600}
+
+  /* Views */
+  .view{display:none}
+  .view.active{display:block}
+
+  /* Info bar */
+  .info-bar{background:var(--blue-light);border:1px solid #BFDBFE;border-radius:var(--radius);padding:0.6rem 1rem;font-size:0.78rem;color:var(--blue);display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem}
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-mark">C</div>
+    <div class="sb-logo-text">CurriculaFP<small>Superadministrador</small></div>
+  </div>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 activo</div>
+  <nav style="flex:1;padding-top:0.5rem">
+    <div class="nav-group">
+      <div class="nav-group-label">General</div>
+      <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Configuración</div>
+      <a class="nav-item" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+      <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+      <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas</a>
+      <a class="nav-item" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Años académicos</a>
+      <a class="nav-item" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Catálogo de ciclos</a>
+      <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Catálogo normativo</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditoría del sistema</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Planificación</div>
+      <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Planificación de ciclos</a>
+      <a class="nav-item" href="festivos.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Festivos del centro</a>
+      <a class="nav-item" href="calendario.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Calendario del año</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Gestión de cursos</div>
+      <a class="nav-item" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
+      <a class="nav-item" href="programaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
+      <a class="nav-item" href="horarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
+      <a class="nav-item active" href="calificaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+      <a class="nav-item" href="alumnado.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Formación en empresa</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Gestión académica</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluación</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Boletín de notas</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Comunicación</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Informes</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y analítica</a>
+    </div>
+  </nav>
+  <div class="sb-bottom">
+    <div class="user-tile">
+      <div class="user-av">SA</div>
+      <div><div class="user-name">Superadmin</div><div class="user-role">Administrador global</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="app-main">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-title">Calificaciones</div>
+    <div id="topbar-context" class="topbar-context" style="display:none">
+      <span class="topbar-sep">›</span>
+      <span id="tb-centro"></span>
+      <span class="topbar-sep">›</span>
+      <span id="tb-grupo"></span>
+      <span class="topbar-sep">›</span>
+      <span id="tb-modulo" style="color:var(--text-muted)"></span>
+    </div>
+    <div class="topbar-actions">
+      <div id="year-sel-wrap" style="display:none">
+        <div class="year-selector" onclick="toggleYearMenu()">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span id="year-label">2024–2025</span>
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+      </div>
+      <div id="btn-guardar" style="display:none">
+        <button class="btn btn-primary btn-sm" onclick="guardarCalificaciones()">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- VISTA 1: CENTROS -->
+    <div id="view-centros" class="view active">
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Centros activos</div>
+          <div class="kpi-value">3</div>
+          <div class="kpi-sub">Con grupos en curso 2024-25</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Instrumentos pendientes</div>
+          <div class="kpi-value" style="color:var(--amber)">47</div>
+          <div class="kpi-sub">Sin calificación introducida</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Módulos cerrados</div>
+          <div class="kpi-value" style="color:var(--green)">8</div>
+          <div class="kpi-sub">Calificación final consolidada</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Convocatorias abiertas</div>
+          <div class="kpi-value">5</div>
+          <div class="kpi-sub">En período de introducción</div>
+        </div>
+      </div>
+      <div class="section-header">
+        <div class="section-title">Selecciona un centro</div>
+      </div>
+      <div class="centros-grid">
+        <div class="centro-card" onclick="irGrupos('CIFP Salud Jerez','Jerez de la Frontera')">
+          <div class="centro-card-header">
+            <div>
+              <div class="centro-name">CIFP Salud Jerez</div>
+              <div class="centro-loc">Jerez de la Frontera · Cádiz · Andalucía</div>
+            </div>
+            <span class="badge badge-green">Activo</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.5rem">Familia: Sanidad · 2 ciclos implantados</div>
+          <div class="mini-progress" style="margin-bottom:0.3rem">
+            <span style="font-size:0.72rem;color:var(--text-muted);width:120px">Calificaciones</span>
+            <div class="mini-bar"><div class="mini-bar-fill fill-amber" style="width:62%"></div></div>
+            <span style="font-size:0.72rem;color:var(--text-sub)">62%</span>
+          </div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">3</div><div class="centro-stat-lbl">Grupos</div></div>
+            <div><div class="centro-stat-val">31</div><div class="centro-stat-lbl">Alumnos</div></div>
+            <div><div class="centro-stat-val">28</div><div class="centro-stat-lbl">Pend.</div></div>
+          </div>
+        </div>
+        <div class="centro-card" onclick="irGrupos('IES Virgen del Rocío','Sevilla')">
+          <div class="centro-card-header">
+            <div>
+              <div class="centro-name">IES Virgen del Rocío</div>
+              <div class="centro-loc">Sevilla · Andalucía</div>
+            </div>
+            <span class="badge badge-green">Activo</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.5rem">Familia: Sanidad · 3 ciclos implantados</div>
+          <div class="mini-progress" style="margin-bottom:0.3rem">
+            <span style="font-size:0.72rem;color:var(--text-muted);width:120px">Calificaciones</span>
+            <div class="mini-bar"><div class="mini-bar-fill fill-amber" style="width:38%"></div></div>
+            <span style="font-size:0.72rem;color:var(--text-sub)">38%</span>
+          </div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">5</div><div class="centro-stat-lbl">Grupos</div></div>
+            <div><div class="centro-stat-val">87</div><div class="centro-stat-lbl">Alumnos</div></div>
+            <div><div class="centro-stat-val">12</div><div class="centro-stat-lbl">Pend.</div></div>
+          </div>
+        </div>
+        <div class="centro-card" onclick="irGrupos('CPIFP Hespérides','Alicante')">
+          <div class="centro-card-header">
+            <div>
+              <div class="centro-name">CPIFP Hespérides</div>
+              <div class="centro-loc">Alicante · Comunitat Valenciana</div>
+            </div>
+            <span class="badge badge-green">Activo</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.5rem">Familia: Sanidad · 1 ciclo implantado</div>
+          <div class="mini-progress" style="margin-bottom:0.3rem">
+            <span style="font-size:0.72rem;color:var(--text-muted);width:120px">Calificaciones</span>
+            <div class="mini-bar"><div class="mini-bar-fill fill-green" style="width:85%"></div></div>
+            <span style="font-size:0.72rem;color:var(--text-sub)">85%</span>
+          </div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">2</div><div class="centro-stat-lbl">Grupos</div></div>
+            <div><div class="centro-stat-val">44</div><div class="centro-stat-lbl">Alumnos</div></div>
+            <div><div class="centro-stat-val">7</div><div class="centro-stat-lbl">Pend.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 2: GRUPOS -->
+    <div id="view-grupos" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Calificaciones</a>
+        <span class="breadcrumb-sep">›</span>
+        <span id="bc-centro"></span>
+      </div>
+      <div class="section-header">
+        <div class="section-title" id="grupos-title">Grupos · 2024–2025</div>
+        <div id="year-sel-wrap2">
+          <div class="year-selector">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            2024–2025 <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="grupos-grid">
+        <div class="grupo-card" onclick="irModulos('TES-M1','TES · Grado Medio · Turno mañana · 18 alumnos')">
+          <div class="grupo-name">TES-M1</div>
+          <div class="grupo-meta">Técnico en Emergencias Sanitarias · Grado Medio · Turno mañana · 18 alumnos</div>
+          <div class="grupo-progress-row">
+            <span style="font-size:0.72rem;color:var(--text-muted);width:110px">Instrumentos intro.</span>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:62%;background:var(--amber)"></div></div>
+            <span class="progress-label">62%</span>
+          </div>
+          <div class="grupo-stats">
+            <div><div class="centro-stat-val">11</div><div class="centro-stat-lbl">Módulos</div></div>
+            <div><div class="centro-stat-val">4</div><div class="centro-stat-lbl">Cerrados</div></div>
+            <div><div class="centro-stat-val">28</div><div class="centro-stat-lbl">Pend.</div></div>
+          </div>
+        </div>
+        <div class="grupo-card" onclick="irModulos('TES-T1','TES · Grado Medio · Turno tarde · 13 alumnos')">
+          <div class="grupo-name">TES-T1</div>
+          <div class="grupo-meta">Técnico en Emergencias Sanitarias · Grado Medio · Turno tarde · 13 alumnos</div>
+          <div class="grupo-progress-row">
+            <span style="font-size:0.72rem;color:var(--text-muted);width:110px">Instrumentos intro.</span>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:28%"></div></div>
+            <span class="progress-label">28%</span>
+          </div>
+          <div class="grupo-stats">
+            <div><div class="centro-stat-val">11</div><div class="centro-stat-lbl">Módulos</div></div>
+            <div><div class="centro-stat-val">1</div><div class="centro-stat-lbl">Cerrados</div></div>
+            <div><div class="centro-stat-val">41</div><div class="centro-stat-lbl">Pend.</div></div>
+          </div>
+        </div>
+        <div class="grupo-card" onclick="irModulos('TCAE-M1','TCAE · Grado Medio · Turno mañana · 22 alumnos')">
+          <div class="grupo-name">TCAE-M1</div>
+          <div class="grupo-meta">Técnico en Cuidados Auxiliares de Enfermería · Turno mañana · 22 alumnos</div>
+          <div class="grupo-progress-row">
+            <span style="font-size:0.72rem;color:var(--text-muted);width:110px">Instrumentos intro.</span>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:91%;background:var(--green)"></div></div>
+            <span class="progress-label">91%</span>
+          </div>
+          <div class="grupo-stats">
+            <div><div class="centro-stat-val">9</div><div class="centro-stat-lbl">Módulos</div></div>
+            <div><div class="centro-stat-val">8</div><div class="centro-stat-lbl">Cerrados</div></div>
+            <div><div class="centro-stat-val">3</div><div class="centro-stat-lbl">Pend.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 3: MÓDULOS -->
+    <div id="view-modulos" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Calificaciones</a>
+        <span class="breadcrumb-sep">›</span>
+        <a onclick="irGruposBack()" id="bc-centro2"></a>
+        <span class="breadcrumb-sep">›</span>
+        <span id="bc-grupo"></span>
+      </div>
+      <div class="section-header">
+        <div>
+          <div class="section-title" id="modulos-title">Módulos · TES-M1</div>
+          <div style="font-size:0.78rem;color:var(--text-sub);margin-top:0.2rem" id="modulos-meta"></div>
+        </div>
+        <div style="display:flex;gap:0.5rem;align-items:center">
+          <div class="conv-selector" style="margin:0">
+            <div class="conv-btn active">1ª Convocatoria</div>
+            <div class="conv-btn">2ª Convocatoria</div>
+          </div>
+        </div>
+      </div>
+      <div class="modulos-table">
+        <div class="modulos-table-header">
+          <div>Módulo</div>
+          <div>Horas</div>
+          <div>Progreso</div>
+          <div>Media grupo</div>
+          <div>Estado</div>
+          <div></div>
+        </div>
+        <!-- 0056 — completo -->
+        <div class="modulo-row clickable" onclick="irCalificacion('0056','Atención sanitaria en urgencias y emergencias extrahospitalarias','D. Morales López')">
+          <div>
+            <div class="modulo-code">0056</div>
+            <div class="modulo-name">Atención sanitaria en urgencias y emergencias extrahospitalarias</div>
+            <div class="modulo-docente">D. Morales López · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">330h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-amber" style="width:68%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">68%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">17/25 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--amber)">6,4</div>
+          <div><span class="badge badge-amber">En progreso</span></div>
+          <div><button class="btn btn-secondary btn-sm">Calificar</button></div>
+        </div>
+        <!-- 0052 — completo -->
+        <div class="modulo-row clickable" onclick="irCalificacion('0052','Dotación sanitaria','Dña. García Romero')">
+          <div>
+            <div class="modulo-code">0052</div>
+            <div class="modulo-name">Dotación sanitaria</div>
+            <div class="modulo-docente">Dña. García Romero · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">165h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-green" style="width:100%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">100%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">12/12 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--green)">7,1</div>
+          <div><span class="badge badge-green">Cerrado</span></div>
+          <div><button class="btn btn-secondary btn-sm">Ver</button></div>
+        </div>
+        <!-- 0053 -->
+        <div class="modulo-row clickable" onclick="irCalificacion('0053','Logística sanitaria en emergencias','D. Fernández Ruiz')">
+          <div>
+            <div class="modulo-code">0053</div>
+            <div class="modulo-name">Logística sanitaria en emergencias</div>
+            <div class="modulo-docente">D. Fernández Ruiz · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">132h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-green" style="width:100%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">100%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">10/10 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--green)">6,8</div>
+          <div><span class="badge badge-green">Cerrado</span></div>
+          <div><button class="btn btn-secondary btn-sm">Ver</button></div>
+        </div>
+        <!-- 0054 -->
+        <div class="modulo-row clickable" onclick="irCalificacion('0054','Planes de emergencias y dispositivos de riesgos previsibles','Dña. Vega Castillo')">
+          <div>
+            <div class="modulo-code">0054</div>
+            <div class="modulo-name">Planes de emergencias y dispositivos de riesgos previsibles</div>
+            <div class="modulo-docente">Dña. Vega Castillo · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">99h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-amber" style="width:50%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">50%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">4/8 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--text-muted)">—</div>
+          <div><span class="badge badge-amber">En progreso</span></div>
+          <div><button class="btn btn-secondary btn-sm">Calificar</button></div>
+        </div>
+        <!-- 0055 -->
+        <div class="modulo-row clickable" onclick="irCalificacion('0055','Psicología en urgencias y emergencias','Dña. Torres Navarro')">
+          <div>
+            <div class="modulo-code">0055</div>
+            <div class="modulo-name">Psicología en urgencias y emergencias</div>
+            <div class="modulo-docente">Dña. Torres Navarro · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">66h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-green" style="width:100%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">100%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">8/8 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--green)">7,5</div>
+          <div><span class="badge badge-green">Cerrado</span></div>
+          <div><button class="btn btn-secondary btn-sm">Ver</button></div>
+        </div>
+        <!-- 0057 -->
+        <div class="modulo-row clickable" onclick="irCalificacion('0057','Tele emergencias','D. Morales López')">
+          <div>
+            <div class="modulo-code">0057</div>
+            <div class="modulo-name">Tele emergencias</div>
+            <div class="modulo-docente">D. Morales López · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">99h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-amber" style="width:40%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">40%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">4/10 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--text-muted)">—</div>
+          <div><span class="badge badge-amber">En progreso</span></div>
+          <div><button class="btn btn-secondary btn-sm">Calificar</button></div>
+        </div>
+        <!-- 0058 -->
+        <div class="modulo-row">
+          <div>
+            <div class="modulo-code">0058</div>
+            <div class="modulo-name">Anatomofisiología y patología básicas</div>
+            <div class="modulo-docente">Dña. García Romero · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">132h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-gray" style="width:0%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">0%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">0/12 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--text-muted)">—</div>
+          <div><span class="badge badge-gray">Sin iniciar</span></div>
+          <div><button class="btn btn-secondary btn-sm">Calificar</button></div>
+        </div>
+        <!-- 0059 -->
+        <div class="modulo-row">
+          <div>
+            <div class="modulo-code">0059</div>
+            <div class="modulo-name">Apoyo psicológico y social en situaciones de emergencia</div>
+            <div class="modulo-docente">Dña. Torres Navarro · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">66h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-gray" style="width:0%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">0%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">0/6 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--text-muted)">—</div>
+          <div><span class="badge badge-gray">Sin iniciar</span></div>
+          <div><button class="btn btn-secondary btn-sm">Calificar</button></div>
+        </div>
+        <!-- 0060 -->
+        <div class="modulo-row">
+          <div>
+            <div class="modulo-code">0060</div>
+            <div class="modulo-name">Operaciones de almacenamiento</div>
+            <div class="modulo-docente">D. Fernández Ruiz · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">66h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-gray" style="width:0%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">0%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">0/6 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--text-muted)">—</div>
+          <div><span class="badge badge-gray">Sin iniciar</span></div>
+          <div><button class="btn btn-secondary btn-sm">Calificar</button></div>
+        </div>
+        <!-- FCT -->
+        <div class="modulo-row">
+          <div>
+            <div class="modulo-code">FCT</div>
+            <div class="modulo-name">Formación en empresa</div>
+            <div class="modulo-docente">D. Morales López · Tutor FCT</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">410h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-gray" style="width:0%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">—</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">Pendiente de asignación</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--text-muted)">—</div>
+          <div><span class="badge badge-gray">Pendiente</span></div>
+          <div><button class="btn btn-secondary btn-sm" style="opacity:0.5;cursor:default">Ver</button></div>
+        </div>
+        <!-- LIBRE DISPOSICIÓN -->
+        <div class="modulo-row">
+          <div>
+            <div class="modulo-code">LD01</div>
+            <div class="modulo-name">Inglés técnico sanitario</div>
+            <div class="modulo-docente">Dña. Vega Castillo · Prof. T. Secundaria</div>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-sub)">66h</div>
+          <div>
+            <div class="mini-progress">
+              <div class="mini-bar"><div class="mini-bar-fill fill-green" style="width:100%"></div></div>
+              <span style="font-size:0.72rem;color:var(--text-sub)">100%</span>
+            </div>
+            <div style="font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem">8/8 instrumentos</div>
+          </div>
+          <div style="font-size:0.92rem;font-weight:700;color:var(--green)">6,2</div>
+          <div><span class="badge badge-green">Cerrado</span></div>
+          <div><button class="btn btn-secondary btn-sm">Ver</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 4: CALIFICACIÓN MÓDULO -->
+    <div id="view-cal" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Calificaciones</a>
+        <span class="breadcrumb-sep">›</span>
+        <a onclick="irGruposBack()" id="bc-centro3"></a>
+        <span class="breadcrumb-sep">›</span>
+        <a onclick="irModulosBack()" id="bc-grupo2"></a>
+        <span class="breadcrumb-sep">›</span>
+        <span id="bc-modulo"></span>
+      </div>
+
+      <div class="info-bar">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Las calificaciones se calculan automáticamente según los pesos definidos en la Planificación del ciclo. Los CE marcados con <span class="ce-conjunto-badge">Empresa</span> incluyen componente de evaluación en empresa.
+      </div>
+
+      <div class="cal-layout">
+        <!-- Panel izquierdo: árbol RA → instrumentos -->
+        <div class="tree-panel">
+          <div class="tree-panel-header">Estructura de calificación</div>
+          <div class="tree-body">
+            <!-- RA1 -->
+            <div class="tree-ra">RA1 — Soporte vital avanzado <span class="tree-ra-pct">30%</span></div>
+            <div class="tree-instr active" onclick="selInstr(this,'ra1-i1','Prueba práctica SVA (rúbrica)','RA1','40%','RA1-a, RA1-b, RA1-c')">
+              <div class="tree-dot dot-amber"></div>
+              <span>Prueba práctica SVA</span>
+              <span class="tree-pct">40%</span>
+            </div>
+            <div class="tree-instr" onclick="selInstr(this,'ra1-i2','Examen teórico escrito','RA1','30%','RA1-d, RA1-e')">
+              <div class="tree-dot dot-green"></div>
+              <span>Examen teórico escrito</span>
+              <span class="tree-pct">30%</span>
+            </div>
+            <div class="tree-instr" onclick="selInstr(this,'ra1-i3','Observación en prácticas','RA1','30%','RA1-f, RA1-g, RA1-h')">
+              <div class="tree-dot dot-green"></div>
+              <span>Observación en prácticas</span>
+              <span class="tree-pct">30%</span>
+            </div>
+            <!-- RA2 -->
+            <div class="tree-ra" style="margin-top:0.5rem">RA2 — Soporte vital básico <span class="tree-ra-pct">25%</span></div>
+            <div class="tree-instr" onclick="selInstr(this,'ra2-i1','Simulación SVB (rúbrica)','RA2','50%','RA2-a, RA2-b, RA2-c')">
+              <div class="tree-dot dot-green"></div>
+              <span>Simulación SVB</span>
+              <span class="tree-pct">50%</span>
+            </div>
+            <div class="tree-instr" onclick="selInstr(this,'ra2-i2','Prueba escrita RA2','RA2','50%','RA2-d, RA2-e')">
+              <div class="tree-dot dot-gray"></div>
+              <span>Prueba escrita RA2</span>
+              <span class="tree-pct">50%</span>
+            </div>
+            <!-- RA3 -->
+            <div class="tree-ra" style="margin-top:0.5rem">RA3 — Emergencias traumatológicas <span class="tree-ra-pct">25%</span></div>
+            <div class="tree-instr" onclick="selInstr(this,'ra3-i1','Proyecto técnico grupal','RA3','50%','RA3-a, RA3-b')">
+              <div class="tree-dot dot-amber"></div>
+              <span>Proyecto técnico grupal</span>
+              <span class="tree-pct">50%</span>
+            </div>
+            <div class="tree-instr" onclick="selInstr(this,'ra3-i2','Defensa oral del proyecto','RA3','30%','RA3-c, RA3-d')">
+              <div class="tree-dot dot-gray"></div>
+              <span>Defensa oral del proyecto</span>
+              <span class="tree-pct">30%</span>
+            </div>
+            <div class="tree-instr" onclick="selInstr(this,'ra3-i3','Seguimiento del proceso','RA3','20%','RA3-e')">
+              <div class="tree-dot dot-gray"></div>
+              <span>Seguimiento del proceso</span>
+              <span class="tree-pct">20%</span>
+            </div>
+            <!-- RA4 -->
+            <div class="tree-ra" style="margin-top:0.5rem">RA4 — Emergencias obstétricas <span class="tree-ra-pct">20%</span></div>
+            <div class="tree-instr" onclick="selInstr(this,'ra4-i1','Prueba práctica obstétrica','RA4','60%','RA4-a, RA4-b, RA4-c')">
+              <div class="tree-dot dot-gray"></div>
+              <span>Prueba práctica obstétrica</span>
+              <span class="tree-pct">60%</span>
+            </div>
+            <div class="tree-instr" onclick="selInstr(this,'ra4-i2','Examen teórico RA4','RA4','40%','RA4-d, RA4-e')">
+              <div class="tree-dot dot-gray"></div>
+              <span>Examen teórico RA4</span>
+              <span class="tree-pct">40%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel central: tabla alumnos -->
+        <div class="cal-panel">
+          <div class="cal-panel-header">
+            <div class="cal-instr-title" id="instr-title">Prueba práctica SVA (rúbrica)</div>
+            <div class="cal-instr-meta">
+              <span id="instr-ra">RA1</span>
+              <span>·</span>
+              <span id="instr-peso">Peso: 40%</span>
+              <span>·</span>
+              <span id="instr-ce">CE: RA1-a, RA1-b, RA1-c</span>
+              <span class="ce-conjunto-badge"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Empresa</span>
+            </div>
+          </div>
+          <table class="cal-table">
+            <thead>
+              <tr>
+                <th style="width:40px">#</th>
+                <th>Alumno/a</th>
+                <th class="th-nota">Nota (0–10)</th>
+                <th class="th-obs">Observaciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-alumnos">
+              <!-- generada por JS -->
+            </tbody>
+          </table>
+          <div class="cal-footer">
+            <div class="cal-stat">
+              <div class="cal-stat-val" id="stat-media">—</div>
+              <div class="cal-stat-lbl">Media</div>
+            </div>
+            <div style="width:1px;height:28px;background:var(--border)"></div>
+            <div class="cal-stat">
+              <div class="cal-stat-val" id="stat-apr" style="color:var(--green)">—</div>
+              <div class="cal-stat-lbl">Aprobados</div>
+            </div>
+            <div style="width:1px;height:28px;background:var(--border)"></div>
+            <div class="cal-stat">
+              <div class="cal-stat-val" id="stat-sus" style="color:var(--brand)">—</div>
+              <div class="cal-stat-lbl">Suspensos</div>
+            </div>
+            <div style="width:1px;height:28px;background:var(--border)"></div>
+            <div class="cal-stat">
+              <div class="cal-stat-val" id="stat-pend" style="color:var(--text-muted)">—</div>
+              <div class="cal-stat-lbl">Sin nota</div>
+            </div>
+            <div style="margin-left:auto;display:flex;gap:0.5rem">
+              <button class="btn btn-secondary btn-sm" onclick="marcarTodosNR()">Marcar NR</button>
+              <button class="btn btn-primary btn-sm" onclick="guardarCalificaciones()">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel derecho: cálculo en tiempo real -->
+        <div class="calc-panel">
+          <div class="calc-panel-header">
+            Calificación calculada
+            <span style="font-size:0.68rem;color:var(--text-muted);font-weight:400">Alumno seleccionado</span>
+          </div>
+          <div class="calc-body">
+            <div id="calc-alumno-name" style="font-size:0.82rem;font-weight:700;color:var(--text-main);margin-bottom:0.875rem;padding-bottom:0.625rem;border-bottom:1px solid var(--border)">López Moreno, Juan</div>
+
+            <!-- RA1 -->
+            <div class="calc-ra-block">
+              <div class="calc-ra-header">
+                <span class="calc-ra-name">RA1 — Soporte vital avanzado</span>
+                <span class="calc-ra-nota nota-amber" id="calc-ra1-nota">6,1</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-row-label">Prueba práctica SVA</span>
+                <span class="calc-row-pct">40%</span>
+                <span class="calc-row-nota nota-amber" id="calc-ra1-i1">—</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-row-label">Examen teórico escrito</span>
+                <span class="calc-row-pct">30%</span>
+                <span class="calc-row-nota nota-verde" id="calc-ra1-i2">7,0</span>
+              </div>
+              <div class="calc-row" style="border-bottom:none">
+                <span class="calc-row-label">Observación en prácticas</span>
+                <span class="calc-row-pct">30%</span>
+                <span class="calc-row-nota nota-verde" id="calc-ra1-i3">6,5</span>
+              </div>
+            </div>
+
+            <!-- RA2 -->
+            <div class="calc-ra-block">
+              <div class="calc-ra-header">
+                <span class="calc-ra-name">RA2 — Soporte vital básico</span>
+                <span class="calc-ra-nota nota-verde" id="calc-ra2-nota">7,3</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-row-label">Simulación SVB</span>
+                <span class="calc-row-pct">50%</span>
+                <span class="calc-row-nota nota-verde" id="calc-ra2-i1">7,5</span>
+              </div>
+              <div class="calc-row" style="border-bottom:none">
+                <span class="calc-row-label">Prueba escrita RA2</span>
+                <span class="calc-row-pct">50%</span>
+                <span class="calc-row-nota nota-verde" id="calc-ra2-i2">7,0</span>
+              </div>
+            </div>
+
+            <!-- RA3 -->
+            <div class="calc-ra-block">
+              <div class="calc-ra-header">
+                <span class="calc-ra-name">RA3 — Emergencias traumatológicas</span>
+                <span class="calc-ra-nota nota-pending" id="calc-ra3-nota">Pendiente</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-row-label">Proyecto técnico grupal</span>
+                <span class="calc-row-pct">50%</span>
+                <span class="calc-row-nota nota-amber" id="calc-ra3-i1">5,5</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-row-label">Defensa oral del proyecto</span>
+                <span class="calc-row-pct">30%</span>
+                <span class="calc-row-nota pending" id="calc-ra3-i2">—</span>
+              </div>
+              <div class="calc-row" style="border-bottom:none">
+                <span class="calc-row-label">Seguimiento del proceso</span>
+                <span class="calc-row-pct">20%</span>
+                <span class="calc-row-nota pending" id="calc-ra3-i3">—</span>
+              </div>
+            </div>
+
+            <!-- RA4 -->
+            <div class="calc-ra-block">
+              <div class="calc-ra-header">
+                <span class="calc-ra-name">RA4 — Emergencias obstétricas</span>
+                <span class="calc-ra-nota nota-pending" id="calc-ra4-nota">Pendiente</span>
+              </div>
+              <div class="calc-row">
+                <span class="calc-row-label">Prueba práctica obstétrica</span>
+                <span class="calc-row-pct">60%</span>
+                <span class="calc-row-nota pending" id="calc-ra4-i1">—</span>
+              </div>
+              <div class="calc-row" style="border-bottom:none">
+                <span class="calc-row-label">Examen teórico RA4</span>
+                <span class="calc-row-pct">40%</span>
+                <span class="calc-row-nota pending" id="calc-ra4-i2">—</span>
+              </div>
+            </div>
+
+            <div class="calc-total">
+              <span class="calc-total-label">Nota módulo 0056</span>
+              <span class="calc-total-nota" id="calc-modulo-nota">Pend.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /app-main -->
+
+<script>
+// Estado de navegación
+let centroActual = '';
+let grupoActual = '';
+let grupoMeta = '';
+let moduloActual = '';
+let moduloNombre = '';
+
+// Alumnos del grupo TES-M1
+const alumnos = [
+  {ini:'JL', nombre:'López Moreno, Juan',     dni:'55.123.456-T'},
+  {ini:'AM', nombre:'Martínez García, Ana',   dni:'62.345.678-A'},
+  {ini:'PR', nombre:'Ruiz Fernández, Pedro',  dni:'71.234.567-B'},
+  {ini:'SV', nombre:'Vega Castillo, Sara',    dni:'43.567.890-C'},
+  {ini:'MN', nombre:'Navarro Torres, Miguel', dni:'88.901.234-D'},
+  {ini:'LR', nombre:'Romero Díaz, Laura',     dni:'34.456.789-E'},
+  {ini:'DM', nombre:'Molina Herrera, Diego',  dni:'67.890.123-F'},
+  {ini:'CB', nombre:'Blanco Serrano, Carmen', dni:'29.012.345-G'},
+  {ini:'AG', nombre:'González Prieto, Álvaro',dni:'56.789.012-H'},
+  {ini:'IR', nombre:'Reyes Castillo, Isabel', dni:'78.234.567-I'},
+  {ini:'FM', nombre:'Mora Jiménez, Francisco',dni:'45.678.901-J'},
+  {ini:'ES', nombre:'Soto Guerrero, Elena',   dni:'92.345.678-K'},
+  {ini:'PT', nombre:'Torres Ramos, Pablo',    dni:'37.890.123-L'},
+  {ini:'NC', nombre:'Cruz Herrera, Nuria',    dni:'61.234.567-M'},
+  {ini:'RV', nombre:'Vargas Ruiz, Raúl',      dni:'84.567.890-N'},
+];
+
+// Notas precargadas por instrumento
+const notasBase = {
+  'ra1-i1': [null, 7.0, 5.5, 8.5, 3.0, 6.5, null, 7.5, 6.0, null, 8.0, 5.0, null, 7.0, 6.5],
+  'ra1-i2': [7.0,  8.0, 6.0, 9.0, 4.0, 7.0, 6.5,  8.5, 5.5, 7.0, 8.5, 5.5, 6.0, 7.5, 7.0],
+  'ra1-i3': [6.5,  7.5, 6.5, 8.0, 5.0, 6.0, 7.0,  7.0, 6.0, 6.5, 7.5, 6.0, 6.5, 7.0, 6.0],
+  'ra2-i1': [7.5,  8.0, 6.5, 9.5, 4.5, 7.5, 7.0,  8.0, 6.5, 7.0, 8.5, 6.0, 7.0, 7.5, 7.0],
+  'ra2-i2': [7.0,  7.5, 5.5, 9.0, 4.0, 7.0, 6.0,  8.0, 5.5, 6.5, 8.0, 5.5, 6.5, 7.0, 6.5],
+  'ra3-i1': [5.5,  7.0, 5.0, 8.0, 3.5, 6.0, 6.5,  7.0, 5.0, 6.0, 7.5, 5.0, 6.0, 6.5, 5.5],
+  'ra3-i2': [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+  'ra3-i3': [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+  'ra4-i1': [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+  'ra4-i2': [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+};
+
+let instrActual = 'ra1-i1';
+let alumnoSelIdx = 0;
+
+// Navegación
+function mostrarView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function irCentros() {
+  mostrarView('view-centros');
+  document.getElementById('topbar-context').style.display = 'none';
+  document.getElementById('btn-guardar').style.display = 'none';
+}
+
+function irGrupos(centro, loc) {
+  centroActual = centro;
+  document.getElementById('bc-centro').textContent = centro;
+  document.getElementById('bc-centro2').textContent = centro;
+  document.getElementById('bc-centro3').textContent = centro;
+  document.getElementById('topbar-context').style.display = 'flex';
+  document.getElementById('tb-centro').textContent = centro;
+  document.getElementById('tb-grupo').textContent = '';
+  document.getElementById('tb-modulo').textContent = '';
+  mostrarView('view-grupos');
+}
+
+function irGruposBack() {
+  irGrupos(centroActual, '');
+}
+
+function irModulos(grupo, meta) {
+  grupoActual = grupo;
+  grupoMeta = meta;
+  document.getElementById('bc-grupo').textContent = grupo;
+  document.getElementById('bc-grupo2').textContent = grupo;
+  document.getElementById('modulos-title').textContent = 'Módulos · ' + grupo;
+  document.getElementById('modulos-meta').textContent = meta;
+  document.getElementById('tb-grupo').textContent = grupo;
+  document.getElementById('tb-modulo').textContent = '';
+  mostrarView('view-modulos');
+}
+
+function irModulosBack() {
+  irModulos(grupoActual, grupoMeta);
+}
+
+function irCalificacion(cod, nombre, docente) {
+  moduloActual = cod;
+  moduloNombre = cod + ' · ' + nombre;
+  document.getElementById('bc-modulo').textContent = cod + ' · ' + nombre;
+  document.getElementById('tb-modulo').textContent = cod + ' ' + nombre.substring(0,30) + '…';
+  document.getElementById('btn-guardar').style.display = 'block';
+  // Seleccionar primer instrumento por defecto
+  selInstr(document.querySelector('.tree-instr.active') || document.querySelector('.tree-instr'),
+    'ra1-i1', 'Prueba práctica SVA (rúbrica)', 'RA1', '40%', 'RA1-a, RA1-b, RA1-c');
+  mostrarView('view-cal');
+}
+
+// Selección de instrumento en árbol
+function selInstr(el, instrId, titulo, ra, peso, ces) {
+  document.querySelectorAll('.tree-instr').forEach(i => i.classList.remove('active'));
+  if (el) el.classList.add('active');
+  instrActual = instrId;
+  document.getElementById('instr-title').textContent = titulo;
+  document.getElementById('instr-ra').textContent = ra;
+  document.getElementById('instr-peso').textContent = 'Peso: ' + peso;
+  document.getElementById('instr-ce').textContent = 'CE: ' + ces;
+  // Mostrar badge empresa solo para ciertos CE
+  const esBadge = ['RA1-a, RA1-b, RA1-c','RA2-a, RA2-b, RA2-c'].includes(ces);
+  document.querySelector('.ce-conjunto-badge').style.display = esBadge ? 'inline-flex' : 'none';
+  renderTablaAlumnos(instrId);
+  actualizarEstadisticas(instrId);
+}
+
+// Render tabla alumnos
+function renderTablaAlumnos(instrId) {
+  const notas = notasBase[instrId] || alumnos.map(() => null);
+  const tbody = document.getElementById('tabla-alumnos');
+  tbody.innerHTML = '';
+  alumnos.forEach((a, i) => {
+    const nota = notas[i];
+    const inputClass = nota === null ? '' : nota >= 5 ? 'nota-ok' : 'nota-fail';
+    const tr = document.createElement('tr');
+    tr.style.cursor = 'pointer';
+    if (i === alumnoSelIdx) tr.style.background = '#FEF2F2';
+    tr.onclick = () => seleccionarAlumno(i, tr);
+    tr.innerHTML = `
+      <td style="color:var(--text-muted);font-size:0.75rem">${i+1}</td>
+      <td>
+        <div class="alumno-info">
+          <div class="alumno-avatar">${a.ini}</div>
+          <div>
+            <div class="alumno-nombre">${a.nombre}</div>
+            <div class="alumno-dni">${a.dni}</div>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center">
+        <input type="number" min="0" max="10" step="0.5"
+          class="nota-input ${inputClass}"
+          value="${nota !== null ? nota : ''}"
+          placeholder="—"
+          oninput="onNotaChange(this,${i},'${instrId}')"
+          onclick="seleccionarAlumno(${i},this.closest('tr'))"
+        >
+      </td>
+      <td>
+        <input type="text" class="obs-input" placeholder="Observación…" value="${nota !== null && nota < 5 ? 'Revisar parte práctica' : ''}">
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function seleccionarAlumno(idx, tr) {
+  alumnoSelIdx = idx;
+  document.querySelectorAll('#tabla-alumnos tr').forEach((r,i) => {
+    r.style.background = i === idx ? '#FEF2F2' : '';
+  });
+  document.getElementById('calc-alumno-name').textContent = alumnos[idx].nombre;
+  actualizarCalcPanel(idx);
+}
+
+function onNotaChange(input, alumnoIdx, instrId) {
+  const v = parseFloat(input.value);
+  if (!isNaN(v) && v >= 0 && v <= 10) {
+    notasBase[instrId][alumnoIdx] = v;
+    input.className = 'nota-input ' + (v >= 5 ? 'nota-ok' : 'nota-fail');
+  } else if (input.value === '') {
+    notasBase[instrId][alumnoIdx] = null;
+    input.className = 'nota-input';
+  }
+  actualizarEstadisticas(instrId);
+  if (alumnoIdx === alumnoSelIdx) actualizarCalcPanel(alumnoIdx);
+  actualizarDotArbol(instrId);
+}
+
+function actualizarEstadisticas(instrId) {
+  const notas = (notasBase[instrId] || []).filter(n => n !== null);
+  const total = alumnos.length;
+  const conNota = notas.length;
+  const media = conNota > 0 ? (notas.reduce((a,b) => a+b, 0) / conNota).toFixed(1) : '—';
+  const aprobados = notas.filter(n => n >= 5).length;
+  const suspensos = notas.filter(n => n < 5).length;
+  document.getElementById('stat-media').textContent = media;
+  document.getElementById('stat-apr').textContent = conNota > 0 ? aprobados : '—';
+  document.getElementById('stat-sus').textContent = conNota > 0 ? suspensos : '—';
+  document.getElementById('stat-pend').textContent = total - conNota;
+}
+
+function actualizarCalcPanel(idx) {
+  // Pesos RA1: i1=40%, i2=30%, i3=30%
+  const ra1i1 = notasBase['ra1-i1'][idx];
+  const ra1i2 = notasBase['ra1-i2'][idx];
+  const ra1i3 = notasBase['ra1-i3'][idx];
+  setCalcNota('calc-ra1-i1', ra1i1);
+  setCalcNota('calc-ra1-i2', ra1i2);
+  setCalcNota('calc-ra1-i3', ra1i3);
+  const ra1 = calcPonderado([ra1i1,ra1i2,ra1i3],[0.4,0.3,0.3]);
+  setCalcRA('calc-ra1-nota', ra1);
+
+  // Pesos RA2: i1=50%, i2=50%
+  const ra2i1 = notasBase['ra2-i1'][idx];
+  const ra2i2 = notasBase['ra2-i2'][idx];
+  setCalcNota('calc-ra2-i1', ra2i1);
+  setCalcNota('calc-ra2-i2', ra2i2);
+  const ra2 = calcPonderado([ra2i1,ra2i2],[0.5,0.5]);
+  setCalcRA('calc-ra2-nota', ra2);
+
+  // Pesos RA3: i1=50%, i2=30%, i3=20%
+  const ra3i1 = notasBase['ra3-i1'][idx];
+  const ra3i2 = notasBase['ra3-i2'][idx];
+  const ra3i3 = notasBase['ra3-i3'][idx];
+  setCalcNota('calc-ra3-i1', ra3i1);
+  setCalcNota('calc-ra3-i2', ra3i2);
+  setCalcNota('calc-ra3-i3', ra3i3);
+  const ra3 = calcPonderado([ra3i1,ra3i2,ra3i3],[0.5,0.3,0.2]);
+  setCalcRA('calc-ra3-nota', ra3);
+
+  // Pesos RA4: i1=60%, i2=40%
+  const ra4i1 = notasBase['ra4-i1'][idx];
+  const ra4i2 = notasBase['ra4-i2'][idx];
+  setCalcNota('calc-ra4-i1', ra4i1);
+  setCalcNota('calc-ra4-i2', ra4i2);
+  const ra4 = calcPonderado([ra4i1,ra4i2],[0.6,0.4]);
+  setCalcRA('calc-ra4-nota', ra4);
+
+  // Nota módulo: RA1=30%, RA2=25%, RA3=25%, RA4=20%
+  const modulo = calcPonderado([ra1,ra2,ra3,ra4],[0.3,0.25,0.25,0.2]);
+  const el = document.getElementById('calc-modulo-nota');
+  if (modulo !== null) {
+    el.textContent = modulo.toFixed(1);
+    el.style.color = modulo >= 5 ? 'var(--green)' : 'var(--brand)';
+  } else {
+    el.textContent = 'Pend.';
+    el.style.color = 'var(--brand)';
+  }
+}
+
+function calcPonderado(notas, pesos) {
+  const conNota = notas.filter(n => n !== null);
+  if (conNota.length === 0) return null;
+  // Si hay alguna pendiente devuelve parcial solo con las que hay
+  let suma = 0, pesoTotal = 0;
+  notas.forEach((n, i) => {
+    if (n !== null) { suma += n * pesos[i]; pesoTotal += pesos[i]; }
+  });
+  if (pesoTotal === 0) return null;
+  return suma / pesoTotal;
+}
+
+function setCalcNota(id, nota) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (nota !== null) {
+    el.textContent = nota.toFixed(1);
+    el.className = 'calc-row-nota ' + (nota >= 5 ? 'nota-verde' : 'nota-roja');
+  } else {
+    el.textContent = '—';
+    el.className = 'calc-row-nota pending';
+  }
+}
+
+function setCalcRA(id, nota) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (nota !== null) {
+    el.textContent = nota.toFixed(1);
+    el.className = 'calc-ra-nota ' + (nota >= 5 ? 'nota-verde' : 'nota-roja');
+  } else {
+    el.textContent = 'Pendiente';
+    el.className = 'calc-ra-nota nota-pending';
+  }
+}
+
+function actualizarDotArbol(instrId) {
+  const notas = notasBase[instrId] || [];
+  const conNota = notas.filter(n => n !== null).length;
+  const total = alumnos.length;
+  const dot = document.querySelector(`.tree-instr[onclick*="${instrId}"] .tree-dot`);
+  if (!dot) return;
+  dot.className = 'tree-dot ' + (conNota === 0 ? 'dot-gray' : conNota === total ? 'dot-green' : 'dot-amber');
+}
+
+function marcarTodosNR() {
+  if (!confirm('¿Marcar a todos los alumnos como No Realizado (0) en este instrumento?')) return;
+  notasBase[instrActual] = alumnos.map(() => 0);
+  renderTablaAlumnos(instrActual);
+  actualizarEstadisticas(instrActual);
+  actualizarCalcPanel(alumnoSelIdx);
+}
+
+function guardarCalificaciones() {
+  const btn = document.querySelector('#btn-guardar .btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Guardado';
+  btn.style.background = 'var(--green)';
+  setTimeout(() => {
+    btn.innerHTML = orig;
+    btn.style.background = '';
+  }, 1800);
+}
+
+function toggleYearMenu() {}
+
+// Init: calcular panel derecho con alumno 0
+actualizarCalcPanel(0);
+actualizarEstadisticas('ra1-i1');
+</script>
+</body>
+</html>
