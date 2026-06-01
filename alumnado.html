@@ -7,17 +7,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  html,body{font-size:14px !important}
   :root{
     --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
     --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
     --text-main:#1C1917;--text-sub:#57534E;--text-muted:#A8A29E;
     --border:#E7E5E0;--border-dark:#D4D0CA;
-    --green:#15803D;--green-light:#F0FDF4;--green-border:#BBF7D0;
-    --amber:#B45309;--amber-light:#FFFBEB;--amber-border:#FDE68A;
-    --blue:#1D4ED8;--blue-light:#EFF6FF;--blue-border:#BFDBFE;
-    --purple:#7C3AED;--purple-light:#EDE9FE;--purple-border:#DDD6FE;
-    --red:#DC2626;--red-light:#FEF2F2;--red-border:#FECACA;
-    --radius:8px;--radius-lg:12px;--radius-sm:6px;
+    --green:#15803D;--green-light:#F0FDF4;
+    --amber:#B45309;--amber-light:#FFFBEB;
+    --blue:#1D4ED8;--blue-light:#EFF6FF;
+    --purple:#7C3AED;--purple-light:#F5F3FF;
+    --radius:8px;--radius-lg:12px;
     --shadow-sm:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
     --shadow:0 4px 12px rgba(0,0,0,0.08);
     --sidebar-w:232px;--topbar-h:52px;
@@ -25,8 +25,6 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;font-size:14px}
   a{text-decoration:none;color:inherit}
-
-  /* SIDEBAR */
   .sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
   .sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
   .sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
@@ -41,60 +39,54 @@
   .nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
   .nav-item:hover .ni{opacity:0.85}
   .nav-item.active{background:var(--brand);color:#fff}
-  .ni{width:15px;height:15px;opacity:0.6;flex-shrink:0}
   .nav-item.active .ni{opacity:1}
   .nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
   .nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
   .sb-bottom{margin-top:auto;padding:0.75rem 0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
   .user-tile{display:flex;align-items:center;gap:0.6rem}
-  .user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-weight:700;font-size:0.69rem;color:#fff;flex-shrink:0}
+  .user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-size:0.68rem;font-weight:700;color:#fff;flex-shrink:0}
   .user-name{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.85)}
   .user-role{font-size:0.65rem;color:rgba(255,255,255,0.35)}
-
-  /* MAIN */
+  .ni{width:15px;height:15px;flex-shrink:0;opacity:0.6}
   .app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
   .topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:100}
   .topbar-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-main)}
-  .topbar-sub{font-size:0.75rem;color:var(--text-muted);margin-left:auto}
-  .page-body{padding:1.5rem;flex:1}
+  .topbar-sep{color:var(--text-muted);font-size:0.85rem}
+  .topbar-context{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-sub)}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:0.75rem}
+  .content{padding:1.5rem;flex:1}
+  .view{display:none}.view.active{display:block}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+  .kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm)}
+  .kpi-label{font-size:0.72rem;color:var(--text-muted);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem}
+  .kpi-value{font-size:1.6rem;font-weight:700;color:var(--text-main);line-height:1}
+  .kpi-sub{font-size:0.72rem;color:var(--text-sub);margin-top:0.3rem}
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+  .centro-card-n1{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm)}
+  .centro-card-n1:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+  .centro-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;border-top:1px solid var(--border);padding-top:0.875rem;margin-top:0.875rem}
+  .centro-stat-val{font-size:1.1rem;font-weight:700}
+  .centro-stat-lbl{font-size:0.67rem;color:var(--text-muted)}
+  .section-title-n1{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:1rem}
+  .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-muted);margin-bottom:1.25rem}
+  .breadcrumb a{color:var(--brand);cursor:pointer}.breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb-sep{color:var(--border-dark)}
+  .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-muted);margin-bottom:1.25rem}
+  .breadcrumb a{color:var(--brand);cursor:pointer}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb-sep{color:var(--border-dark)}
+  .btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
+  .btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-dark)}
+  .btn-secondary{background:var(--bg-white);color:var(--text-main);border:1px solid var(--border)}.btn-secondary:hover{background:var(--bg)}
+  .btn-sm{padding:0.3rem 0.7rem;font-size:0.75rem}
+  .badge{display:inline-flex;align-items:center;gap:0.25rem;padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600}
+  .badge-green{background:var(--green-light);color:var(--green)}
+  .badge-amber{background:var(--amber-light);color:var(--amber)}
+  .badge-red{background:var(--brand-light);color:var(--brand)}
+  .badge-gray{background:#F5F5F4;color:#78716C}
+  .badge-blue{background:var(--blue-light);color:var(--blue)}
 
-  /* CARDS Y LAYOUT */
-  .card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm)}
-  .card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main);margin-bottom:0.75rem}
-  .btn{display:inline-flex;align-items:center;gap:0.35rem;padding:0.45rem 0.875rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
-  .btn-primary{background:var(--brand);color:#fff}
-  .btn-primary:hover{background:var(--brand-dark)}
-  .btn-secondary{background:var(--bg);color:var(--text-sub);border:1px solid var(--border)}
-  .btn-secondary:hover{border-color:var(--border-dark);color:var(--text-main)}
-  .btn-sm{padding:0.3rem 0.65rem;font-size:0.75rem}
-  .btn-ghost{background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:0.78rem;font-weight:500;padding:0.25rem 0.5rem;border-radius:4px}
-  .btn-ghost:hover{background:var(--bg);color:var(--text-main)}
-
-  /* PILLS Y BADGES */
-  .pill{display:inline-flex;align-items:center;font-size:0.7rem;font-weight:600;padding:0.2rem 0.55rem;border-radius:999px;white-space:nowrap}
-  .pill-green{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
-  .pill-amber{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
-  .pill-blue{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-border)}
-  .pill-purple{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)}
-  .pill-gray{background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
-  .pill-red{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
-  .badge{font-size:0.68rem;font-weight:600;padding:0.15rem 0.5rem;border-radius:3px;white-space:nowrap}
-  .badge-uc{background:#EEF2FF;color:#3730A3;border:1px solid #C7D2FE}
-  .badge-cual{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
-  .badge-cert{background:#FFF7ED;color:#9A3412;border:1px solid #FED7AA}
-
-  /* LISTADO ALUMNOS */
-  .alumno-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s}
-  .alumno-row:hover{background:#FAFAF9}
-  .alumno-row.selected{background:var(--brand-light);border-left:3px solid var(--brand)}
-  .alumno-row:last-child{border-bottom:none}
-  .alumno-av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0}
-  .alumno-name{font-size:13px;font-weight:600;color:var(--text-main)}
-  .alumno-meta{font-size:11px;color:var(--text-muted);margin-top:1px}
-  .alumno-status{margin-left:auto;display:flex;align-items:center;gap:6px}
-
-  /* FICHA ALUMNO */
-  .ficha-header{display:flex;align-items:center;gap:16px;padding:16px;border-bottom:1px solid var(--border);background:var(--bg-white)}
+.ficha-header{display:flex;align-items:center;gap:16px;padding:16px;border-bottom:1px solid var(--border);background:var(--bg-white)}
   .ficha-av{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:#fff;flex-shrink:0}
   .ficha-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text-main)}
   .ficha-meta{font-size:11.5px;color:var(--text-muted);margin-top:3px}
@@ -267,10 +259,71 @@
 <div class="app-main">
   <div class="topbar">
     <span class="topbar-title">Alumnado</span>
-    <span class="topbar-sub">TES · Grado Medio · CIFP Salud Jerez · 2024–25</span>
+    <div id="topbar-context" class="topbar-context" style="display:none">
+      <span class="topbar-sep">&#8250;</span><span id="tb-centro"></span>
+    </div>
+    <div class="topbar-actions"></div>
   </div>
 
-  <div class="page-body">
+  <div style="padding:1.5rem;flex:1">
+
+    <!-- VISTA N1: CENTROS -->
+    <div id="view-centros" class="view active">
+      <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-label">Alumnos matriculados</div><div class="kpi-value">162</div><div class="kpi-sub">Total sistema 2024&ndash;2025</div></div>
+        <div class="kpi-card"><div class="kpi-label">Tasa de superaci&oacute;n</div><div class="kpi-value" style="color:var(--green)">71%</div><div class="kpi-sub">Media global del sistema</div></div>
+        <div class="kpi-card"><div class="kpi-label">Alumnos en empresa</div><div class="kpi-value" style="color:var(--amber)">38</div><div class="kpi-sub">FCT activa en 3 centros</div></div>
+        <div class="kpi-card"><div class="kpi-label">Con riesgo acad&eacute;mico</div><div class="kpi-value" style="color:var(--brand)">7</div><div class="kpi-sub">3+ m&oacute;dulos suspensos</div></div>
+      </div>
+      <div class="section-title-n1">Selecciona un centro</div>
+      <div class="centros-grid">
+        <div class="centro-card-n1" onclick="irCentro('CIFP Salud Jerez')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.875rem">
+            <div><div style="font-size:0.92rem;font-weight:700">CIFP Salud Jerez</div><div style="font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem">Jerez de la Frontera &middot; C&aacute;diz &middot; Andaluc&iacute;a</div></div>
+            <span style="background:var(--green-light);color:var(--green);padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600">Activo</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.625rem">Familia: Sanidad &middot; 3 ciclos &middot; 4 grupos activos</div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">49</div><div class="centro-stat-lbl">Alumnos</div></div>
+            <div><div class="centro-stat-val" style="color:var(--green)">71%</div><div class="centro-stat-lbl">Superaci&oacute;n</div></div>
+            <div><div class="centro-stat-val" style="color:var(--brand)">3</div><div class="centro-stat-lbl">Riesgo</div></div>
+          </div>
+        </div>
+        <div class="centro-card-n1" onclick="irCentro('IES Virgen del Rocío')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.875rem">
+            <div><div style="font-size:0.92rem;font-weight:700">IES Virgen del Roc&iacute;o</div><div style="font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem">Sevilla &middot; Andaluc&iacute;a</div></div>
+            <span style="background:var(--green-light);color:var(--green);padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600">Activo</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.625rem">Familia: Sanidad &middot; 5 ciclos &middot; 7 grupos activos</div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">87</div><div class="centro-stat-lbl">Alumnos</div></div>
+            <div><div class="centro-stat-val" style="color:var(--amber)">64%</div><div class="centro-stat-lbl">Superaci&oacute;n</div></div>
+            <div><div class="centro-stat-val" style="color:var(--brand)">4</div><div class="centro-stat-lbl">Riesgo</div></div>
+          </div>
+        </div>
+        <div class="centro-card-n1" onclick="irCentro('CPIFP Hespérides')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.875rem">
+            <div><div style="font-size:0.92rem;font-weight:700">CPIFP Hesp&eacute;rides</div><div style="font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem">Alicante &middot; Comunitat Valenciana</div></div>
+            <span style="background:var(--green-light);color:var(--green);padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600">Activo</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.625rem">Familia: Sanidad &middot; 2 ciclos &middot; 3 grupos activos</div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">26</div><div class="centro-stat-lbl">Alumnos</div></div>
+            <div><div class="centro-stat-val" style="color:var(--green)">82%</div><div class="centro-stat-lbl">Superaci&oacute;n</div></div>
+            <div><div class="centro-stat-val" style="color:var(--text-muted)">0</div><div class="centro-stat-lbl">Riesgo</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA N2: LISTADO + FICHA -->
+    <div id="view-listado" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Alumnado</a>
+        <span class="breadcrumb-sep">&#8250;</span>
+        <span id="bc-centro"></span>
+      </div>
+    <div class="page-body" style="margin:0;padding:0">
     <div class="two-col">
 
       <!-- PANEL IZQUIERDO: LISTADO -->
@@ -885,10 +938,24 @@
 
       </div><!-- /ficha-panel-wrap -->
     </div><!-- /two-col -->
-  </div><!-- /page-body -->
+    </div><!-- /page-body -->
+    </div><!-- /view-listado -->
+  </div><!-- /content wrapper -->
 </div><!-- /app-main -->
 
 <script>
+function irCentro(centro) {
+  document.getElementById('view-centros').classList.remove('active');
+  document.getElementById('view-listado').classList.add('active');
+  document.getElementById('bc-centro').textContent = centro;
+  document.getElementById('topbar-context').style.display = 'flex';
+  document.getElementById('tb-centro').textContent = centro;
+}
+function irCentros() {
+  document.getElementById('view-listado').classList.remove('active');
+  document.getElementById('view-centros').classList.add('active');
+  document.getElementById('topbar-context').style.display = 'none';
+}
 function seleccionarAlumno(row) {
   document.querySelectorAll('.alumno-row').forEach(r => r.classList.remove('selected'));
   row.classList.add('selected');
