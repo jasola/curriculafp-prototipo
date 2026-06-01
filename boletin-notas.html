@@ -496,7 +496,7 @@ const modulos = [
 ];
 
 function notaLiteral(n){
-  if(n===null) return 'En evaluación';
+  if(n===null) return 'En evaluacion';
   if(n<5) return 'Insuficiente';
   if(n<6) return 'Suficiente';
   if(n<7) return 'Bien';
@@ -584,20 +584,21 @@ function irBoletin(conv, subtitulo, fecha, estado){
   alumnos.forEach((a,i)=>{
     const div = document.createElement('div');
     div.className = 'alumno-sel-item' + (i===0?' active':'');
-    div.onclick = ()=>selAlumno(i);
+    div.onclick = (function(idx){ return function(){ selAlumno(idx); }; })(i);
     const nota = mediaAlumno[i];
     const color = nota!=='—' ? (parseFloat(nota)>=5?'var(--green)':'var(--brand)') : 'var(--text-muted)';
-    div.innerHTML = `
-      <div class="alumno-sel-av">${a.ini}</div>
-      <div class="alumno-sel-nombre">${a.nombre}</div>
-      <div class="alumno-sel-nota" style="color:${color}">${nota}</div>`;
+    const av = document.createElement('div'); av.className='alumno-sel-av'; av.textContent=a.ini;
+    const nm = document.createElement('div'); nm.className='alumno-sel-nombre'; nm.textContent=a.nombre;
+    const nt = document.createElement('div'); nt.className='alumno-sel-nota'; nt.style.color=color; nt.textContent=nota;
+    div.appendChild(av); div.appendChild(nm); div.appendChild(nt);
     lista.appendChild(div);
   });
 
   alumnoSelIdx=0;
   mostrarView('view-boletin');
-  // Pequeño timeout para asegurar que el DOM está visible antes de renderizar
-  setTimeout(()=>{ renderBoletin(0, conv, subtitulo, fecha, estado); }, 30);
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{ renderBoletin(0, conv, subtitulo, fecha, estado); });
+  });
 }
 
 function selAlumno(idx){
@@ -607,6 +608,7 @@ function selAlumno(idx){
 }
 
 function renderBoletin(idx, conv, subtitulo, fecha, estado){
+  try {
   const a = alumnos[idx];
   const notas = a.notas;
   const notasValidas = Object.values(notas).filter(n=>n!==null);
@@ -733,6 +735,10 @@ function renderBoletin(idx, conv, subtitulo, fecha, estado){
       Documento generado por CurriculaFP · CIFP Salud Jerez · Curso académico 2024–2025<br>
       Este boletín tiene carácter informativo. La calificación oficial consta en el expediente académico del alumno.
     </div>`;
+  } catch(e) {
+    document.getElementById('boletin-contenido').innerHTML = '<div style="padding:2rem;color:var(--brand)">Error al generar el boletín: ' + e.message + '</div>';
+    console.error('renderBoletin error:', e);
+  }
 }
 
 function publicarBoletines(){
