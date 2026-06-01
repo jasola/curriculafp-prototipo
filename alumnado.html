@@ -190,6 +190,18 @@
   /* LAYOUT DOS COLUMNAS */
   .two-col{display:grid;grid-template-columns:280px 1fr;gap:16px;align-items:start}
   .list-panel{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .filter-bar{padding:10px 12px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center}
+  .search-box{display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 8px;flex:1}
+  .search-box input{border:none;background:transparent;font-size:12px;font-family:'Inter',sans-serif;color:var(--text-main);outline:none;width:100%}
+  .filter-select{font-size:12px;border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Inter',sans-serif;color:var(--text-sub);background:var(--bg);cursor:pointer}
+  .alumno-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s}
+  .alumno-row:hover{background:var(--bg)}
+  .alumno-row.selected{background:var(--brand-light);border-left:3px solid var(--brand)}
+  .alumno-row:last-child{border-bottom:none}
+  .alumno-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+  .alumno-name{font-size:13px;font-weight:600;color:var(--text-main)}
+  .alumno-meta{font-size:11px;color:var(--text-muted);margin-top:1px}
+  .alumno-status{margin-left:auto;font-size:13px;font-weight:700;color:var(--text-main)}
   .ficha-panel-wrap{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
 
   /* FILTROS */
