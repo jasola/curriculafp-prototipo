@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Informes y analítica — CurriculaFP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+  html,body{font-size:14px !important}
+  :root{
+    --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+    --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+    --text-main:#1C1917;--text-sub:#57534E;--text-muted:#A8A29E;
+    --border:#E7E5E0;--border-dark:#D4D0CA;
+    --green:#15803D;--green-light:#F0FDF4;
+    --amber:#B45309;--amber-light:#FFFBEB;
+    --blue:#1D4ED8;--blue-light:#EFF6FF;
+    --purple:#7C3AED;--purple-light:#F5F3FF;
+    --radius:8px;--radius-lg:12px;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+    --shadow:0 4px 12px rgba(0,0,0,0.08);
+    --sidebar-w:232px;--topbar-h:52px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;font-size:14px}
+  a{text-decoration:none;color:inherit}
+  .sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+  .sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+  .sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+  .sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+  .sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+  .sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+  .sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .nav-group{padding:0 0.625rem 0.25rem}
+  .nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+  .nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+  .nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+  .nav-item:hover .ni{opacity:0.85}
+  .nav-item.active{background:var(--brand);color:#fff}
+  .nav-item.active .ni{opacity:1}
+  .nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+  .sb-bottom{margin-top:auto;padding:0.75rem 0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+  .user-tile{display:flex;align-items:center;gap:0.6rem}
+  .user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-size:0.68rem;font-weight:700;color:#fff;flex-shrink:0}
+  .user-name{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.85)}
+  .user-role{font-size:0.65rem;color:rgba(255,255,255,0.35)}
+  .ni{width:15px;height:15px;flex-shrink:0;opacity:0.6}
+  .app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+  .topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:100}
+  .topbar-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:0.75rem}
+  .content{padding:1.5rem;flex:1}
+  .btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
+  .btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-dark)}
+  .btn-secondary{background:var(--bg-white);color:var(--text-main);border:1px solid var(--border)}.btn-secondary:hover{background:var(--bg)}
+  .btn-sm{padding:0.3rem 0.7rem;font-size:0.75rem}
+  .badge{display:inline-flex;align-items:center;gap:0.25rem;padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600}
+  .badge-green{background:var(--green-light);color:var(--green)}
+  .badge-amber{background:var(--amber-light);color:var(--amber)}
+  .badge-red{background:var(--brand-light);color:var(--brand)}
+  .badge-gray{background:#F5F5F4;color:#78716C}
+  .badge-blue{background:var(--blue-light);color:var(--blue)}
+  .badge-purple{background:var(--purple-light);color:var(--purple)}
+
+  /* Rol selector */
+  .rol-selector{display:flex;align-items:center;gap:0.5rem;background:#FFF7ED;border:1px solid #FED7AA;border-radius:6px;padding:0.3rem 0.75rem;font-size:0.78rem;font-weight:600;color:#C2410C;cursor:pointer;position:relative}
+  .rol-selector svg{flex-shrink:0}
+  .rol-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);min-width:280px;z-index:300;display:none}
+  .rol-dropdown.open{display:block}
+  .rol-option{padding:0.75rem 1rem;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.12s}
+  .rol-option:last-child{border-bottom:none}
+  .rol-option:hover{background:var(--bg)}
+  .rol-option.active{background:var(--brand-light)}
+  .rol-option-name{font-size:0.82rem;font-weight:700;color:var(--text-main)}
+  .rol-option-sub{font-size:0.72rem;color:var(--text-muted);margin-top:0.1rem}
+
+  /* Contexto centro */
+  .centro-context{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem;box-shadow:var(--shadow-sm)}
+  .centro-context-icon{width:38px;height:38px;border-radius:var(--radius);background:var(--brand-light);display:grid;place-items:center;flex-shrink:0}
+  .centro-context-nombre{font-size:0.95rem;font-weight:700;color:var(--text-main)}
+  .centro-context-sub{font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem}
+  .centro-context-stats{margin-left:auto;display:flex;gap:1.5rem}
+  .ctx-stat-val{font-size:1rem;font-weight:700;color:var(--text-main);text-align:right}
+  .ctx-stat-lbl{font-size:0.67rem;color:var(--text-muted);text-align:right}
+
+  /* KPIs */
+  .kpi-row{display:grid;gap:1rem;margin-bottom:1.25rem}
+  .kpi-row-4{grid-template-columns:repeat(4,1fr)}
+  .kpi-row-3{grid-template-columns:repeat(3,1fr)}
+  .kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm)}
+  .kpi-label{font-size:0.72rem;color:var(--text-muted);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem}
+  .kpi-value{font-size:1.6rem;font-weight:700;color:var(--text-main);line-height:1}
+  .kpi-sub{font-size:0.72rem;color:var(--text-sub);margin-top:0.3rem}
+  .kpi-trend{font-size:0.72rem;font-weight:600;margin-top:0.3rem}
+  .trend-up{color:var(--green)}.trend-down{color:var(--brand)}.trend-flat{color:var(--text-muted)}
+
+  /* Grid bloques */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1rem}
+  .card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm)}
+  .card-title{font-size:0.85rem;font-weight:700;color:var(--text-main);margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
+  .card-title-sub{font-size:0.72rem;color:var(--text-muted);font-weight:400;margin-top:0.15rem}
+
+  /* Barras de progreso */
+  .bar-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.625rem}
+  .bar-label{font-size:0.75rem;color:var(--text-sub);min-width:140px;flex-shrink:0}
+  .bar-label-sm{font-size:0.72rem;color:var(--text-sub);min-width:110px;flex-shrink:0}
+  .bar-wrap{flex:1;height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:999px;transition:width 0.4s}
+  .bar-val{font-size:0.75rem;font-weight:700;min-width:36px;text-align:right;color:var(--text-main)}
+  .bar-green{background:var(--green)}
+  .bar-amber{background:#D97706}
+  .bar-red{background:var(--brand)}
+  .bar-blue{background:var(--blue)}
+
+  /* Tabla simple */
+  .simple-table{width:100%;border-collapse:collapse;font-size:0.8rem}
+  .simple-table th{padding:0.5rem 0.75rem;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);background:var(--bg);border-bottom:1px solid var(--border);text-align:left}
+  .simple-table td{padding:0.6rem 0.75rem;border-bottom:1px solid var(--border)}
+  .simple-table tr:last-child td{border-bottom:none}
+  .simple-table tr:hover td{background:#FAFAF9}
+
+  /* Dona chart CSS */
+  .donut-wrap{display:flex;align-items:center;gap:1.25rem}
+  .donut{width:80px;height:80px;border-radius:50%;flex-shrink:0}
+  .donut-legend{display:flex;flex-direction:column;gap:0.4rem;flex:1}
+  .donut-leg-item{display:flex;align-items:center;gap:0.5rem;font-size:0.75rem}
+  .donut-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+  /* Informes exportables */
+  .informe-item{display:flex;align-items:center;gap:1rem;padding:0.875rem 0;border-bottom:1px solid var(--border)}
+  .informe-item:last-child{border-bottom:none}
+  .informe-icon{width:36px;height:36px;border-radius:var(--radius);display:grid;place-items:center;flex-shrink:0}
+  .informe-nombre{font-size:0.85rem;font-weight:600;color:var(--text-main)}
+  .informe-desc{font-size:0.72rem;color:var(--text-muted);margin-top:0.1rem}
+  .informe-actions{margin-left:auto;display:flex;gap:0.5rem}
+
+  /* Alerta riesgo */
+  .riesgo-item{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.875rem;border-radius:var(--radius);margin-bottom:0.5rem;background:var(--brand-light);border:1px solid #FCA5A5}
+  .riesgo-av{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-size:0.6rem;font-weight:700;display:grid;place-items:center;flex-shrink:0}
+  .riesgo-nombre{font-size:0.82rem;font-weight:600;color:var(--brand)}
+  .riesgo-det{font-size:0.7rem;color:var(--text-sub);margin-top:0.1rem}
+
+  /* Seccion titulo */
+  .section-titulo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main);margin:1.25rem 0 0.875rem;display:flex;align-items:center;gap:0.5rem}
+  .section-titulo::after{content:'';flex:1;height:1px;background:var(--border)}
+
+  /* Vista */
+  .vista{display:none}.vista.active{display:block}
+  </style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sb-logo"><div class="sb-logo-mark">C</div><div class="sb-logo-text">CurriculaFP<small id="sb-rol-label">Superadministrador</small></div></div>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024&ndash;2025 activo</div>
+  <nav style="flex:1;padding-top:0.5rem">
+    <div class="nav-group"><div class="nav-group-label">General</div>
+      <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    </div>
+    <div class="nav-group"><div class="nav-group-label">Configuraci&oacute;n</div>
+      <a class="nav-item" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+      <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+      <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas</a>
+      <a class="nav-item" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>A&ntilde;os acad&eacute;micos</a>
+      <a class="nav-item" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Cat&aacute;logo de ciclos</a>
+      <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Cat&aacute;logo normativo</a>
+      <a class="nav-item" style="opacity:0.45;cursor:not-allowed;pointer-events:none" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditor&iacute;a del sistema</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group"><div class="nav-group-label">Planificaci&oacute;n</div>
+      <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Planificaci&oacute;n de ciclos</a>
+      <a class="nav-item" href="festivos.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Festivos del centro</a>
+      <a class="nav-item" href="calendario.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Calendario del a&ntilde;o</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group"><div class="nav-group-label">Gesti&oacute;n de cursos</div>
+      <a class="nav-item" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
+      <a class="nav-item" href="programaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
+      <a class="nav-item" href="horarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
+      <a class="nav-item" href="calificaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+      <a class="nav-item" href="alumnado.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+      <a class="nav-item" href="formacion-empresa.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Formaci&oacute;n en empresa</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group"><div class="nav-group-label">Gesti&oacute;n acad&eacute;mica</div>
+      <a class="nav-item" href="sesiones-evaluacion.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluaci&oacute;n</a>
+      <a class="nav-item" href="boletin-notas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Bolet&iacute;n de notas</a>
+      <a class="nav-item" href="convalidaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group"><div class="nav-group-label">Comunicaci&oacute;n</div>
+      <a class="nav-item" href="avisos.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos</a>
+    </div>
+    <div class="nav-group"><div class="nav-group-label">Informes</div>
+      <a class="nav-item active" href="informes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y anal&iacute;tica</a>
+    </div>
+  </nav>
+  <div class="sb-bottom"><div class="user-tile"><div class="user-av" id="sb-av">SA</div><div><div class="user-name" id="sb-nombre">Superadmin</div><div class="user-role" id="sb-cargo">Administrador global</div></div></div></div>
+</aside>
+
+<div class="app-main">
+  <div class="topbar">
+    <div class="topbar-title">Informes y anal&iacute;tica</div>
+    <div class="topbar-actions">
+      <!-- Selector de rol simulado -->
+      <div style="position:relative">
+        <div class="rol-selector" onclick="toggleDropdown()">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          <span id="rol-label-btn">Vista simulada: Superadmin</span>
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="rol-dropdown" id="rol-dropdown">
+          <div class="rol-option active" onclick="cambiarRol('superadmin',this)">
+            <div class="rol-option-name">Superadmin</div>
+            <div class="rol-option-sub">Administrador global del sistema &mdash; todos los centros</div>
+          </div>
+          <div class="rol-option" onclick="cambiarRol('admin',this)">
+            <div class="rol-option-name">D&ntilde;a. Garc&iacute;a Romero &mdash; Administradora de centro</div>
+            <div class="rol-option-sub">CIFP Salud Jerez &middot; Jerez de la Frontera</div>
+          </div>
+          <div class="rol-option" onclick="cambiarRol('jefe',this)">
+            <div class="rol-option-name">D. Morales L&oacute;pez &mdash; Jefe de Departamento</div>
+            <div class="rol-option-sub">CIFP Salud Jerez &middot; Departamento de Sanidad</div>
+          </div>
+          <div class="rol-option" onclick="cambiarRol('profesor',this)">
+            <div class="rol-option-name">D. Morales L&oacute;pez &mdash; Profesor</div>
+            <div class="rol-option-sub">CIFP Salud Jerez &middot; M&oacute;dulos 0056 y 0057 &middot; TES-M1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- VISTA SUPERADMIN -->
+    <div id="vista-superadmin" class="vista active">
+      <div class="kpi-row kpi-row-4">
+        <div class="kpi-card"><div class="kpi-label">Centros activos</div><div class="kpi-value">3</div><div class="kpi-sub">2024&ndash;2025</div><div class="kpi-trend trend-up">+1 respecto al curso anterior</div></div>
+        <div class="kpi-card"><div class="kpi-label">Ciclos implantados</div><div class="kpi-value">7</div><div class="kpi-sub">En 3 centros</div><div class="kpi-trend trend-up">+2 nuevas implantaciones</div></div>
+        <div class="kpi-card"><div class="kpi-label">Alumnos matriculados</div><div class="kpi-value">162</div><div class="kpi-sub">Total sistema</div><div class="kpi-trend trend-up">+14 respecto a 2023&ndash;24</div></div>
+        <div class="kpi-card"><div class="kpi-label">Tasa de superaci&oacute;n</div><div class="kpi-value" style="color:var(--green)">71%</div><div class="kpi-sub">Media global del sistema</div><div class="kpi-trend trend-up">+3 pp respecto al curso anterior</div></div>
+      </div>
+
+      <div class="section-titulo">Comparativa de centros</div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">Tasa de superaci&oacute;n por centro</div>
+          <div class="bar-row"><span class="bar-label">CPIFP Hesp&eacute;rides</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:82%"></div></div><span class="bar-val" style="color:var(--green)">82%</span></div>
+          <div class="bar-row"><span class="bar-label">CIFP Salud Jerez</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:71%"></div></div><span class="bar-val" style="color:var(--green)">71%</span></div>
+          <div class="bar-row"><span class="bar-label">IES Virgen del Roc&iacute;o</span><div class="bar-wrap"><div class="bar-fill bar-amber" style="width:64%"></div></div><span class="bar-val" style="color:var(--amber)">64%</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Programaciones completadas</div>
+          <div class="bar-row"><span class="bar-label">CPIFP Hesp&eacute;rides</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:95%"></div></div><span class="bar-val">95%</span></div>
+          <div class="bar-row"><span class="bar-label">CIFP Salud Jerez</span><div class="bar-wrap"><div class="bar-fill bar-amber" style="width:78%"></div></div><span class="bar-val">78%</span></div>
+          <div class="bar-row"><span class="bar-label">IES Virgen del Roc&iacute;o</span><div class="bar-wrap"><div class="bar-fill bar-amber" style="width:70%"></div></div><span class="bar-val">70%</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">FCT &mdash; alumnos asignados</div>
+          <div class="bar-row"><span class="bar-label">CPIFP Hesp&eacute;rides</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="bar-val">100%</span></div>
+          <div class="bar-row"><span class="bar-label">CIFP Salud Jerez</span><div class="bar-wrap"><div class="bar-fill bar-amber" style="width:75%"></div></div><span class="bar-val">75%</span></div>
+          <div class="bar-row"><span class="bar-label">IES Virgen del Roc&iacute;o</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:86%"></div></div><span class="bar-val">86%</span></div>
+        </div>
+      </div>
+
+      <div class="section-titulo">Cat&aacute;logo nacional &mdash; estado de implantaci&oacute;n</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Ciclos m&aacute;s implantados</div>
+          <table class="simple-table">
+            <thead><tr><th>Ciclo</th><th>Familia</th><th>Centros</th></tr></thead>
+            <tbody>
+              <tr><td><strong>T&eacute;cnico en Emergencias Sanitarias</strong></td><td>Sanidad</td><td style="font-weight:700;color:var(--green)">3</td></tr>
+              <tr><td><strong>TCAE</strong></td><td>Sanidad</td><td style="font-weight:700;color:var(--green)">2</td></tr>
+              <tr><td><strong>Imagen para el Diagn&oacute;stico</strong></td><td>Sanidad</td><td style="font-weight:700">1</td></tr>
+              <tr><td><strong>Pr&oacute;tesis Dentales</strong></td><td>Sanidad</td><td style="font-weight:700">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">Informes exportables &mdash; sistema global</div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--blue-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+            <div><div class="informe-nombre">Resumen ejecutivo del sistema</div><div class="informe-desc">KPIs globales &middot; Todos los centros &middot; 2024&ndash;2025</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--green-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--green)" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+            <div><div class="informe-nombre">Informe de trazabilidad curricular</div><div class="informe-desc">Cobertura de competencias &middot; Todos los ciclos</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--purple-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
+            <div><div class="informe-nombre">Historial docente agregado</div><div class="informe-desc">Trayectoria por m&oacute;dulo, ciclo y centro &middot; DNI universal</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA ADMIN CENTRO -->
+    <div id="vista-admin" class="vista">
+      <div class="centro-context">
+        <div class="centro-context-icon"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--brand)" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg></div>
+        <div><div class="centro-context-nombre">CIFP Salud Jerez</div><div class="centro-context-sub">Jerez de la Frontera &middot; C&aacute;diz &middot; Junta de Andaluc&iacute;a &middot; Familia: Sanidad</div></div>
+        <div class="centro-context-stats">
+          <div><div class="ctx-stat-val">3</div><div class="ctx-stat-lbl">Ciclos</div></div>
+          <div><div class="ctx-stat-val">49</div><div class="ctx-stat-lbl">Alumnos</div></div>
+          <div><div class="ctx-stat-val">71%</div><div class="ctx-stat-lbl">Superaci&oacute;n</div></div>
+        </div>
+      </div>
+      <div class="kpi-row kpi-row-4">
+        <div class="kpi-card"><div class="kpi-label">Grupos activos</div><div class="kpi-value">4</div><div class="kpi-sub">TES-M1, TES-T1, TES-M2, TCAE-M1</div></div>
+        <div class="kpi-card"><div class="kpi-label">M&oacute;dulos programados</div><div class="kpi-value">32</div><div class="kpi-sub">De 36 totales del centro</div><div class="kpi-trend trend-flat">4 sin programar</div></div>
+        <div class="kpi-card"><div class="kpi-label">Sesiones de evaluaci&oacute;n</div><div class="kpi-value">8</div><div class="kpi-sub">5 cerradas &middot; 3 pendientes</div></div>
+        <div class="kpi-card"><div class="kpi-label">Convalidaciones</div><div class="kpi-value">9</div><div class="kpi-sub">3 pendientes de resoluci&oacute;n</div></div>
+      </div>
+      <div class="section-titulo">Rendimiento por ciclo &mdash; CIFP Salud Jerez</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Tasa de superaci&oacute;n por m&oacute;dulo &mdash; TES</div>
+          <div class="bar-row"><span class="bar-label-sm">0052 Dotaci&oacute;n san.</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:88%"></div></div><span class="bar-val" style="color:var(--green)">88%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0053 Log&iacute;stica san.</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:82%"></div></div><span class="bar-val" style="color:var(--green)">82%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0055 Psicolog&iacute;a urg.</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:79%"></div></div><span class="bar-val" style="color:var(--green)">79%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0057 Tele emergencias</span><div class="bar-wrap"><div class="bar-fill bar-amber" style="width:61%"></div></div><span class="bar-val" style="color:var(--amber)">61%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0054 Planes emerg.</span><div class="bar-wrap"><div class="bar-fill bar-red" style="width:48%"></div></div><span class="bar-val" style="color:var(--brand)">48%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0056 Aten. sanitaria</span><div class="bar-wrap"><div class="bar-fill bar-blue" style="width:0%"></div></div><span class="bar-val" style="color:var(--text-muted)">En curso</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Informes exportables &mdash; centro</div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--brand-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--brand)" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+            <div><div class="informe-nombre">Memoria anual del centro</div><div class="informe-desc">Todos los ciclos &middot; CIFP Salud Jerez &middot; 2024&ndash;2025</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--blue-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+            <div><div class="informe-nombre">Informe de rendimiento acad&eacute;mico</div><div class="informe-desc">Por grupo y m&oacute;dulo &middot; 2&ordf; evaluaci&oacute;n</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--green-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--green)" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+            <div><div class="informe-nombre">Estado de programaciones</div><div class="informe-desc">Cobertura de SA por m&oacute;dulo y docente</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--amber-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--amber)" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+            <div><div class="informe-nombre">Informe de Formaci&oacute;n en empresa</div><div class="informe-desc">Estado por alumno &middot; Visitas &middot; Calificaciones FCT</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA JEFE DEPARTAMENTO -->
+    <div id="vista-jefe" class="vista">
+      <div class="centro-context">
+        <div class="centro-context-icon"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--brand)" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <div><div class="centro-context-nombre">Departamento de Sanidad &mdash; CIFP Salud Jerez</div><div class="centro-context-sub">D. Morales L&oacute;pez &middot; Jefe de Departamento &middot; Familia profesional: Sanidad</div></div>
+        <div class="centro-context-stats">
+          <div><div class="ctx-stat-val">2</div><div class="ctx-stat-lbl">Ciclos</div></div>
+          <div><div class="ctx-stat-val">7</div><div class="ctx-stat-lbl">Docentes</div></div>
+          <div><div class="ctx-stat-val">4</div><div class="ctx-stat-lbl">Grupos</div></div>
+        </div>
+      </div>
+      <div class="kpi-row kpi-row-3">
+        <div class="kpi-card"><div class="kpi-label">SA programadas vs normativa</div><div class="kpi-value" style="color:var(--amber)">78%</div><div class="kpi-sub">De las horas normativas cubiertas</div></div>
+        <div class="kpi-card"><div class="kpi-label">Cobertura de competencias</div><div class="kpi-value" style="color:var(--green)">86%</div><div class="kpi-sub">CP del TES con trazabilidad completa</div></div>
+        <div class="kpi-card"><div class="kpi-label">M&oacute;dulo con menor tasa</div><div class="kpi-value" style="color:var(--brand)">0054</div><div class="kpi-sub">Planes de emergencias &middot; 48% superaci&oacute;n</div></div>
+      </div>
+      <div class="section-titulo">Cobertura de SA por m&oacute;dulo &mdash; TES &middot; 2024&ndash;2025</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Progreso de programaciones &mdash; TES-M1</div>
+          <div class="bar-row"><span class="bar-label-sm">0052 &middot; D. Morales</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="bar-val" style="color:var(--green)">100%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0053 &middot; D. Fern&aacute;ndez</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="bar-val" style="color:var(--green)">100%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0055 &middot; D&ntilde;a. Torres</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:100%"></div></div><span class="bar-val" style="color:var(--green)">100%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0056 &middot; D. Morales</span><div class="bar-wrap"><div class="bar-fill bar-amber" style="width:68%"></div></div><span class="bar-val" style="color:var(--amber)">68%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0057 &middot; D. Morales</span><div class="bar-wrap"><div class="bar-fill bar-amber" style="width:40%"></div></div><span class="bar-val" style="color:var(--amber)">40%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">0054 &middot; D&ntilde;a. Vega</span><div class="bar-wrap"><div class="bar-fill bar-amber" style="width:50%"></div></div><span class="bar-val" style="color:var(--amber)">50%</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Alumnos con riesgo acad&eacute;mico &mdash; TES</div>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:0.875rem">3 o m&aacute;s m&oacute;dulos con calificaci&oacute;n inferior a 5</div>
+          <div class="riesgo-item"><div class="riesgo-av">MN</div><div><div class="riesgo-nombre">Navarro Torres, Miguel</div><div class="riesgo-det">TES-M1 &middot; 5 m&oacute;dulos suspensos &middot; Orientaci&oacute;n activa</div></div></div>
+          <div class="riesgo-item"><div class="riesgo-av">PR</div><div><div class="riesgo-nombre">Ruiz Fern&aacute;ndez, Pedro</div><div class="riesgo-det">TES-M1 &middot; 3 m&oacute;dulos suspensos &middot; Seguimiento reforzado</div></div></div>
+          <div class="riesgo-item"><div class="riesgo-av">DM</div><div><div class="riesgo-nombre">Molina Herrera, Diego</div><div class="riesgo-det">TES-M1 &middot; 1 m&oacute;dulo suspenso &middot; En recuperaci&oacute;n</div></div></div>
+          <div style="margin-top:0.875rem">
+            <button class="btn btn-secondary btn-sm" onclick="simularExport(this)">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Exportar informe de riesgo
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section-titulo">Informes del departamento</div>
+      <div class="card">
+        <div class="informe-item">
+          <div class="informe-icon" style="background:var(--brand-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--brand)" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+          <div><div class="informe-nombre">Memoria del departamento de Sanidad</div><div class="informe-desc">Resumen anual &middot; Programaciones, rendimiento y FCT &middot; CIFP Salud Jerez 2024&ndash;2025</div></div>
+          <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+        </div>
+        <div class="informe-item">
+          <div class="informe-icon" style="background:var(--blue-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+          <div><div class="informe-nombre">Informe de cobertura competencial &mdash; TES</div><div class="informe-desc">Trazabilidad RA &rarr; Competencias profesionales &middot; Cobertura por m&oacute;dulo</div></div>
+          <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+        </div>
+        <div class="informe-item">
+          <div class="informe-icon" style="background:var(--amber-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--amber)" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+          <div><div class="informe-nombre">Informe de alumnado en riesgo</div><div class="informe-desc">Alumnos con 3+ m&oacute;dulos suspensos &middot; Plan de acci&oacute;n tutorial</div></div>
+          <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA PROFESOR -->
+    <div id="vista-profesor" class="vista">
+      <div class="centro-context">
+        <div class="centro-context-icon"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--brand)" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg></div>
+        <div><div class="centro-context-nombre">D. Morales L&oacute;pez &mdash; Profesor TES</div><div class="centro-context-sub">CIFP Salud Jerez &middot; M&oacute;dulos asignados: 0056 Atenci&oacute;n sanitaria &middot; 0057 Tele emergencias &middot; Grupo TES-M1</div></div>
+        <div class="centro-context-stats">
+          <div><div class="ctx-stat-val">2</div><div class="ctx-stat-lbl">M&oacute;dulos</div></div>
+          <div><div class="ctx-stat-val">18</div><div class="ctx-stat-lbl">Alumnos</div></div>
+          <div><div class="ctx-stat-val">Tutor FCT</div><div class="ctx-stat-lbl">TES-M2</div></div>
+        </div>
+      </div>
+      <div class="kpi-row kpi-row-4">
+        <div class="kpi-card"><div class="kpi-label">SA programadas &mdash; 0056</div><div class="kpi-value" style="color:var(--amber)">68%</div><div class="kpi-sub">226h de 330h normativas</div></div>
+        <div class="kpi-card"><div class="kpi-label">SA programadas &mdash; 0057</div><div class="kpi-value" style="color:var(--amber)">40%</div><div class="kpi-sub">40h de 99h normativas</div></div>
+        <div class="kpi-card"><div class="kpi-label">Instrumentos introducidos</div><div class="kpi-value" style="color:var(--amber)">68%</div><div class="kpi-sub">17 de 25 en m&oacute;d. 0056</div></div>
+        <div class="kpi-card"><div class="kpi-label">Alumnos FCT asignados</div><div class="kpi-value" style="color:var(--green)">12</div><div class="kpi-sub">De 16 en TES-M2 &middot; 4 pendientes</div></div>
+      </div>
+      <div class="section-titulo">Mis m&oacute;dulos &mdash; detalle de calificaciones</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">M&oacute;dulo 0056 &mdash; Distribuci&oacute;n de notas &middot; TES-M1</div>
+          <div class="donut-wrap" style="margin-bottom:1rem">
+            <div class="donut" style="background:conic-gradient(var(--green) 0% 57%, #D97706 57% 71%, var(--brand) 71% 86%, var(--text-muted) 86% 100%)"></div>
+            <div class="donut-legend">
+              <div class="donut-leg-item"><div class="donut-dot" style="background:var(--green)"></div><span>Notable&ndash;Sobresaliente (7&ndash;10): 57%</span></div>
+              <div class="donut-leg-item"><div class="donut-dot" style="background:#D97706"></div><span>Suficiente&ndash;Bien (5&ndash;6,9): 14%</span></div>
+              <div class="donut-leg-item"><div class="donut-dot" style="background:var(--brand)"></div><span>Insuficiente (&lt;5): 15%</span></div>
+              <div class="donut-leg-item"><div class="donut-dot" style="background:var(--text-muted)"></div><span>En evaluaci&oacute;n: 14%</span></div>
+            </div>
+          </div>
+          <div class="bar-row"><span class="bar-label-sm">RA1 Soporte vital avanzado</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:72%"></div></div><span class="bar-val" style="color:var(--green)">72%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">RA2 Soporte vital b&aacute;sico</span><div class="bar-wrap"><div class="bar-fill bar-green" style="width:81%"></div></div><span class="bar-val" style="color:var(--green)">81%</span></div>
+          <div class="bar-row"><span class="bar-label-sm">RA3 Emergencias traumat.</span><div class="bar-wrap"><div class="bar-fill bar-blue" style="width:0%"></div></div><span class="bar-val" style="color:var(--text-muted)">En curso</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Informes del profesor</div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--brand-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--brand)" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg></div>
+            <div><div class="informe-nombre">Programaci&oacute;n did&aacute;ctica &mdash; M&oacute;d. 0056</div><div class="informe-desc">Memoria completa &middot; SA, RA, CE, instrumentos &middot; TES-M1</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--blue-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg></div>
+            <div><div class="informe-nombre">Expediente de calificaciones</div><div class="informe-desc">Notas por alumno &middot; Desglose RA y CE &middot; TES-M1</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--amber-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--amber)" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+            <div><div class="informe-nombre">Informe de seguimiento FCT</div><div class="informe-desc">Estado de alumnos en empresa &middot; Visitas &middot; TES-M2</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+          <div class="informe-item">
+            <div class="informe-icon" style="background:var(--purple-light)"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="var(--purple)" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+            <div><div class="informe-nombre">Trayectoria docente personal</div><div class="informe-desc">Historial de m&oacute;dulos, ciclos y centros v&iacute;a DNI</div></div>
+            <div class="informe-actions"><button class="btn btn-primary btn-sm" onclick="simularExport(this)">Generar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var rolActual = 'superadmin';
+var roles = {
+  superadmin: {label:'Vista simulada: Superadmin', sbLabel:'Superadministrador', sbNombre:'Superadmin', sbCargo:'Administrador global', sbAv:'SA'},
+  admin: {label:'Vista simulada: Administradora centro', sbLabel:'Administradora de centro', sbNombre:'Dña. García Romero', sbCargo:'CIFP Salud Jerez', sbAv:'GR'},
+  jefe: {label:'Vista simulada: Jefe de Departamento', sbLabel:'Jefe de Departamento', sbNombre:'D. Morales López', sbCargo:'Dpto. Sanidad · CIFP Salud Jerez', sbAv:'ML'},
+  profesor: {label:'Vista simulada: Profesor TES', sbLabel:'Profesor', sbNombre:'D. Morales López', sbCargo:'TES-M1 · CIFP Salud Jerez', sbAv:'ML'},
+};
+
+function toggleDropdown(){
+  document.getElementById('rol-dropdown').classList.toggle('open');
+}
+
+function cambiarRol(rol, el){
+  rolActual = rol;
+  document.querySelectorAll('.rol-option').forEach(function(o){o.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('rol-dropdown').classList.remove('open');
+  var r = roles[rol];
+  document.getElementById('rol-label-btn').textContent = r.label;
+  document.getElementById('sb-rol-label').textContent = r.sbLabel;
+  document.getElementById('sb-nombre').textContent = r.sbNombre;
+  document.getElementById('sb-cargo').textContent = r.sbCargo;
+  document.getElementById('sb-av').textContent = r.sbAv;
+  document.querySelectorAll('.vista').forEach(function(v){v.classList.remove('active');});
+  document.getElementById('vista-' + rol).classList.add('active');
+}
+
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.rol-selector') && !e.target.closest('.rol-dropdown')){
+    document.getElementById('rol-dropdown').classList.remove('open');
+  }
+});
+
+function simularExport(btn){
+  var orig = btn.innerHTML;
+  btn.innerHTML = '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Generado';
+  btn.style.background = 'var(--green)';
+  setTimeout(function(){ btn.innerHTML = orig; btn.style.background = ''; }, 1800);
+}
+</script>
+</body>
+</html>
