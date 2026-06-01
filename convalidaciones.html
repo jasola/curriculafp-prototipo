@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Convalidaciones — CurriculaFP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+  html,body{font-size:14px !important}
+  :root{
+    --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+    --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+    --text-main:#1C1917;--text-sub:#57534E;--text-muted:#A8A29E;
+    --border:#E7E5E0;--border-dark:#D4D0CA;
+    --green:#15803D;--green-light:#F0FDF4;
+    --amber:#B45309;--amber-light:#FFFBEB;
+    --blue:#1D4ED8;--blue-light:#EFF6FF;
+    --purple:#7C3AED;--purple-light:#F5F3FF;
+    --radius:8px;--radius-lg:12px;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+    --shadow:0 4px 12px rgba(0,0,0,0.08);
+    --sidebar-w:232px;--topbar-h:52px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;font-size:14px}
+  a{text-decoration:none;color:inherit}
+  .sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+  .sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+  .sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+  .sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+  .sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+  .sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+  .sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .nav-group{padding:0 0.625rem 0.25rem}
+  .nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+  .nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+  .nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+  .nav-item:hover .ni{opacity:0.85}
+  .nav-item.active{background:var(--brand);color:#fff}
+  .nav-item.active .ni{opacity:1}
+  .nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+  .nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
+  .sb-bottom{margin-top:auto;padding:0.75rem 0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+  .user-tile{display:flex;align-items:center;gap:0.6rem}
+  .user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-size:0.68rem;font-weight:700;color:#fff;flex-shrink:0}
+  .user-name{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.85)}
+  .user-role{font-size:0.65rem;color:rgba(255,255,255,0.35)}
+  .ni{width:15px;height:15px;flex-shrink:0;opacity:0.6}
+  .app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+  .topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:100}
+  .topbar-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-main)}
+  .topbar-context{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-sub)}
+  .topbar-sep{color:var(--text-muted);font-size:0.85rem}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:0.75rem}
+  .content{padding:1.5rem;flex:1}
+  .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-muted);margin-bottom:1.25rem}
+  .breadcrumb a{color:var(--brand);cursor:pointer}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb-sep{color:var(--border-dark)}
+  .btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
+  .btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-dark)}
+  .btn-secondary{background:var(--bg-white);color:var(--text-main);border:1px solid var(--border)}.btn-secondary:hover{background:var(--bg)}
+  .btn-sm{padding:0.3rem 0.7rem;font-size:0.75rem}
+  .badge{display:inline-flex;align-items:center;gap:0.25rem;padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600}
+  .badge-green{background:var(--green-light);color:var(--green)}
+  .badge-amber{background:var(--amber-light);color:var(--amber)}
+  .badge-red{background:var(--brand-light);color:var(--brand)}
+  .badge-gray{background:#F5F5F4;color:#78716C}
+  .badge-blue{background:var(--blue-light);color:var(--blue)}
+  .badge-purple{background:var(--purple-light);color:var(--purple)}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+  .kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm)}
+  .kpi-label{font-size:0.72rem;color:var(--text-muted);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem}
+  .kpi-value{font-size:1.6rem;font-weight:700;color:var(--text-main);line-height:1}
+  .kpi-sub{font-size:0.72rem;color:var(--text-sub);margin-top:0.3rem}
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+  .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm)}
+  .centro-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+  .centro-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;border-top:1px solid var(--border);padding-top:0.875rem;margin-top:0.875rem}
+  .centro-stat-val{font-size:1.1rem;font-weight:700}
+  .centro-stat-lbl{font-size:0.67rem;color:var(--text-muted)}
+  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700}
+  .grupos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .grupo-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm)}
+  .grupo-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+  .curso-badge{display:inline-flex;padding:0.15rem 0.5rem;border-radius:5px;font-size:0.68rem;font-weight:700;margin-bottom:0.4rem}
+  .curso-1{background:#EFF6FF;color:#1D4ED8}
+  .curso-2{background:#F0FDF4;color:#15803D}
+  /* Solicitudes */
+  .solicitud-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:0.75rem;box-shadow:var(--shadow-sm);overflow:hidden}
+  .solicitud-header{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;cursor:pointer;transition:background 0.12s}
+  .solicitud-header:hover{background:#FAFAF9}
+  .sol-av{width:32px;height:32px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:0.68rem;font-weight:700;display:grid;place-items:center;flex-shrink:0}
+  .sol-nombre{font-size:0.88rem;font-weight:700;color:var(--text-main)}
+  .sol-modulo{font-size:0.75rem;color:var(--text-sub);margin-top:0.1rem}
+  .sol-meta{margin-left:auto;display:flex;align-items:center;gap:0.75rem}
+  .sol-fecha{font-size:0.72rem;color:var(--text-muted)}
+  .sol-chevron{transition:transform 0.2s;color:var(--text-muted)}
+  .sol-chevron.open{transform:rotate(180deg)}
+  .solicitud-body{display:none;border-top:1px solid var(--border);padding:1.25rem;background:var(--bg)}
+  .solicitud-body.open{display:block}
+  .sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem}
+  .sol-field-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:0.25rem}
+  .sol-field-val{font-size:0.85rem;font-weight:500;color:var(--text-main)}
+  .sol-obs{font-size:0.82rem;color:var(--text-sub);line-height:1.5;padding:0.75rem;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius)}
+  .sol-actions{display:flex;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+  /* Modal */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s}
+  .modal-overlay.open{opacity:1;pointer-events:all}
+  .modal{background:var(--bg-white);border-radius:var(--radius-lg);padding:1.5rem;width:520px;max-width:95vw;box-shadow:var(--shadow)}
+  .modal-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:1.25rem}
+  .modal-field{margin-bottom:0.875rem}
+  .modal-label{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:0.3rem;display:block}
+  .modal-input{width:100%;padding:0.45rem 0.75rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;font-family:'Inter',sans-serif;color:var(--text-main)}
+  .modal-input:focus{outline:none;border-color:var(--brand)}
+  .modal-footer{display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border)}
+  .view{display:none}.view.active{display:block}
+  .info-bar{background:var(--blue-light);border:1px solid #BFDBFE;border-radius:var(--radius);padding:0.6rem 1rem;font-size:0.78rem;color:var(--blue);display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem}
+  </style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sb-logo"><div class="sb-logo-mark">C</div><div class="sb-logo-text">CurriculaFP<small>Superadministrador</small></div></div>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024&ndash;2025 activo</div>
+  <nav style="flex:1;padding-top:0.5rem">
+    <div class="nav-group"><div class="nav-group-label">General</div>
+      <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    </div>
+    <div class="nav-group"><div class="nav-group-label">Configuraci&oacute;n</div>
+      <a class="nav-item" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+      <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+      <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas</a>
+      <a class="nav-item" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>A&ntilde;os acad&eacute;micos</a>
+      <a class="nav-item" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Cat&aacute;logo de ciclos</a>
+      <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Cat&aacute;logo normativo</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditor&iacute;a del sistema</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group"><div class="nav-group-label">Planificaci&oacute;n</div>
+      <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Planificaci&oacute;n de ciclos</a>
+      <a class="nav-item" href="festivos.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Festivos del centro</a>
+      <a class="nav-item" href="calendario.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Calendario del a&ntilde;o</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group"><div class="nav-group-label">Gesti&oacute;n de cursos</div>
+      <a class="nav-item" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
+      <a class="nav-item" href="programaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
+      <a class="nav-item" href="horarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
+      <a class="nav-item" href="calificaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+      <a class="nav-item" href="alumnado.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+      <a class="nav-item" href="formacion-empresa.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Formaci&oacute;n en empresa</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group"><div class="nav-group-label">Gesti&oacute;n acad&eacute;mica</div>
+      <a class="nav-item" href="sesiones-evaluacion.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluaci&oacute;n</a>
+      <a class="nav-item" href="boletin-notas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Bolet&iacute;n de notas</a>
+      <a class="nav-item active" href="convalidaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group"><div class="nav-group-label">Comunicaci&oacute;n</div>
+      <a class="nav-item" href="avisos.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos</a>
+    </div>
+    <div class="nav-group"><div class="nav-group-label">Informes</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y anal&iacute;tica</a>
+    </div>
+  </nav>
+  <div class="sb-bottom"><div class="user-tile"><div class="user-av">SA</div><div><div class="user-name">Superadmin</div><div class="user-role">Administrador global</div></div></div></div>
+</aside>
+
+<div class="app-main">
+  <div class="topbar">
+    <div class="topbar-title">Convalidaciones</div>
+    <div id="topbar-context" class="topbar-context" style="display:none">
+      <span class="topbar-sep">&rsaquo;</span><span id="tb-centro"></span>
+      <span class="topbar-sep">&rsaquo;</span><span id="tb-grupo" style="color:var(--text-muted)"></span>
+    </div>
+    <div class="topbar-actions">
+      <div id="btn-nueva" style="display:none">
+        <button class="btn btn-primary btn-sm" onclick="abrirModal('modal-nueva')">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>
+          Nueva solicitud
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- N1 CENTROS -->
+    <div id="view-centros" class="view active">
+      <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-label">Solicitudes totales</div><div class="kpi-value">14</div><div class="kpi-sub">Curso 2024&ndash;2025</div></div>
+        <div class="kpi-card"><div class="kpi-label">Pendientes de resoluci&oacute;n</div><div class="kpi-value" style="color:var(--amber)">3</div><div class="kpi-sub">Plazo m&aacute;ximo: 30 d&iacute;as</div></div>
+        <div class="kpi-card"><div class="kpi-label">Aprobadas</div><div class="kpi-value" style="color:var(--green)">9</div><div class="kpi-sub">Convalidaciones y exenciones</div></div>
+        <div class="kpi-card"><div class="kpi-label">Denegadas</div><div class="kpi-value" style="color:var(--brand)">2</div><div class="kpi-sub">Con motivaci&oacute;n documentada</div></div>
+      </div>
+      <div class="section-header"><div class="section-title">Selecciona un centro</div></div>
+      <div class="centros-grid">
+        <div class="centro-card" onclick="irGrupos('CIFP Salud Jerez')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.875rem">
+            <div><div style="font-size:0.92rem;font-weight:700">CIFP Salud Jerez</div><div style="font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem">Jerez de la Frontera &middot; C&aacute;diz</div></div>
+            <span class="badge badge-green">Activo</span>
+          </div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">9</div><div class="centro-stat-lbl">Solicitudes</div></div>
+            <div><div class="centro-stat-val" style="color:var(--amber)">3</div><div class="centro-stat-lbl">Pendientes</div></div>
+            <div><div class="centro-stat-val" style="color:var(--green)">5</div><div class="centro-stat-lbl">Aprobadas</div></div>
+          </div>
+        </div>
+        <div class="centro-card" onclick="irGrupos('IES Virgen del Roc&iacute;o')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.875rem">
+            <div><div style="font-size:0.92rem;font-weight:700">IES Virgen del Roc&iacute;o</div><div style="font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem">Sevilla &middot; Andaluc&iacute;a</div></div>
+            <span class="badge badge-green">Activo</span>
+          </div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">5</div><div class="centro-stat-lbl">Solicitudes</div></div>
+            <div><div class="centro-stat-val" style="color:var(--text-muted)">0</div><div class="centro-stat-lbl">Pendientes</div></div>
+            <div><div class="centro-stat-val" style="color:var(--green)">4</div><div class="centro-stat-lbl">Aprobadas</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- N2 GRUPOS -->
+    <div id="view-grupos" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Convalidaciones</a>
+        <span class="breadcrumb-sep">&rsaquo;</span><span id="bc-centro"></span>
+      </div>
+      <div class="section-header"><div class="section-title">Grupos &middot; 2024&ndash;2025</div></div>
+      <div class="grupos-grid">
+        <div class="grupo-card" onclick="irSolicitudes('TES-M1','1&ordm; TES &middot; Turno ma&ntilde;ana')">
+          <div class="curso-badge curso-1">1&ordm; Curso</div>
+          <div style="font-size:1rem;font-weight:700;margin-bottom:0.15rem">TES-M1</div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.875rem">T&eacute;cnico en Emergencias Sanitarias &middot; Turno ma&ntilde;ana &middot; 18 alumnos</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="badge badge-amber">2 pendientes</span>
+            <span class="badge badge-green">3 resueltas</span>
+          </div>
+        </div>
+        <div class="grupo-card" onclick="irSolicitudes('TES-M2','2&ordm; TES &middot; Turno ma&ntilde;ana')">
+          <div class="curso-badge curso-2">2&ordm; Curso</div>
+          <div style="font-size:1rem;font-weight:700;margin-bottom:0.15rem">TES-M2</div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.875rem">T&eacute;cnico en Emergencias Sanitarias &middot; Turno ma&ntilde;ana &middot; 16 alumnos</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="badge badge-amber">1 pendiente</span>
+            <span class="badge badge-green">2 resueltas</span>
+          </div>
+        </div>
+        <div class="grupo-card" onclick="irSolicitudes('TES-T1','1&ordm; TES &middot; Turno tarde')">
+          <div class="curso-badge curso-1">1&ordm; Curso</div>
+          <div style="font-size:1rem;font-weight:700;margin-bottom:0.15rem">TES-T1</div>
+          <div style="font-size:0.75rem;color:var(--text-sub);margin-bottom:0.875rem">T&eacute;cnico en Emergencias Sanitarias &middot; Turno tarde &middot; 13 alumnos</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="badge badge-gray">Sin solicitudes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- N3 SOLICITUDES -->
+    <div id="view-solicitudes" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Convalidaciones</a>
+        <span class="breadcrumb-sep">&rsaquo;</span>
+        <a onclick="irGruposBack()" id="bc-centro2"></a>
+        <span class="breadcrumb-sep">&rsaquo;</span>
+        <span id="bc-grupo"></span>
+      </div>
+      <div class="section-header">
+        <div>
+          <div class="section-title" id="sol-title">Solicitudes &middot; TES-M1</div>
+          <div style="font-size:0.78rem;color:var(--text-sub);margin-top:0.2rem" id="sol-meta"></div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="abrirModal('modal-nueva')">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>
+          Nueva solicitud
+        </button>
+      </div>
+      <div class="info-bar">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Convalidaciones seg&uacute;n RD 659/2023 arts. 88&ndash;95. Exenciones de FCT por experiencia laboral acreditada seg&uacute;n art. 96. El historial acumulable del alumno v&iacute;a DNI queda actualizado autom&aacute;ticamente tras la resoluci&oacute;n.
+      </div>
+
+      <!-- Solicitud 1 — pendiente -->
+      <div class="solicitud-card">
+        <div class="solicitud-header" onclick="toggleSol(this)">
+          <div class="sol-av">JL</div>
+          <div>
+            <div class="sol-nombre">L&oacute;pez Moreno, Juan</div>
+            <div class="sol-modulo">M&oacute;d. 0052 &middot; Dotaci&oacute;n sanitaria &middot; Convalidaci&oacute;n por titulaci&oacute;n</div>
+          </div>
+          <div class="sol-meta">
+            <span class="badge badge-amber">Pendiente</span>
+            <span class="sol-fecha">Solicitado 15 sep 2024</span>
+            <svg class="sol-chevron ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+        <div class="solicitud-body">
+          <div class="sol-grid">
+            <div><div class="sol-field-label">Tipo de solicitud</div><div class="sol-field-val">Convalidaci&oacute;n por titulaci&oacute;n universitaria</div></div>
+            <div><div class="sol-field-label">M&oacute;dulo afectado</div><div class="sol-field-val">0052 &middot; Dotaci&oacute;n sanitaria (165h)</div></div>
+            <div><div class="sol-field-label">Estado</div><div class="sol-field-val"><span class="badge badge-amber">Pendiente de resoluci&oacute;n</span></div></div>
+            <div><div class="sol-field-label">Titulaci&oacute;n alegada</div><div class="sol-field-val">Grado en Enfermer&iacute;a (Universidad de C&aacute;diz, 2022)</div></div>
+            <div><div class="sol-field-label">Documentaci&oacute;n aportada</div><div class="sol-field-val">T&iacute;tulo universitario + certificado acad&eacute;mico oficial</div></div>
+            <div><div class="sol-field-label">Fecha l&iacute;mite resoluci&oacute;n</div><div class="sol-field-val" style="color:var(--amber)">15 oct 2024 (vencido)</div></div>
+          </div>
+          <div class="sol-obs">El alumno solicita convalidaci&oacute;n del m&oacute;dulo de dotaci&oacute;n sanitaria alegando estudios universitarios de Enfermer&iacute;a. Aporta certificado acad&eacute;mico con las asignaturas cursadas. Pendiente de informe del jefe de departamento.</div>
+          <div class="sol-actions">
+            <button class="btn btn-primary btn-sm" onclick="resolverSolicitud(this,'aprobada')">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Aprobar
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="resolverSolicitud(this,'denegada')">Denegar</button>
+            <button class="btn btn-secondary btn-sm">Ver documentaci&oacute;n</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solicitud 2 — pendiente -->
+      <div class="solicitud-card">
+        <div class="solicitud-header" onclick="toggleSol(this)">
+          <div class="sol-av">MN</div>
+          <div>
+            <div class="sol-nombre">Navarro Torres, Miguel</div>
+            <div class="sol-modulo">FCT &middot; Formaci&oacute;n en empresa &middot; Exenci&oacute;n parcial por experiencia laboral</div>
+          </div>
+          <div class="sol-meta">
+            <span class="badge badge-amber">Pendiente</span>
+            <span class="sol-fecha">Solicitado 3 oct 2024</span>
+            <svg class="sol-chevron ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+        <div class="solicitud-body">
+          <div class="sol-grid">
+            <div><div class="sol-field-label">Tipo de solicitud</div><div class="sol-field-val">Exenci&oacute;n parcial de FCT por experiencia laboral</div></div>
+            <div><div class="sol-field-label">M&oacute;dulo afectado</div><div class="sol-field-val">FCT &middot; Formaci&oacute;n en empresa (410h)</div></div>
+            <div><div class="sol-field-label">Estado</div><div class="sol-field-val"><span class="badge badge-amber">Pendiente de resoluci&oacute;n</span></div></div>
+            <div><div class="sol-field-label">Experiencia acreditada</div><div class="sol-field-val">3 a&ntilde;os en SAMUR-PC Madrid (2021&ndash;2024)</div></div>
+            <div><div class="sol-field-label">Documentaci&oacute;n aportada</div><div class="sol-field-val">Certificado de empresa + vida laboral (TGSS)</div></div>
+            <div><div class="sol-field-label">Horas exentas solicitadas</div><div class="sol-field-val">205h (exenci&oacute;n del 50%)</div></div>
+          </div>
+          <div class="sol-obs">El alumno acredita 3 a&ntilde;os de experiencia como auxiliar de emergencias sanitarias en el SAMUR. Seg&uacute;n el art. 96 del RD 659/2023, puede solicitarse exenci&oacute;n total o parcial de la FCT. Se propone exenci&oacute;n del 50% de las horas, manteniendo el per&iacute;odo de pr&aacute;cticas para la verificaci&oacute;n de competencias.</div>
+          <div class="sol-actions">
+            <button class="btn btn-primary btn-sm" onclick="resolverSolicitud(this,'aprobada')">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>
+              Aprobar exenci&oacute;n parcial
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="resolverSolicitud(this,'denegada')">Denegar</button>
+            <button class="btn btn-secondary btn-sm">Ver documentaci&oacute;n</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solicitud 3 — aprobada -->
+      <div class="solicitud-card">
+        <div class="solicitud-header" onclick="toggleSol(this)">
+          <div class="sol-av">AM</div>
+          <div>
+            <div class="sol-nombre">Mart&iacute;nez Garc&iacute;a, Ana</div>
+            <div class="sol-modulo">M&oacute;d. 0055 &middot; Psicolog&iacute;a en urgencias &middot; Convalidaci&oacute;n por m&oacute;dulo equivalente</div>
+          </div>
+          <div class="sol-meta">
+            <span class="badge badge-green">Aprobada</span>
+            <span class="sol-fecha">Resuelta 2 oct 2024</span>
+            <svg class="sol-chevron ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+        <div class="solicitud-body">
+          <div class="sol-grid">
+            <div><div class="sol-field-label">Tipo de solicitud</div><div class="sol-field-val">Convalidaci&oacute;n por m&oacute;dulo equivalente (otro ciclo FP)</div></div>
+            <div><div class="sol-field-label">M&oacute;dulo afectado</div><div class="sol-field-val">0055 &middot; Psicolog&iacute;a en urgencias (66h)</div></div>
+            <div><div class="sol-field-label">Estado</div><div class="sol-field-val"><span class="badge badge-green">Aprobada</span></div></div>
+            <div><div class="sol-field-label">M&oacute;dulo origen</div><div class="sol-field-val">Intervenci&oacute;n psicosocial &middot; TCAE (IES Mar de Arag&oacute;n, 2023)</div></div>
+            <div><div class="sol-field-label">Calificaci&oacute;n reconocida</div><div class="sol-field-val" style="color:var(--green);font-weight:700">7,8 &mdash; Notable</div></div>
+            <div><div class="sol-field-label">Resuelto por</div><div class="sol-field-val">D&ntilde;a. Garc&iacute;a Romero &middot; 2 oct 2024</div></div>
+          </div>
+          <div class="sol-obs">Convalidaci&oacute;n aprobada por correspondencia de contenidos entre el m&oacute;dulo de origen y el solicitado. La calificaci&oacute;n del m&oacute;dulo origen (7,8) se traslada al expediente del alumno en CurriculaFP.</div>
+        </div>
+      </div>
+
+      <!-- Solicitud 4 — denegada -->
+      <div class="solicitud-card">
+        <div class="solicitud-header" onclick="toggleSol(this)">
+          <div class="sol-av">PR</div>
+          <div>
+            <div class="sol-nombre">Ruiz Fern&aacute;ndez, Pedro</div>
+            <div class="sol-modulo">M&oacute;d. 0056 &middot; Atenci&oacute;n sanitaria &middot; Exenci&oacute;n total por experiencia laboral</div>
+          </div>
+          <div class="sol-meta">
+            <span class="badge badge-red">Denegada</span>
+            <span class="sol-fecha">Resuelta 10 oct 2024</span>
+            <svg class="sol-chevron ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+        <div class="solicitud-body">
+          <div class="sol-grid">
+            <div><div class="sol-field-label">Tipo de solicitud</div><div class="sol-field-val">Exenci&oacute;n total de FCT por experiencia laboral</div></div>
+            <div><div class="sol-field-label">M&oacute;dulo afectado</div><div class="sol-field-val">0056 &middot; Atenci&oacute;n sanitaria en urgencias (330h)</div></div>
+            <div><div class="sol-field-label">Estado</div><div class="sol-field-val"><span class="badge badge-red">Denegada</span></div></div>
+            <div><div class="sol-field-label">Experiencia alegada</div><div class="sol-field-val">1 a&ntilde;o como auxiliar administrativo en cl&iacute;nica</div></div>
+            <div><div class="sol-field-label">Motivo de denegaci&oacute;n</div><div class="sol-field-val" style="color:var(--brand)">Experiencia no vinculada al perfil del m&oacute;dulo</div></div>
+            <div><div class="sol-field-label">Resuelto por</div><div class="sol-field-val">D&ntilde;a. Garc&iacute;a Romero &middot; 10 oct 2024</div></div>
+          </div>
+          <div class="sol-obs" style="border-color:#FCA5A5;background:var(--brand-light)">Solicitud denegada. La experiencia laboral aportada corresponde a funciones administrativas en entorno sanitario, sin correspondencia con las competencias profesionales del m&oacute;dulo 0056. Seg&uacute;n el art. 96 RD 659/2023, la experiencia debe ser directamente relacionada con las actividades del m&oacute;dulo.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL NUEVA SOLICITUD -->
+<div class="modal-overlay" id="modal-nueva">
+  <div class="modal">
+    <div class="modal-title">Nueva solicitud de convalidaci&oacute;n o exenci&oacute;n</div>
+    <div class="modal-field">
+      <label class="modal-label">Alumno/a</label>
+      <select class="modal-input">
+        <option>L&oacute;pez Moreno, Juan &mdash; 55.123.456-T</option>
+        <option>Mart&iacute;nez Garc&iacute;a, Ana &mdash; 62.345.678-A</option>
+        <option>Ruiz Fern&aacute;ndez, Pedro &mdash; 71.234.567-B</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Tipo de solicitud</label>
+      <select class="modal-input">
+        <option>Convalidaci&oacute;n por titulaci&oacute;n universitaria</option>
+        <option>Convalidaci&oacute;n por m&oacute;dulo equivalente (otro ciclo FP)</option>
+        <option>Exenci&oacute;n total de FCT por experiencia laboral</option>
+        <option>Exenci&oacute;n parcial de FCT por experiencia laboral</option>
+        <option>Reconocimiento de competencias (art. 10 LO 3/2022)</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">M&oacute;dulo afectado</label>
+      <select class="modal-input">
+        <option>0052 &middot; Dotaci&oacute;n sanitaria</option>
+        <option>0053 &middot; Log&iacute;stica sanitaria en emergencias</option>
+        <option>0054 &middot; Planes de emergencias</option>
+        <option>0055 &middot; Psicolog&iacute;a en urgencias</option>
+        <option>0056 &middot; Atenci&oacute;n sanitaria en urgencias</option>
+        <option>FCT &middot; Formaci&oacute;n en empresa</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Fecha de solicitud</label>
+      <input type="date" class="modal-input" value="2025-06-01">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="cerrarModal('modal-nueva')">Cancelar</button>
+      <button class="btn btn-primary" onclick="cerrarModal('modal-nueva')">Registrar solicitud</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var centroActual='', grupoActual='';
+function mostrarView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});document.getElementById(id).classList.add('active');}
+function irCentros(){mostrarView('view-centros');document.getElementById('topbar-context').style.display='none';document.getElementById('btn-nueva').style.display='none';}
+function irGrupos(centro){
+  centroActual=centro;
+  document.getElementById('bc-centro').textContent=centro;
+  document.getElementById('bc-centro2').textContent=centro;
+  document.getElementById('topbar-context').style.display='flex';
+  document.getElementById('tb-centro').textContent=centro;
+  document.getElementById('tb-grupo').textContent='';
+  document.getElementById('btn-nueva').style.display='none';
+  mostrarView('view-grupos');
+}
+function irGruposBack(){irGrupos(centroActual);}
+function irSolicitudes(grupo,meta){
+  grupoActual=grupo;
+  document.getElementById('bc-grupo').textContent=grupo;
+  document.getElementById('sol-title').textContent='Solicitudes \u00b7 '+grupo;
+  document.getElementById('sol-meta').innerHTML=meta;
+  document.getElementById('tb-grupo').textContent=grupo;
+  document.getElementById('btn-nueva').style.display='block';
+  mostrarView('view-solicitudes');
+}
+function toggleSol(header){
+  var body=header.nextElementSibling;
+  var chevron=header.querySelector('.sol-chevron');
+  var isOpen=body.classList.contains('open');
+  document.querySelectorAll('.solicitud-body').forEach(function(b){b.classList.remove('open');});
+  document.querySelectorAll('.sol-chevron').forEach(function(c){c.classList.remove('open');});
+  if(!isOpen){body.classList.add('open');chevron.classList.add('open');}
+}
+function resolverSolicitud(btn,resultado){
+  var card=btn.closest('.solicitud-card');
+  var badgeEl=card.querySelector('.sol-meta .badge');
+  var actionsEl=card.querySelector('.sol-actions');
+  if(resultado==='aprobada'){
+    badgeEl.textContent='Aprobada';badgeEl.className='badge badge-green';
+  } else {
+    badgeEl.textContent='Denegada';badgeEl.className='badge badge-red';
+  }
+  actionsEl.style.display='none';
+}
+function abrirModal(id){document.getElementById(id).classList.add('open');}
+function cerrarModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('open');});});
+</script>
+</body>
+</html>
