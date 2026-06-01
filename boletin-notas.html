@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Boletín de notas — CurriculaFP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+  html,body{font-size:14px !important}
+  :root{
+    --brand:#9B1C1C;--brand-dark:#7B1111;--brand-light:#FEF2F2;
+    --bg:#F7F4F0;--bg-white:#FFFFFF;--bg-sidebar:#18100A;
+    --text-main:#1C1917;--text-sub:#57534E;--text-muted:#A8A29E;
+    --border:#E7E5E0;--border-dark:#D4D0CA;
+    --green:#15803D;--green-light:#F0FDF4;
+    --amber:#B45309;--amber-light:#FFFBEB;
+    --blue:#1D4ED8;--blue-light:#EFF6FF;
+    --purple:#7C3AED;--purple-light:#F5F3FF;
+    --radius:8px;--radius-lg:12px;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+    --shadow:0 4px 12px rgba(0,0,0,0.08);
+    --sidebar-w:232px;--topbar-h:52px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-main);display:flex;min-height:100vh;font-size:14px}
+  a{text-decoration:none;color:inherit}
+  .sidebar{width:var(--sidebar-w);background:var(--bg-sidebar);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;overflow-y:auto}
+  .sb-logo{padding:1.125rem 1.125rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:0.55rem}
+  .sb-logo-mark{width:32px;height:32px;background:var(--brand);border-radius:7px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:12px;color:#fff;flex-shrink:0}
+  .sb-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#F7F4F0}
+  .sb-logo-text small{display:block;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.07em;text-transform:uppercase;margin-top:1px}
+  .sb-year{margin:0.75rem 0.875rem 0;padding:0.35rem 0.625rem;background:rgba(155,28,28,0.2);border:1px solid rgba(200,60,60,0.3);border-radius:6px;font-size:0.69rem;font-weight:600;color:#FCA5A5;display:flex;align-items:center;gap:0.35rem}
+  .sb-year-dot{width:5px;height:5px;border-radius:50%;background:#FCA5A5;animation:blink 2s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .nav-group{padding:0 0.625rem 0.25rem}
+  .nav-group-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:0.875rem 0.5rem 0.3rem}
+  .nav-item{display:flex;align-items:center;gap:0.55rem;padding:0.45rem 0.55rem;border-radius:6px;color:rgba(255,255,255,0.5);font-size:0.8rem;font-weight:500;transition:all 0.15s;cursor:pointer}
+  .nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.88)}
+  .nav-item:hover .ni{opacity:0.85}
+  .nav-item.active{background:var(--brand);color:#fff}
+  .nav-item.active .ni{opacity:1}
+  .nav-divider{height:1px;background:rgba(255,255,255,0.06);margin:0.375rem 0.625rem}
+  .nav-disabled{opacity:0.45;cursor:not-allowed !important;pointer-events:none}
+  .sb-bottom{margin-top:auto;padding:0.75rem 0.875rem;border-top:1px solid rgba(255,255,255,0.07)}
+  .user-tile{display:flex;align-items:center;gap:0.6rem}
+  .user-av{width:30px;height:30px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-size:0.68rem;font-weight:700;color:#fff;flex-shrink:0}
+  .user-name{font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.85)}
+  .user-role{font-size:0.65rem;color:rgba(255,255,255,0.35)}
+  .ni{width:15px;height:15px;flex-shrink:0;opacity:0.6}
+  .app-main{margin-left:var(--sidebar-w);display:flex;flex-direction:column;flex:1;min-width:0}
+  .topbar{height:var(--topbar-h);background:var(--bg-white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:100}
+  .topbar-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-main)}
+  .topbar-sep{color:var(--text-muted);font-size:0.85rem}
+  .topbar-context{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-sub)}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:0.75rem}
+  .content{padding:1.5rem;flex:1}
+  .breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-muted);margin-bottom:1.25rem}
+  .breadcrumb a{color:var(--brand);cursor:pointer}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb-sep{color:var(--border-dark)}
+  .btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;border:none;transition:all 0.15s}
+  .btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-dark)}
+  .btn-secondary{background:var(--bg-white);color:var(--text-main);border:1px solid var(--border)}.btn-secondary:hover{background:var(--bg)}
+  .btn-sm{padding:0.3rem 0.7rem;font-size:0.75rem}
+  .badge{display:inline-flex;align-items:center;gap:0.25rem;padding:0.18rem 0.55rem;border-radius:999px;font-size:0.68rem;font-weight:600}
+  .badge-green{background:var(--green-light);color:var(--green)}
+  .badge-amber{background:var(--amber-light);color:var(--amber)}
+  .badge-red{background:var(--brand-light);color:var(--brand)}
+  .badge-gray{background:#F5F5F4;color:#78716C}
+  .badge-blue{background:var(--blue-light);color:var(--blue)}
+
+  /* KPIs */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+  .kpi-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;box-shadow:var(--shadow-sm)}
+  .kpi-label{font-size:0.72rem;color:var(--text-muted);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem}
+  .kpi-value{font-size:1.6rem;font-weight:700;color:var(--text-main);line-height:1}
+  .kpi-sub{font-size:0.72rem;color:var(--text-sub);margin-top:0.3rem}
+
+  /* Centros */
+  .centros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+  .centro-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm)}
+  .centro-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+  .centro-name{font-size:0.92rem;font-weight:700}
+  .centro-loc{font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem;margin-bottom:0.875rem}
+  .centro-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;border-top:1px solid var(--border);padding-top:0.875rem;margin-top:0.875rem}
+  .centro-stat-val{font-size:1.1rem;font-weight:700}
+  .centro-stat-lbl{font-size:0.67rem;color:var(--text-muted)}
+
+  /* N2 Grupos */
+  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700}
+  .year-selector{display:flex;align-items:center;gap:0.5rem;background:var(--bg-white);border:1px solid var(--border);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:500;cursor:pointer}
+  .grupos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+  .grupo-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm)}
+  .grupo-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+  .curso-badge{display:inline-flex;padding:0.15rem 0.5rem;border-radius:5px;font-size:0.68rem;font-weight:700;margin-bottom:0.4rem}
+  .curso-1{background:#EFF6FF;color:#1D4ED8}
+  .curso-2{background:#F0FDF4;color:#15803D}
+  .grupo-name{font-size:1rem;font-weight:700;margin-bottom:0.15rem}
+  .grupo-meta{font-size:0.75rem;color:var(--text-sub);margin-bottom:0.875rem}
+
+  /* N3 Convocatorias */
+  .conv-list{display:flex;flex-direction:column;gap:0.75rem}
+  .conv-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;display:flex;align-items:center;gap:1.25rem;cursor:pointer;transition:all 0.15s;box-shadow:var(--shadow-sm)}
+  .conv-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+  .conv-icon{width:42px;height:42px;border-radius:var(--radius);display:grid;place-items:center;flex-shrink:0;font-size:1.1rem}
+  .conv-info{flex:1}
+  .conv-nombre{font-size:0.92rem;font-weight:700}
+  .conv-meta{font-size:0.75rem;color:var(--text-sub);margin-top:0.15rem}
+  .conv-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem}
+  .conv-fecha{font-size:0.78rem;font-weight:600;color:var(--text-main)}
+
+  /* N4 Boletín layout */
+  .boletin-layout{display:grid;grid-template-columns:220px 1fr;gap:1.25rem;align-items:start}
+
+  /* Panel selector alumnos */
+  .alumno-selector{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;position:sticky;top:calc(var(--topbar-h) + 1.5rem)}
+  .alumno-selector-header{padding:0.75rem 1rem;border-bottom:1px solid var(--border);font-size:0.78rem;font-weight:700;background:var(--bg)}
+  .alumno-sel-item{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.875rem;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.12s}
+  .alumno-sel-item:last-child{border-bottom:none}
+  .alumno-sel-item:hover{background:#FAFAF9}
+  .alumno-sel-item.active{background:var(--brand-light);border-left:3px solid var(--brand)}
+  .alumno-sel-av{width:26px;height:26px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:0.6rem;font-weight:700;display:grid;place-items:center;flex-shrink:0}
+  .alumno-sel-item.active .alumno-sel-av{background:var(--brand);color:#fff}
+  .alumno-sel-nombre{font-size:0.78rem;font-weight:500;color:var(--text-main);line-height:1.2}
+  .alumno-sel-nota{margin-left:auto;font-size:0.75rem;font-weight:700}
+
+  /* Documento boletín */
+  .boletin-doc{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden}
+  .boletin-actions{padding:0.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.75rem;background:var(--bg)}
+  .boletin-action-label{font-size:0.78rem;color:var(--text-sub);margin-right:auto}
+
+  /* Documento interior */
+  .boletin-inner{padding:2rem 2.5rem;max-width:700px;margin:0 auto}
+
+  /* Cabecera institucional */
+  .boletin-cabecera{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.25rem;border-bottom:3px solid var(--brand);margin-bottom:1.5rem}
+  .boletin-logo-area{display:flex;align-items:center;gap:0.75rem}
+  .boletin-logo-mark{width:42px;height:42px;background:var(--brand);border-radius:8px;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:16px;color:#fff}
+  .boletin-centro-nombre{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-main)}
+  .boletin-centro-sub{font-size:0.72rem;color:var(--text-sub);margin-top:0.1rem}
+  .boletin-titulo-area{text-align:right}
+  .boletin-titulo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--brand)}
+  .boletin-subtitulo{font-size:0.72rem;color:var(--text-muted);margin-top:0.2rem}
+
+  /* Datos alumno */
+  .boletin-alumno{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem}
+  .b-field-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.2rem}
+  .b-field-val{font-size:0.85rem;font-weight:600;color:var(--text-main)}
+
+  /* Tabla módulos */
+  .boletin-table-title{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.625rem}
+  .boletin-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:0.82rem}
+  .boletin-table thead tr{background:var(--brand);color:#fff}
+  .boletin-table th{padding:0.55rem 0.875rem;text-align:left;font-size:0.72rem;font-weight:700;letter-spacing:0.04em}
+  .boletin-table th.th-r{text-align:right}
+  .boletin-table td{padding:0.6rem 0.875rem;border-bottom:1px solid var(--border)}
+  .boletin-table tr:last-child td{border-bottom:none}
+  .boletin-table tr:nth-child(even) td{background:#FAFAF9}
+  .boletin-table tr:hover td{background:#F7F0F0}
+  .nota-num{font-weight:700;text-align:right}
+  .nota-num.ap{color:var(--green)}
+  .nota-num.su{color:var(--brand)}
+  .nota-num.pe{color:var(--amber)}
+  .nota-lit{font-size:0.75rem;color:var(--text-sub);text-align:right}
+  .modulo-cod{font-size:0.7rem;color:var(--text-muted);margin-right:0.4rem}
+
+  /* Resumen calificaciones */
+  .boletin-resumen{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;padding:1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius)}
+  .b-res-val{font-size:1.3rem;font-weight:800;color:var(--text-main);line-height:1}
+  .b-res-label{font-size:0.68rem;color:var(--text-muted);margin-top:0.2rem;text-transform:uppercase;letter-spacing:0.05em}
+
+  /* Observaciones tutor */
+  .boletin-obs{border:1px solid var(--border);border-radius:var(--radius);padding:0.875rem 1rem;margin-bottom:1.5rem;background:var(--bg)}
+  .boletin-obs-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:0.4rem}
+  .boletin-obs-text{font-size:0.82rem;color:var(--text-sub);line-height:1.6;font-style:italic}
+
+  /* Firma */
+  .boletin-firma{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+  .firma-col{text-align:center}
+  .firma-linea{height:1px;background:var(--border-dark);margin:2rem 0 0.4rem}
+  .firma-nombre{font-size:0.78rem;font-weight:600;color:var(--text-main)}
+  .firma-cargo{font-size:0.68rem;color:var(--text-muted)}
+
+  /* Pie documento */
+  .boletin-pie{text-align:center;font-size:0.65rem;color:var(--text-muted);margin-top:1.5rem;padding-top:0.875rem;border-top:1px dashed var(--border)}
+
+  /* Views */
+  .view{display:none}
+  .view.active{display:block}
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-mark">C</div>
+    <div class="sb-logo-text">CurriculaFP<small>Superadministrador</small></div>
+  </div>
+  <div class="sb-year"><div class="sb-year-dot"></div>2024–2025 activo</div>
+  <nav style="flex:1;padding-top:0.5rem">
+    <div class="nav-group">
+      <div class="nav-group-label">General</div>
+      <a class="nav-item" href="index.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Panel de control</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Configuración</div>
+      <a class="nav-item" href="centro.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4"/></svg>Centros educativos</a>
+      <a class="nav-item" href="usuarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>Usuarios y roles</a>
+      <a class="nav-item" href="personas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>Personas</a>
+      <a class="nav-item" href="anio-academico.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Años académicos</a>
+      <a class="nav-item" href="catalogo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>Catálogo de ciclos</a>
+      <a class="nav-item" href="admin-catalogo-normativo.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Catálogo normativo</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Auditoría del sistema</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Planificación</div>
+      <a class="nav-item" href="ciclo-tes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>Planificación de ciclos</a>
+      <a class="nav-item" href="festivos.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Festivos del centro</a>
+      <a class="nav-item" href="calendario.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Calendario del año</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Gestión de cursos</div>
+      <a class="nav-item" href="grupos-docentes.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Grupos y docentes</a>
+      <a class="nav-item" href="programaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h8m-8 4h4"/></svg>Programaciones</a>
+      <a class="nav-item" href="horarios.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Horarios</a>
+      <a class="nav-item" href="calificaciones.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>Calificaciones</a>
+      <a class="nav-item" href="alumnado.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>Alumnado</a>
+      <a class="nav-item" href="formacion-empresa.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Formación en empresa</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Gestión académica</div>
+      <a class="nav-item" href="sesiones-evaluacion.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Sesiones de evaluación</a>
+      <a class="nav-item active" href="boletin-notas.html"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Boletín de notas</a>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Convalidaciones</a>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-group">
+      <div class="nav-group-label">Comunicación</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Avisos</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Informes</div>
+      <a class="nav-item nav-disabled" href="#"><svg class="ni" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Informes y analítica</a>
+    </div>
+  </nav>
+  <div class="sb-bottom">
+    <div class="user-tile">
+      <div class="user-av">SA</div>
+      <div><div class="user-name">Superadmin</div><div class="user-role">Administrador global</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="app-main">
+  <div class="topbar">
+    <div class="topbar-title">Boletín de notas</div>
+    <div id="topbar-context" class="topbar-context" style="display:none">
+      <span class="topbar-sep">›</span><span id="tb-centro"></span>
+      <span class="topbar-sep">›</span><span id="tb-grupo"></span>
+      <span class="topbar-sep">›</span><span id="tb-conv" style="color:var(--text-muted)"></span>
+    </div>
+    <div class="topbar-actions">
+      <div id="btn-publicar" style="display:none">
+        <button class="btn btn-secondary btn-sm" onclick="publicarBoletines()">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          Publicar para alumnos
+        </button>
+      </div>
+      <div id="btn-pdf" style="display:none">
+        <button class="btn btn-primary btn-sm" onclick="exportarPDF()">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          Exportar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- VISTA 1: CENTROS -->
+    <div id="view-centros" class="view active">
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Boletines generados</div>
+          <div class="kpi-value">94</div>
+          <div class="kpi-sub">Curso 2024–2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Publicados al alumno</div>
+          <div class="kpi-value" style="color:var(--green)">62</div>
+          <div class="kpi-sub">Visibles en el portal</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Pendientes publicar</div>
+          <div class="kpi-value" style="color:var(--amber)">32</div>
+          <div class="kpi-sub">Acta cerrada sin publicar</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Convocatorias cerradas</div>
+          <div class="kpi-value">2</div>
+          <div class="kpi-sub">De 3 previstas en el curso</div>
+        </div>
+      </div>
+      <div class="section-header"><div class="section-title">Selecciona un centro</div></div>
+      <div class="centros-grid">
+        <div class="centro-card" onclick="irGrupos('CIFP Salud Jerez')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between">
+            <div><div class="centro-name">CIFP Salud Jerez</div><div class="centro-loc">Jerez de la Frontera · Cádiz · Andalucía</div></div>
+            <span class="badge badge-green">Activo</span>
+          </div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">49</div><div class="centro-stat-lbl">Boletines</div></div>
+            <div><div class="centro-stat-val" style="color:var(--green)">31</div><div class="centro-stat-lbl">Publicados</div></div>
+            <div><div class="centro-stat-val" style="color:var(--amber)">18</div><div class="centro-stat-lbl">Pendientes</div></div>
+          </div>
+        </div>
+        <div class="centro-card" onclick="irGrupos('IES Virgen del Rocío')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between">
+            <div><div class="centro-name">IES Virgen del Rocío</div><div class="centro-loc">Sevilla · Andalucía</div></div>
+            <span class="badge badge-green">Activo</span>
+          </div>
+          <div class="centro-stats">
+            <div><div class="centro-stat-val">45</div><div class="centro-stat-lbl">Boletines</div></div>
+            <div><div class="centro-stat-val" style="color:var(--green)">31</div><div class="centro-stat-lbl">Publicados</div></div>
+            <div><div class="centro-stat-val" style="color:var(--amber)">14</div><div class="centro-stat-lbl">Pendientes</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 2: GRUPOS -->
+    <div id="view-grupos" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Boletín de notas</a>
+        <span class="breadcrumb-sep">›</span><span id="bc-centro"></span>
+      </div>
+      <div class="section-header">
+        <div class="section-title">Grupos · 2024–2025</div>
+        <div class="year-selector">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          2024–2025
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+      </div>
+      <div class="grupos-grid">
+        <div class="grupo-card" onclick="irConvocatorias('TES-M1','1º TES · Turno mañana · 18 alumnos')">
+          <div class="curso-badge curso-1">1º Curso</div>
+          <div class="grupo-name">TES-M1</div>
+          <div class="grupo-meta">Técnico en Emergencias Sanitarias · Turno mañana · 18 alumnos</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="badge badge-green">2 actas cerradas</span>
+            <span class="badge badge-amber">18 boletines pendientes</span>
+          </div>
+        </div>
+        <div class="grupo-card" onclick="irConvocatorias('TES-T1','1º TES · Turno tarde · 13 alumnos')">
+          <div class="curso-badge curso-1">1º Curso</div>
+          <div class="grupo-name">TES-T1</div>
+          <div class="grupo-meta">Técnico en Emergencias Sanitarias · Turno tarde · 13 alumnos</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="badge badge-green">2 actas cerradas</span>
+            <span class="badge badge-green">Todos publicados</span>
+          </div>
+        </div>
+        <div class="grupo-card" onclick="irConvocatorias('TES-M2','2º TES · Turno mañana · 16 alumnos')">
+          <div class="curso-badge curso-2">2º Curso</div>
+          <div class="grupo-name">TES-M2</div>
+          <div class="grupo-meta">Técnico en Emergencias Sanitarias · Turno mañana · 16 alumnos</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <span class="badge badge-green">1 acta cerrada</span>
+            <span class="badge badge-green">Todos publicados</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 3: CONVOCATORIAS -->
+    <div id="view-convocatorias" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Boletín de notas</a>
+        <span class="breadcrumb-sep">›</span>
+        <a onclick="irGruposBack()" id="bc-centro2"></a>
+        <span class="breadcrumb-sep">›</span>
+        <span id="bc-grupo"></span>
+      </div>
+      <div class="section-header">
+        <div class="section-title" id="conv-title">Convocatorias · TES-M1</div>
+        <div style="font-size:0.78rem;color:var(--text-sub)" id="conv-meta"></div>
+      </div>
+      <div class="conv-list">
+        <div class="conv-card" onclick="irBoletin('2ª Evaluación','2ª Sesión de evaluación · 1ª Convocatoria','28 marzo 2025','pendiente')">
+          <div class="conv-icon" style="background:var(--green-light)">📋</div>
+          <div class="conv-info">
+            <div class="conv-nombre">2ª Evaluación — 1ª Convocatoria</div>
+            <div class="conv-meta">Acta cerrada · 18 alumnos · 7 módulos evaluados</div>
+          </div>
+          <div class="conv-right">
+            <div class="conv-fecha">28 marzo 2025</div>
+            <span class="badge badge-amber">Sin publicar</span>
+          </div>
+        </div>
+        <div class="conv-card" onclick="irBoletin('1ª Evaluación','1ª Sesión de evaluación · 1ª Convocatoria','18 diciembre 2024','publicado')">
+          <div class="conv-icon" style="background:var(--green-light)">📋</div>
+          <div class="conv-info">
+            <div class="conv-nombre">1ª Evaluación — 1ª Convocatoria</div>
+            <div class="conv-meta">Acta cerrada · 18 alumnos · 5 módulos evaluados · Publicado el 20 dic 2024</div>
+          </div>
+          <div class="conv-right">
+            <div class="conv-fecha">18 diciembre 2024</div>
+            <span class="badge badge-green">Publicado</span>
+          </div>
+        </div>
+        <div class="conv-card" style="opacity:0.5;cursor:default;pointer-events:none">
+          <div class="conv-icon" style="background:#F5F5F4">🎓</div>
+          <div class="conv-info">
+            <div class="conv-nombre">Evaluación final — 1ª Convocatoria</div>
+            <div class="conv-meta">Pendiente de celebrar · Sesión prevista 12 jun 2025</div>
+          </div>
+          <div class="conv-right">
+            <div class="conv-fecha">12 junio 2025</div>
+            <span class="badge badge-gray">Pendiente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 4: BOLETÍN -->
+    <div id="view-boletin" class="view">
+      <div class="breadcrumb">
+        <a onclick="irCentros()">Boletín de notas</a>
+        <span class="breadcrumb-sep">›</span>
+        <a onclick="irGruposBack()" id="bc-centro3"></a>
+        <span class="breadcrumb-sep">›</span>
+        <a onclick="irConvocatoriasBack()" id="bc-grupo2"></a>
+        <span class="breadcrumb-sep">›</span>
+        <span id="bc-conv"></span>
+      </div>
+
+      <div class="boletin-layout">
+        <!-- Selector alumnos -->
+        <div class="alumno-selector">
+          <div class="alumno-selector-header">Alumnos del grupo</div>
+          <div id="lista-alumnos"></div>
+        </div>
+
+        <!-- Documento boletín -->
+        <div class="boletin-doc">
+          <div class="boletin-actions">
+            <span class="boletin-action-label" id="boletin-estado-label">Boletín · Sin publicar</span>
+            <button class="btn btn-secondary btn-sm" onclick="publicarBoletines()">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+              Publicar para alumnos
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="exportarPDF()">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Exportar PDF
+            </button>
+          </div>
+
+          <div class="boletin-inner" id="boletin-contenido">
+            <!-- Generado por JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let centroActual='', grupoActual='', grupoMetaActual='', convActual='', convFecha='', convEstado='';
+
+const alumnos = [
+  {ini:'JL', nombre:'López Moreno, Juan',      dni:'55.123.456-T', notas:{0052:7.1,0053:6.8,0054:4.9,0055:7.5,0056:null,0057:null,LD01:6.2}, obs:'Módulos 0054 y 0056 en proceso de evaluación. Se recomienda refuerzo en el área de planes de emergencia.'},
+  {ini:'AM', nombre:'Martínez García, Ana',    dni:'62.345.678-A', notas:{0052:8.0,0053:7.5,0054:6.5,0055:8.1,0056:null,0057:6.8,LD01:7.3}, obs:'Rendimiento satisfactorio. Destaca en módulos de atención sanitaria.'},
+  {ini:'PR', nombre:'Ruiz Fernández, Pedro',   dni:'71.234.567-B', notas:{0052:5.5,0053:6.0,0054:3.8,0055:5.8,0056:null,0057:4.5,LD01:5.2}, obs:'Requiere seguimiento tutorial reforzado. Módulos 0054 y 0057 suspendidos.'},
+  {ini:'SV', nombre:'Vega Castillo, Sara',     dni:'43.567.890-C', notas:{0052:9.0,0053:8.8,0054:8.5,0055:9.2,0056:null,0057:8.1,LD01:8.7}, obs:'Rendimiento excelente en todos los módulos evaluados.'},
+  {ini:'MN', nombre:'Navarro Torres, Miguel',  dni:'88.901.234-D', notas:{0052:3.8,0053:4.2,0054:3.0,0055:5.2,0056:null,0057:3.9,LD01:4.1}, obs:'Situación académica preocupante. Se ha activado plan de orientación tutorial.'},
+  {ini:'LR', nombre:'Romero Díaz, Laura',      dni:'34.456.789-E', notas:{0052:7.0,0053:6.5,0054:6.0,0055:7.0,0056:null,0057:6.2,LD01:6.8}, obs:'Evolución positiva respecto al primer trimestre.'},
+  {ini:'DM', nombre:'Molina Herrera, Diego',   dni:'67.890.123-F', notas:{0052:6.5,0053:5.8,0054:4.5,0055:6.5,0056:null,0057:5.5,LD01:6.0}, obs:'Módulo 0054 pendiente de recuperación.'},
+];
+
+const modulos = [
+  {cod:'0052', nom:'Dotación sanitaria', horas:165},
+  {cod:'0053', nom:'Logística sanitaria en emergencias', horas:132},
+  {cod:'0054', nom:'Planes de emergencias y disp. de riesgos', horas:99},
+  {cod:'0055', nom:'Psicología en urgencias y emergencias', horas:66},
+  {cod:'0056', nom:'Atención sanitaria en urgencias', horas:330},
+  {cod:'0057', nom:'Tele emergencias', horas:99},
+  {cod:'LD01', nom:'Inglés técnico sanitario', horas:66},
+];
+
+function notaLiteral(n){
+  if(n===null) return 'En evaluación';
+  if(n<5) return 'Insuficiente';
+  if(n<6) return 'Suficiente';
+  if(n<7) return 'Bien';
+  if(n<9) return 'Notable';
+  return 'Sobresaliente';
+}
+
+function notaClass(n){
+  if(n===null) return 'pe';
+  return n>=5 ? 'ap' : 'su';
+}
+
+let alumnoSelIdx = 0;
+
+function mostrarView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function irCentros(){
+  mostrarView('view-centros');
+  document.getElementById('topbar-context').style.display='none';
+  document.getElementById('btn-publicar').style.display='none';
+  document.getElementById('btn-pdf').style.display='none';
+}
+
+function irGrupos(centro){
+  centroActual=centro;
+  ['bc-centro','bc-centro2','bc-centro3'].forEach(id=>document.getElementById(id).textContent=centro);
+  document.getElementById('topbar-context').style.display='flex';
+  document.getElementById('tb-centro').textContent=centro;
+  document.getElementById('tb-grupo').textContent='';
+  document.getElementById('tb-conv').textContent='';
+  document.getElementById('btn-publicar').style.display='none';
+  document.getElementById('btn-pdf').style.display='none';
+  mostrarView('view-grupos');
+}
+
+function irGruposBack(){ irGrupos(centroActual); }
+
+function irConvocatorias(grupo, meta){
+  grupoActual=grupo; grupoMetaActual=meta;
+  ['bc-grupo','bc-grupo2'].forEach(id=>document.getElementById(id).textContent=grupo);
+  document.getElementById('conv-title').textContent='Convocatorias · '+grupo;
+  document.getElementById('conv-meta').textContent=meta;
+  document.getElementById('tb-grupo').textContent=grupo;
+  document.getElementById('tb-conv').textContent='';
+  document.getElementById('btn-publicar').style.display='none';
+  document.getElementById('btn-pdf').style.display='none';
+  mostrarView('view-convocatorias');
+}
+
+function irConvocatoriasBack(){ irConvocatorias(grupoActual, grupoMetaActual); }
+
+function irBoletin(conv, subtitulo, fecha, estado){
+  convActual=conv; convFecha=fecha; convEstado=estado;
+  document.getElementById('bc-conv').textContent=conv;
+  document.getElementById('tb-conv').textContent=conv;
+  document.getElementById('btn-publicar').style.display='block';
+  document.getElementById('btn-pdf').style.display='block';
+
+  const lbl = document.getElementById('boletin-estado-label');
+  lbl.textContent = estado==='publicado' ? 'Boletín · Publicado para alumnos' : 'Boletín · Pendiente de publicar';
+  lbl.style.color = estado==='publicado' ? 'var(--green)' : 'var(--amber)';
+
+  // Calcular nota media de cada alumno para el selector
+  const mediaAlumno = alumnos.map(a=>{
+    const ns = Object.values(a.notas).filter(n=>n!==null);
+    return ns.length ? (ns.reduce((s,v)=>s+v,0)/ns.length).toFixed(1) : '—';
+  });
+
+  // Render lista alumnos
+  const lista = document.getElementById('lista-alumnos');
+  lista.innerHTML = '';
+  alumnos.forEach((a,i)=>{
+    const div = document.createElement('div');
+    div.className = 'alumno-sel-item' + (i===0?' active':'');
+    div.onclick = ()=>selAlumno(i);
+    const nota = mediaAlumno[i];
+    const color = nota!=='—' ? (parseFloat(nota)>=5?'var(--green)':'var(--brand)') : 'var(--text-muted)';
+    div.innerHTML = `
+      <div class="alumno-sel-av">${a.ini}</div>
+      <div class="alumno-sel-nombre">${a.nombre}</div>
+      <div class="alumno-sel-nota" style="color:${color}">${nota}</div>`;
+    lista.appendChild(div);
+  });
+
+  alumnoSelIdx=0;
+  renderBoletin(0, conv, subtitulo, fecha, estado);
+  mostrarView('view-boletin');
+}
+
+function selAlumno(idx){
+  alumnoSelIdx=idx;
+  document.querySelectorAll('.alumno-sel-item').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  renderBoletin(idx, convActual, '', convFecha, convEstado);
+}
+
+function renderBoletin(idx, conv, subtitulo, fecha, estado){
+  const a = alumnos[idx];
+  const notas = a.notas;
+  const notasValidas = Object.values(notas).filter(n=>n!==null);
+  const media = notasValidas.length ? (notasValidas.reduce((s,v)=>s+v,0)/notasValidas.length).toFixed(2) : '—';
+  const aprobados = notasValidas.filter(n=>n>=5).length;
+  const suspensos = notasValidas.filter(n=>n<5).length;
+
+  // Tabla módulos
+  let filas = '';
+  modulos.forEach(m=>{
+    const n = notas[m.cod];
+    const nc = notaClass(n);
+    const nlit = notaLiteral(n);
+    const nval = n!==null ? n.toFixed(1) : '—';
+    filas += `
+      <tr>
+        <td><span class="modulo-cod">${m.cod}</span>${m.nom}</td>
+        <td style="text-align:center;font-size:0.72rem;color:var(--text-muted)">${m.horas}h</td>
+        <td class="nota-num ${nc}">${nval}</td>
+        <td class="nota-lit">${nlit}</td>
+      </tr>`;
+  });
+
+  const estadoBadge = estado==='publicado'
+    ? `<span style="background:var(--green-light);color:var(--green);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600">Publicado</span>`
+    : `<span style="background:var(--amber-light);color:var(--amber);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:600">Sin publicar</span>`;
+
+  document.getElementById('boletin-contenido').innerHTML = `
+    <!-- Cabecera -->
+    <div class="boletin-cabecera">
+      <div class="boletin-logo-area">
+        <div class="boletin-logo-mark">C</div>
+        <div>
+          <div class="boletin-centro-nombre">CIFP Salud Jerez</div>
+          <div class="boletin-centro-sub">Jerez de la Frontera · Cádiz · Junta de Andalucía</div>
+        </div>
+      </div>
+      <div class="boletin-titulo-area">
+        <div class="boletin-titulo">Boletín de calificaciones</div>
+        <div class="boletin-subtitulo">${conv} · Curso 2024–2025 ${estadoBadge}</div>
+      </div>
+    </div>
+
+    <!-- Datos alumno -->
+    <div class="boletin-alumno">
+      <div>
+        <div class="b-field-label">Alumno/a</div>
+        <div class="b-field-val">${a.nombre}</div>
+      </div>
+      <div>
+        <div class="b-field-label">DNI</div>
+        <div class="b-field-val">${a.dni}</div>
+      </div>
+      <div>
+        <div class="b-field-label">Grupo</div>
+        <div class="b-field-val">${grupoActual} · 1º TES Mañana</div>
+      </div>
+      <div>
+        <div class="b-field-label">Ciclo formativo</div>
+        <div class="b-field-val">Técnico en Emergencias Sanitarias</div>
+      </div>
+      <div>
+        <div class="b-field-label">Familia profesional</div>
+        <div class="b-field-val">Sanidad</div>
+      </div>
+      <div>
+        <div class="b-field-label">Fecha emisión</div>
+        <div class="b-field-val">${fecha}</div>
+      </div>
+    </div>
+
+    <!-- Resumen -->
+    <div class="boletin-resumen">
+      <div>
+        <div class="b-res-val" style="color:var(--green)">${aprobados}</div>
+        <div class="b-res-label">Módulos aprobados</div>
+      </div>
+      <div>
+        <div class="b-res-val" style="color:var(--brand)">${suspensos}</div>
+        <div class="b-res-label">Módulos suspensos</div>
+      </div>
+      <div>
+        <div class="b-res-val">${media}</div>
+        <div class="b-res-label">Media ponderada</div>
+      </div>
+    </div>
+
+    <!-- Tabla módulos -->
+    <div class="boletin-table-title">Calificaciones por módulo profesional</div>
+    <table class="boletin-table">
+      <thead>
+        <tr>
+          <th>Módulo profesional</th>
+          <th style="text-align:center">Horas</th>
+          <th class="th-r">Calificación</th>
+          <th class="th-r">Mención</th>
+        </tr>
+      </thead>
+      <tbody>${filas}</tbody>
+    </table>
+
+    <!-- Observaciones tutor -->
+    <div class="boletin-obs">
+      <div class="boletin-obs-title">Observaciones del tutor/a del grupo</div>
+      <div class="boletin-obs-text">${a.obs}</div>
+    </div>
+
+    <!-- Firmas -->
+    <div class="boletin-firma">
+      <div class="firma-col">
+        <div class="firma-linea"></div>
+        <div class="firma-nombre">Dña. García Romero</div>
+        <div class="firma-cargo">Jefa de Departamento · Presidenta de la sesión</div>
+      </div>
+      <div class="firma-col">
+        <div class="firma-linea"></div>
+        <div class="firma-nombre">D. Morales López</div>
+        <div class="firma-cargo">Tutor/a del grupo · TES-M1</div>
+      </div>
+    </div>
+
+    <!-- Pie -->
+    <div class="boletin-pie">
+      Documento generado por CurriculaFP · CIFP Salud Jerez · Curso académico 2024–2025<br>
+      Este boletín tiene carácter informativo. La calificación oficial consta en el expediente académico del alumno.
+    </div>`;
+}
+
+function publicarBoletines(){
+  const lbl = document.getElementById('boletin-estado-label');
+  lbl.textContent='Boletín · Publicado para alumnos';
+  lbl.style.color='var(--green)';
+  convEstado='publicado';
+  renderBoletin(alumnoSelIdx, convActual, '', convFecha, 'publicado');
+}
+
+function exportarPDF(){
+  const btn = event.target.closest('button');
+  const orig=btn.innerHTML;
+  btn.innerHTML='<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Generado';
+  btn.style.background='var(--green)';
+  setTimeout(()=>{btn.innerHTML=orig;btn.style.background='';},1800);
+}
+</script>
+</body>
+</html>
